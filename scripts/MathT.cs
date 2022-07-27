@@ -195,5 +195,15 @@ namespace Com.Surbon.CSUtils
 			else if (value >= max) return max;
 			return value;
 		}
+
+		public static float Congruence(float a, float b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
+
+		public static int Congruence(int a, int b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
+
+		public static float EuclidianQuotient(float a, float b) => MathF.Floor(a / b);
+
+		public static float EuclidianRemainder(float a, float b) => a - EuclidianQuotient(a, b) * b;
+
+		public static int EuclidianRemainder(int a, int b) => a - (a / b) * b;
 	}
 }
