@@ -333,6 +333,45 @@ namespace Com.Surbon.CSUtils
 				y = pY;
 				z = pZ;
 			}
+
+			#region OPERATORS
+
+			public static Vector3 operator +(Vector3 vector1, Vector3 vector2)
+			{
+				return new Vector3(vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z);
+			}
+
+			public static Vector3 operator -(Vector3 vector1, Vector3 vector2)
+			{
+				return new Vector3(vector1.x - vector2.x, vector1.y - vector2.y, vector1.z - vector2.z);
+			}
+
+			public static Vector3 operator *(Vector3 vector1, Vector3 vector2)
+			{
+				return new Vector3(vector1.x * vector2.x, vector1.y * vector2.y, vector1.z * vector2.z);
+			}
+
+			public static Vector3 operator *(Vector3 vector, float scalar)
+			{
+				return new Vector3(vector.x * scalar, vector.y * scalar, vector.z * scalar);
+			}
+
+			public static Vector3 operator *(float scalar, Vector3 vector)
+			{
+				return vector * scalar;
+			}
+
+			public static Vector3 operator /(Vector3 vector1, Vector3 vector2)
+			{
+				return new Vector3(vector1.x / vector2.x, vector1.y / vector2.y, vector1.z / vector2.z);
+			}
+
+			public static Vector3 operator /(Vector3 vector, float scalar)
+			{
+				return new Vector3(vector.x / scalar, vector.y / scalar, vector.z / scalar);
+			}
+
+			#endregion OPERATORS
 		}
 
 		/// <summary>
