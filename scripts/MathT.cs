@@ -397,6 +397,10 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			public Vector3 Abs() => new Vector3(MathF.Abs(x), MathF.Abs(y), MathF.Abs(z));
+
+			public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
+
 			public override bool Equals(object obj)
 			{
 				if (obj is Vector3)
