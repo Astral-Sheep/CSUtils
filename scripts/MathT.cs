@@ -706,6 +706,96 @@ namespace Com.Surbon.CSUtils
 				return new Vector3(lCartesianVector.x, lCartesianVector.y, z);
 			}
 
+			/// <summary>
+			/// Returns the spheric coordinates of the vector given in cylindric coordinates
+			/// </summary>
+			/// <param name="vector">Cylindric coordinates as (r, phi, z)</param>
+			/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+			public static Vector3 CylindricToSpheric(Vector3 vector)
+			{
+				return new Vector3(
+					new Vector2(vector.x, vector.z).Length(),
+					vector.y,
+					MathF.Atan2(vector.z, vector.x)
+					);
+			}
+
+			/// <summary>
+			/// Returns the spheric coordinates of the vector given in cylindric coordinates
+			/// </summary>
+			/// <param name="r">Polar radius</param>
+			/// <param name="phi">Azimuth angle</param>
+			/// <param name="z">Cartesian coordinate z</param>
+			/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+			public static Vector3 CylindricToSpheric(float r, float phi, float z)
+			{
+				return new Vector3(
+					new Vector2(r, z).Length(),
+					phi,
+					MathF.Atan2(z, r)
+					);
+			}
+
+			/// <summary>
+			/// Returns the cartesian coordinates of the vector given in spheric coordinates
+			/// </summary>
+			/// <param name="vector">Spheric coordinates as (rho, phi, th)</param>
+			/// <returns>Cartesian coordinates as (x, y, z)</returns>
+			public static Vector3 SphericToCartesian(Vector3 vector)
+			{
+				return new Vector3(
+					vector.x * MathF.Cos(vector.y) * MathF.Sin(vector.z),
+					vector.x * MathF.Sin(vector.y) * MathF.Sin(vector.z),
+					vector.x * MathF.Cos(vector.z)
+					);
+			}
+
+			/// <summary>
+			/// Returns the cartesian coordinates of the vector given in spheric coordinates
+			/// </summary>
+			/// <param name="rho">Spheric radius</param>
+			/// <param name="phi">Azimuth angle</param>
+			/// <param name="th">Polar angle</param>
+			/// <returns>Cartesian coordinates as (x, y, z)</returns>
+			public static Vector3 SphericToCartesian(float rho, float phi, float th)
+			{
+				return new Vector3(
+					rho * MathF.Cos(phi) * MathF.Sin(th),
+					rho * MathF.Sin(phi) * MathF.Sin(th),
+					rho * MathF.Cos(th)
+					);
+			}
+
+			/// <summary>
+			/// Returns the cylindric coordinates of the vector given in spheric coordinates
+			/// </summary>
+			/// <param name="vector">Spheric coordinates as (rho, phi, th)</param>
+			/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+			public static Vector3 SphericToCylindric(Vector3 vector)
+			{
+				return new Vector3(
+					vector.x * MathF.Sin(vector.z),
+					vector.y,
+					vector.x * MathF.Cos(vector.z)
+					);
+			}
+
+			/// <summary>
+			/// Returns the cylindric coordinates of the vector given in spheric coordinates
+			/// </summary>
+			/// <param name="rho">Spheric radius</param>
+			/// <param name="phi">Azimuth angle</param>
+			/// <param name="th">Polar angle</param>
+			/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+			public static Vector3 SphericToCylindric(float rho, float phi, float th)
+			{
+				return new Vector3(
+					rho * MathF.Sin(th),
+					phi,
+					rho * MathF.Cos(th)
+					);
+			}
+
 			#endregion STATIC
 		}
 
