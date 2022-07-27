@@ -7,8 +7,8 @@ namespace Com.Surbon.CSUtils
 	/// </summary>
 	public static class MathT
 	{
-#pragma warning disable CS0659 // Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
-#pragma warning disable CS0661 // Le type définit l'opérateur == ou l'opérateur != mais ne se substitue pas à Object.GetHashCode()
+		#pragma warning disable CS0659 // Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
+		#pragma warning disable CS0661 // Le type définit l'opérateur == ou l'opérateur != mais ne se substitue pas à Object.GetHashCode()
 		public struct Vector2
 		{
 			public float x;
@@ -19,6 +19,28 @@ namespace Com.Surbon.CSUtils
 				x = pX;
 				y = pY;
 			}
+
+			#region OPERATORS
+
+			public static Vector2 operator +(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
+
+			public static Vector2 operator -(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
+
+			public static Vector2 operator *(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x * vector2.x, vector1.y * vector2.y);
+
+			public static Vector2 operator *(Vector2 vector, float scalar) => new Vector2(vector.x * scalar, vector.y * scalar);
+
+			public static Vector2 operator *(float scalar, Vector2 vector) => new Vector2(vector.x * scalar, vector.y * scalar);
+
+			public static Vector2 operator /(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x / vector2.x, vector1.y / vector2.y);
+
+			public static Vector2 operator /(Vector2 vector, float scalar) => new Vector2(vector.x / scalar, vector.y / scalar);
+
+			public static bool operator ==(Vector2 vector1, Vector2 vector2) => vector1.x == vector2.x && vector1.y == vector2.y;
+
+			public static bool operator !=(Vector2 vector1, Vector2 vector2) => vector1.x != vector2.x || vector1.y != vector2.y;
+
+			#endregion OPERATORS
 
 			public Vector2 Abs() => new Vector2(MathF.Abs(x), MathF.Abs(y));
 
@@ -132,6 +154,20 @@ namespace Com.Surbon.CSUtils
 				return new Vector2(x / l, y / l);
 			}
 
+			public Vector2 PosMod(float mod)
+			{
+				// To do
+				throw new NotImplementedException("Don't use this method");
+			}
+
+			public Vector2 Rotated(float angle)
+			{
+				float sin = MathF.Sin(angle);
+				float cos = MathF.Cos(angle);
+
+				return new Vector2(x * cos - y * sin, x * sin + y * cos);
+			}
+
 			public void RoundLength()
 			{
 				float l = x * x + y * y;
@@ -150,27 +186,7 @@ namespace Com.Surbon.CSUtils
 				y = MathF.Round(y);
 			}
 
-			#region OPERATORS
-
-			public static Vector2 operator +(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
-
-			public static Vector2 operator -(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
-
-			public static Vector2 operator *(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x * vector2.x, vector1.y * vector2.y);
-
-			public static Vector2 operator *(Vector2 vector, float scalar) => new Vector2(vector.x * scalar, vector.y * scalar);
-
-			public static Vector2 operator *(float scalar, Vector2 vector) => new Vector2(vector.x * scalar, vector.y * scalar);
-
-			public static Vector2 operator /(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x / vector2.x, vector1.y / vector2.y);
-
-			public static Vector2 operator /(Vector2 vector, float scalar) => new Vector2(vector.x / scalar, vector.y / scalar);
-
-			public static bool operator ==(Vector2 vector1, Vector2 vector2) => vector1.x == vector2.x && vector1.y == vector2.y;
-
-			public static bool operator !=(Vector2 vector1, Vector2 vector2) => vector1.x != vector2.x || vector1.y != vector2.y;
-
-			#endregion OPERATORS
+			public Vector2 Sign() => new Vector2(MathF.Sign(x), MathF.Sign(y));
 		}
 
 		public static float Clamp(float value, float min, float max)
