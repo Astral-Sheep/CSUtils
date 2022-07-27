@@ -561,6 +561,29 @@ namespace Com.Surbon.CSUtils
 				return vector;
 			}
 
+			public void RoundLength()
+			{
+				float l = x * x + y * y + z * z;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					float round = MathF.Round(l);
+					x /= l / round;
+					y /= l / round;
+					z /= l / round;
+				}
+			}
+
+			public void RoundValues()
+			{
+				x = MathF.Round(x);
+				y = MathF.Round(y);
+				z = MathF.Round(z);
+			}
+
+			public Vector3 Sign() => new Vector3(MathF.Sign(x), MathF.Sign(y), MathF.Sign(z));
+
 			#endregion INSTANCE
 		}
 
