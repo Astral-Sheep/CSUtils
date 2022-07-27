@@ -458,6 +458,16 @@ namespace Com.Surbon.CSUtils
 				(z * vector.x - x * vector.z) + 
 				(x * vector.y - y * vector.x);
 
+			public float Distance(Vector3 vector)
+			{
+				return MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z));
+			}
+
+			public float DistanceSquared(Vector3 vector)
+			{
+				return (x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z);
+			}
+
 			public float Dot(Vector3 vector) => x * vector.x + y * vector.y + z * vector.z;
 
 			public override bool Equals(object obj)
