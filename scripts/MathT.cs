@@ -18,7 +18,27 @@ namespace Com.Surbon.CSUtils
 				y = pY;
 			}
 
+			public Vector2 Abs() => new Vector2(MathF.Abs(x), MathF.Abs(y));
+
 			public float Angle() => MathF.Atan2(y, x);
+
+			public void CeilLength()
+			{
+				float l = x * x + y * y;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					x /= l / MathF.Ceiling(l);
+					y /= l / MathF.Ceiling(l);
+				}
+			}
+
+			public void CeilValues()
+			{
+				x = MathF.Ceiling(x);
+				y = MathF.Ceiling(y);
+			}
 
 			public bool IsNormalized() => LengthSquared() == 1f;
 
