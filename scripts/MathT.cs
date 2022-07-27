@@ -24,11 +24,7 @@ namespace Com.Surbon.CSUtils
 
 			public float AngleTo(Vector2 vector) => MathF.Atan2(Cross(vector), Dot(vector));
 
-			public float AngleToPoint(Vector2 vector)
-			{
-				// To do
-				throw new NotImplementedException("Don't use this method.");
-			}
+			public float AngleToPoint(Vector2 vector) => (vector - this).Angle();
 
 			public void CeilLength()
 			{
@@ -143,6 +139,11 @@ namespace Com.Surbon.CSUtils
 			{
 				x = MathF.Round(x);
 				y = MathF.Round(y);
+			}
+
+			public static Vector2 operator-(Vector2 vector1, Vector2 vector2)
+			{
+				return new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
 			}
 		}
 
