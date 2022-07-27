@@ -248,7 +248,19 @@ namespace Com.Surbon.CSUtils
 			/// <summary>
 			/// Rotates the vector by phi radians.
 			/// </summary>
-			public Vector2 Rotate(float phi)
+			/// <param name="phi"></param>
+			public void Rotate(float phi)
+			{
+				float sin = MathF.Sin(phi);
+				float cos = MathF.Cos(phi);
+				x = x * cos - y * sin;
+				y = x * sin + y * cos;
+			}
+
+			/// <summary>
+			/// Returns the vector rotated by phi radians.
+			/// </summary>
+			public Vector2 Rotated(float phi)
 			{
 				float sin = MathF.Sin(phi);
 				float cos = MathF.Cos(phi);
@@ -419,6 +431,8 @@ namespace Com.Surbon.CSUtils
 				l = MathF.Sqrt(l);
 				return new Vector3(x / l, y / l, z / l);
 			}
+
+			public bool IsNormalized() => LengthSquared() == 1;
 
 			#endregion INSTANCE
 		}
