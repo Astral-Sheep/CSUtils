@@ -46,6 +46,8 @@ namespace Com.Surbon.CSUtils
 
 			#endregion OPERATORS
 
+			#region INSTANCE
+
 			/// <summary>
 			/// Returns the vector with absolute values.
 			/// </summary>
@@ -239,6 +241,11 @@ namespace Com.Surbon.CSUtils
 			public Vector2 PosModV(Vector2 modv) => new Vector2(Congruence(x, modv.x), Congruence(y, modv.y));
 
 			/// <summary>
+			/// Returns the vector with x and y to the power of pow.
+			/// </summary>
+			public Vector2 Pow(float pow) => new Vector2(MathF.Pow(x, pow), MathF.Pow(y, pow));
+
+			/// <summary>
 			/// Rotates the vector by phi radians.
 			/// </summary>
 			public Vector2 Rotate(float phi)
@@ -277,6 +284,41 @@ namespace Com.Surbon.CSUtils
 			/// Returns the signs of the vector as (sign x, sign y).
 			/// </summary>
 			public Vector2 Sign() => new Vector2(MathF.Sign(x), MathF.Sign(y));
+
+			#endregion INSTANCE
+
+			#region STATIC
+
+			/// <summary>
+			/// Returns the polar coordinates of the vector given in cartesian coordinates
+			/// </summary>
+			/// <param name="vector">Cartesian coordinates as (x, y)</param>
+			/// <returns>Polar coordinates as (r, th)</returns>
+			public static Vector2 CartesianToPolar(Vector2 vector) => new Vector2(vector.Length(), vector.Angle());
+
+			/// <summary>
+			/// Returns the polar coordinates of the vector given in cartesian coordinates
+			/// </summary>
+			/// <param name="vector">Cartesian coordinates as (x, y)</param>
+			/// <returns>Polar coordinates as (r, th)</returns>
+			public static Vector2 CartesianToPolar(float x, float y) => new Vector2(MathF.Sqrt(x * x + y * y), MathF.Atan2(y, x));
+
+			/// <summary>
+			/// Returns the cartesian coordinates of the vector given in polar coordinates
+			/// </summary>
+			/// <param name="vector">Polar coordinates as (r, th)</param>
+			/// <returns>Cartesian coordinates as (x, y)</returns>
+			public static Vector2 PolarToCartesian(Vector2 vector) => new Vector2(vector.x * MathF.Cos(vector.y), vector.x * MathF.Sin(vector.y));
+
+			/// <summary>
+			/// Returns the cartesian coordinates of the vector given in polar coordinates
+			/// </summary>
+			/// <param name="r">Radius</param>
+			/// <param name="th">Angle</param>
+			/// <returns>Cartesian coordinates as (x, y)</returns>
+			public static Vector2 PolarToCartesian(float r, float th) => new Vector2(r * MathF.Cos(th), r * MathF.Sin(th));
+
+			#endregion STATIC
 		}
 
 		/// <summary>
