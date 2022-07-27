@@ -396,6 +396,30 @@ namespace Com.Surbon.CSUtils
 
 			public float LengthSquared() => x * x + y * y + z * z;
 
+			public void Normalize(float length = 1f)
+			{
+				float l = x * x + y * y + z * z;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l) / length;
+					x /= l;
+					y /= l;
+					z /= l;
+				}
+			}
+
+			public Vector3 Normalized()
+			{
+				float l = x * x + y * y + z * z;
+
+				if (l == 0)
+					throw new InvalidOperationException("The vector's length must be greater than 0");
+
+				l = MathF.Sqrt(l);
+				return new Vector3(x / l, y / l, z / l);
+			}
+
 			#endregion INSTANCE
 		}
 
