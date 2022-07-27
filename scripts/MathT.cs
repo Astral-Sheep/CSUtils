@@ -407,12 +407,39 @@ namespace Com.Surbon.CSUtils
 
 			public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
 
+			public void ClampLength(float min, float max)
+			{
+				float l = x * x + y * y + z * z;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					x /= l / Clamp(l, min, max);
+					y /= l / Clamp(l, min, max);
+					z /= l / Clamp(l, min, max);
+				}
+			}
+
+			public void ClampValues(float minX, float maxX, float minY, float maxY, float minZ, float maxZ)
+			{
+				x = Clamp(x, minX, maxX);
+				y = Clamp(y, minY, maxY);
+				z = Clamp(z, minZ, maxZ);
+			}
+
+			public void ClampValuesUniform(float min, float max)
+			{
+				ClampValues(min, max, min, max, min, max);
+			}
+
 			public override bool Equals(object obj)
 			{
 				if (obj is Vector3)
 					return (Vector3)obj == this;
 				return false;
 			}
+
+			public bool IsNormalized() => LengthSquared() == 1;
 
 			public float Length() => MathF.Sqrt(x * x + y * y + z * z);
 
@@ -441,8 +468,6 @@ namespace Com.Surbon.CSUtils
 				l = MathF.Sqrt(l);
 				return new Vector3(x / l, y / l, z / l);
 			}
-
-			public bool IsNormalized() => LengthSquared() == 1;
 
 			public void Rotate(float value, ANGLE angle = ANGLE.AZIMUTHAL)
 			{
