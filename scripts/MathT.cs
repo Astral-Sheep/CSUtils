@@ -76,6 +76,13 @@ namespace Com.Surbon.CSUtils
 
 			public float Dot(Vector2 vector) => x * vector.x + y * vector.y;
 
+			public override bool Equals(object obj)
+			{
+				if (obj is Vector2)
+					return (Vector2)obj == this;
+				return false;
+			}
+
 			public void FloorLength()
 			{
 				float l = x * x + y * y;
