@@ -621,6 +621,92 @@ namespace Com.Surbon.CSUtils
 			public Vector3 Sign() => new Vector3(MathF.Sign(x), MathF.Sign(y), MathF.Sign(z));
 
 			#endregion INSTANCE
+
+			#region STATIC
+
+			/// <summary>
+			/// Returns the cylindric coordinates of the vector from the cartesian coordinates
+			/// </summary>
+			/// <param name="vector">Cartesian coordinates as (x, y, z)</param>
+			/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+			public static Vector3 CartesianToCylindric(Vector3 vector)
+			{
+				Vector2 lPolarVector = Vector2.CartesianToPolar(vector.x, vector.y);
+
+				return new Vector3(lPolarVector.x, lPolarVector.y, vector.z);
+			}
+
+			/// <summary>
+			/// Returns the cylindric coordinates of the vector given in cartesian coordinates
+			/// </summary>
+			/// <param name="x">Cartesian coordinate x</param>
+			/// <param name="y">Cartesian coordinate y</param>
+			/// <param name="z">Cartesian coordinate z</param>
+			/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+			public static Vector3 CartesianToCylindric(float x, float y, float z)
+			{
+				Vector2 lPolarVector = Vector2.CartesianToPolar(x, y);
+
+				return new Vector3(lPolarVector.x, lPolarVector.y, z);
+			}
+
+			/// <summary>
+			/// Returns the spheric coordinates of the vector from the cartesian coordinates
+			/// </summary>
+			/// <param name="vector">Cartesian coordinates as (x, y, z)</param>
+			/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+			public static Vector3 CartesianToSpheric(Vector3 vector)
+			{
+				return new Vector3(
+					vector.Length(),
+					MathF.Atan2(vector.y, vector.x),
+					MathF.Atan2(vector.z, new Vector2(vector.x, vector.y).Length())
+					);
+			}
+
+			/// <summary>
+			/// Returns the spheric coordinates of the vector from the cartesian coordinates
+			/// </summary>
+			/// <param name="x">Cartesian coordinate x</param>
+			/// <param name="y">Cartesian coordinate y</param>
+			/// <param name="z">Cartesian coordinate z</param>
+			/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+			public static Vector3 CartesianToSpheric(float x, float y, float z)
+			{
+				return new Vector3(
+					new Vector3(x, y, z).Length(),
+					MathF.Atan2(y, x),
+					MathF.Atan2(z, new Vector2(x, y).Length())
+					);
+			}
+
+			/// <summary>
+			/// Returns the cartesian coordinates of the vector given in cylindric coordinates
+			/// </summary>
+			/// <param name="vector">Cylindric coordinates as (r, phi, z)</param>
+			/// <returns>Cartesian coordinates as (x, y, z)</returns>
+			public static Vector3 CylindricToCartesian(Vector3 vector)
+			{
+				Vector2 lCartesianVector = Vector2.PolarToCartesian(vector.x, vector.y);
+
+				return new Vector3(lCartesianVector.x, lCartesianVector.y, vector.z);
+			}
+
+			/// <summary>
+			/// Returns the cartesian coordinates of the vector given in cylindric coordinates
+			/// </summary>
+			/// <param name="r">Polar radius</param>
+			/// <param name="phi">Azimuth angle</param>
+			/// <param name="z">Cartesian coordinate z</param>
+			/// <returns>Cartesian coordinates as (x, y, z)</returns>
+			public static Vector3 CylindricToCartesian(float r, float phi, float z)
+			{
+				Vector2 lCartesianVector = Vector2.PolarToCartesian(r, phi);
+
+				return new Vector3(lCartesianVector.x, lCartesianVector.y, z);
+			}
+
+			#endregion STATIC
 		}
 
 		/// <summary>
