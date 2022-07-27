@@ -513,6 +513,16 @@ namespace Com.Surbon.CSUtils
 
 			public Vector3 Lerp(Vector3 to, float weight)
 			{
+				return LerpUnclamped(to, Clamp(weight, 0, 1));
+			}
+
+			public Vector3 LerpRand(Vector3 to)
+			{
+				return LerpUnclamped(to, (float)(new Random().NextDouble()));
+			}
+
+			public Vector3 LerpUnclamped(Vector3 to, float weight)
+			{
 				return new Vector3(
 					x + weight * (to.x - x),
 					y + weight * (to.y - y),
