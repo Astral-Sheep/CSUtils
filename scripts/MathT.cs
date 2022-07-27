@@ -22,6 +22,14 @@ namespace Com.Surbon.CSUtils
 
 			public float Angle() => MathF.Atan2(y, x);
 
+			public float AngleTo(Vector2 vector) => MathF.Atan2(Cross(vector), Dot(vector));
+
+			public float AngleToPoint(Vector2 vector)
+			{
+				// To do
+				throw new NotImplementedException("Don't use this method.");
+			}
+
 			public void CeilLength()
 			{
 				float l = x * x + y * y;
@@ -64,25 +72,13 @@ namespace Com.Surbon.CSUtils
 				ClampValues(min, max, min, max);
 			}
 
-			public float Cross(Vector2 vector)
-			{
-				return x * vector.y - y * vector.x;
-			}
+			public float Cross(Vector2 vector) => x * vector.y - y * vector.x;
 
-			public float Distance(Vector2 vector)
-			{
-				return MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.x) * (y - vector.y));
-			}
+			public float Distance(Vector2 vector) => MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.x) * (y - vector.y));
 
-			public float DistanceSquared(Vector2 vector)
-			{
-				return (x - vector.x) * (x - vector.x) + (y - vector.x) * (y - vector.y);
-			}
+			public float DistanceSquared(Vector2 vector) => (x - vector.x) * (x - vector.x) + (y - vector.x) * (y - vector.y);
 
-			public float Dot(Vector2 vector)
-			{
-				return x * vector.x + y * vector.y;
-			}
+			public float Dot(Vector2 vector) => x * vector.x + y * vector.y;
 
 			public void FloorLength()
 			{
