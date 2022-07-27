@@ -141,10 +141,23 @@ namespace Com.Surbon.CSUtils
 				y = MathF.Round(y);
 			}
 
-			public static Vector2 operator-(Vector2 vector1, Vector2 vector2)
-			{
-				return new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
-			}
+			#region OPERATORS
+
+			public static Vector2 operator +(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
+
+			public static Vector2 operator -(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
+
+			public static Vector2 operator *(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x * vector2.x, vector1.y * vector2.y);
+
+			public static Vector2 operator *(Vector2 vector, float scalar) => new Vector2(vector.x * scalar, vector.y * scalar);
+
+			public static Vector2 operator *(float scalar, Vector2 vector) => new Vector2(vector.x * scalar, vector.y * scalar);
+
+			public static Vector2 operator /(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x / vector2.x, vector1.y / vector2.y);
+
+			public static Vector2 operator /(Vector2 vector, float scalar) => new Vector2(vector.x / scalar, vector.y / scalar);
+
+			#endregion OPERATORS
 		}
 
 		public static float Clamp(float value, float min, float max)
