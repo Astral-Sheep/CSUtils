@@ -321,6 +321,20 @@ namespace Com.Surbon.CSUtils
 			#endregion STATIC
 		}
 
+		public struct Vector3
+		{
+			public float x;
+			public float y;
+			public float z;
+
+			public Vector3(float pX = 0f, float pY = 0f, float pZ = 0f)
+			{
+				x = pX;
+				y = pY;
+				z = pZ;
+			}
+		}
+
 		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
