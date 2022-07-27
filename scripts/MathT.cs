@@ -335,6 +335,12 @@ namespace Com.Surbon.CSUtils
 
 		public struct Vector3
 		{
+			public enum ANGLE
+			{
+				AZIMUTHAL = 0,
+				POLAR = 1
+			}
+
 			public float x;
 			public float y;
 			public float z;
@@ -437,6 +443,49 @@ namespace Com.Surbon.CSUtils
 			}
 
 			public bool IsNormalized() => LengthSquared() == 1;
+
+			public void Rotate(float value, ANGLE angle = ANGLE.AZIMUTHAL)
+			{
+				switch (angle)
+				{
+					case ANGLE.AZIMUTHAL:
+						float phi = MathF.Atan2(y, x);
+						float sin = MathF.Sin(phi);
+						float cos = MathF.Cos(phi);
+						x = x * sin - y * cos;
+						y = x * cos + y * sin;
+						break;
+					case ANGLE.POLAR:
+						float theta = MathF.Atan2(z, new Vector2(x, y).Length());
+						throw new NotImplementedException("I'll do it later");
+					default:
+						throw new Exception("How tf did you get there ?");
+				}
+			}
+
+			public Vector3 Rotated(float value, ANGLE angle = ANGLE.AZIMUTHAL)
+			{
+				Vector3 vector = new Vector3();
+
+				switch (angle)
+				{
+					case ANGLE.AZIMUTHAL:
+						float phi = MathF.Atan2(y, x);
+						float sin = MathF.Sin(phi);
+						float cos = MathF.Cos(phi);
+						vector.x = x * sin - y * cos;
+						vector.y = x * cos + y * sin;
+						vector.z = z;
+						break;
+					case ANGLE.POLAR:
+						float theta = MathF.Atan2(z, new Vector2(x, y).Length());
+						throw new NotImplementedException("I'll do it later");
+					default:
+						throw new Exception("How tf did you get there ?");
+				}
+
+				return vector;
+			}
 
 			#endregion INSTANCE
 		}
