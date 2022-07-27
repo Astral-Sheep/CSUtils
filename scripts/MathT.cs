@@ -192,6 +192,21 @@ namespace Com.Surbon.CSUtils
 			public float LengthSquared() => x * x + y * y;
 
 			/// <summary>
+			/// Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+			/// </summary>
+			public Vector2 Lerp(Vector2 to, float weight) => LerpUnclamped(to, Clamp(weight, 0, 1));
+
+			/// <summary>
+			/// Lerp the vector between this and to by a random number between 0 and 1.
+			/// </summary>
+			public Vector2 LerpRand(Vector2 to) => LerpUnclamped(to, (float)new Random().NextDouble());
+
+			/// <summary>
+			/// Lerp the vector between this and to by weight.
+			/// </summary>
+			public Vector2 LerpUnclamped(Vector2 to, float weight) => new Vector2(x + weight * (to.x - x), y + weight * (to.y - y));
+
+			/// <summary>
 			/// Performs a modulus operation on x and y, where the result is in ]-b, 0].
 			/// </summary>
 			public Vector2 NegMod(float mod) => new Vector2(Congruence(x, mod), Congruence(y, mod));
@@ -333,6 +348,9 @@ namespace Com.Surbon.CSUtils
 			#endregion STATIC
 		}
 
+		/// <summary>
+		/// Representation of a vector in a 3 dimensional space
+		/// </summary>
 		public struct Vector3
 		{
 			public enum ANGLE
