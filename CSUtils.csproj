@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>CSUtils</AssemblyName>
+    <RootNamespace>Com.Surbon.CSUtils</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DocumentationFile>C:\Users\thoma\Documents\tools\CSUtils\CSUtils.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>
