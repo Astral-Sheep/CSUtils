@@ -84,6 +84,24 @@ namespace Com.Surbon.CSUtils
 				return x * vector.x + y * vector.y;
 			}
 
+			public void FloorLength()
+			{
+				float l = x * x + y * y;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					x /= l / MathF.Floor(l);
+					y /= l / MathF.Floor(l);
+				}
+			}
+
+			public void FloorValues()
+			{
+				x = MathF.Floor(x);
+				y = MathF.Floor(y);
+			}
+
 			public bool IsNormalized() => LengthSquared() == 1f;
 
 			public float Length() => MathF.Sqrt(x * x + y * y);
@@ -111,6 +129,24 @@ namespace Com.Surbon.CSUtils
 
 				l = MathF.Sqrt(l);
 				return new Vector2(x / l, y / l);
+			}
+
+			public void RoundLength()
+			{
+				float l = x * x + y * y;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					x /= l / MathF.Round(l);
+					y /= l / MathF.Round(l);
+				}
+			}
+
+			public void RoundValues()
+			{
+				x = MathF.Round(x);
+				y = MathF.Round(y);
 			}
 		}
 
