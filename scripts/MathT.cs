@@ -40,6 +40,30 @@ namespace Com.Surbon.CSUtils
 				y = MathF.Ceiling(y);
 			}
 
+			public void ClampLength(float min, float max)
+			{
+				float l = x * x + y * y;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					float lClamped = Clamp(l, min, max);
+					x /= l / lClamped;
+					y /= l / lClamped;
+				}
+			}
+
+			public void ClampValues(float minX, float maxX, float minY, float maxY)
+			{
+				x = Clamp(x, minX, maxX);
+				y = Clamp(y, minY, maxY);
+			}
+
+			public void ClampValuesUniform(float min, float max)
+			{
+				ClampValues(min, max, min, max);
+			}
+
 			public bool IsNormalized() => LengthSquared() == 1f;
 
 			public float Length() => MathF.Sqrt(x * x + y * y);
@@ -68,6 +92,13 @@ namespace Com.Surbon.CSUtils
 				l = MathF.Sqrt(l);
 				return new Vector2(x / l, y / l);
 			}
+		}
+
+		public static float Clamp(float value, float min, float max)
+		{
+			if (value <= min) return min;
+			else if (value >= max) return max;
+			return value;
 		}
 	}
 }
