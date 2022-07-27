@@ -392,6 +392,10 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			public float Length() => MathF.Sqrt(x * x + y * y + z * z);
+
+			public float LengthSquared() => x * x + y * y + z * z;
+
 			#endregion INSTANCE
 		}
 
