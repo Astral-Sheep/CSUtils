@@ -131,6 +131,10 @@ namespace Com.Surbon.CSUtils
 
 			public float LengthSquared() => x * x + y * y;
 
+			public Vector2 NegMod(float mod) => new Vector2(Congruence(x, mod), Congruence(y, mod));
+
+			public Vector2 NegModv(Vector2 modv) => new Vector2(Congruence(x, modv.x), Congruence(y, modv.y));
+
 			public void Normalize(float length = 1)
 			{
 				float l = x * x + y * y;
@@ -154,11 +158,9 @@ namespace Com.Surbon.CSUtils
 				return new Vector2(x / l, y / l);
 			}
 
-			public Vector2 PosMod(float mod)
-			{
-				// To do
-				throw new NotImplementedException("Don't use this method");
-			}
+			public Vector2 PosMod(float mod) => new Vector2(Congruence(x, mod), Congruence(y, mod));
+
+			public Vector2 PosModV(Vector2 modv) => new Vector2(Congruence(x, modv.x), Congruence(y, modv.y));
 
 			public Vector2 Rotated(float angle)
 			{
