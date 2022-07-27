@@ -64,6 +64,26 @@ namespace Com.Surbon.CSUtils
 				ClampValues(min, max, min, max);
 			}
 
+			public float Cross(Vector2 vector)
+			{
+				return x * vector.y - y * vector.x;
+			}
+
+			public float Distance(Vector2 vector)
+			{
+				return MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.x) * (y - vector.y));
+			}
+
+			public float DistanceSquared(Vector2 vector)
+			{
+				return (x - vector.x) * (x - vector.x) + (y - vector.x) * (y - vector.y);
+			}
+
+			public float Dot(Vector2 vector)
+			{
+				return x * vector.x + y * vector.y;
+			}
+
 			public bool IsNormalized() => LengthSquared() == 1f;
 
 			public float Length() => MathF.Sqrt(x * x + y * y);
