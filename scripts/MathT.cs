@@ -407,6 +407,27 @@ namespace Com.Surbon.CSUtils
 
 			public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
 
+			public void CeilLength()
+			{
+				float l = x * x + y * y + z * z;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					float ceil = MathF.Ceiling(l);
+					x /= l / ceil;
+					y /= l / ceil;
+					z /= l / ceil;
+				}
+			}
+
+			public void CeilValues()
+			{
+				x = MathF.Ceiling(x);
+				y = MathF.Ceiling(y);
+				z = MathF.Ceiling(z);
+			}
+
 			public void ClampLength(float min, float max)
 			{
 				float l = x * x + y * y + z * z;
@@ -414,9 +435,10 @@ namespace Com.Surbon.CSUtils
 				if (l != 0)
 				{
 					l = MathF.Sqrt(l);
-					x /= l / Clamp(l, min, max);
-					y /= l / Clamp(l, min, max);
-					z /= l / Clamp(l, min, max);
+					float clamped = Clamp(l, min, max);
+					x /= l / clamped;
+					y /= l / clamped;
+					z /= l / clamped;
 				}
 			}
 
