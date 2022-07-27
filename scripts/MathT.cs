@@ -34,7 +34,7 @@ namespace Com.Surbon.CSUtils
 
 			public static Vector2 operator *(Vector2 vector, float scalar) => new Vector2(vector.x * scalar, vector.y * scalar);
 
-			public static Vector2 operator *(float scalar, Vector2 vector) => new Vector2(vector.x * scalar, vector.y * scalar);
+			public static Vector2 operator *(float scalar, Vector2 vector) => vector * scalar;
 
 			public static Vector2 operator /(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x / vector2.x, vector1.y / vector2.y);
 
@@ -371,7 +371,28 @@ namespace Com.Surbon.CSUtils
 				return new Vector3(vector.x / scalar, vector.y / scalar, vector.z / scalar);
 			}
 
+			public static bool operator == (Vector3 vector1, Vector3 vector2)
+			{
+				return vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z;
+			}
+
+			public static bool operator != (Vector3 vector1, Vector3 vector2)
+			{
+				return vector1.x != vector2.x || vector1.y != vector2.y || vector1.z != vector2.z;
+			}
+
 			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Vector3)
+					return (Vector3)obj == this;
+				return false;
+			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
