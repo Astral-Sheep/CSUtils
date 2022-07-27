@@ -17,6 +17,28 @@ namespace Com.Surbon.CSUtils
 				x = pX;
 				y = pY;
 			}
+
+			public float Length()
+			{
+				return MathF.Sqrt(x * x + y * y);
+			}
+
+			public float LengthSquared()
+			{
+				return x * x + y * y;
+			}
+
+			public void Normalize(float length = 1)
+			{
+				float l = x * x + y * y;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l) / length;
+					x /= l;
+					y /= l;
+				}
+			}
 		}
 	}
 }
