@@ -157,6 +157,10 @@ namespace Com.Surbon.CSUtils
 
 			public static Vector2 operator /(Vector2 vector, float scalar) => new Vector2(vector.x / scalar, vector.y / scalar);
 
+			public static bool operator ==(Vector2 vector1, Vector2 vector2) => vector1.x == vector2.x && vector1.y == vector2.y;
+
+			public static bool operator !=(Vector2 vector1, Vector2 vector2) => vector1.x != vector2.x || vector1.y != vector2.y;
+
 			#endregion OPERATORS
 		}
 
