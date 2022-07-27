@@ -231,7 +231,7 @@ namespace Com.Surbon.CSUtils
 			}
 
 			/// <summary>
-			/// Performs a modulus operation on x and y, where the result is in [0, b[.
+			/// Performs a modulus operation on x and y, where the result is in [0, mod[.
 			/// </summary>
 			public Vector2 PosMod(float mod) => new Vector2(Congruence(x, mod), Congruence(y, mod));
 
@@ -403,12 +403,25 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Returns the vector with absolute values.
+			/// </summary>
 			public Vector3 Abs() => new Vector3(MathF.Abs(x), MathF.Abs(y), MathF.Abs(z));
 
+			/// <summary>
+			/// Returns the azimuthal angle and the polar angle.
+			/// </summary>
+			/// <returns>Angles as (azimuthal, polar)</returns>
 			public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
 
+			/// <summary>
+			/// Returns the angle between the vector (this) and the given vector.
+			/// </summary>
 			public float AngleTo(Vector3 vector) => MathF.Atan2(Cross(vector).Length(), Dot(vector));
 
+			/// <summary>
+			/// Rounds up the length of the vector.
+			/// </summary>
 			public void CeilLength()
 			{
 				float l = x * x + y * y + z * z;
@@ -423,6 +436,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Rounds up the values of the vector.
+			/// </summary>
 			public void CeilValues()
 			{
 				x = MathF.Ceiling(x);
@@ -430,6 +446,9 @@ namespace Com.Surbon.CSUtils
 				z = MathF.Ceiling(z);
 			}
 
+			/// <summary>
+			/// Clamps the length of the vector between min and max.
+			/// </summary>
 			public void ClampLength(float min, float max)
 			{
 				float l = x * x + y * y + z * z;
@@ -444,6 +463,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Clamps x between minX and maxX, y between minY and maxY, and z between minZ and maxZ.
+			/// </summary>
 			public void ClampValues(float minX, float maxX, float minY, float maxY, float minZ, float maxZ)
 			{
 				x = Clamp(x, minX, maxX);
@@ -451,11 +473,17 @@ namespace Com.Surbon.CSUtils
 				z = Clamp(z, minZ, maxZ);
 			}
 
+			/// <summary>
+			/// Clamps x, y and z between min and max.
+			/// </summary>
 			public void ClampValuesUniform(float min, float max)
 			{
 				ClampValues(min, max, min, max, min, max);
 			}
 
+			/// <summary>
+			/// Returns the cross product of the vector (this) and the given vector.
+			/// </summary>
 			public Vector3 Cross(Vector3 vector)
 			{
 				return new Vector3(
@@ -465,16 +493,25 @@ namespace Com.Surbon.CSUtils
 				);
 			}
 
+			/// <summary>
+			/// Returns the distance between the vector (this) and the given vector.
+			/// </summary>
 			public float Distance(Vector3 vector)
 			{
 				return MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z));
 			}
 
+			/// <summary>
+			/// Returns the distance squared between the vector (this) and the given vector.
+			/// </summary>
 			public float DistanceSquared(Vector3 vector)
 			{
 				return (x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z);
 			}
 
+			/// <summary>
+			/// Returns the dot product of the vector (this) and the given the vector.
+			/// </summary>
 			public float Dot(Vector3 vector) => x * vector.x + y * vector.y + z * vector.z;
 
 			public override bool Equals(object obj)
@@ -484,6 +521,9 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Rounds the length of the vector downward.
+			/// </summary>
 			public void FloorLength()
 			{
 				float l = x * x + y * y + z * z;
@@ -498,6 +538,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Rounds the values of the vector downward.
+			/// </summary>
 			public void FloorValues()
 			{
 				x = MathF.Floor(x);
@@ -505,22 +548,40 @@ namespace Com.Surbon.CSUtils
 				z = MathF.Floor(z);
 			}
 
+			/// <summary>
+			/// Says if the vector is normalized (the length is equal to 1).
+			/// </summary>
 			public bool IsNormalized() => LengthSquared() == 1;
 
+			/// <summary>
+			/// Returns the length of the vector.
+			/// </summary>
 			public float Length() => MathF.Sqrt(x * x + y * y + z * z);
 
+			/// <summary>
+			/// Returns the squared length of the vector.
+			/// </summary>
 			public float LengthSquared() => x * x + y * y + z * z;
 
+			/// <summary>
+			/// Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+			/// </summary>
 			public Vector3 Lerp(Vector3 to, float weight)
 			{
 				return LerpUnclamped(to, Clamp(weight, 0, 1));
 			}
 
+			/// <summary>
+			/// Lerp the vector between this and to by a random number between 0 and 1.
+			/// </summary>
 			public Vector3 LerpRand(Vector3 to)
 			{
 				return LerpUnclamped(to, (float)(new Random().NextDouble()));
 			}
 
+			/// <summary>
+			/// Lerp the vector between this and to by weight.
+			/// </summary>
 			public Vector3 LerpUnclamped(Vector3 to, float weight)
 			{
 				return new Vector3(
@@ -530,6 +591,9 @@ namespace Com.Surbon.CSUtils
 					);
 			}
 
+			/// <summary>
+			/// Sets the length of the vector to length.
+			/// </summary>
 			public void Normalize(float length = 1f)
 			{
 				float l = x * x + y * y + z * z;
@@ -543,6 +607,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Returns the vector with its length set to 1.
+			/// </summary>
 			public Vector3 Normalized()
 			{
 				float l = x * x + y * y + z * z;
@@ -554,16 +621,25 @@ namespace Com.Surbon.CSUtils
 				return new Vector3(x / l, y / l, z / l);
 			}
 
+			/// <summary>
+			/// Performs a modulus operation on x, y and z, where the result is in [0, mod[.
+			/// </summary>
 			public Vector3 PosMod(float mod)
 			{
 				return new Vector3(Congruence(x, mod), Congruence(y, mod), Congruence(z, mod));
 			}
 
+			/// <summary>
+			/// Performs a modulus operation on x and y, where the result is in [0, modv.x[ for x, [0, modv.y[ for y, and [0, modv.z[ for z.
+			/// </summary>
 			public Vector3 PosModv(Vector3 modv)
 			{
 				return new Vector3(Congruence(x, modv.x), Congruence(y, modv.y), Congruence(z, modv.z));
 			}
 
+			/// <summary>
+			/// Rotates the vector by value radians on the given angle
+			/// </summary>
 			public void Rotate(float value, ANGLE angle = ANGLE.AZIMUTHAL)
 			{
 				switch (angle)
@@ -583,6 +659,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Returns the vector rotated by value radians on the given angle.
+			/// </summary>
 			public Vector3 Rotated(float value, ANGLE angle = ANGLE.AZIMUTHAL)
 			{
 				Vector3 vector = new Vector3();
@@ -607,6 +686,9 @@ namespace Com.Surbon.CSUtils
 				return vector;
 			}
 
+			/// <summary>
+			/// Rounds the length of the vector.
+			/// </summary>
 			public void RoundLength()
 			{
 				float l = x * x + y * y + z * z;
@@ -621,6 +703,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Rounds the values of the vector.
+			/// </summary>
 			public void RoundValues()
 			{
 				x = MathF.Round(x);
@@ -628,6 +713,9 @@ namespace Com.Surbon.CSUtils
 				z = MathF.Round(z);
 			}
 
+			/// <summary>
+			/// Returns a <see cref="Vector3"/> with the sign of the values.
+			/// </summary>
 			public Vector3 Sign() => new Vector3(MathF.Sign(x), MathF.Sign(y), MathF.Sign(z));
 
 			#endregion INSTANCE
