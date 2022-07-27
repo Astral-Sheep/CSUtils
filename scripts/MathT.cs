@@ -461,6 +461,27 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			public void FloorLength()
+			{
+				float l = x * x + y * y + z * z;
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					float floor = MathF.Floor(l);
+					x /= l / floor;
+					y /= l / floor;
+					z /= l / floor;
+				}
+			}
+
+			public void FloorValues()
+			{
+				x = MathF.Floor(x);
+				y = MathF.Floor(y);
+				z = MathF.Floor(z);
+			}
+
 			public bool IsNormalized() => LengthSquared() == 1;
 
 			public float Length() => MathF.Sqrt(x * x + y * y + z * z);
