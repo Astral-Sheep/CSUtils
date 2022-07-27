@@ -407,7 +407,7 @@ namespace Com.Surbon.CSUtils
 
 			public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
 
-			public float AngleTo(Vector3 vector) => MathF.Atan2(Cross(vector), Dot(vector));
+			public float AngleTo(Vector3 vector) => MathF.Atan2(Cross(vector).Length(), Dot(vector));
 
 			public void CeilLength()
 			{
@@ -456,9 +456,14 @@ namespace Com.Surbon.CSUtils
 				ClampValues(min, max, min, max, min, max);
 			}
 
-			public float Cross(Vector3 vector) => (y * vector.z - z * vector.y) + 
-				(z * vector.x - x * vector.z) + 
-				(x * vector.y - y * vector.x);
+			public Vector3 Cross(Vector3 vector)
+			{
+				return new Vector3(
+					y * vector.z - z * vector.y,
+					z * vector.x - x * vector.z,
+					x * vector.y - y * vector.x
+				);
+			}
 
 			public float Distance(Vector3 vector)
 			{
