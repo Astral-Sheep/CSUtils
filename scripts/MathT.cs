@@ -454,6 +454,14 @@ namespace Com.Surbon.CSUtils
 				ClampValues(min, max, min, max, min, max);
 			}
 
+			public float Cross(Vector3 vector)
+			{
+				// To do
+				throw new NotImplementedException("Don't use it please");
+			}
+
+			public float Dot(Vector3 vector) => x * vector.x + y * vector.y + z * vector.z;
+
 			public override bool Equals(object obj)
 			{
 				if (obj is Vector3)
