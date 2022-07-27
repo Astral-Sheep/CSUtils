@@ -407,6 +407,8 @@ namespace Com.Surbon.CSUtils
 
 			public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
 
+			public float AngleTo(Vector3 vector) => MathF.Atan2(Cross(vector), Dot(vector));
+
 			public void CeilLength()
 			{
 				float l = x * x + y * y + z * z;
@@ -503,6 +505,15 @@ namespace Com.Surbon.CSUtils
 			public float Length() => MathF.Sqrt(x * x + y * y + z * z);
 
 			public float LengthSquared() => x * x + y * y + z * z;
+
+			public Vector3 Lerp(Vector3 to, float weight)
+			{
+				return new Vector3(
+					x + weight * (to.x - x),
+					y + weight * (to.y - y),
+					z + weight * (to.z - z)
+					);
+			}
 
 			public void Normalize(float length = 1f)
 			{
