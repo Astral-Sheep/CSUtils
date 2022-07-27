@@ -528,6 +528,16 @@ namespace Com.Surbon.CSUtils
 				return new Vector3(x / l, y / l, z / l);
 			}
 
+			public Vector3 PosMod(float mod)
+			{
+				return new Vector3(Congruence(x, mod), Congruence(y, mod), Congruence(z, mod));
+			}
+
+			public Vector3 PosModv(Vector3 modv)
+			{
+				return new Vector3(Congruence(x, modv.x), Congruence(y, modv.y), Congruence(z, modv.z));
+			}
+
 			public void Rotate(float value, ANGLE angle = ANGLE.AZIMUTHAL)
 			{
 				switch (angle)
