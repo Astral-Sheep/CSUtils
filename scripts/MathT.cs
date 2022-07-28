@@ -1572,6 +1572,9 @@ namespace Com.Surbon.CSUtils
 			/// <param name="b">The y-intercept</param>
 			public Line2(Vector2 m, float b)
 			{
+				if (m.LengthSquared() == 0)
+					throw new ArgumentOutOfRangeException("m must have length greater than 0.");
+
 				n = m;
 				p = b;
 			}
