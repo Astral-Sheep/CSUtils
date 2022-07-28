@@ -1098,6 +1098,7 @@ namespace Com.Surbon.CSUtils
 
 				if (l != 0)
 				{
+					l = MathF.Sqrt(l);
 					float ceil = MathF.Ceiling(l);
 
 					for (int i = 0; i < Dimension; i++)
@@ -1121,6 +1122,7 @@ namespace Com.Surbon.CSUtils
 
 				if (l != 0)
 				{
+					l = MathF.Sqrt(l);
 					float clamp = Clamp(l, min, max);
 
 					for (int i = 0; i < Dimension; i++)
@@ -1231,6 +1233,7 @@ namespace Com.Surbon.CSUtils
 
 				if (l != 0)
 				{
+					l = MathF.Sqrt(l);
 					float floor = MathF.Floor(l);
 
 					for (int i = 0; i < Dimension; i++)
@@ -1297,6 +1300,66 @@ namespace Com.Surbon.CSUtils
 				}
 
 				return l;
+			}
+
+			public VectorN NegMod(float mod)
+			{
+				VectorN result = new VectorN(Dimension);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = Congruence(values[i], mod, false);
+				}
+
+				return result;
+			}
+
+			public VectorN NegModv(VectorN modv)
+			{
+				if (Dimension != modv.Dimension)
+					throw new ArgumentException("Both vectors must be the same dimension.");
+
+				VectorN result = new VectorN(Dimension);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = Congruence(values[i], modv[i], false);
+				}
+
+				return result;
+			}
+
+			public void Normalize(float length)
+			{
+				float l = LengthSquared();
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+
+					for (int i = 0; i < Dimension; i++)
+					{
+						values[i] /= l / length;
+					}
+				}
+			}
+
+			public VectorN Normalized()
+			{
+				VectorN result = new VectorN(Dimension);
+				float l = LengthSquared();
+
+				if (l == 0)
+					throw new InvalidOperationException("The vector's length must be greater than 0");
+
+				l = MathF.Sqrt(l);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = values[i] / l;
+				}
+
+				return result;
 			}
 
 			#endregion INSTANCE
