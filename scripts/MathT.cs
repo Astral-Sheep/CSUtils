@@ -672,6 +672,11 @@ namespace Com.Surbon.CSUtils
 			}
 
 			/// <summary>
+			/// Returns the vector with x, y and z to the power of pow.
+			/// </summary>
+			public Vector3 Pow(float pow) => new Vector3(MathF.Pow(x, pow), MathF.Pow(y, pow), MathF.Pow(z, pow));
+
+			/// <summary>
 			/// Rotates the vector by value radians on the given angle
 			/// </summary>
 			public void Rotate(float value, ANGLE angle = ANGLE.AZIMUTHAL)
