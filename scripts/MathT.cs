@@ -936,9 +936,9 @@ namespace Com.Surbon.CSUtils
 
 			private float[] values;
 
-			public VectorN(float[] pValues)
+			public VectorN(params float[] pValues)
 			{
-				values = pValues;
+				values = pValues == null ? new float[4] : pValues;
 			}
 		}
 
