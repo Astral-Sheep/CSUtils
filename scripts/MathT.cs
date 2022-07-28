@@ -207,14 +207,14 @@ namespace Com.Surbon.CSUtils
 			public Vector2 LerpUnclamped(Vector2 to, float weight) => new Vector2(x + weight * (to.x - x), y + weight * (to.y - y));
 
 			/// <summary>
-			/// Performs a modulus operation on x and y, where the result is in ]-b, 0].
+			/// Performs a modulus operation on x and y, where the result is in ]-mod, 0].
 			/// </summary>
-			public Vector2 NegMod(float mod) => new Vector2(Congruence(x, mod), Congruence(y, mod));
+			public Vector2 NegMod(float mod) => new Vector2(Congruence(x, mod, false), Congruence(y, mod, false));
 
 			/// <summary>
-			/// Performs a modulus operation on x and y, where the result is in ]modv.x, 0] for x, and ]modv.y, 0] for y.
+			/// Performs a modulus operation on x and y, where the result is in ]-modv.x, 0] for x, and ]-modv.y, 0] for y.
 			/// </summary>
-			public Vector2 NegModv(Vector2 modv) => new Vector2(Congruence(x, modv.x), Congruence(y, modv.y));
+			public Vector2 NegModv(Vector2 modv) => new Vector2(Congruence(x, modv.x, false), Congruence(y, modv.y, false));
 
 			/// <summary>
 			/// Sets the length of the vector to the given length.
@@ -607,6 +607,22 @@ namespace Com.Surbon.CSUtils
 					y + weight * (to.y - y),
 					z + weight * (to.z - z)
 					);
+			}
+
+			/// <summary>
+			/// Performs a modulus operation on x, y and z, where the result is in ]-mod, 0].
+			/// </summary>
+			public Vector3 NegMod(float mod)
+			{
+				return new Vector3(Congruence(x, mod, false), Congruence(y, mod, false), Congruence(z, mod, false));
+			}
+
+			/// <summary>
+			/// Performs a modulus operation on x, y and z, where the result is in ]-modv.x, 0] for x, ]-modv.y, 0] for y, and]-modv.z, 0] for z.
+			/// </summary>
+			public Vector3 NegModv(Vector3 modv)
+			{
+				return new Vector3(Congruence(x, modv.x, false), Congruence(y, modv.y, false), Congruence(z, modv.z, false));
 			}
 
 			/// <summary>
