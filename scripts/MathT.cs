@@ -1367,6 +1367,45 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			public VectorN PosMod(float mod)
+			{
+				VectorN result = new VectorN(Dimension);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = Congruence(values[i], mod);
+				}
+
+				return result;
+			}
+
+			public VectorN PosModv(VectorN modv)
+			{
+				if (Dimension != modv.Dimension)
+					throw new ArgumentException("Both vectors must be the same dimension.");
+
+				VectorN result = new VectorN(Dimension);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = Congruence(values[i], modv[i]);
+				}
+
+				return result;
+			}
+
+			public VectorN Pow(float pow)
+			{
+				VectorN result = new VectorN(Dimension);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = MathF.Pow(values[i], pow);
+				}
+
+				return result;
+			}
+
 			#endregion INSTANCE
 		}
 
