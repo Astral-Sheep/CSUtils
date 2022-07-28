@@ -1028,6 +1028,32 @@ namespace Com.Surbon.CSUtils
 				});
 			}
 
+			private static bool IsEqual(VectorN vector1, VectorN vector2, bool equality)
+			{
+				if (vector1.Dimension == vector2.Dimension)
+				{
+					for (int i = 0; i < vector1.Dimension; i++)
+					{
+						if (vector1[i] != vector2[i])
+							return !equality;
+					}
+
+					return equality;
+				}
+
+				return !equality;
+			}
+
+			public static bool operator ==(VectorN vector1, VectorN vector2)
+			{
+				return IsEqual(vector1, vector2, true);
+			}
+
+			public static bool operator !=(VectorN vector1, VectorN vector2)
+			{
+				return IsEqual(vector1, vector2, false);
+			}
+
 			#endregion OPERATORS
 		}
 
