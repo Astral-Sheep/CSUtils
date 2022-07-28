@@ -1516,7 +1516,99 @@ namespace Com.Surbon.CSUtils
 
 		public struct Line2
 		{
+			public (float a, float b, float c) CartesianForm
+			{
+				get
+				{
+					float angle = n.Angle();
+					return (MathF.Cos(angle), MathF.Sin(angle), p);
+				}
+				set
+				{
+					n = new Vector2(value.a, value.b).Normalized();
+					p = value.c;
+				}
+			}
 
+			public (float phi, float p) NormalForm
+			{
+				get => (n.Angle(), p);
+				set
+				{
+					n = Vector2.PolarToCartesian(MathF.Cos(value.phi), MathF.Sin(value.phi));
+					p = value.p;
+				}
+			}
+
+			public (float m, float p) SlopeInterceptForm
+			{
+				get => (n.y / n.x, p / MathF.Sin(n.Angle()));
+				set
+				{
+					n = new Vector2(1, value.m).Normalized();
+					p = value.p * MathF.Sin(n.Angle());
+				}
+			}
+
+			private Vector2 n;
+			private float p;
+
+			/// <summary>
+			/// The line deduced by two points.
+			/// </summary>
+			public Line2(Vector2 a, Vector2 b)
+			{
+				n = a - b;
+				p = (b.y - b.x * (n.y / n.x)) * MathF.Sin(n.Angle());
+			}
+
+			/// <summary>
+			/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
+			/// </summary>
+			/// <param name="m">The normal segment</param>
+			/// <param name="b">The y-intercept</param>
+			public Line2(Vector2 m, float b)
+			{
+				n = m;
+				p = b;
+			}
+
+			/// <summary>
+			/// The line given in the slope-intercept form (ax + b = y).
+			/// </summary>
+			/// <param name="a">The slope</param>
+			/// <param name="b">The y-intercept</param>
+			public Line2(float a, float b)
+			{
+				n = new Vector2(1, a);
+				p = b;
+			}
+
+			/// <summary>
+			/// The line given in cartesian coordinates (ax + by = c).
+			/// </summary>
+			public Line2(float a, float b, float c)
+			{
+				n = new Vector2(1, -a / b);
+				p = c / b;
+			}
+
+			/// <summary>
+			/// Returns the intersection of two lines. If there's no intersection, the point has <see cref="float.NegativeInfinity"/> as coordinates.
+			/// </summary>
+			public Vector2 Intersection(Line2 line)
+			{
+				(float a, float b) line1 = SlopeInterceptForm;
+				(float a, float b) line2 = line.SlopeInterceptForm;
+
+				if (line2.a - line1.a == 0 || (line2.b * line1.a) * (line2.a - line1.a) == 0)
+					return new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+
+				return new Vector2(
+					(line1.b - line2.b) / (line2.a - line1.a),
+					(line2.a * line1.b) / ((line2.b * line1.a) * (line2.a - line1.a))
+					);
+			}
 		}
 
 		/// <summary>
