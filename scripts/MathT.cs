@@ -951,28 +951,28 @@ namespace Com.Surbon.CSUtils
 
 				int dimension = vector1.Dimension;
 
-				float[] values = new float[dimension];
+				float[] lValues = new float[dimension];
 
 				for (int i = 0; i < dimension; i++)
 				{
-					values[i] = operation(vector1[i], vector2[i]);
+					lValues[i] = operation(vector1[i], vector2[i]);
 				}
 
-				return new VectorN(values);
+				return new VectorN(lValues);
 			}
 
 			private static VectorN Operate(VectorN vector, float scalar, Func<float, float, float> operation)
 			{
 				int dimension = vector.Dimension;
 
-				float[] values = new float[dimension];
+				float[] lValues = new float[dimension];
 
 				for (int i = 0; i < dimension; i++)
 				{
-					values[i] = operation(vector[i], scalar);
+					lValues[i] = operation(vector[i], scalar);
 				}
 
-				return new VectorN(values);
+				return new VectorN(lValues);
 			}
 
 			public static VectorN operator +(VectorN vector1, VectorN vector2)
@@ -1058,11 +1058,47 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			public VectorN Abs()
+			{
+				float[] lValues = new float[Dimension];
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					lValues[i] = MathF.Abs(values[i]);
+				}
+
+				return new VectorN(lValues);
+			}
+
 			public override bool Equals(object obj)
 			{
 				if (obj is VectorN)
 					return (VectorN)obj == this;
 				return false;
+			}
+
+			public float Length()
+			{
+				float l = 0f;
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					l += values[i] * values[i];
+				}
+
+				return MathF.Sqrt(l);
+			}
+
+			public float LengthSquared()
+			{
+				float l = 0f;
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					l += values[i] * values[i];
+				}
+
+				return l;
 			}
 
 			#endregion INSTANCE
