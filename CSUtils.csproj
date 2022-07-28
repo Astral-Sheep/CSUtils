@@ -8,7 +8,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>C:\Users\thoma\Documents\tools\CSUtils\CSUtils.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
