@@ -916,6 +916,33 @@ namespace Com.Surbon.CSUtils
 		}
 
 		/// <summary>
+		/// Representation of a vector in a N dimensional space
+		/// </summary>
+		public struct VectorN
+		{
+			public int Dimension => values.Length;
+
+			/// <summary>
+			/// Returns the coordinate on the given axis. Example: x for 0, z for 2, w for 3...
+			/// </summary>
+			public float this[int index]
+			{
+				get => values[index];
+				set
+				{
+					values[index] = value;
+				}
+			}
+
+			private float[] values;
+
+			public VectorN(float[] pValues)
+			{
+				values = pValues;
+			}
+		}
+
+		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
 		public static float Clamp(float value, float min, float max)
