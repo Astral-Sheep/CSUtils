@@ -1085,6 +1085,9 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Returns the vector with absolute values.
+			/// </summary>
 			public VectorN Abs()
 			{
 				float[] lValues = new float[Size];
@@ -1097,6 +1100,9 @@ namespace Com.Surbon.CSUtils
 				return new VectorN(lValues);
 			}
 
+			/// <summary>
+			/// Rounds up the length of the vector.
+			/// </summary>
 			public void CeilLength()
 			{
 				float l = LengthSquared();
@@ -1113,6 +1119,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Rounds up the values of the vector.
+			/// </summary>
 			public void CeilValues()
 			{
 				for (int i = 0; i < Size; i++)
@@ -1121,6 +1130,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Clamps the length of the vector between min and max.
+			/// </summary>
 			public void ClampLength(float min, float max)
 			{
 				float l = LengthSquared();
@@ -1137,6 +1149,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Clamps the values of the vector between the corresponding min and max in range.
+			/// </summary>
 			public void ClampValues(params (float min, float max)[] range)
 			{
 				if (range.Length != Size)
@@ -1148,6 +1163,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Clamps the values of the vector between min and max.
+			/// </summary>
 			public void ClampValuesUniform(float min, float max)
 			{
 				for (int i = 0; i < Size; i++)
@@ -1156,6 +1174,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Returns the cross product between the vector (this) and the given vector.
+			/// </summary>
 			public VectorN Cross(VectorN vector)
 			{
 				//if (Dimension != vector.Dimension)
@@ -1180,6 +1201,9 @@ namespace Com.Surbon.CSUtils
 				throw new NotImplementedException("Don't use it, it's a work in progress.");
 			}
 
+			/// <summary>
+			/// Returns the distance between the vector (this) and the given vector.
+			/// </summary>
 			public float Distance(VectorN vector)
 			{
 				if (Size != vector.Size)
@@ -1195,6 +1219,9 @@ namespace Com.Surbon.CSUtils
 				return MathF.Sqrt(l);
 			}
 
+			/// <summary>
+			/// Returns the squared distance between the vector (this) and the given vector.
+			/// </summary>
 			public float DistanceSquared(VectorN vector)
 			{
 				if (Size != vector.Size)
@@ -1210,6 +1237,9 @@ namespace Com.Surbon.CSUtils
 				return l;
 			}
 
+			/// <summary>
+			/// Returns the dot product of the vector (this) and the given vector.
+			/// </summary>
 			public float Dot(VectorN vector)
 			{
 				if (Size != vector.Size)
@@ -1232,6 +1262,9 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Rounds the length of the vector downward.
+			/// </summary>
 			public void FloorLength()
 			{
 				float l = LengthSquared();
@@ -1248,6 +1281,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Rounds the values of the vector downward.
+			/// </summary>
 			public void FloorValues()
 			{
 				for (int i = 0; i < Size; i++)
@@ -1256,18 +1292,30 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Says if the vector is normalized (if the length is equal to 1).
+			/// </summary>
 			public bool IsNormalized() => LengthSquared() == 1;
 
+			/// <summary>
+			/// Lerp between this and to by weight (weight is clamped between 0 and 1).
+			/// </summary>
 			public VectorN Lerp(VectorN to, float weight)
 			{
 				return LerpUnclamped(to, Clamp(weight, 0, 1));
 			}
 
+			/// <summary>
+			/// Lerp between this and to by a random number between 0 and 1.
+			/// </summary>
 			public VectorN LerpRand(VectorN to)
 			{
 				return LerpUnclamped(to, (float)new Random().NextDouble());
 			}
 
+			/// <summary>
+			/// Lerp between this and to by weight.
+			/// </summary>
 			public VectorN LerpUnclamped(VectorN to, float weight)
 			{
 				if (Size != to.Size)
@@ -1283,6 +1331,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Returns the length of the vector.
+			/// </summary>
 			public float Length()
 			{
 				float l = 0f;
@@ -1295,6 +1346,9 @@ namespace Com.Surbon.CSUtils
 				return MathF.Sqrt(l);
 			}
 
+			/// <summary>
+			/// Returns the squared length of the vector.
+			/// </summary>
 			public float LengthSquared()
 			{
 				float l = 0f;
@@ -1307,6 +1361,9 @@ namespace Com.Surbon.CSUtils
 				return l;
 			}
 
+			/// <summary>
+			/// Performs a modulus operation on each value, where the result is in ]-mod, 0].
+			/// </summary>
 			public VectorN NegMod(float mod)
 			{
 				VectorN result = new VectorN(Size);
@@ -1319,6 +1376,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Performs a modulus operation on each value, where the result is in ]-modv[i], 0].
+			/// </summary>
 			public VectorN NegModv(VectorN modv)
 			{
 				if (Size != modv.Size)
@@ -1334,6 +1394,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Sets the length of the vector to length.
+			/// </summary>
 			public void Normalize(float length)
 			{
 				float l = LengthSquared();
@@ -1349,6 +1412,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Returns the normalized vector.
+			/// </summary>
 			public VectorN Normalized()
 			{
 				VectorN result = new VectorN(Size);
@@ -1367,6 +1433,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Performs a modulus operation on each value, where the result is in [0, mod[.
+			/// </summary>
 			public VectorN PosMod(float mod)
 			{
 				VectorN result = new VectorN(Size);
@@ -1379,6 +1448,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Performs a modulus operation on each value, where the result is in [0, modv[i][.
+			/// </summary>
 			public VectorN PosModv(VectorN modv)
 			{
 				if (Size != modv.Size)
@@ -1394,6 +1466,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Returns the vector with its values to the power of pow.
+			/// </summary>
 			public VectorN Pow(float pow)
 			{
 				VectorN result = new VectorN(Size);
@@ -1406,6 +1481,9 @@ namespace Com.Surbon.CSUtils
 				return result;
 			}
 
+			/// <summary>
+			/// Rounds the length of the vector.
+			/// </summary>
 			public void RoundLength()
 			{
 				float l = LengthSquared();
@@ -1422,6 +1500,9 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			/// <summary>
+			/// Rounds the values of the vector.
+			/// </summary>
 			public void RoundValues()
 			{
 				for (int i = 0; i < Size; i++)
