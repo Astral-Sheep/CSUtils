@@ -1209,6 +1209,56 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			public void FloorLength()
+			{
+				float l = LengthSquared();
+
+				if (l != 0)
+				{
+					float floor = MathF.Floor(l);
+
+					for (int i = 0; i < Dimension; i++)
+					{
+						values[i] /= l / floor;
+					}
+				}
+			}
+
+			public void FloorValues()
+			{
+				for (int i = 0; i < Dimension; i++)
+				{
+					values[i] = MathF.Floor(values[i]);
+				}
+			}
+
+			public bool IsNormalized() => LengthSquared() == 1;
+
+			public VectorN Lerp(VectorN to, float weight)
+			{
+				return LerpUnclamped(to, Clamp(weight, 0, 1));
+			}
+
+			public VectorN LerpRand(VectorN to)
+			{
+				return LerpUnclamped(to, (float)new Random().NextDouble());
+			}
+
+			public VectorN LerpUnclamped(VectorN to, float weight)
+			{
+				if (Dimension != to.Dimension)
+					throw new ArgumentException("Both vectors must have the same dimension.");
+
+				VectorN result = new VectorN(Dimension);
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result[i] = values[i] + weight * (to[i] - values[i]);
+				}
+
+				return result;
+			}
+
 			public float Length()
 			{
 				float l = 0f;
