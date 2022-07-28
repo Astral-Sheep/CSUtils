@@ -1514,6 +1514,11 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
+		public struct Line2
+		{
+
+		}
+
 		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
