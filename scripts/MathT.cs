@@ -920,7 +920,7 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct VectorN
 		{
-			public int Dimension => values.Length;
+			public readonly int Dimension;
 
 			/// <summary>
 			/// Returns the coordinate on the given axis. Example: x for 0, z for 2, w for 3...
@@ -939,8 +939,99 @@ namespace Com.Surbon.CSUtils
 			public VectorN(params float[] pValues)
 			{
 				values = pValues == null ? new float[4] : pValues;
+				Dimension = values.Length;
 			}
+
+			#region OPERATORS
+
+			private static VectorN Operate(VectorN vector1, VectorN vector2, Func<float, float, float> operation)
+			{
+				if (vector1.Dimension != vector2.Dimension)
+					throw new InvalidOperationException("Both vectors must have the same dimensions.");
+
+				int dimension = vector1.Dimension;
+
+				float[] values = new float[dimension];
+
+				for (int i = 0; i < dimension; i++)
+				{
+					values[i] = operation(vector1[i], vector2[i]);
+				}
+
+				return new VectorN(values);
+			}
+
+			private static VectorN Operate(VectorN vector, float scalar, Func<float, float, float> operation)
+			{
+				int dimension = vector.Dimension;
+
+				float[] values = new float[dimension];
+
+				for (int i = 0; i < dimension; i++)
+				{
+					values[i] = operation(vector[i], scalar);
+				}
+
+				return new VectorN(values);
+			}
+
+			public static VectorN operator +(VectorN vector1, VectorN vector2)
+			{
+				return Operate(vector1, vector2, delegate(float n1, float n2)
+				{
+					return n1 + n2;
+				});
+			}
+
+			public static VectorN operator -(VectorN vector1, VectorN vector2)
+			{
+				return Operate(vector1, vector2, delegate(float n1, float n2)
+				{
+					return n1 - n2;
+				});
+			}
+
+			public static VectorN operator *(VectorN vector1, VectorN vector2)
+			{
+				return Operate(vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				});
+			}
+
+			public static VectorN operator *(VectorN vector, float scalar)
+			{
+				return Operate(vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				});
+			}
+
+			public static VectorN operator *(float scalar, VectorN vector)
+			{
+				return vector * scalar;
+			}
+
+			public static VectorN operator /(VectorN vector1, VectorN vector2)
+			{
+				return Operate(vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 / n2;
+				});
+			}
+
+			public static VectorN operator /(VectorN vector, float scalar)
+			{
+				return Operate(vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 / n2;
+				});
+			}
+
+			#endregion OPERATORS
 		}
+
+
 
 		/// <summary>
 		/// Clamps value between min and max.
