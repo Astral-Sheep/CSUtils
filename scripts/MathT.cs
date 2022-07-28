@@ -1322,7 +1322,7 @@ namespace Com.Surbon.CSUtils
 			public VectorN NegModv(VectorN modv)
 			{
 				if (Size != modv.Size)
-					throw new ArgumentException("Both vectors must be the same dimension.");
+					throw new ArgumentException("Both vectors must have the same dimension.");
 
 				VectorN result = new VectorN(Size);
 
@@ -1382,7 +1382,7 @@ namespace Com.Surbon.CSUtils
 			public VectorN PosModv(VectorN modv)
 			{
 				if (Size != modv.Size)
-					throw new ArgumentException("Both vectors must be the same dimension.");
+					throw new ArgumentException("Both vectors must have the same dimension.");
 
 				VectorN result = new VectorN(Size);
 
@@ -1433,8 +1433,6 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
-
-
 		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
@@ -1452,7 +1450,6 @@ namespace Com.Surbon.CSUtils
 		/// <param name="b">The divisor.</param>
 		/// <param name="isPos">If true, the remainder is negative.</param>
 		public static float Congruence(float a, float b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
-
 
 		/// <summary>
 		/// Returns a modulo b.
