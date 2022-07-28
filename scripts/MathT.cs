@@ -1592,6 +1592,23 @@ namespace Com.Surbon.CSUtils
 				n = new Vector2(1, -a / b);
 				p = c / b;
 			}
+
+			/// <summary>
+			/// Returns the intersection of two lines. If there's no intersection, the point has <see cref="float.NegativeInfinity"/> as coordinates.
+			/// </summary>
+			public Vector2 Intersection(Line2 line)
+			{
+				(float a, float b) line1 = SlopeInterceptForm;
+				(float a, float b) line2 = line.SlopeInterceptForm;
+
+				if (line2.a - line1.a == 0 || (line2.b * line1.a) * (line2.a - line1.a) == 0)
+					return new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+
+				return new Vector2(
+					(line1.b - line2.b) / (line2.a - line1.a),
+					(line2.a * line1.b) / ((line2.b * line1.a) * (line2.a - line1.a))
+					);
+			}
 		}
 
 		/// <summary>
