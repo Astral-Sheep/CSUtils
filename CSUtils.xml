@@ -191,7 +191,6 @@
             <summary>
             Returns the polar coordinates of the vector given in cartesian coordinates
             </summary>
-            <param name="vector">Cartesian coordinates as (x, y)</param>
             <returns>Polar coordinates as (r, th)</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.MathT.Vector2.PolarToCartesian(Com.Surbon.CSUtils.MathT.Vector2)">
@@ -650,6 +649,21 @@
         <member name="M:Com.Surbon.CSUtils.MathT.EuclidianRemainder(System.Int32,System.Int32)">
             <summary>
             Returns the euclidian remainder of a / b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.NegPow(System.Single,System.Int32)">
+            <summary>
+            Returns a to the power of -b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.PosPow(System.Single,System.Int32)">
+            <summary>
+            Returns a to the power of b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Pow(System.Single,System.Int32)">
+            <summary>
+            Returns a to the power of b.
             </summary>
         </member>
     </members>

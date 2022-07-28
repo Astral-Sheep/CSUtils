@@ -9,6 +9,7 @@ namespace Com.Surbon.CSUtils
 	{
 		#pragma warning disable CS0659 // Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
 		#pragma warning disable CS0661 // Le type définit l'opérateur == ou l'opérateur != mais ne se substitue pas à Object.GetHashCode()
+		#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 
 		/// <summary>
 		/// Representation of a vector in a 2 dimensional space.
@@ -326,7 +327,6 @@ namespace Com.Surbon.CSUtils
 			/// <summary>
 			/// Returns the polar coordinates of the vector given in cartesian coordinates
 			/// </summary>
-			/// <param name="vector">Cartesian coordinates as (x, y)</param>
 			/// <returns>Polar coordinates as (r, th)</returns>
 			public static Vector2 CartesianToPolar(float x, float y) => new Vector2(MathF.Sqrt(x * x + y * y), MathF.Atan2(y, x));
 
@@ -963,10 +963,10 @@ namespace Com.Surbon.CSUtils
 				Size = values.Length;
 			}
 
-			public VectorN(int dimension)
+			public VectorN(int size)
 			{
-				values = new float[dimension];
-				Size = dimension;
+				values = new float[size];
+				Size = size;
 			}
 
 			#region OPERATORS
@@ -1554,5 +1554,43 @@ namespace Com.Surbon.CSUtils
 		/// Returns the euclidian remainder of a / b.
 		/// </summary>
 		public static int EuclidianRemainder(int a, int b) => a - (a / b) * b;
+
+		/// <summary>
+		/// Returns a to the power of -b.
+		/// </summary>
+		public static float NegPow(float a, int b)
+		{
+			float pow = 1f;
+
+			for (int i = 0; i < b; i++)
+			{
+				pow /= a;
+			}
+
+			return a;
+		}
+
+		/// <summary>
+		/// Returns a to the power of b.
+		/// </summary>
+		public static float PosPow(float a, int b)
+		{
+			float pow = 1f;
+
+			for (int i = 0; i < b; i++)
+			{
+				pow *= a;
+			}
+
+			return pow;
+		}
+
+		/// <summary>
+		/// Returns a to the power of b.
+		/// </summary>
+		public static float Pow(float a, int b)
+		{
+			return b < 0 ? NegPow(a, -b) : PosPow(a, b);
+		}
 	}
 }
