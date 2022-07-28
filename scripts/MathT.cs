@@ -941,7 +941,7 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct VectorN
 		{
-			public readonly int Dimension;
+			public readonly int Size;
 
 			/// <summary>
 			/// Returns the coordinate on the given axis. Example: x for 0, z for 2, w for 3...
@@ -960,23 +960,23 @@ namespace Com.Surbon.CSUtils
 			public VectorN(params float[] pValues)
 			{
 				values = pValues == null ? new float[4] : pValues;
-				Dimension = values.Length;
+				Size = values.Length;
 			}
 
 			public VectorN(int dimension)
 			{
 				values = new float[dimension];
-				Dimension = dimension;
+				Size = dimension;
 			}
 
 			#region OPERATORS
 
 			private static VectorN Operate(VectorN vector1, VectorN vector2, Func<float, float, float> operation)
 			{
-				if (vector1.Dimension != vector2.Dimension)
+				if (vector1.Size != vector2.Size)
 					throw new InvalidOperationException("Both vectors must have the same dimensions.");
 
-				int dimension = vector1.Dimension;
+				int dimension = vector1.Size;
 
 				float[] lValues = new float[dimension];
 
@@ -990,7 +990,7 @@ namespace Com.Surbon.CSUtils
 
 			private static VectorN Operate(VectorN vector, float scalar, Func<float, float, float> operation)
 			{
-				int dimension = vector.Dimension;
+				int dimension = vector.Size;
 
 				float[] lValues = new float[dimension];
 
@@ -1057,9 +1057,9 @@ namespace Com.Surbon.CSUtils
 
 			private static bool IsEqual(VectorN vector1, VectorN vector2, bool equality)
 			{
-				if (vector1.Dimension == vector2.Dimension)
+				if (vector1.Size == vector2.Size)
 				{
-					for (int i = 0; i < vector1.Dimension; i++)
+					for (int i = 0; i < vector1.Size; i++)
 					{
 						if (vector1[i] != vector2[i])
 							return !equality;
@@ -1087,9 +1087,9 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN Abs()
 			{
-				float[] lValues = new float[Dimension];
+				float[] lValues = new float[Size];
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					lValues[i] = MathF.Abs(values[i]);
 				}
@@ -1106,7 +1106,7 @@ namespace Com.Surbon.CSUtils
 					l = MathF.Sqrt(l);
 					float ceil = MathF.Ceiling(l);
 
-					for (int i = 0; i < Dimension; i++)
+					for (int i = 0; i < Size; i++)
 					{
 						values[i] /= l / ceil;
 					}
@@ -1115,7 +1115,7 @@ namespace Com.Surbon.CSUtils
 
 			public void CeilValues()
 			{
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					values[i] = MathF.Ceiling(values[i]);
 				}
@@ -1130,7 +1130,7 @@ namespace Com.Surbon.CSUtils
 					l = MathF.Sqrt(l);
 					float clamp = Clamp(l, min, max);
 
-					for (int i = 0; i < Dimension; i++)
+					for (int i = 0; i < Size; i++)
 					{
 						values[i] /= l / clamp;
 					}
@@ -1139,10 +1139,10 @@ namespace Com.Surbon.CSUtils
 
 			public void ClampValues(params (float min, float max)[] range)
 			{
-				if (range.Length != Dimension)
-					throw new ArgumentException($"Range must have {Dimension} elements in it (the same dimensions as the vector).");
+				if (range.Length != Size)
+					throw new ArgumentException($"Range must have {Size} elements in it (the same dimensions as the vector).");
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					values[i] = Clamp(values[i], range[i].min, range[i].max);
 				}
@@ -1150,7 +1150,7 @@ namespace Com.Surbon.CSUtils
 
 			public void ClampValuesUniform(float min, float max)
 			{
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					values[i] = Clamp(values[i], min, max);
 				}
@@ -1182,12 +1182,12 @@ namespace Com.Surbon.CSUtils
 
 			public float Distance(VectorN vector)
 			{
-				if (Dimension != vector.Dimension)
+				if (Size != vector.Size)
 					throw new ArgumentException("Both vectors must have the same dimension.");
 
 				float l = 0f;
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					l += (this[i] - vector[i]) * (this[i] - vector[i]);
 				}
@@ -1197,12 +1197,12 @@ namespace Com.Surbon.CSUtils
 
 			public float DistanceSquared(VectorN vector)
 			{
-				if (Dimension != vector.Dimension)
+				if (Size != vector.Size)
 					throw new ArgumentException("Both vectors must have the same dimension.");
 
 				float l = 0f;
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					l += (this[i] - vector[i]) * (this[i] - vector[i]);
 				}
@@ -1212,12 +1212,12 @@ namespace Com.Surbon.CSUtils
 
 			public float Dot(VectorN vector)
 			{
-				if (Dimension != vector.Dimension)
+				if (Size != vector.Size)
 					throw new ArgumentException("Both vectors must have the same dimension.");
 
 				float result = 0f;
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result += this[i] * vector[i];
 				}
@@ -1241,7 +1241,7 @@ namespace Com.Surbon.CSUtils
 					l = MathF.Sqrt(l);
 					float floor = MathF.Floor(l);
 
-					for (int i = 0; i < Dimension; i++)
+					for (int i = 0; i < Size; i++)
 					{
 						values[i] /= l / floor;
 					}
@@ -1250,7 +1250,7 @@ namespace Com.Surbon.CSUtils
 
 			public void FloorValues()
 			{
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					values[i] = MathF.Floor(values[i]);
 				}
@@ -1270,12 +1270,12 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN LerpUnclamped(VectorN to, float weight)
 			{
-				if (Dimension != to.Dimension)
+				if (Size != to.Size)
 					throw new ArgumentException("Both vectors must have the same dimension.");
 
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = values[i] + weight * (to[i] - values[i]);
 				}
@@ -1287,7 +1287,7 @@ namespace Com.Surbon.CSUtils
 			{
 				float l = 0f;
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					l += values[i] * values[i];
 				}
@@ -1299,7 +1299,7 @@ namespace Com.Surbon.CSUtils
 			{
 				float l = 0f;
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					l += values[i] * values[i];
 				}
@@ -1309,9 +1309,9 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN NegMod(float mod)
 			{
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = Congruence(values[i], mod, false);
 				}
@@ -1321,12 +1321,12 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN NegModv(VectorN modv)
 			{
-				if (Dimension != modv.Dimension)
+				if (Size != modv.Size)
 					throw new ArgumentException("Both vectors must be the same dimension.");
 
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = Congruence(values[i], modv[i], false);
 				}
@@ -1342,7 +1342,7 @@ namespace Com.Surbon.CSUtils
 				{
 					l = MathF.Sqrt(l);
 
-					for (int i = 0; i < Dimension; i++)
+					for (int i = 0; i < Size; i++)
 					{
 						values[i] /= l / length;
 					}
@@ -1351,7 +1351,7 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN Normalized()
 			{
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 				float l = LengthSquared();
 
 				if (l == 0)
@@ -1359,7 +1359,7 @@ namespace Com.Surbon.CSUtils
 
 				l = MathF.Sqrt(l);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = values[i] / l;
 				}
@@ -1369,9 +1369,9 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN PosMod(float mod)
 			{
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = Congruence(values[i], mod);
 				}
@@ -1381,12 +1381,12 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN PosModv(VectorN modv)
 			{
-				if (Dimension != modv.Dimension)
+				if (Size != modv.Size)
 					throw new ArgumentException("Both vectors must be the same dimension.");
 
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = Congruence(values[i], modv[i]);
 				}
@@ -1396,14 +1396,38 @@ namespace Com.Surbon.CSUtils
 
 			public VectorN Pow(float pow)
 			{
-				VectorN result = new VectorN(Dimension);
+				VectorN result = new VectorN(Size);
 
-				for (int i = 0; i < Dimension; i++)
+				for (int i = 0; i < Size; i++)
 				{
 					result[i] = MathF.Pow(values[i], pow);
 				}
 
 				return result;
+			}
+
+			public void RoundLength()
+			{
+				float l = LengthSquared();
+
+				if (l != 0)
+				{
+					l = MathF.Sqrt(l);
+					float round = MathF.Round(l);
+
+					for (int i = 0; i < Size; i++)
+					{
+						values[i] /= l / round;
+					}
+				}
+			}
+
+			public void RoundValues()
+			{
+				for (int i = 0; i < Size; i++)
+				{
+					values[i] = MathF.Round(values[i]);
+				}
 			}
 
 			#endregion INSTANCE
