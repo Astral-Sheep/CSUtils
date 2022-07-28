@@ -1,0 +1,656 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSUtils</name>
+    </assembly>
+    <members>
+        <member name="T:Com.Surbon.CSUtils.MathT">
+            <summary>
+            Provides structs and methods for mathematical operations
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.Vector2">
+            <summary>
+            Representation of a vector in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Abs">
+            <summary>
+            Returns the vector with absolute values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Angle">
+            <summary>
+            Returns the vector's angle in radians.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.AngleTo(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the angle between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.AngleToPoint(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the angle between the line passing through both points, and the x axis.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.CeilLength">
+            <summary>
+            Rounds up the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.CeilValues">
+            <summary>
+            Rounds up the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.ClampLength(System.Single,System.Single)">
+            <summary>
+            Sets the length of the vector between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.ClampValues(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Clamps x between minX and maxX, and y between minY and maxY.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.ClampValuesUniform(System.Single,System.Single)">
+            <summary>
+            Clamps x and y between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Cross(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the cross product of the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Distance(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the distance between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.DistanceSquared(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the distance squared of the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Dot(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the dot product of the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.FloorLength">
+            <summary>
+            Rounds the length of the vector downward.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.FloorValues">
+            <summary>
+            Rounds the values of the vector downward.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.IsNormalized">
+            <summary>
+            Says if the vector is normalized (if the length is equal to 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Length">
+            <summary>
+            Returns the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.LengthSquared">
+            <summary>
+            Returns the length squared of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Lerp(Com.Surbon.CSUtils.MathT.Vector2,System.Single)">
+            <summary>
+            Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.LerpRand(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Lerp the vector between this and to by a random number between 0 and 1.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.LerpUnclamped(Com.Surbon.CSUtils.MathT.Vector2,System.Single)">
+            <summary>
+            Lerp the vector between this and to by weight.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.NegMod(System.Single)">
+            <summary>
+            Performs a modulus operation on x and y, where the result is in ]-mod, 0].
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.NegModv(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Performs a modulus operation on x and y, where the result is in ]-modv.x, 0] for x, and ]-modv.y, 0] for y.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Normalize(System.Single)">
+            <summary>
+            Sets the length of the vector to the given length.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Normalized">
+            <summary>
+            Returns the normalized vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.PosMod(System.Single)">
+            <summary>
+            Performs a modulus operation on x and y, where the result is in [0, mod[.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.PosModV(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Performs a modulus operation on x and y, where the result is in [0, modv.x[ for x, and [0, modv.y[ for y.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Pow(System.Single)">
+            <summary>
+            Returns the vector with x and y to the power of pow.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Rotate(System.Single)">
+            <summary>
+            Rotates the vector by phi radians.
+            </summary>
+            <param name="phi"></param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Rotated(System.Single)">
+            <summary>
+            Returns the vector rotated by phi radians.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.RoundLength">
+            <summary>
+            Rounds the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.RoundValues">
+            <summary>
+            Rounds the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.Sign">
+            <summary>
+            Returns the signs of the vector as (sign x, sign y).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.CartesianToPolar(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the polar coordinates of the vector given in cartesian coordinates
+            </summary>
+            <param name="vector">Cartesian coordinates as (x, y)</param>
+            <returns>Polar coordinates as (r, th)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.CartesianToPolar(System.Single,System.Single)">
+            <summary>
+            Returns the polar coordinates of the vector given in cartesian coordinates
+            </summary>
+            <param name="vector">Cartesian coordinates as (x, y)</param>
+            <returns>Polar coordinates as (r, th)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.PolarToCartesian(Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            Returns the cartesian coordinates of the vector given in polar coordinates
+            </summary>
+            <param name="vector">Polar coordinates as (r, th)</param>
+            <returns>Cartesian coordinates as (x, y)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector2.PolarToCartesian(System.Single,System.Single)">
+            <summary>
+            Returns the cartesian coordinates of the vector given in polar coordinates
+            </summary>
+            <param name="r">Radius</param>
+            <param name="th">Angle</param>
+            <returns>Cartesian coordinates as (x, y)</returns>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.Vector3">
+            <summary>
+            Representation of a vector in a 3 dimensional space
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Abs">
+            <summary>
+            Returns the vector with absolute values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Angles">
+            <summary>
+            Returns the azimuthal angle and the polar angle.
+            </summary>
+            <returns>Angles as (azimuthal, polar)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.AngleTo(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the angle between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CeilLength">
+            <summary>
+            Rounds up the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CeilValues">
+            <summary>
+            Rounds up the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.ClampLength(System.Single,System.Single)">
+            <summary>
+            Clamps the length of the vector between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.ClampValues(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Clamps x between minX and maxX, y between minY and maxY, and z between minZ and maxZ.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.ClampValuesUniform(System.Single,System.Single)">
+            <summary>
+            Clamps x, y and z between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Cross(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the cross product of the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Distance(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the distance between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.DistanceSquared(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the distance squared between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Dot(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the dot product of the vector (this) and the given the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.FloorLength">
+            <summary>
+            Rounds the length of the vector downward.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.FloorValues">
+            <summary>
+            Rounds the values of the vector downward.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.IsNormalized">
+            <summary>
+            Says if the vector is normalized (the length is equal to 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Length">
+            <summary>
+            Returns the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.LengthSquared">
+            <summary>
+            Returns the squared length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Lerp(Com.Surbon.CSUtils.MathT.Vector3,System.Single)">
+            <summary>
+            Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.LerpRand(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Lerp the vector between this and to by a random number between 0 and 1.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.LerpUnclamped(Com.Surbon.CSUtils.MathT.Vector3,System.Single)">
+            <summary>
+            Lerp the vector between this and to by weight.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.NegMod(System.Single)">
+            <summary>
+            Performs a modulus operation on x, y and z, where the result is in ]-mod, 0].
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.NegModv(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Performs a modulus operation on x, y and z, where the result is in ]-modv.x, 0] for x, ]-modv.y, 0] for y, and]-modv.z, 0] for z.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Normalize(System.Single)">
+            <summary>
+            Sets the length of the vector to length.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Normalized">
+            <summary>
+            Returns the vector with its length set to 1.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.PosMod(System.Single)">
+            <summary>
+            Performs a modulus operation on x, y and z, where the result is in [0, mod[.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.PosModv(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Performs a modulus operation on x and y, where the result is in [0, modv.x[ for x, [0, modv.y[ for y, and [0, modv.z[ for z.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Pow(System.Single)">
+            <summary>
+            Returns the vector with x, y and z to the power of pow.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Rotate(System.Single,Com.Surbon.CSUtils.MathT.Vector3.ANGLE)">
+            <summary>
+            Rotates the vector by value radians on the given angle
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Rotated(System.Single,Com.Surbon.CSUtils.MathT.Vector3.ANGLE)">
+            <summary>
+            Returns the vector rotated by value radians on the given angle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.RoundLength">
+            <summary>
+            Rounds the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.RoundValues">
+            <summary>
+            Rounds the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.Sign">
+            <summary>
+            Returns a <see cref="T:Com.Surbon.CSUtils.MathT.Vector3"/> with the sign of the values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CartesianToCylindric(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the cylindric coordinates of the vector from the cartesian coordinates
+            </summary>
+            <param name="vector">Cartesian coordinates as (x, y, z)</param>
+            <returns>Cylindric coordinates as (r, phi, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CartesianToCylindric(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns the cylindric coordinates of the vector given in cartesian coordinates
+            </summary>
+            <param name="x">Cartesian coordinate x</param>
+            <param name="y">Cartesian coordinate y</param>
+            <param name="z">Cartesian coordinate z</param>
+            <returns>Cylindric coordinates as (r, phi, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CartesianToSpheric(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the spheric coordinates of the vector from the cartesian coordinates
+            </summary>
+            <param name="vector">Cartesian coordinates as (x, y, z)</param>
+            <returns>Spheric coordinates as (rho, phi, th)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CartesianToSpheric(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns the spheric coordinates of the vector from the cartesian coordinates
+            </summary>
+            <param name="x">Cartesian coordinate x</param>
+            <param name="y">Cartesian coordinate y</param>
+            <param name="z">Cartesian coordinate z</param>
+            <returns>Spheric coordinates as (rho, phi, th)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CylindricToCartesian(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the cartesian coordinates of the vector given in cylindric coordinates
+            </summary>
+            <param name="vector">Cylindric coordinates as (r, phi, z)</param>
+            <returns>Cartesian coordinates as (x, y, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CylindricToCartesian(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns the cartesian coordinates of the vector given in cylindric coordinates
+            </summary>
+            <param name="r">Polar radius</param>
+            <param name="phi">Azimuth angle</param>
+            <param name="z">Cartesian coordinate z</param>
+            <returns>Cartesian coordinates as (x, y, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CylindricToSpheric(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the spheric coordinates of the vector given in cylindric coordinates
+            </summary>
+            <param name="vector">Cylindric coordinates as (r, phi, z)</param>
+            <returns>Spheric coordinates as (rho, phi, th)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.CylindricToSpheric(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns the spheric coordinates of the vector given in cylindric coordinates
+            </summary>
+            <param name="r">Polar radius</param>
+            <param name="phi">Azimuth angle</param>
+            <param name="z">Cartesian coordinate z</param>
+            <returns>Spheric coordinates as (rho, phi, th)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.SphericToCartesian(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the cartesian coordinates of the vector given in spheric coordinates
+            </summary>
+            <param name="vector">Spheric coordinates as (rho, phi, th)</param>
+            <returns>Cartesian coordinates as (x, y, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.SphericToCartesian(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns the cartesian coordinates of the vector given in spheric coordinates
+            </summary>
+            <param name="rho">Spheric radius</param>
+            <param name="phi">Azimuth angle</param>
+            <param name="th">Polar angle</param>
+            <returns>Cartesian coordinates as (x, y, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.SphericToCylindric(Com.Surbon.CSUtils.MathT.Vector3)">
+            <summary>
+            Returns the cylindric coordinates of the vector given in spheric coordinates
+            </summary>
+            <param name="vector">Spheric coordinates as (rho, phi, th)</param>
+            <returns>Cylindric coordinates as (r, phi, z)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Vector3.SphericToCylindric(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns the cylindric coordinates of the vector given in spheric coordinates
+            </summary>
+            <param name="rho">Spheric radius</param>
+            <param name="phi">Azimuth angle</param>
+            <param name="th">Polar angle</param>
+            <returns>Cylindric coordinates as (r, phi, z)</returns>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.VectorN">
+            <summary>
+            Representation of a vector in a N dimensional space
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.MathT.VectorN.Item(System.Int32)">
+            <summary>
+            Returns the coordinate on the given axis. Example: x for 0, z for 2, w for 3...
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Abs">
+            <summary>
+            Returns the vector with absolute values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.CeilLength">
+            <summary>
+            Rounds up the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.CeilValues">
+            <summary>
+            Rounds up the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.ClampLength(System.Single,System.Single)">
+            <summary>
+            Clamps the length of the vector between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.ClampValues(System.ValueTuple{System.Single,System.Single}[])">
+            <summary>
+            Clamps the values of the vector between the corresponding min and max in range.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.ClampValuesUniform(System.Single,System.Single)">
+            <summary>
+            Clamps the values of the vector between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Cross(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Returns the cross product between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Distance(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Returns the distance between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.DistanceSquared(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Returns the squared distance between the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Dot(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Returns the dot product of the vector (this) and the given vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.FloorLength">
+            <summary>
+            Rounds the length of the vector downward.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.FloorValues">
+            <summary>
+            Rounds the values of the vector downward.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.IsNormalized">
+            <summary>
+            Says if the vector is normalized (if the length is equal to 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Lerp(Com.Surbon.CSUtils.MathT.VectorN,System.Single)">
+            <summary>
+            Lerp between this and to by weight (weight is clamped between 0 and 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.LerpRand(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Lerp between this and to by a random number between 0 and 1.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.LerpUnclamped(Com.Surbon.CSUtils.MathT.VectorN,System.Single)">
+            <summary>
+            Lerp between this and to by weight.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Length">
+            <summary>
+            Returns the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.LengthSquared">
+            <summary>
+            Returns the squared length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.NegMod(System.Single)">
+            <summary>
+            Performs a modulus operation on each value, where the result is in ]-mod, 0].
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.NegModv(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Performs a modulus operation on each value, where the result is in ]-modv[i], 0].
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Normalize(System.Single)">
+            <summary>
+            Sets the length of the vector to length.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Normalized">
+            <summary>
+            Returns the normalized vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.PosMod(System.Single)">
+            <summary>
+            Performs a modulus operation on each value, where the result is in [0, mod[.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.PosModv(Com.Surbon.CSUtils.MathT.VectorN)">
+            <summary>
+            Performs a modulus operation on each value, where the result is in [0, modv[i][.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.Pow(System.Single)">
+            <summary>
+            Returns the vector with its values to the power of pow.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.RoundLength">
+            <summary>
+            Rounds the length of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.VectorN.RoundValues">
+            <summary>
+            Rounds the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Clamp(System.Single,System.Single,System.Single)">
+            <summary>
+            Clamps value between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Congruence(System.Single,System.Single,System.Boolean)">
+            <summary>
+            Returns a modulo b.
+            </summary>
+            <param name="a">The dividend.</param>
+            <param name="b">The divisor.</param>
+            <param name="isPos">If true, the remainder is negative.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Congruence(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Returns a modulo b.
+            </summary>
+            <param name="a">The dividend.</param>
+            <param name="b">The divisor.</param>
+            <param name="isPos">If true, the remainder is negative.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.EuclidianQuotient(System.Single,System.Single)">
+            <summary>
+            Returns the euclidian quotient of a / b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.EuclidianRemainder(System.Single,System.Single)">
+            <summary>
+            Returns the euclidian remainder of a / b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.EuclidianRemainder(System.Int32,System.Int32)">
+            <summary>
+            Returns the euclidian remainder of a / b.
+            </summary>
+        </member>
+    </members>
+</doc>
