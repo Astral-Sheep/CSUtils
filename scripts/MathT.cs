@@ -1516,7 +1516,75 @@ namespace Com.Surbon.CSUtils
 
 		public struct Line2
 		{
+			public Vector2 Normal
+			{
+				get => n;
+				set
+				{
+					n = value;
+				}
+			}
 
+			public float Slope
+			{
+				get => n.y / n.x;
+				set
+				{
+					n = new Vector2(1, value);
+				}
+			}
+
+			public float Intercept
+			{
+				get => p;
+				set
+				{
+					p = value;
+				}
+			}
+
+			private Vector2 n;
+			private float p;
+
+			/// <summary>
+			/// The line given in the slope-intercept form (ax + b = y).
+			/// </summary>
+			/// <param name="a">The slope</param>
+			/// <param name="b">The y-intercept</param>
+			public Line2(float a, float b)
+			{
+				n = new Vector2(1, a);
+				p = b;
+			}
+
+			/// <summary>
+			/// The line deduced by two points.
+			/// </summary>
+			public Line2(Vector2 a, Vector2 b)
+			{
+				n = a - b;
+				p = b.y - b.x * (n.y / n.x);
+			}
+
+			/// <summary>
+			/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0).
+			/// </summary>
+			/// <param name="m">The normal segment</param>
+			/// <param name="b">The y-intercept</param>
+			public Line2(Vector2 m, float b)
+			{
+				n = m;
+				p = b;
+			}
+
+			/// <summary>
+			/// The line given in cartesian coordinates (ax + by = c).
+			/// </summary>
+			public Line2(float a, float b, float c)
+			{
+				n = new Vector2(1, -a / b);
+				p = c / b;
+			}
 		}
 
 		/// <summary>
