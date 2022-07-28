@@ -1070,6 +1070,63 @@ namespace Com.Surbon.CSUtils
 				return new VectorN(lValues);
 			}
 
+			public void CeilLength()
+			{
+				float l = LengthSquared();
+
+				if (l != 0)
+				{
+					float ceil = MathF.Ceiling(l);
+
+					for (int i = 0; i < Dimension; i++)
+					{
+						values[i] /= l / ceil;
+					}
+				}
+			}
+
+			public void CeilValues()
+			{
+				for (int i = 0; i < Dimension; i++)
+				{
+					values[i] = MathF.Ceiling(values[i]);
+				}
+			}
+
+			public void ClampLength(float min, float max)
+			{
+				float l = LengthSquared();
+
+				if (l != 0)
+				{
+					float clamp = Clamp(l, min, max);
+
+					for (int i = 0; i < Dimension; i++)
+					{
+						values[i] /= l / clamp;
+					}
+				}
+			}
+
+			public void ClampValues(params (float min, float max)[] range)
+			{
+				if (range.Length != Dimension)
+					throw new ArgumentException($"Range must have {Dimension} elements in it (the same dimensions as the vector).");
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					values[i] = Clamp(values[i], range[i].min, range[i].max);
+				}
+			}
+
+			public void ClampValuesUniform(float min, float max)
+			{
+				for (int i = 0; i < Dimension; i++)
+				{
+					values[i] = Clamp(values[i], min, max);
+				}
+			}
+
 			public override bool Equals(object obj)
 			{
 				if (obj is VectorN)
