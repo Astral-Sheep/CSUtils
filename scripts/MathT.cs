@@ -1514,6 +1514,9 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
+		/// <summary>
+		/// Representation of a straight line in a 2 dimensional space.
+		/// </summary>
 		public struct Line2
 		{
 			public (float a, float b, float c) CartesianForm
@@ -1627,6 +1630,12 @@ namespace Com.Surbon.CSUtils
 				float angle = n.Angle() + phi;
 				return new Line2(new Vector2(MathF.Cos(angle), MathF.Sin(angle)), p);
 			}
+		}
+
+		public struct Line3
+		{
+			private Vector3 n;
+			private Vector3 p;
 		}
 
 		/// <summary>
