@@ -1516,35 +1516,62 @@ namespace Com.Surbon.CSUtils
 
 		public struct Line2
 		{
-			public Vector2 Normal
+			public (float a, float b, float c) CartesianForm
 			{
-				get => n;
+				get
+				{
+					float angle = n.Angle();
+					return (MathF.Cos(angle), MathF.Sin(angle), p);
+				}
 				set
 				{
-					n = value;
+					n = new Vector2(value.a, value.b).Normalized();
+					p = value.c;
 				}
 			}
 
-			public float Slope
+			public (float phi, float p) NormalForm
 			{
-				get => n.y / n.x;
+				get => (n.Angle(), p);
 				set
 				{
-					n = new Vector2(1, value);
+					n = Vector2.PolarToCartesian(MathF.Cos(value.phi), MathF.Sin(value.phi));
+					p = value.p;
 				}
 			}
 
-			public float Intercept
+			public (float m, float p) SlopeInterceptForm
 			{
-				get => p;
+				get => (n.y / n.x, p / MathF.Sin(n.Angle()));
 				set
 				{
-					p = value;
+					n = new Vector2(1, value.m).Normalized();
+					p = value.p * MathF.Sin(n.Angle());
 				}
 			}
 
 			private Vector2 n;
 			private float p;
+
+			/// <summary>
+			/// The line deduced by two points.
+			/// </summary>
+			public Line2(Vector2 a, Vector2 b)
+			{
+				n = a - b;
+				p = (b.y - b.x * (n.y / n.x)) * MathF.Sin(n.Angle());
+			}
+
+			/// <summary>
+			/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
+			/// </summary>
+			/// <param name="m">The normal segment</param>
+			/// <param name="b">The y-intercept</param>
+			public Line2(Vector2 m, float b)
+			{
+				n = m;
+				p = b;
+			}
 
 			/// <summary>
 			/// The line given in the slope-intercept form (ax + b = y).
@@ -1554,26 +1581,6 @@ namespace Com.Surbon.CSUtils
 			public Line2(float a, float b)
 			{
 				n = new Vector2(1, a);
-				p = b;
-			}
-
-			/// <summary>
-			/// The line deduced by two points.
-			/// </summary>
-			public Line2(Vector2 a, Vector2 b)
-			{
-				n = a - b;
-				p = b.y - b.x * (n.y / n.x);
-			}
-
-			/// <summary>
-			/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0).
-			/// </summary>
-			/// <param name="m">The normal segment</param>
-			/// <param name="b">The y-intercept</param>
-			public Line2(Vector2 m, float b)
-			{
-				n = m;
 				p = b;
 			}
 
