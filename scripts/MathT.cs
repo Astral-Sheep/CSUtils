@@ -1610,12 +1610,18 @@ namespace Com.Surbon.CSUtils
 					);
 			}
 
+			/// <summary>
+			/// Rotates the line by phi radians.
+			/// </summary>
 			public void Rotate(float phi)
 			{
 				float angle = n.Angle() + phi;
 				n = new Vector2(MathF.Cos(angle), MathF.Sin(angle));
 			}
 
+			/// <summary>
+			/// Returns the line rotated by phi radians.
+			/// </summary>
 			public Line2 Rotated(float phi)
 			{
 				float angle = n.Angle() + phi;
