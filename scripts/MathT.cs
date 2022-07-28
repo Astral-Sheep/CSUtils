@@ -1055,6 +1055,17 @@ namespace Com.Surbon.CSUtils
 			}
 
 			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is VectorN)
+					return (VectorN)obj == this;
+				return false;
+			}
+
+			#endregion INSTANCE
 		}
 
 
