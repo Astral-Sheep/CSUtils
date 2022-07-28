@@ -942,6 +942,12 @@ namespace Com.Surbon.CSUtils
 				Dimension = values.Length;
 			}
 
+			public VectorN(int dimension)
+			{
+				values = new float[dimension];
+				Dimension = dimension;
+			}
+
 			#region OPERATORS
 
 			private static VectorN Operate(VectorN vector1, VectorN vector2, Func<float, float, float> operation)
@@ -1125,6 +1131,75 @@ namespace Com.Surbon.CSUtils
 				{
 					values[i] = Clamp(values[i], min, max);
 				}
+			}
+
+			public VectorN Cross(VectorN vector)
+			{
+				//if (Dimension != vector.Dimension)
+				//	throw new ArgumentException("Both vectors must have the same dimension.");
+
+				//VectorN result = new VectorN(Dimension);
+				//float length = MathF.Floor(Dimension / 2f);
+				//float coord = 0f;
+
+				//for (int i = 0; i < Dimension; i++)
+				//{
+				//	coord = 0f;
+
+				//	for (int j = 0; j < length; j++)
+				//	{
+				//		coord += this[Congruence(i + j, Dimension) + 1] - vector[Congruence()]
+				//	}
+
+				//	result[i] = coord;
+				//}
+
+				throw new NotImplementedException("Don't use it, it's a work in progress.");
+			}
+
+			public float Distance(VectorN vector)
+			{
+				if (Dimension != vector.Dimension)
+					throw new ArgumentException("Both vectors must have the same dimension.");
+
+				float l = 0f;
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					l += (this[i] - vector[i]) * (this[i] - vector[i]);
+				}
+
+				return MathF.Sqrt(l);
+			}
+
+			public float DistanceSquared(VectorN vector)
+			{
+				if (Dimension != vector.Dimension)
+					throw new ArgumentException("Both vectors must have the same dimension.");
+
+				float l = 0f;
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					l += (this[i] - vector[i]) * (this[i] - vector[i]);
+				}
+
+				return l;
+			}
+
+			public float Dot(VectorN vector)
+			{
+				if (Dimension != vector.Dimension)
+					throw new ArgumentException("Both vectors must have the same dimension.");
+
+				float result = 0f;
+
+				for (int i = 0; i < Dimension; i++)
+				{
+					result += this[i] * vector[i];
+				}
+
+				return result;
 			}
 
 			public override bool Equals(object obj)
