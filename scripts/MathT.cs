@@ -1609,6 +1609,18 @@ namespace Com.Surbon.CSUtils
 					(line2.a * line1.b) / ((line2.b * line1.a) * (line2.a - line1.a))
 					);
 			}
+
+			public void Rotate(float phi)
+			{
+				float angle = n.Angle() + phi;
+				n = new Vector2(MathF.Cos(angle), MathF.Sin(angle));
+			}
+
+			public Line2 Rotated(float phi)
+			{
+				float angle = n.Angle() + phi;
+				return new Line2(new Vector2(MathF.Cos(angle), MathF.Sin(angle)), p);
+			}
 		}
 
 		/// <summary>
