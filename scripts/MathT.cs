@@ -1621,10 +1621,7 @@ namespace Com.Surbon.CSUtils
 			/// </summary>
 			public bool IsParallel(Line2 line)
 			{
-				(float a, float b) line1 = SlopeInterceptForm;
-				(float a, float b) line2 = line.SlopeInterceptForm;
-
-				return line2.a - line1.a == 0 || (line2.b * line1.a) * (line2.a - line1.a) == 0;
+				return n.Cross(Vector2.PolarToCartesian(1, line.NormalForm.phi)) == 0;
 			}
 
 			/// <summary>
@@ -1738,6 +1735,21 @@ namespace Com.Surbon.CSUtils
 					return new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 
 				return GetPoint(t);
+			}
+
+			public bool IsCoplanar(Line3 line)
+			{
+				return IsParallel(line) || IsSecant(line);
+			}
+
+			public bool IsParallel(Line3 line)
+			{
+				return n.x / line.Direction.x == n.y / line.Direction.y && n.x / line.Direction.x == n.z / line.Direction.z;
+			}
+
+			public bool IsSecant(Line3 line)
+			{
+				return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 			}
 		}
 
