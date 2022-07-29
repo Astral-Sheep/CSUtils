@@ -1722,9 +1722,22 @@ namespace Com.Surbon.CSUtils
 				p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
 			}
 
+			public Vector3 GetPoint(float t)
+			{
+				return new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
+			}
+
 			public Vector3 Intersection(Line3 line)
 			{
-				throw new NotImplementedException("Don't use it please.");
+				float t = (line.ParametricX.a * (p.y - line.ParametricY.y) - line.ParametricY.b * (p.x - line.ParametricX.x)) /
+					(n.x * line.ParametricY.b - line.ParametricX.a * n.y);
+				float T = (n.x * (line.ParametricY.y - p.y) - n.y * (line.ParametricX.x - p.x)) /
+					(line.ParametricX.a * n.y - n.x * line.ParametricY.b);
+
+				if (p.z + n.z * t != line.ParametricZ.z + line.ParametricZ.c * T)
+					return new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
+
+				return GetPoint(t);
 			}
 		}
 
