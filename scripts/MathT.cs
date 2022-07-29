@@ -1671,12 +1671,42 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
-			public Vector3 Point
+			public Vector3 Origin
 			{
 				get => p;
 				set
 				{
-					p = value;
+					p = new Vector3(0, value.y - value.x * n.y, value.z - value.x * n.z);
+				}
+			}
+
+			public (float x, float a) ParametricX
+			{
+				get => (p.x, n.x);
+				set
+				{
+					n.x = value.a;
+					p = new Vector3(0, p.y - value.x * n.y, p.z - value.x * n.z);
+				}
+			}
+
+			public (float y, float b) ParametricY
+			{
+				get => (p.y, n.y);
+				set
+				{
+					n.y = value.b;
+					p.y = value.y;
+				}
+			}
+
+			public (float z, float c) ParametricZ
+			{
+				get => (p.z, n.z);
+				set
+				{
+					n.z = value.c;
+					p.z = value.z;
 				}
 			}
 
@@ -1689,7 +1719,7 @@ namespace Com.Surbon.CSUtils
 					throw new ArgumentOutOfRangeException("distance must have a length greater than 0.");
 
 				n = direction;
-				p = point;
+				p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
 			}
 
 			public Vector3 Intersection(Line3 line)
