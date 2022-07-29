@@ -1617,6 +1617,28 @@ namespace Com.Surbon.CSUtils
 			}
 
 			/// <summary>
+			/// Says if the given line is parallel to this one.
+			/// </summary>
+			public bool IsParallel(Line2 line)
+			{
+				(float a, float b) line1 = SlopeInterceptForm;
+				(float a, float b) line2 = line.SlopeInterceptForm;
+
+				return line2.a - line1.a == 0 || (line2.b * line1.a) * (line2.a - line1.a) == 0;
+			}
+
+			/// <summary>
+			/// Says if the given line is secant to this one.
+			/// </summary>
+			public bool IsSecant(Line2 line)
+			{
+				(float a, float b) line1 = SlopeInterceptForm;
+				(float a, float b) line2 = line.SlopeInterceptForm;
+
+				return line2.a - line1.a != 0 && (line2.b * line1.a) * (line2.a - line1.a) != 0;
+			}
+
+			/// <summary>
 			/// Rotates the line by phi radians.
 			/// </summary>
 			public void Rotate(float phi)
@@ -1668,6 +1690,11 @@ namespace Com.Surbon.CSUtils
 
 				n = direction;
 				p = point;
+			}
+
+			public Vector3 Intersection(Line3 line)
+			{
+				throw new NotImplementedException("Don't use it please.");
 			}
 		}
 
