@@ -1635,10 +1635,40 @@ namespace Com.Surbon.CSUtils
 			}
 		}
 
+		/// <summary>
+		/// Representation of a straight line in a 3 dimensional space.
+		/// </summary>
 		public struct Line3
 		{
+			public Vector3 Direction
+			{
+				get => n;
+				set
+				{
+					n = value;
+				}
+			}
+
+			public Vector3 Point
+			{
+				get => p;
+				set
+				{
+					p = value;
+				}
+			}
+
 			private Vector3 n;
 			private Vector3 p;
+
+			public Line3(Vector3 direction, Vector3 point)
+			{
+				if (direction.LengthSquared() == 0)
+					throw new ArgumentOutOfRangeException("distance must have a length greater than 0.");
+
+				n = direction;
+				p = point;
+			}
 		}
 
 		/// <summary>
