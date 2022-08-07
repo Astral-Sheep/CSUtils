@@ -1599,6 +1599,16 @@ namespace Com.Surbon.CSUtils
 				p = c / b;
 			}
 
+			#region OPERATORS
+
+			public static bool operator ==(Line2 line1, Line2 line2) => line1.SlopeInterceptForm == line2.SlopeInterceptForm;
+
+			public static bool operator !=(Line2 line1, Line2 line2) => line1.SlopeInterceptForm != line2.SlopeInterceptForm;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
 			/// <summary>
 			/// Returns the intersection of two lines. If there's no intersection, the point has <see cref="float.NegativeInfinity"/> as coordinates.
 			/// </summary>
@@ -1652,6 +1662,8 @@ namespace Com.Surbon.CSUtils
 				float angle = n.Angle() + phi;
 				return new Line2(new Vector2(MathF.Cos(angle), MathF.Sin(angle)), p);
 			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
