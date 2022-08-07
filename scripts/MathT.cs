@@ -1886,6 +1886,34 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			public VectorN GetPoint(float t)
+			{
+				float[] coordinates = new float[Size];
+
+				for (int i = 0; i < Size; i++)
+				{
+					coordinates[i] = p[i] + n[i] * t;
+				}
+
+				return new VectorN(coordinates);
+			}
+
+			public bool IsParallel(LineN line)
+			{
+				if (line.Size != Size)
+					throw new ArgumentException("Both lines must have the same Size.");
+
+				float lRatio = n[0] / line.Direction[0];
+
+				for (int i = 1; i < Size; i++)
+				{
+					if (n[i] / line.Direction[i] != lRatio)
+						return false;
+				}
+
+				return true;
+			}
+
 			#endregion INSTANCE
 		}
 
