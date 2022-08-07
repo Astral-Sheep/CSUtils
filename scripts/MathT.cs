@@ -1924,6 +1924,57 @@ namespace Com.Surbon.CSUtils
 		}
 
 		/// <summary>
+		/// Representation of a circle.
+		/// </summary>
+		public struct Circle
+		{
+			public Vector2 Origin
+			{
+				get => o;
+				set
+				{
+					o = value;
+				}
+			}
+
+			public float Radius
+			{
+				get => r;
+				set
+				{
+					if (value <= 0)
+						throw new ArgumentOutOfRangeException("The radius must be greater than 0.");
+
+					r = value;
+				}
+			}
+
+			public float Diameter
+			{
+				get => 2f * r;
+				set
+				{
+					if (value <= 0)
+						throw new ArgumentOutOfRangeException("The diameter must be greater than 0.");
+
+					r = value / 2f;
+				}
+			}
+
+			public float Area => MathF.PI * r * r;
+			public float Perimeter => 2f * MathF.PI * r;
+
+			private Vector2 o;
+			private float r;
+
+			public Circle(Vector2 origin, float radius)
+			{
+				o = origin;
+				r = radius;
+			}
+		}
+
+		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
 		public static float Clamp(float value, float min, float max)
