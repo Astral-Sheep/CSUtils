@@ -1810,7 +1810,47 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct LineN
 		{
+			public readonly int Size;
 
+			public VectorN Direction
+			{
+				get => n;
+				set
+				{
+					if (value.Size == Size)
+						n = value;
+				}
+			}
+
+			public VectorN Origin
+			{
+				get => p;
+				set
+				{
+					if (value.Size == Size)
+					{
+						p[0] = 0f;
+
+						for (int i = 1; i < Size; i++)
+						{
+							p[i] = value[i] - value[0] * n[i];
+						}
+					}
+				}
+			}
+
+			private VectorN n;
+			private VectorN p;
+
+			public LineN(VectorN direction, VectorN origin)
+			{
+				if (direction.Size != origin.Size)
+					throw new ArgumentException("The direction and the origin must have the same Size.");
+
+				Size = direction.Size;
+				n = direction;
+				p = origin;
+			}
 		}
 
 		/// <summary>
