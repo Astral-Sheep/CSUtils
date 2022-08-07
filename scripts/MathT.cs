@@ -1972,6 +1972,20 @@ namespace Com.Surbon.CSUtils
 				o = origin;
 				r = radius;
 			}
+
+			#region OPERATOR
+
+			public static bool operator ==(Circle circle1, Circle circle2)
+			{
+				return circle1.Origin == circle2.Origin && circle1.Radius == circle2.Radius;
+			}
+
+			public static bool operator !=(Circle circle1, Circle circle2)
+			{
+				return circle1.Origin != circle2.Origin || circle1.Radius != circle2.Radius;
+			}
+
+			#endregion OPERATOR
 		}
 
 		/// <summary>
