@@ -1719,9 +1719,27 @@ namespace Com.Surbon.CSUtils
 				p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
 			}
 
+			#region OPERATORS
+
+			public static bool operator ==(Line3 line1, Line3 line2) => line1.Direction == line2.Direction && line1.Origin == line2.Origin;
+
+			public static bool operator !=(Line3 line1, Line3 line2) => line1.Direction != line2.Direction || line1.Origin != line2.Origin;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
 			public Vector3 GetPoint(float t)
 			{
 				return new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Line3)
+					return (Line3)obj == this;
+
+				return false;
 			}
 
 			public Vector3 Intersection(Line3 line)
@@ -1737,20 +1755,19 @@ namespace Com.Surbon.CSUtils
 				return GetPoint(t);
 			}
 
-			public bool IsCoplanar(Line3 line)
-			{
-				return IsParallel(line) || IsSecant(line);
-			}
+			public bool IsCoplanar(Line3 line) => IsParallel(line) || IsSecant(line);
 
 			public bool IsParallel(Line3 line)
 			{
-				return n.x / line.Direction.x == n.y / line.Direction.y && n.x / line.Direction.x == n.z / line.Direction.z;
+				return n.x / line.Direction.x == n.y / line.Direction.y && n.z / line.Direction.z == n.z / line.Direction.z;
 			}
 
 			public bool IsSecant(Line3 line)
 			{
 				return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
