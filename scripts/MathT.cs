@@ -1729,6 +1729,9 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
+			/// </summary>
 			public Vector3 GetPoint(float t)
 			{
 				return new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
@@ -1742,6 +1745,9 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
+			/// </summary>
 			public Vector3 Intersection(Line3 line)
 			{
 				float t = (line.ParametricX.a * (p.y - line.ParametricY.y) - line.ParametricY.b * (p.x - line.ParametricX.x)) /
@@ -1755,13 +1761,22 @@ namespace Com.Surbon.CSUtils
 				return GetPoint(t);
 			}
 
+			/// <summary>
+			/// Says if both lines are on the same plan.
+			/// </summary>
 			public bool IsCoplanar(Line3 line) => IsParallel(line) || IsSecant(line);
 
+			/// <summary>
+			/// Says if both lines are parallel.
+			/// </summary>
 			public bool IsParallel(Line3 line)
 			{
 				return n.x / line.Direction.x == n.y / line.Direction.y && n.z / line.Direction.z == n.z / line.Direction.z;
 			}
 
+			/// <summary>
+			/// Says if both lines are secant.
+			/// </summary>
 			public bool IsSecant(Line3 line)
 			{
 				return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
