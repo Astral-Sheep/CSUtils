@@ -1851,6 +1851,42 @@ namespace Com.Surbon.CSUtils
 				n = direction;
 				p = origin;
 			}
+
+			#region OPERATORS
+
+			public static bool operator ==(LineN line1, LineN line2)
+			{
+				if (line1.Size == line2.Size)
+				{
+					return line1.Direction == line2.Direction && line1.Origin == line2.Origin;
+				}
+
+				return false;
+			}
+
+			public static bool operator !=(LineN line1, LineN line2)
+			{
+				if (line1.Size == line2.Size)
+				{
+					return line1.Direction != line2.Direction || line1.Origin != line2.Origin;
+				}
+
+				return true;
+			}
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is LineN)
+					return (LineN)obj == this;
+
+				return false;
+			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
