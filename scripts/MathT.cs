@@ -1886,6 +1886,9 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Returns the point at the given value (the point is calculated with parametric equations).
+			/// </summary>
 			public VectorN GetPoint(float t)
 			{
 				float[] coordinates = new float[Size];
@@ -1898,6 +1901,9 @@ namespace Com.Surbon.CSUtils
 				return new VectorN(coordinates);
 			}
 
+			/// <summary>
+			/// Says if both lines are parallel.
+			/// </summary>
 			public bool IsParallel(LineN line)
 			{
 				if (line.Size != Size)
