@@ -615,6 +615,65 @@
             Rounds the values of the vector.
             </summary>
         </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.Line2">
+            <summary>
+            Representation of a straight line in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.#ctor(Com.Surbon.CSUtils.MathT.Vector2,Com.Surbon.CSUtils.MathT.Vector2)">
+            <summary>
+            The line deduced by two points.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.#ctor(Com.Surbon.CSUtils.MathT.Vector2,System.Single)">
+            <summary>
+            The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
+            </summary>
+            <param name="m">The normal segment</param>
+            <param name="b">The y-intercept</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.#ctor(System.Single,System.Single)">
+            <summary>
+            The line given in the slope-intercept form (ax + b = y).
+            </summary>
+            <param name="a">The slope</param>
+            <param name="b">The y-intercept</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            The line given in cartesian coordinates (ax + by = c).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.Intersection(Com.Surbon.CSUtils.MathT.Line2)">
+            <summary>
+            Returns the intersection of two lines. If there's no intersection, the point has <see cref="F:System.Single.NegativeInfinity"/> as coordinates.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.IsParallel(Com.Surbon.CSUtils.MathT.Line2)">
+            <summary>
+            Says if the given line is parallel to this one.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.IsSecant(Com.Surbon.CSUtils.MathT.Line2)">
+            <summary>
+            Says if the given line is secant to this one.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.Rotate(System.Single)">
+            <summary>
+            Rotates the line by phi radians.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line2.Rotated(System.Single)">
+            <summary>
+            Returns the line rotated by phi radians.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.Line3">
+            <summary>
+            Representation of a straight line in a 3 dimensional space.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.MathT.Clamp(System.Single,System.Single,System.Single)">
             <summary>
             Clamps value between min and max.

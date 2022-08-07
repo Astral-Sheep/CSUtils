@@ -1514,6 +1514,9 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
+		/// <summary>
+		/// Representation of a straight line in a 2 dimensional space.
+		/// </summary>
 		public struct Line2
 		{
 			public (float a, float b, float c) CartesianForm
@@ -1569,6 +1572,9 @@ namespace Com.Surbon.CSUtils
 			/// <param name="b">The y-intercept</param>
 			public Line2(Vector2 m, float b)
 			{
+				if (m.LengthSquared() == 0)
+					throw new ArgumentOutOfRangeException("m must have length greater than 0.");
+
 				n = m;
 				p = b;
 			}
@@ -1593,6 +1599,16 @@ namespace Com.Surbon.CSUtils
 				p = c / b;
 			}
 
+			#region OPERATORS
+
+			public static bool operator ==(Line2 line1, Line2 line2) => line1.SlopeInterceptForm == line2.SlopeInterceptForm;
+
+			public static bool operator !=(Line2 line1, Line2 line2) => line1.SlopeInterceptForm != line2.SlopeInterceptForm;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
 			/// <summary>
 			/// Returns the intersection of two lines. If there's no intersection, the point has <see cref="float.NegativeInfinity"/> as coordinates.
 			/// </summary>
@@ -1608,6 +1624,33 @@ namespace Com.Surbon.CSUtils
 					(line1.b - line2.b) / (line2.a - line1.a),
 					(line2.a * line1.b) / ((line2.b * line1.a) * (line2.a - line1.a))
 					);
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Line2)
+					return (Line2)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Says if the given line is parallel to this one.
+			/// </summary>
+			public bool IsParallel(Line2 line)
+			{
+				return n.Cross(Vector2.PolarToCartesian(1, line.NormalForm.phi)) == 0;
+			}
+
+			/// <summary>
+			/// Says if the given line is secant to this one.
+			/// </summary>
+			public bool IsSecant(Line2 line)
+			{
+				(float a, float b) line1 = SlopeInterceptForm;
+				(float a, float b) line2 = line.SlopeInterceptForm;
+
+				return line2.a - line1.a != 0 && (line2.b * line1.a) * (line2.a - line1.a) != 0;
 			}
 
 			/// <summary>
@@ -1627,6 +1670,257 @@ namespace Com.Surbon.CSUtils
 				float angle = n.Angle() + phi;
 				return new Line2(new Vector2(MathF.Cos(angle), MathF.Sin(angle)), p);
 			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
+		/// Representation of a straight line in a 3 dimensional space.
+		/// </summary>
+		public struct Line3
+		{
+			public Vector3 Direction
+			{
+				get => n;
+				set
+				{
+					n = value;
+				}
+			}
+
+			public Vector3 Origin
+			{
+				get => p;
+				set
+				{
+					p = new Vector3(0, value.y - value.x * n.y, value.z - value.x * n.z);
+				}
+			}
+
+			public (float x, float a) ParametricX
+			{
+				get => (p.x, n.x);
+				set
+				{
+					n.x = value.a;
+					p = new Vector3(0, p.y - value.x * n.y, p.z - value.x * n.z);
+				}
+			}
+
+			public (float y, float b) ParametricY
+			{
+				get => (p.y, n.y);
+				set
+				{
+					n.y = value.b;
+					p.y = value.y;
+				}
+			}
+
+			public (float z, float c) ParametricZ
+			{
+				get => (p.z, n.z);
+				set
+				{
+					n.z = value.c;
+					p.z = value.z;
+				}
+			}
+
+			private Vector3 n;
+			private Vector3 p;
+
+			public Line3(Vector3 direction, Vector3 point)
+			{
+				if (direction.LengthSquared() == 0)
+					throw new ArgumentOutOfRangeException("distance must have a length greater than 0.");
+
+				n = direction;
+				p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
+			}
+
+			#region OPERATORS
+
+			public static bool operator ==(Line3 line1, Line3 line2) => line1.Direction == line2.Direction && line1.Origin == line2.Origin;
+
+			public static bool operator !=(Line3 line1, Line3 line2) => line1.Direction != line2.Direction || line1.Origin != line2.Origin;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			/// <summary>
+			/// Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
+			/// </summary>
+			public Vector3 GetPoint(float t)
+			{
+				return new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Line3)
+					return (Line3)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
+			/// </summary>
+			public Vector3 Intersection(Line3 line)
+			{
+				float t = (line.ParametricX.a * (p.y - line.ParametricY.y) - line.ParametricY.b * (p.x - line.ParametricX.x)) /
+					(n.x * line.ParametricY.b - line.ParametricX.a * n.y);
+				float T = (n.x * (line.ParametricY.y - p.y) - n.y * (line.ParametricX.x - p.x)) /
+					(line.ParametricX.a * n.y - n.x * line.ParametricY.b);
+
+				if (p.z + n.z * t != line.ParametricZ.z + line.ParametricZ.c * T)
+					return new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
+
+				return GetPoint(t);
+			}
+
+			/// <summary>
+			/// Says if both lines are on the same plan.
+			/// </summary>
+			public bool IsCoplanar(Line3 line) => IsParallel(line) || IsSecant(line);
+
+			/// <summary>
+			/// Says if both lines are parallel.
+			/// </summary>
+			public bool IsParallel(Line3 line)
+			{
+				return n.x / line.Direction.x == n.y / line.Direction.y && n.z / line.Direction.z == n.z / line.Direction.z;
+			}
+
+			/// <summary>
+			/// Says if both lines are secant.
+			/// </summary>
+			public bool IsSecant(Line3 line)
+			{
+				return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
+			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
+		/// Representation of a straight line in a N dimensional space.
+		/// </summary>
+		public struct LineN
+		{
+			public readonly int Size;
+
+			public VectorN Direction
+			{
+				get => n;
+				set
+				{
+					if (value.Size == Size)
+						n = value;
+				}
+			}
+
+			public VectorN Origin
+			{
+				get => p;
+				set
+				{
+					if (value.Size == Size)
+					{
+						p[0] = 0f;
+
+						for (int i = 1; i < Size; i++)
+						{
+							p[i] = value[i] - value[0] * n[i];
+						}
+					}
+				}
+			}
+
+			private VectorN n;
+			private VectorN p;
+
+			public LineN(VectorN direction, VectorN origin)
+			{
+				if (direction.Size != origin.Size)
+					throw new ArgumentException("The direction and the origin must have the same Size.");
+
+				Size = direction.Size;
+				n = direction;
+				p = origin;
+			}
+
+			#region OPERATORS
+
+			public static bool operator ==(LineN line1, LineN line2)
+			{
+				if (line1.Size == line2.Size)
+				{
+					return line1.Direction == line2.Direction && line1.Origin == line2.Origin;
+				}
+
+				return false;
+			}
+
+			public static bool operator !=(LineN line1, LineN line2)
+			{
+				if (line1.Size == line2.Size)
+				{
+					return line1.Direction != line2.Direction || line1.Origin != line2.Origin;
+				}
+
+				return true;
+			}
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is LineN)
+					return (LineN)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Returns the point at the given value (the point is calculated with parametric equations).
+			/// </summary>
+			public VectorN GetPoint(float t)
+			{
+				float[] coordinates = new float[Size];
+
+				for (int i = 0; i < Size; i++)
+				{
+					coordinates[i] = p[i] + n[i] * t;
+				}
+
+				return new VectorN(coordinates);
+			}
+
+			/// <summary>
+			/// Says if both lines are parallel.
+			/// </summary>
+			public bool IsParallel(LineN line)
+			{
+				if (line.Size != Size)
+					throw new ArgumentException("Both lines must have the same Size.");
+
+				float lRatio = n[0] / line.Direction[0];
+
+				for (int i = 1; i < Size; i++)
+				{
+					if (n[i] / line.Direction[i] != lRatio)
+						return false;
+				}
+
+				return true;
+			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
