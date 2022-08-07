@@ -1626,6 +1626,14 @@ namespace Com.Surbon.CSUtils
 					);
 			}
 
+			public override bool Equals(object obj)
+			{
+				if (obj is Line2)
+					return (Line2)obj == this;
+
+				return false;
+			}
+
 			/// <summary>
 			/// Says if the given line is parallel to this one.
 			/// </summary>
@@ -1795,6 +1803,14 @@ namespace Com.Surbon.CSUtils
 			}
 
 			#endregion INSTANCE
+		}
+
+		/// <summary>
+		/// Representation of a straight line in a N dimensional space.
+		/// </summary>
+		public struct LineN
+		{
+
 		}
 
 		/// <summary>
