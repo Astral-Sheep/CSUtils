@@ -1961,8 +1961,23 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
-			public float Area => MathF.PI * r * r;
-			public float Perimeter => 2f * MathF.PI * r;
+			public float Area
+			{
+				get => MathF.PI * r * r;
+				set
+				{
+					r = MathF.Sqrt(value / MathF.PI);
+				}
+			}
+
+			public float Perimeter
+			{
+				get => 2f * MathF.PI * r;
+				set
+				{
+					r = value / (2f * MathF.PI);
+				}
+			}
 
 			private Vector2 o;
 			private float r;
@@ -1986,6 +2001,20 @@ namespace Com.Surbon.CSUtils
 			}
 
 			#endregion OPERATOR
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Circle)
+					return (Circle)obj == this;
+
+				return false;
+			}
+
+			public Vector2 GetPoint(float angle) => Vector2.PolarToCartesian(r, angle) + o;
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
