@@ -1521,6 +1521,9 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Line2
 		{
+			public static readonly Line2 AxisX = new Line2(0, 0);
+			public static readonly Line2 AxisY = new Line2(new Vector2(0, 0), new Vector2(0, 1));
+
 			public (float a, float b, float c) CartesianForm
 			{
 				get
@@ -1681,6 +1684,12 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Line3
 		{
+			public static readonly Line3 AxisX = new Line3(new Vector3(1, 0, 0), new Vector3(0, 0, 0));
+			public static readonly Line3 AxisY = new Line3(new Vector3(0, 1, 0), new Vector3(0, 0, 0));
+			public static readonly Line3 AxisZ = new Line3(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+
+			#region PROPERTIES
+
 			public Vector3 Direction
 			{
 				get => n;
@@ -1728,6 +1737,8 @@ namespace Com.Surbon.CSUtils
 					p.z = value.z;
 				}
 			}
+
+			#endregion PROPERTIES
 
 			private Vector3 n;
 			private Vector3 p;
@@ -1932,6 +1943,8 @@ namespace Com.Surbon.CSUtils
 		{
 			public static readonly Circle TRIGONOMETRIC = new Circle(new Vector2(0, 0), 1f);
 
+			#region PROPERTIES
+
 			public Vector2 Origin
 			{
 				get => o;
@@ -1982,6 +1995,8 @@ namespace Com.Surbon.CSUtils
 					r = value / (2f * MathF.PI);
 				}
 			}
+
+			#endregion PROPERTIES
 
 			private Vector2 o;
 			private float r;
