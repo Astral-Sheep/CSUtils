@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Com.Surbon.CSUtils
 {
@@ -1929,6 +1930,8 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Circle
 		{
+			public static readonly Circle TRIGONOMETRIC = new Circle(new Vector2(0, 0), 1f);
+
 			public Vector2 Origin
 			{
 				get => o;
@@ -2005,10 +2008,36 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
-			//public List<Vector2> CircleIntersect(Circle circle)
-			//{
-			//	List<Vector2> lPoints = new List<Vector2>();
-			//}
+			/// <summary>
+			/// Returns the intersection points between the given circle and this circle.
+			/// </summary>
+			public List<Vector2> CircleIntersect(Circle circle)
+			{
+				List<Vector2> lPoints = new List<Vector2>();
+
+				float z = (o.x - circle.Origin.x) / (o.y - circle.Origin.y);
+				float n = (circle.Radius * circle.Radius - r * r - circle.Origin.x * circle.Origin.x + o.x * o.x - circle.Origin.y * circle.Origin.y + o.y * o.y) /
+					(2f * (o.y - circle.Origin.y));
+				float a = 1f + z * z;
+				float b = 2f * (o.y - n) * z * -o.x;
+				float c = o.x * o.x + (o.y - n) * (o.y - n) - r * r;
+
+				float delta = b * b - 4 * a * c;
+
+				if (delta >= 0)
+				{
+					float x;
+					float sqrtd = MathF.Sqrt(delta);
+
+					for (int i = 0; i < (delta == 0 ? 1 : 2); i++)
+					{
+						x = (-b - sqrtd) / (2f * a);
+						lPoints.Add(new Vector2(x, MathF.Sqrt(r - (o.x - x) * (o.x - x)) + o.y));
+					}
+				}
+
+				return lPoints;
+			}
 
 			public override bool Equals(object obj)
 			{
@@ -2018,8 +2047,18 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Returns the point on the circle at the given angle.
+			/// </summary>
+			/// <param name="angle">The angle of the point in radians.</param>
 			public Vector2 GetPoint(float angle) => Vector2.PolarToCartesian(r, angle) + o;
 
+			/// <summary>
+			/// Returns a list of points corresponding to an arc on the circle.
+			/// </summary>
+			/// <param name="minAngle">The starting angle of the arc in radians.</param>
+			/// <param name="maxAngle">The ending angle of the arc in radians (if it's greater than minAngle the arc is clockwise).</param>
+			/// <param name="nPoints">The number of points wanted on the arc.</param>
 			public List<Vector2> GetArc(float minAngle, float maxAngle, int nPoints = 100)
 			{
 				List<Vector2> lPoints = new List<Vector2>(nPoints);
@@ -2065,7 +2104,7 @@ namespace Com.Surbon.CSUtils
 			/// </summary>
 			public override string ToString()
 			{
-				return $"(x - {o.x})^2 + (y - {o.y})^2 = {r * r}";
+				return $"(x - {o.x})² + (y - {o.y})² = {r * r}";
 			}
 
 			#endregion INSTANCE
