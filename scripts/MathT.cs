@@ -2005,6 +2005,11 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			//public List<Vector2> CircleIntersect(Circle circle)
+			//{
+			//	List<Vector2> lPoints = new List<Vector2>();
+			//}
+
 			public override bool Equals(object obj)
 			{
 				if (obj is Circle)
@@ -2022,6 +2027,34 @@ namespace Com.Surbon.CSUtils
 				for (int i = 0; i < nPoints; i++)
 				{
 					lPoints.Add(Vector2.PolarToCartesian(r, minAngle + (maxAngle - minAngle) * (i / (nPoints - 1))));
+				}
+
+				return lPoints;
+			}
+
+			/// <summary>
+			/// Returns the intersection points between the given line and the circle.
+			/// </summary>
+			public List<Vector2> LineIntersect(Line2 line)
+			{
+				List<Vector2> lPoints = new List<Vector2>();
+
+				(float m, float p) lLine = line.SlopeInterceptForm;
+				float a = lLine.m * lLine.m + 1;
+				float b = 2f * lLine.m * (lLine.p - o.y) - 2f * o.x;
+				float c = o.x * o.x + (lLine.p - o.y) * (lLine.p - o.y) - r * r;
+				float delta = (b * b) - (4f * a * c);
+
+				if (delta >= 0)
+				{
+					float x;
+					float sqrtd = MathF.Sqrt(delta);
+
+					for (int i = 0; i < (delta == 0 ? 1 : 2); i++)
+					{
+						x = (-b + (i % 2 == 0 ? -sqrtd : sqrtd)) / (2f * a);
+						lPoints.Add(new Vector2(x, lLine.m * x + lLine.p));
+					}
 				}
 
 				return lPoints;

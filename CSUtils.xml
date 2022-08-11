@@ -719,6 +719,11 @@
             Representation of a circle.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Circle.LineIntersect(Com.Surbon.CSUtils.MathT.Line2)">
+            <summary>
+            Returns the intersection points between the given line and the circle.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.MathT.Circle.ToString">
             <summary>
             Returns the equation of the circle
