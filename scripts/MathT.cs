@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Com.Surbon.CSUtils
 {
@@ -2014,6 +2015,26 @@ namespace Com.Surbon.CSUtils
 
 			public Vector2 GetPoint(float angle) => Vector2.PolarToCartesian(r, angle) + o;
 
+			public List<Vector2> GetArc(float minAngle, float maxAngle, int nPoints = 100)
+			{
+				List<Vector2> lPoints = new List<Vector2>(nPoints);
+
+				for (int i = 0; i < nPoints; i++)
+				{
+					lPoints.Add(Vector2.PolarToCartesian(r, minAngle + (maxAngle - minAngle) * (i / (nPoints - 1))));
+				}
+
+				return lPoints;
+			}
+
+			/// <summary>
+			/// Returns the equation of the circle
+			/// </summary>
+			public override string ToString()
+			{
+				return $"(x - {o.x})^2 + (y - {o.y})^2 = {r * r}";
+			}
+
 			#endregion INSTANCE
 		}
 
@@ -2057,6 +2078,21 @@ namespace Com.Surbon.CSUtils
 		/// Returns the euclidian remainder of a / b.
 		/// </summary>
 		public static int EuclidianRemainder(int a, int b) => a - (a / b) * b;
+
+		/// <summary>
+		/// Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
+		/// </summary>
+		public static float Lerp(float a, float b, float ratio) => LerpUnclamped(a, b, Math.Clamp(ratio, 0, 1));
+
+		/// <summary>
+		/// Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
+		/// </summary>
+		public static float LerpRand(float a, float b) => LerpUnclamped(a, b, (float)new Random().NextDouble());
+
+		/// <summary>
+		/// Linearly interpolates between to values by a given ratio.
+		/// </summary>
+		public static float LerpUnclamped(float a, float b, float ratio) => a + (b - a) * ratio;
 
 		/// <summary>
 		/// Returns a to the power of -b.
