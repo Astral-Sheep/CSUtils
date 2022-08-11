@@ -18,6 +18,13 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Vector2
 		{
+			public static readonly Vector2 Down = new Vector2(0, 1);
+			public static readonly Vector2 Left = new Vector2(-1, 0);
+			public static readonly Vector2 NegOne = new Vector2(-1, -1);
+			public static readonly Vector2 One = new Vector2(1, 1);
+			public static readonly Vector2 Right = new Vector2(1, 0);
+			public static readonly Vector2 Up = new Vector2(0, -1);
+
 			public float x;
 			public float y;
 
@@ -355,6 +362,15 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Vector3
 		{
+			public static readonly Vector3 Backward = new Vector3(0, 0, -1);
+			public static readonly Vector3 Down = new Vector3(0, 1, 0);
+			public static readonly Vector3 Forward = new Vector3(0, 0, 1);
+			public static readonly Vector3 Left = new Vector3(-1, 0, 0);
+			public static readonly Vector3 NegOne = new Vector3(-1, -1, -1);
+			public static readonly Vector3 One = new Vector3(1, 1, 1);
+			public static readonly Vector3 Right = new Vector3(1, 0, 0);
+			public static readonly Vector3 Up = new Vector3(0, -1, 0);
+
 			public enum ANGLE
 			{
 				AZIMUTHAL = 0,
@@ -1823,6 +1839,8 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct LineN
 		{
+			public static LineN AxisW = new LineN(new VectorN(0, 0, 0, 1), new VectorN(0, 0, 0, 0));
+
 			public readonly int Size;
 
 			public VectorN Direction
