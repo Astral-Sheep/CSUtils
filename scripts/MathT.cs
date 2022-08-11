@@ -2143,6 +2143,39 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
+		public struct Sphere
+		{
+			public Vector3 Origin
+			{
+				get => o;
+				set
+				{
+					o = value;
+				}
+			}
+
+			public float Radius
+			{
+				get => r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("Radius must be greater than 0.");
+
+					r = value;
+				}
+			}
+
+			private Vector3 o;
+			private float r;
+
+			public Sphere(Vector3 origin, float radius)
+			{
+				o = origin;
+				r = radius;
+			}
+		}
+
 		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
