@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Com.Surbon.CSUtils
 {
@@ -1519,6 +1521,9 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Line2
 		{
+			public static readonly Line2 AxisX = new Line2(0, 0);
+			public static readonly Line2 AxisY = new Line2(new Vector2(0, 0), new Vector2(0, 1));
+
 			public (float a, float b, float c) CartesianForm
 			{
 				get
@@ -1679,6 +1684,12 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Line3
 		{
+			public static readonly Line3 AxisX = new Line3(new Vector3(1, 0, 0), new Vector3(0, 0, 0));
+			public static readonly Line3 AxisY = new Line3(new Vector3(0, 1, 0), new Vector3(0, 0, 0));
+			public static readonly Line3 AxisZ = new Line3(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+
+			#region PROPERTIES
+
 			public Vector3 Direction
 			{
 				get => n;
@@ -1726,6 +1737,8 @@ namespace Com.Surbon.CSUtils
 					p.z = value.z;
 				}
 			}
+
+			#endregion PROPERTIES
 
 			private Vector3 n;
 			private Vector3 p;
@@ -1924,6 +1937,195 @@ namespace Com.Surbon.CSUtils
 		}
 
 		/// <summary>
+		/// Representation of a circle.
+		/// </summary>
+		public struct Circle
+		{
+			public static readonly Circle TRIGONOMETRIC = new Circle(new Vector2(0, 0), 1f);
+
+			#region PROPERTIES
+
+			public Vector2 Origin
+			{
+				get => o;
+				set
+				{
+					o = value;
+				}
+			}
+
+			public float Radius
+			{
+				get => r;
+				set
+				{
+					if (value <= 0)
+						throw new ArgumentOutOfRangeException("The radius must be greater than 0.");
+
+					r = value;
+				}
+			}
+
+			public float Diameter
+			{
+				get => 2f * r;
+				set
+				{
+					if (value <= 0)
+						throw new ArgumentOutOfRangeException("The diameter must be greater than 0.");
+
+					r = value / 2f;
+				}
+			}
+
+			public float Area
+			{
+				get => MathF.PI * r * r;
+				set
+				{
+					r = MathF.Sqrt(value / MathF.PI);
+				}
+			}
+
+			public float Perimeter
+			{
+				get => 2f * MathF.PI * r;
+				set
+				{
+					r = value / (2f * MathF.PI);
+				}
+			}
+
+			#endregion PROPERTIES
+
+			private Vector2 o;
+			private float r;
+
+			public Circle(Vector2 origin, float radius)
+			{
+				o = origin;
+				r = radius;
+			}
+
+			#region OPERATOR
+
+			public static bool operator ==(Circle circle1, Circle circle2)
+			{
+				return circle1.Origin == circle2.Origin && circle1.Radius == circle2.Radius;
+			}
+
+			public static bool operator !=(Circle circle1, Circle circle2)
+			{
+				return circle1.Origin != circle2.Origin || circle1.Radius != circle2.Radius;
+			}
+
+			#endregion OPERATOR
+
+			#region INSTANCE
+
+			/// <summary>
+			/// Returns the intersection points between the given circle and this circle.
+			/// </summary>
+			public List<Vector2> CircleIntersect(Circle circle)
+			{
+				List<Vector2> lPoints = new List<Vector2>();
+
+				float z = (o.x - circle.Origin.x) / (o.y - circle.Origin.y);
+				float n = (circle.Radius * circle.Radius - r * r - circle.Origin.x * circle.Origin.x + o.x * o.x - circle.Origin.y * circle.Origin.y + o.y * o.y) /
+					(2f * (o.y - circle.Origin.y));
+				float a = 1f + z * z;
+				float b = 2f * (o.y - n) * z * -o.x;
+				float c = o.x * o.x + (o.y - n) * (o.y - n) - r * r;
+
+				float delta = b * b - 4 * a * c;
+
+				if (delta >= 0)
+				{
+					float x;
+					float sqrtd = MathF.Sqrt(delta);
+
+					for (int i = 0; i < (delta == 0 ? 1 : 2); i++)
+					{
+						x = (-b - sqrtd) / (2f * a);
+						lPoints.Add(new Vector2(x, MathF.Sqrt(r - (o.x - x) * (o.x - x)) + o.y));
+					}
+				}
+
+				return lPoints;
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Circle)
+					return (Circle)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Returns the point on the circle at the given angle.
+			/// </summary>
+			/// <param name="angle">The angle of the point in radians.</param>
+			public Vector2 GetPoint(float angle) => Vector2.PolarToCartesian(r, angle) + o;
+
+			/// <summary>
+			/// Returns a list of points corresponding to an arc on the circle.
+			/// </summary>
+			/// <param name="minAngle">The starting angle of the arc in radians.</param>
+			/// <param name="maxAngle">The ending angle of the arc in radians (if it's greater than minAngle the arc is clockwise).</param>
+			/// <param name="nPoints">The number of points wanted on the arc.</param>
+			public List<Vector2> GetArc(float minAngle, float maxAngle, int nPoints = 100)
+			{
+				List<Vector2> lPoints = new List<Vector2>(nPoints);
+
+				for (int i = 0; i < nPoints; i++)
+				{
+					lPoints.Add(Vector2.PolarToCartesian(r, minAngle + (maxAngle - minAngle) * (i / (nPoints - 1))));
+				}
+
+				return lPoints;
+			}
+
+			/// <summary>
+			/// Returns the intersection points between the given line and the circle.
+			/// </summary>
+			public List<Vector2> LineIntersect(Line2 line)
+			{
+				List<Vector2> lPoints = new List<Vector2>();
+
+				(float m, float p) lLine = line.SlopeInterceptForm;
+				float a = lLine.m * lLine.m + 1;
+				float b = 2f * lLine.m * (lLine.p - o.y) - 2f * o.x;
+				float c = o.x * o.x + (lLine.p - o.y) * (lLine.p - o.y) - r * r;
+				float delta = (b * b) - (4f * a * c);
+
+				if (delta >= 0)
+				{
+					float x;
+					float sqrtd = MathF.Sqrt(delta);
+
+					for (int i = 0; i < (delta == 0 ? 1 : 2); i++)
+					{
+						x = (-b + (i % 2 == 0 ? -sqrtd : sqrtd)) / (2f * a);
+						lPoints.Add(new Vector2(x, lLine.m * x + lLine.p));
+					}
+				}
+
+				return lPoints;
+			}
+
+			/// <summary>
+			/// Returns the equation of the circle
+			/// </summary>
+			public override string ToString()
+			{
+				return $"(x - {o.x})² + (y - {o.y})² = {r * r}";
+			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
 		public static float Clamp(float value, float min, float max)
@@ -1963,6 +2165,21 @@ namespace Com.Surbon.CSUtils
 		/// Returns the euclidian remainder of a / b.
 		/// </summary>
 		public static int EuclidianRemainder(int a, int b) => a - (a / b) * b;
+
+		/// <summary>
+		/// Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
+		/// </summary>
+		public static float Lerp(float a, float b, float ratio) => LerpUnclamped(a, b, Math.Clamp(ratio, 0, 1));
+
+		/// <summary>
+		/// Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
+		/// </summary>
+		public static float LerpRand(float a, float b) => LerpUnclamped(a, b, (float)new Random().NextDouble());
+
+		/// <summary>
+		/// Linearly interpolates between to values by a given ratio.
+		/// </summary>
+		public static float LerpUnclamped(float a, float b, float ratio) => a + (b - a) * ratio;
 
 		/// <summary>
 		/// Returns a to the power of -b.

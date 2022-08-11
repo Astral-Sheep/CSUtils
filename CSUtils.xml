@@ -674,6 +674,61 @@
             Representation of a straight line in a 3 dimensional space.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line3.GetPoint(System.Single)">
+            <summary>
+            Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line3.Intersection(Com.Surbon.CSUtils.MathT.Line3)">
+            <summary>
+            Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line3.IsCoplanar(Com.Surbon.CSUtils.MathT.Line3)">
+            <summary>
+            Says if both lines are on the same plan.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line3.IsParallel(Com.Surbon.CSUtils.MathT.Line3)">
+            <summary>
+            Says if both lines are parallel.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Line3.IsSecant(Com.Surbon.CSUtils.MathT.Line3)">
+            <summary>
+            Says if both lines are secant.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.LineN">
+            <summary>
+            Representation of a straight line in a N dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.LineN.GetPoint(System.Single)">
+            <summary>
+            Returns the point at the given value (the point is calculated with parametric equations).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.LineN.IsParallel(Com.Surbon.CSUtils.MathT.LineN)">
+            <summary>
+            Says if both lines are parallel.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.MathT.Circle">
+            <summary>
+            Representation of a circle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Circle.LineIntersect(Com.Surbon.CSUtils.MathT.Line2)">
+            <summary>
+            Returns the intersection points between the given line and the circle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Circle.ToString">
+            <summary>
+            Returns the equation of the circle
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.MathT.Clamp(System.Single,System.Single,System.Single)">
             <summary>
             Clamps value between min and max.
@@ -708,6 +763,21 @@
         <member name="M:Com.Surbon.CSUtils.MathT.EuclidianRemainder(System.Int32,System.Int32)">
             <summary>
             Returns the euclidian remainder of a / b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.Lerp(System.Single,System.Single,System.Single)">
+            <summary>
+            Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.LerpRand(System.Single,System.Single)">
+            <summary>
+            Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.MathT.LerpUnclamped(System.Single,System.Single,System.Single)">
+            <summary>
+            Linearly interpolates between to values by a given ratio.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.MathT.NegPow(System.Single,System.Int32)">
