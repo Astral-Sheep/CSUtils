@@ -2156,7 +2156,7 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Sphere
 		{
-			public static readonly Sphere UNITY = new Sphere(new Vector3(0, 0, 0), 1);
+			public static readonly Sphere UNIT = new Sphere(new Vector3(0, 0, 0), 1);
 
 			#region PROPERTIES
 
