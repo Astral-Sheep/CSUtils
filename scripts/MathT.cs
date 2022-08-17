@@ -2463,6 +2463,34 @@ namespace Com.Surbon.CSUtils
 
 		public struct Rectangle
 		{
+			public float Width
+			{
+				get => w;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+					w = value;
+				}
+			}
+
+			public float Height
+			{
+				get => h;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+					h = value;
+				}
+			}
+
+			public float Perimeter => 2f * w + 2f * h;
+
+			public float Area => w * h;
+
 			private float w;
 			private float h;
 
