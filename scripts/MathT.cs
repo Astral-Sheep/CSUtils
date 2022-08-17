@@ -2072,6 +2072,14 @@ namespace Com.Surbon.CSUtils
 				return lPoints;
 			}
 
+			/// <summary>
+			/// Says if the given point is on the circle
+			/// </summary>
+			public bool Contains(Vector3 point)
+			{
+				return (point.x - o.x) * (point.x - o.x) + (point.y - o.y) * (point.y - o.y) == r * r;
+			}
+
 			public override bool Equals(object obj)
 			{
 				if (obj is Circle)
@@ -2143,6 +2151,9 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
+		/// <summary>
+		/// Representation of a sphere.
+		/// </summary>
 		public struct Sphere
 		{
 			public Vector3 Origin
@@ -2166,6 +2177,34 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			public float Diameter
+			{
+				get => 2f * r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("Diameter must be greater than 0.");
+				}
+			}
+
+			public float Area
+			{
+				get => 4f * MathF.PI * r * r;
+				set
+				{
+					r = MathF.Sqrt(value / (4f * MathF.PI));
+				}
+			}
+
+			public float Volume
+			{
+				get => (4f * MathF.PI * r * r * r) / 3f;
+				set
+				{
+					r = MathF.Cbrt((value * 3f) / (4f * MathF.PI));
+				}
+			}
+
 			private Vector3 o;
 			private float r;
 
@@ -2173,6 +2212,16 @@ namespace Com.Surbon.CSUtils
 			{
 				o = origin;
 				r = radius;
+			}
+
+			public bool Contains(Vector3 point)
+			{
+				return (point - o).LengthSquared() == r * r;
+			}
+
+			public Vector3 GetPoint(float phi, float th)
+			{
+				return Vector3.SphericToCartesian(r, phi, th);
 			}
 		}
 
