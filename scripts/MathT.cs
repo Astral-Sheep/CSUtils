@@ -2238,6 +2238,9 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Says if to points are antipodal on this circle.
+			/// </summary>
 			public bool AreAntipodal(Vector3 p1, Vector3 p2)
 			{
 				if (Contains(p1) && Contains(p2))
@@ -2246,6 +2249,9 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Says if the point is on the sphere.
+			/// </summary>
 			public bool Contains(Vector3 point)
 			{
 				return (point - o).LengthSquared() == r * r;
@@ -2259,6 +2265,11 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Returns the point on the circle with the given angles.
+			/// </summary>
+			/// <param name="phi">The azimuth angle.</param>
+			/// <param name="th">The polar angle</param>
 			public Vector3 GetPoint(float phi, float th)
 			{
 				return Vector3.SphericToCartesian(r, phi, th);
@@ -2442,6 +2453,9 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Says if the n-sphere contains the given point.
+			/// </summary>
 			public bool Contains(VectorN vector)
 			{
 				if (vector.Size != Size)
@@ -2461,8 +2475,13 @@ namespace Com.Surbon.CSUtils
 			#endregion INSTANCE
 		}
 
+		/// <summary>
+		/// Representation of a rectangle in a 2 dimensional space.
+		/// </summary>
 		public struct Rectangle
 		{
+			#region PROPERTIES
+
 			public float Width
 			{
 				get => w;
@@ -2496,6 +2515,8 @@ namespace Com.Surbon.CSUtils
 			public float Perimeter => 2f * w + 2f * h;
 
 			public float Area => w * h;
+
+			#endregion PROPERTIES
 
 			private Vector2 o;
 			private float w;
@@ -2532,8 +2553,14 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Says if the given point is in the boundaries of the rectangle.
+			/// </summary>
 			public bool IsIn(Vector2 point) => point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h;
 
+			/// <summary>
+			/// Says if the given point is on the rectangle.
+			/// </summary>
 			public bool Has(Vector2 point)
 			{
 				return (point.x >= o.x && point.x <= o.x + w && (point.y == o.y || point.y == o.y + h)) || (point.y >= o.y && point.y <= o.y + h && (point.x == o.x || point.x == o.x + w));
