@@ -2238,6 +2238,9 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Says if to points are antipodal on this circle.
+			/// </summary>
 			public bool AreAntipodal(Vector3 p1, Vector3 p2)
 			{
 				if (Contains(p1) && Contains(p2))
@@ -2246,6 +2249,9 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Says if the point is on the sphere.
+			/// </summary>
 			public bool Contains(Vector3 point)
 			{
 				return (point - o).LengthSquared() == r * r;
@@ -2259,6 +2265,11 @@ namespace Com.Surbon.CSUtils
 				return false;
 			}
 
+			/// <summary>
+			/// Returns the point on the circle with the given angles.
+			/// </summary>
+			/// <param name="phi">The azimuth angle.</param>
+			/// <param name="th">The polar angle</param>
 			public Vector3 GetPoint(float phi, float th)
 			{
 				return Vector3.SphericToCartesian(r, phi, th);
@@ -2425,6 +2436,13 @@ namespace Com.Surbon.CSUtils
 			private VectorN o;
 			private float r;
 
+			public NSphere(VectorN origin, float radius)
+			{
+				o = origin;
+				r = radius;
+				Size = o.Size;
+			}
+
 			#region OPERATORS
 
 			public static bool operator==(NSphere sphere1, NSphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
@@ -2435,6 +2453,9 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			/// <summary>
+			/// Says if the n-sphere contains the given point.
+			/// </summary>
 			public bool Contains(VectorN vector)
 			{
 				if (vector.Size != Size)
@@ -2449,6 +2470,100 @@ namespace Com.Surbon.CSUtils
 					return (NSphere)obj == this;
 
 				return false;
+			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
+		/// Representation of a rectangle in a 2 dimensional space.
+		/// </summary>
+		public struct Rectangle
+		{
+			#region PROPERTIES
+
+			public float Width
+			{
+				get => w;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+					w = value;
+				}
+			}
+
+			public float Height
+			{
+				get => h;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+					h = value;
+				}
+			}
+
+			public Vector2 Origin
+			{
+				get => o;
+				set { o = value; }
+			}
+
+			public float Perimeter => 2f * w + 2f * h;
+
+			public float Area => w * h;
+
+			#endregion PROPERTIES
+
+			private Vector2 o;
+			private float w;
+			private float h;
+
+			public Rectangle(Vector2 origin, float width, float height)
+			{
+				o = origin;
+				w = width;
+				h = height;
+			}
+
+			#region OPERATORS
+
+			public static bool operator==(Rectangle rect1, Rectangle rect2)
+			{
+				return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height;
+			}
+
+			public static bool operator!=(Rectangle rect1, Rectangle rect2)
+			{
+				return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height;
+			}
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Rectangle)
+					return (Rectangle)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Says if the given point is in the boundaries of the rectangle.
+			/// </summary>
+			public bool IsIn(Vector2 point) => point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h;
+
+			/// <summary>
+			/// Says if the given point is on the rectangle.
+			/// </summary>
+			public bool Has(Vector2 point)
+			{
+				return (point.x >= o.x && point.x <= o.x + w && (point.y == o.y || point.y == o.y + h)) || (point.y >= o.y && point.y <= o.y + h && (point.x == o.x || point.x == o.x + w));
 			}
 
 			#endregion INSTANCE
