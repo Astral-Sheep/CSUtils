@@ -2001,6 +2001,9 @@ namespace Com.Surbon.CSUtils
 				get => MathF.PI * r * r;
 				set
 				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The area must be greater than 0.");
+
 					r = MathF.Sqrt(value / MathF.PI);
 				}
 			}
@@ -2010,6 +2013,9 @@ namespace Com.Surbon.CSUtils
 				get => 2f * MathF.PI * r;
 				set
 				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The perimeter must be greater than 0.");
+
 					r = value / (2f * MathF.PI);
 				}
 			}
@@ -2152,7 +2158,7 @@ namespace Com.Surbon.CSUtils
 		}
 
 		/// <summary>
-		/// Representation of a sphere.
+		/// Representation of a sphere in a 3 dimensional space.
 		/// </summary>
 		public struct Sphere
 		{
@@ -2188,6 +2194,8 @@ namespace Com.Surbon.CSUtils
 				{
 					if (value < 0)
 						throw new ArgumentOutOfRangeException("Diameter must be greater than 0.");
+
+					r = value / 2f;
 				}
 			}
 
@@ -2265,6 +2273,156 @@ namespace Com.Surbon.CSUtils
 		}
 
 		/// <summary>
+		/// Representation of a sphere in a N dimensional space.
+		/// </summary>
+		public struct NSphere
+		{
+			public readonly int Size;
+
+			public VectorN Origin
+			{
+				get => o;
+				set
+				{
+					if (value.Size != o.Size)
+						throw new ArgumentException("Both vectors must have the same dimensions.");
+
+					o = value;
+				}
+			}
+
+			public float Radius
+			{
+				get => r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The radius must be greater than 0.");
+
+					r = value;
+				}
+			}
+
+			public float Diameter
+			{
+				get => 2f * r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The diameter must be greater than 0.");
+
+					r = value / 2f;
+				}
+			}
+
+			public float Area
+			{
+				get
+				{
+					if (Size % 2 == 1)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size - 1; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (PosPow(2f * MathF.PI, (Size + 1) / 2) * PosPow(r, Size)) / lSum;
+					}
+					else
+					{
+						float lSum = 0;
+
+						for (int i = 1; i <= Size - 1; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (2f * PosPow(2f * MathF.PI, Size / 2) * PosPow(r, Size)) / lSum;
+					}
+				}
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The area must be greater than 0.");
+
+					if (Size % 2 == 0)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size - 1; i += 2)
+						{
+							lSum += i;
+						}
+
+						r = NRoot((value * lSum) / PosPow(2f * MathF.PI, Size / 2), Size);
+					}
+				}
+			}
+
+			public float Volume
+			{
+				get
+				{
+					if (Size % 2 == 0)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (PosPow(2f * MathF.PI, Size / 2) * PosPow(r, Size)) / lSum;
+					}
+					else
+					{
+						float lSum = 0;
+
+						for (int i = 1; i <= Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (2f * PosPow(2f * MathF.PI, (Size - 1) / 2) * PosPow(r, Size)) / lSum;
+					}
+				}
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The volume must be greater than 0.");
+
+					if (Size % 2 == 0)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						r = NRoot((value * lSum) / PosPow(2f * MathF.PI, Size / 2), Size);
+					}
+					else
+					{
+						float lSum = 0;
+
+						for (int i = 1; i < Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						r = NRoot((value * lSum) / (2f * PosPow(2f * MathF.PI, (Size - 1) / 2)), Size);
+					}
+				}
+			}
+
+			private VectorN o;
+			private float r;
+		}
+
+		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
 		public static float Clamp(float value, float min, float max)
@@ -2334,6 +2492,11 @@ namespace Com.Surbon.CSUtils
 
 			return a;
 		}
+
+		/// <summary>
+		/// Returns the nth root of the given number.
+		/// </summary>
+		public static float NRoot(float value, float n) => MathF.Exp((1f / n) * MathF.Log(value));
 
 		/// <summary>
 		/// Returns a to the power of b.
