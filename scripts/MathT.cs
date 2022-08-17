@@ -2156,6 +2156,10 @@ namespace Com.Surbon.CSUtils
 		/// </summary>
 		public struct Sphere
 		{
+			public static readonly Sphere UNITY = new Sphere(new Vector3(0, 0, 0), 1);
+
+			#region PROPERTIES
+
 			public Vector3 Origin
 			{
 				get => o;
@@ -2205,6 +2209,8 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			#endregion PROPERTIES
+
 			private Vector3 o;
 			private float r;
 
@@ -2213,6 +2219,16 @@ namespace Com.Surbon.CSUtils
 				o = origin;
 				r = radius;
 			}
+
+			#region OPERATORS
+
+			public static bool operator==(Sphere sphere1, Sphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
+
+			public static bool operator!=(Sphere sphere1, Sphere sphere2) => sphere1.Origin != sphere2.Origin || sphere1.Radius != sphere2.Radius;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
 
 			public bool Contains(Vector3 point)
 			{
@@ -2223,6 +2239,8 @@ namespace Com.Surbon.CSUtils
 			{
 				return Vector3.SphericToCartesian(r, phi, th);
 			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
