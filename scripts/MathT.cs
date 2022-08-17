@@ -2230,14 +2230,35 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			public bool AreAntipodal(Vector3 p1, Vector3 p2)
+			{
+				if (Contains(p1) && Contains(p2))
+					return (p1 - p2).Length() == Diameter;
+
+				return false;
+			}
+
 			public bool Contains(Vector3 point)
 			{
 				return (point - o).LengthSquared() == r * r;
 			}
 
+			public override bool Equals(object obj)
+			{
+				if (obj is Sphere)
+					return (Sphere)obj == this;
+
+				return false;
+			}
+
 			public Vector3 GetPoint(float phi, float th)
 			{
 				return Vector3.SphericToCartesian(r, phi, th);
+			}
+
+			public override string ToString()
+			{
+				return $"(x - {Origin.x})² + (y - {Origin.y})² + (z - {Origin.z})² = {Radius}²";
 			}
 
 			#endregion INSTANCE
