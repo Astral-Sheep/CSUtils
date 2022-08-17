@@ -2279,6 +2279,8 @@ namespace Com.Surbon.CSUtils
 		{
 			public readonly int Size;
 
+			#region PROPERTIES
+
 			public VectorN Origin
 			{
 				get => o;
@@ -2418,8 +2420,30 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			#endregion PROPERTIES
+
 			private VectorN o;
 			private float r;
+
+			#region OPERATORS
+
+			public static bool operator==(NSphere sphere1, NSphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
+
+			public static bool operator!=(NSphere sphere1, NSphere sphere2) => sphere1.Origin != sphere2.Origin || sphere1.Radius != sphere2.Radius;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is NSphere)
+					return (NSphere)obj == this;
+
+				return false;
+			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
