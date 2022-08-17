@@ -2425,6 +2425,13 @@ namespace Com.Surbon.CSUtils
 			private VectorN o;
 			private float r;
 
+			public NSphere(VectorN origin, float radius)
+			{
+				o = origin;
+				r = radius;
+				Size = o.Size;
+			}
+
 			#region OPERATORS
 
 			public static bool operator==(NSphere sphere1, NSphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
@@ -2452,6 +2459,18 @@ namespace Com.Surbon.CSUtils
 			}
 
 			#endregion INSTANCE
+		}
+
+		public struct Rectangle
+		{
+			private float w;
+			private float h;
+
+			public Rectangle(float width, float height)
+			{
+				w = width;
+				h = height;
+			}
 		}
 
 		/// <summary>
