@@ -2435,6 +2435,14 @@ namespace Com.Surbon.CSUtils
 
 			#region INSTANCE
 
+			public bool Contains(VectorN vector)
+			{
+				if (vector.Size != Size)
+					throw new ArgumentOutOfRangeException("The point must be in the same dimension as the sphere.");
+
+				return (vector - o).LengthSquared() == r * r;
+			}
+
 			public override bool Equals(object obj)
 			{
 				if (obj is NSphere)
@@ -2486,6 +2494,24 @@ namespace Com.Surbon.CSUtils
 		/// Returns the euclidian remainder of a / b.
 		/// </summary>
 		public static int EuclidianRemainder(int a, int b) => a - (a / b) * b;
+
+		/// <summary>
+		/// Returns the factorial of the given number.
+		/// </summary>
+		public static int Factorial(int value)
+		{
+			if (value < 0)
+				throw new ArgumentOutOfRangeException("The value must be greater than 0.");
+
+			int lFact = 1;
+
+			for (int i = 1; i <= value; i++)
+			{
+				lFact *= i;
+			}
+
+			return lFact;
+		}
 
 		/// <summary>
 		/// Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
