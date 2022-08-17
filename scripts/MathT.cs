@@ -2487,18 +2487,59 @@ namespace Com.Surbon.CSUtils
 				}
 			}
 
+			public Vector2 Origin
+			{
+				get => o;
+				set { o = value; }
+			}
+
 			public float Perimeter => 2f * w + 2f * h;
 
 			public float Area => w * h;
 
+			private Vector2 o;
 			private float w;
 			private float h;
 
-			public Rectangle(float width, float height)
+			public Rectangle(Vector2 origin, float width, float height)
 			{
+				o = origin;
 				w = width;
 				h = height;
 			}
+
+			#region OPERATORS
+
+			public static bool operator==(Rectangle rect1, Rectangle rect2)
+			{
+				return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height;
+			}
+
+			public static bool operator!=(Rectangle rect1, Rectangle rect2)
+			{
+				return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height;
+			}
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Rectangle)
+					return (Rectangle)obj == this;
+
+				return false;
+			}
+
+			public bool IsIn(Vector2 point) => point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h;
+
+			public bool Has(Vector2 point)
+			{
+				return (point.x >= o.x && point.x <= o.x + w && (point.y == o.y || point.y == o.y + h)) || (point.y >= o.y && point.y <= o.y + h && (point.x == o.x || point.x == o.x + w));
+			}
+
+			#endregion INSTANCE
 		}
 
 		/// <summary>
