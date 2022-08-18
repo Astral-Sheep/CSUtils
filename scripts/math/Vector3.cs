@@ -421,6 +421,8 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 Sign() => new Vector3(MathF.Sign(x), MathF.Sign(y), MathF.Sign(z));
 
+		public override string ToString() => $"({x}, {y}, {z})";
+
 		#endregion INSTANCE
 
 		#region STATIC

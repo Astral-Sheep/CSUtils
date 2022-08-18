@@ -321,6 +321,8 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector2 Sign() => new Vector2(MathF.Sign(x), MathF.Sign(y));
 
+		public override string ToString() => $"({x}, {y})";
+
 		#endregion INSTANCE
 
 		#region STATIC

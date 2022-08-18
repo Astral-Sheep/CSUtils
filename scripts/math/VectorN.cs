@@ -569,6 +569,18 @@ namespace Com.Surbon.CSUtils.Math
 			return lSign;
 		}
 
+		public override string ToString()
+		{
+			string lString = $"({values[0]}";
+
+			for (int i = 1; i < Size; i++)
+			{
+				lString += $", {values[i]}";
+			}
+
+			return lString + ")";
+		}
+
 		#endregion INSTANCE
 	}
 }
