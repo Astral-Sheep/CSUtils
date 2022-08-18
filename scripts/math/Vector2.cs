@@ -11,6 +11,14 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Vector2
 	{
+		public static readonly Vector2 DOWN = new Vector2(0, 1);
+		public static readonly Vector2 LEFT = new Vector2(-1, 0);
+		public static readonly Vector2 NEG_ONE = new Vector2(-1, -1);
+		public static readonly Vector2 ONE = new Vector2(1, 1);
+		public static readonly Vector2 RIGHT = new Vector2(1, 0);
+		public static readonly Vector2 UP = new Vector2(0, -1);
+		public static readonly Vector2 ZERO = new Vector2(0, 0);
+
 		public float x;
 		public float y;
 
@@ -74,8 +82,9 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				x /= l / MathF.Ceiling(l);
-				y /= l / MathF.Ceiling(l);
+				l /= MathF.Ceiling(l);
+				x /= l;
+				y /= l;
 			}
 		}
 
@@ -98,9 +107,9 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float lClamped = MathT.Clamp(l, min, max);
-				x /= l / lClamped;
-				y /= l / lClamped;
+				l /= MathT.Clamp(l, min, max);
+				x /= l;
+				y /= l;
 			}
 		}
 
@@ -158,8 +167,9 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				x /= l / MathF.Floor(l);
-				y /= l / MathF.Floor(l);
+				l /= MathF.Floor(l);
+				x /= l;
+				y /= l;
 			}
 		}
 
@@ -291,8 +301,9 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				x /= l / MathF.Round(l);
-				y /= l / MathF.Round(l);
+				l /= MathF.Round(l);
+				x /= l;
+				y /= l;
 			}
 		}
 

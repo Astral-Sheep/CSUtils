@@ -11,6 +11,16 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Vector3
 	{
+		public static readonly Vector3 BACK = new Vector3(0, 0, -1);
+		public static readonly Vector3 DOWN = new Vector3(0, 1, 0);
+		public static readonly Vector3 FRONT = new Vector3(0, 0, 1);
+		public static readonly Vector3 LEFT = new Vector3(-1, 0, 0);
+		public static readonly Vector3 NEG_ONE = new Vector3(-1, -1, -1);
+		public static readonly Vector3 ONE = new Vector3(1, 1, 1);
+		public static readonly Vector3 RIGHT = new Vector3(1, 0, 0);
+		public static readonly Vector3 UP = new Vector3(0, -1, 0);
+		public static readonly Vector3 ZERO = new Vector3(0, 0, 0);
+
 		public enum ANGLE
 		{
 			AZIMUTHAL = 0,
