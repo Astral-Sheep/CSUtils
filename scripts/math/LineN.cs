@@ -123,6 +123,8 @@ namespace Com.Surbon.CSUtils.Math
 			return true;
 		}
 
+		public override string ToString() => $"Origin : {p} | Direction : {n}";
+
 		#endregion INSTANCE
 	}
 }
