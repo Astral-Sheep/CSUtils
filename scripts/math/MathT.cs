@@ -320,6 +320,8 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public struct LineN
 		{
+			public static LineN AxisW = new LineN(new VectorN(0, 0, 0, 1), new VectorN(0, 0, 0, 0));
+
 			public readonly int Size;
 
 			public VectorN Direction
@@ -480,6 +482,9 @@ namespace Com.Surbon.CSUtils.Math
 				get => MathF.PI * r * r;
 				set
 				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The area must be greater than 0.");
+
 					r = MathF.Sqrt(value / MathF.PI);
 				}
 			}
@@ -489,6 +494,9 @@ namespace Com.Surbon.CSUtils.Math
 				get => 2f * MathF.PI * r;
 				set
 				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The perimeter must be greater than 0.");
+
 					r = value / (2f * MathF.PI);
 				}
 			}
@@ -549,6 +557,14 @@ namespace Com.Surbon.CSUtils.Math
 				}
 
 				return lPoints;
+			}
+
+			/// <summary>
+			/// Says if the given point is on the circle
+			/// </summary>
+			public bool Contains(Vector3 point)
+			{
+				return (point.x - o.x) * (point.x - o.x) + (point.y - o.y) * (point.y - o.y) == r * r;
 			}
 
 			public override bool Equals(object obj)
@@ -623,6 +639,418 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
+		/// Representation of a sphere in a 3 dimensional space.
+		/// </summary>
+		public struct Sphere
+		{
+			public static readonly Sphere UNIT = new Sphere(new Vector3(0, 0, 0), 1);
+
+			#region PROPERTIES
+
+			public Vector3 Origin
+			{
+				get => o;
+				set
+				{
+					o = value;
+				}
+			}
+
+			public float Radius
+			{
+				get => r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("Radius must be greater than 0.");
+
+					r = value;
+				}
+			}
+
+			public float Diameter
+			{
+				get => 2f * r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("Diameter must be greater than 0.");
+
+					r = value / 2f;
+				}
+			}
+
+			public float Area
+			{
+				get => 4f * MathF.PI * r * r;
+				set
+				{
+					r = MathF.Sqrt(value / (4f * MathF.PI));
+				}
+			}
+
+			public float Volume
+			{
+				get => (4f * MathF.PI * r * r * r) / 3f;
+				set
+				{
+					r = MathF.Cbrt((value * 3f) / (4f * MathF.PI));
+				}
+			}
+
+			#endregion PROPERTIES
+
+			private Vector3 o;
+			private float r;
+
+			public Sphere(Vector3 origin, float radius)
+			{
+				o = origin;
+				r = radius;
+			}
+
+			#region OPERATORS
+
+			public static bool operator ==(Sphere sphere1, Sphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
+
+			public static bool operator !=(Sphere sphere1, Sphere sphere2) => sphere1.Origin != sphere2.Origin || sphere1.Radius != sphere2.Radius;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			/// <summary>
+			/// Says if to points are antipodal on this circle.
+			/// </summary>
+			public bool AreAntipodal(Vector3 p1, Vector3 p2)
+			{
+				if (Contains(p1) && Contains(p2))
+					return (p1 - p2).Length() == Diameter;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Says if the point is on the sphere.
+			/// </summary>
+			public bool Contains(Vector3 point)
+			{
+				return (point - o).LengthSquared() == r * r;
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Sphere)
+					return (Sphere)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Returns the point on the circle with the given angles.
+			/// </summary>
+			/// <param name="phi">The azimuth angle.</param>
+			/// <param name="th">The polar angle</param>
+			public Vector3 GetPoint(float phi, float th)
+			{
+				return Vector3.SphericToCartesian(r, phi, th);
+			}
+
+			public override string ToString()
+			{
+				return $"(x - {Origin.x})² + (y - {Origin.y})² + (z - {Origin.z})² = {Radius}²";
+			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
+		/// Representation of a sphere in a N dimensional space.
+		/// </summary>
+		public struct NSphere
+		{
+			public readonly int Size;
+
+			#region PROPERTIES
+
+			public VectorN Origin
+			{
+				get => o;
+				set
+				{
+					if (value.Size != o.Size)
+						throw new ArgumentException("Both vectors must have the same dimensions.");
+
+					o = value;
+				}
+			}
+
+			public float Radius
+			{
+				get => r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The radius must be greater than 0.");
+
+					r = value;
+				}
+			}
+
+			public float Diameter
+			{
+				get => 2f * r;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The diameter must be greater than 0.");
+
+					r = value / 2f;
+				}
+			}
+
+			public float Area
+			{
+				get
+				{
+					if (Size % 2 == 1)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size - 1; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (PosPow(2f * MathF.PI, (Size + 1) / 2) * PosPow(r, Size)) / lSum;
+					}
+					else
+					{
+						float lSum = 0;
+
+						for (int i = 1; i <= Size - 1; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (2f * PosPow(2f * MathF.PI, Size / 2) * PosPow(r, Size)) / lSum;
+					}
+				}
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The area must be greater than 0.");
+
+					if (Size % 2 == 0)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size - 1; i += 2)
+						{
+							lSum += i;
+						}
+
+						r = NRoot((value * lSum) / PosPow(2f * MathF.PI, Size / 2), Size);
+					}
+				}
+			}
+
+			public float Volume
+			{
+				get
+				{
+					if (Size % 2 == 0)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (PosPow(2f * MathF.PI, Size / 2) * PosPow(r, Size)) / lSum;
+					}
+					else
+					{
+						float lSum = 0;
+
+						for (int i = 1; i <= Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						return (2f * PosPow(2f * MathF.PI, (Size - 1) / 2) * PosPow(r, Size)) / lSum;
+					}
+				}
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The volume must be greater than 0.");
+
+					if (Size % 2 == 0)
+					{
+						float lSum = 0;
+
+						for (int i = 2; i <= Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						r = NRoot((value * lSum) / PosPow(2f * MathF.PI, Size / 2), Size);
+					}
+					else
+					{
+						float lSum = 0;
+
+						for (int i = 1; i < Size; i += 2)
+						{
+							lSum += i;
+						}
+
+						r = NRoot((value * lSum) / (2f * PosPow(2f * MathF.PI, (Size - 1) / 2)), Size);
+					}
+				}
+			}
+
+			#endregion PROPERTIES
+
+			private VectorN o;
+			private float r;
+
+			public NSphere(VectorN origin, float radius)
+			{
+				o = origin;
+				r = radius;
+				Size = o.Size;
+			}
+
+			#region OPERATORS
+
+			public static bool operator ==(NSphere sphere1, NSphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
+
+			public static bool operator !=(NSphere sphere1, NSphere sphere2) => sphere1.Origin != sphere2.Origin || sphere1.Radius != sphere2.Radius;
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			/// <summary>
+			/// Says if the n-sphere contains the given point.
+			/// </summary>
+			public bool Contains(VectorN vector)
+			{
+				if (vector.Size != Size)
+					throw new ArgumentOutOfRangeException("The point must be in the same dimension as the sphere.");
+
+				return (vector - o).LengthSquared() == r * r;
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is NSphere)
+					return (NSphere)obj == this;
+
+				return false;
+			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
+		/// Representation of a rectangle in a 2 dimensional space.
+		/// </summary>
+		public struct Rectangle
+		{
+			#region PROPERTIES
+
+			public float Width
+			{
+				get => w;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+					w = value;
+				}
+			}
+
+			public float Height
+			{
+				get => h;
+				set
+				{
+					if (value < 0)
+						throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+					h = value;
+				}
+			}
+
+			public Vector2 Origin
+			{
+				get => o;
+				set { o = value; }
+			}
+
+			public float Perimeter => 2f * w + 2f * h;
+
+			public float Area => w * h;
+
+			#endregion PROPERTIES
+
+			private Vector2 o;
+			private float w;
+			private float h;
+
+			public Rectangle(Vector2 origin, float width, float height)
+			{
+				o = origin;
+				w = width;
+				h = height;
+			}
+
+			#region OPERATORS
+
+			public static bool operator ==(Rectangle rect1, Rectangle rect2)
+			{
+				return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height;
+			}
+
+			public static bool operator !=(Rectangle rect1, Rectangle rect2)
+			{
+				return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height;
+			}
+
+			#endregion OPERATORS
+
+			#region INSTANCE
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Rectangle)
+					return (Rectangle)obj == this;
+
+				return false;
+			}
+
+			/// <summary>
+			/// Says if the given point is in the boundaries of the rectangle.
+			/// </summary>
+			public bool IsIn(Vector2 point) => point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h;
+
+			/// <summary>
+			/// Says if the given point is on the rectangle.
+			/// </summary>
+			public bool Has(Vector2 point)
+			{
+				return (point.x >= o.x && point.x <= o.x + w && (point.y == o.y || point.y == o.y + h)) || (point.y >= o.y && point.y <= o.y + h && (point.x == o.x || point.x == o.x + w));
+			}
+
+			#endregion INSTANCE
+		}
+
+		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
 		public static float Clamp(float value, float min, float max)
@@ -664,6 +1092,24 @@ namespace Com.Surbon.CSUtils.Math
 		public static int EuclidianRemainder(int a, int b) => a - (a / b) * b;
 
 		/// <summary>
+		/// Returns the factorial of the given number.
+		/// </summary>
+		public static int Factorial(int value)
+		{
+			if (value < 0)
+				throw new ArgumentOutOfRangeException("The value must be greater than 0.");
+
+			int lFact = 1;
+
+			for (int i = 1; i <= value; i++)
+			{
+				lFact *= i;
+			}
+
+			return lFact;
+		}
+
+		/// <summary>
 		/// Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
 		/// </summary>
 		public static float Lerp(float a, float b, float ratio) => LerpUnclamped(a, b, Clamp(ratio, 0, 1));
@@ -692,6 +1138,11 @@ namespace Com.Surbon.CSUtils.Math
 
 			return a;
 		}
+
+		/// <summary>
+		/// Returns the nth root of the given number.
+		/// </summary>
+		public static float NRoot(float value, float n) => MathF.Exp((1f / n) * MathF.Log(value));
 
 		/// <summary>
 		/// Returns a to the power of b.

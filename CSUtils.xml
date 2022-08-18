@@ -4,12 +4,6 @@
         <name>CSUtils</name>
     </assembly>
     <members>
-        <member name="T:Com.Surbon.CSUtils.Math.IVector`1">
-            <summary>
-            Interface with vectorial methods.
-            T is the type of the vector inheriting it.
-            </summary>
-        </member>
         <member name="T:Com.Surbon.CSUtils.Math.MathT">
             <summary>
             Provides structs and methods for mathematical operations
@@ -124,6 +118,11 @@
             Returns the intersection points between the given circle and this circle.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.Contains(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if the given point is on the circle
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.GetPoint(System.Single)">
             <summary>
             Returns the point on the circle at the given angle.
@@ -146,6 +145,53 @@
         <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.ToString">
             <summary>
             Returns the equation of the circle
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.MathT.Sphere">
+            <summary>
+            Representation of a sphere in a 3 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Sphere.AreAntipodal(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if to points are antipodal on this circle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Sphere.Contains(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if the point is on the sphere.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Sphere.GetPoint(System.Single,System.Single)">
+            <summary>
+            Returns the point on the circle with the given angles.
+            </summary>
+            <param name="phi">The azimuth angle.</param>
+            <param name="th">The polar angle</param>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.MathT.NSphere">
+            <summary>
+            Representation of a sphere in a N dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.NSphere.Contains(Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Says if the n-sphere contains the given point.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.MathT.Rectangle">
+            <summary>
+            Representation of a rectangle in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Rectangle.IsIn(Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Says if the given point is in the boundaries of the rectangle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Rectangle.Has(Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Says if the given point is on the rectangle.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.Clamp(System.Single,System.Single,System.Single)">
@@ -184,6 +230,11 @@
             Returns the euclidian remainder of a / b.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Factorial(System.Int32)">
+            <summary>
+            Returns the factorial of the given number.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.Lerp(System.Single,System.Single,System.Single)">
             <summary>
             Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
@@ -202,6 +253,11 @@
         <member name="M:Com.Surbon.CSUtils.Math.MathT.NegPow(System.Single,System.Int32)">
             <summary>
             Returns a to the power of -b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.NRoot(System.Single,System.Single)">
+            <summary>
+            Returns the nth root of the given number.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.PosPow(System.Single,System.Int32)">
@@ -775,7 +831,7 @@
             Sets the length of the vector to length.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.VectorN.Normalized">
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.Normalized(System.Single)">
             <summary>
             Returns the normalized vector.
             </summary>
@@ -803,6 +859,11 @@
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.RoundValues">
             <summary>
             Rounds the values of the vector.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.Sign">
+            <summary>
+            Returns the signs of each value in the vector as a vector.
             </summary>
         </member>
     </members>
