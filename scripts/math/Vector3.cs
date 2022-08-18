@@ -88,12 +88,18 @@ namespace Com.Surbon.CSUtils.Math
 		/// Returns the azimuthal angle and the polar angle.
 		/// </summary>
 		/// <returns>Angles as (azimuthal, polar)</returns>
-		public (float phi, float theta) Angles() => (MathF.Atan2(y, x), MathF.Atan2(z, new Vector2(x, y).Length()));
-
-		/// <summary>
-		/// Returns the angle between the vector (this) and the given vector.
-		/// </summary>
-		public float AngleTo(Vector3 vector) => MathF.Atan2(Cross(vector).Length(), Dot(vector));
+		public float Angle(ANGLE type)
+		{
+			switch (type)
+			{
+				case ANGLE.AZIMUTHAL:
+					return MathF.Atan2(y, x);
+				case ANGLE.POLAR:
+					return MathF.Atan2(z, new Vector2(x, y).Length());
+				default:
+					throw new Exception("How tf did you get there ?");
+			}
+		}
 
 		/// <summary>
 		/// Rounds up the length of the vector.
@@ -155,18 +161,6 @@ namespace Com.Surbon.CSUtils.Math
 		public void ClampValuesUniform(float min, float max)
 		{
 			ClampValues(min, max, min, max, min, max);
-		}
-
-		/// <summary>
-		/// Returns the cross product of the vector (this) and the given vector.
-		/// </summary>
-		public Vector3 Cross(Vector3 vector)
-		{
-			return new Vector3(
-				y * vector.z - z * vector.y,
-				z * vector.x - x * vector.z,
-				x * vector.y - y * vector.x
-			);
 		}
 
 		/// <summary>
@@ -302,14 +296,16 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the vector with its length set to 1.
 		/// </summary>
-		public Vector3 Normalized()
+		public Vector3 Normalized(float length = 1)
 		{
 			float l = x * x + y * y + z * z;
 
-			if (l == 0)
+			if (l < 0)
 				throw new InvalidOperationException("The vector's length must be greater than 0");
+			else if (l == 0)
+				return new Vector3(0, 0, 0);
 
-			l = MathF.Sqrt(l);
+			l = MathF.Sqrt(l) / length;
 			return new Vector3(x / l, y / l, z / l);
 		}
 

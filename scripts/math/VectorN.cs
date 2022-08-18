@@ -245,33 +245,6 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cross product between the vector (this) and the given vector.
-		/// </summary>
-		public VectorN Cross(VectorN vector)
-		{
-			//if (Dimension != vector.Dimension)
-			//	throw new ArgumentException("Both vectors must have the same dimension.");
-
-			//VectorN result = new VectorN(Dimension);
-			//float length = MathF.Floor(Dimension / 2f);
-			//float coord = 0f;
-
-			//for (int i = 0; i < Dimension; i++)
-			//{
-			//	coord = 0f;
-
-			//	for (int j = 0; j < length; j++)
-			//	{
-			//		coord += this[Congruence(i + j, Dimension) + 1] - vector[Congruence()]
-			//	}
-
-			//	result[i] = coord;
-			//}
-
-			throw new NotImplementedException("Don't use it, it's a work in progress.");
-		}
-
-		/// <summary>
 		/// Returns the distance between the vector (this) and the given vector.
 		/// </summary>
 		public float Distance(VectorN vector)

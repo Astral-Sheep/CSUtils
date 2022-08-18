@@ -7,6 +7,7 @@
         <member name="T:Com.Surbon.CSUtils.Math.IVector`1">
             <summary>
             Interface with vectorial methods.
+            T is the type of the vector inheriting it.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.MathT">
@@ -422,16 +423,11 @@
             Returns the vector with absolute values.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Angles">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Angle(Com.Surbon.CSUtils.Math.Vector3.ANGLE)">
             <summary>
             Returns the azimuthal angle and the polar angle.
             </summary>
             <returns>Angles as (azimuthal, polar)</returns>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.AngleTo(Com.Surbon.CSUtils.Math.Vector3)">
-            <summary>
-            Returns the angle between the vector (this) and the given vector.
-            </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CeilLength">
             <summary>
@@ -456,11 +452,6 @@
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.ClampValuesUniform(System.Single,System.Single)">
             <summary>
             Clamps x, y and z between min and max.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Cross(Com.Surbon.CSUtils.Math.Vector3)">
-            <summary>
-            Returns the cross product of the vector (this) and the given vector.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Distance(Com.Surbon.CSUtils.Math.Vector3)">
@@ -533,7 +524,7 @@
             Sets the length of the vector to length.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Normalized">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Normalized(System.Single)">
             <summary>
             Returns the vector with its length set to 1.
             </summary>
@@ -712,11 +703,6 @@
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.ClampValuesUniform(System.Single,System.Single)">
             <summary>
             Clamps the values of the vector between min and max.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.VectorN.Cross(Com.Surbon.CSUtils.Math.VectorN)">
-            <summary>
-            Returns the cross product between the vector (this) and the given vector.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Distance(Com.Surbon.CSUtils.Math.VectorN)">
