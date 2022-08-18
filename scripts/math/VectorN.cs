@@ -180,11 +180,11 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float ceil = MathF.Ceiling(l);
+				l /= MathF.Ceiling(l);
 
 				for (int i = 0; i < Size; i++)
 				{
-					values[i] /= l / ceil;
+					values[i] /= l;
 				}
 			}
 		}
@@ -210,11 +210,11 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float clamp = MathT.Clamp(l, min, max);
+				l /= MathT.Clamp(l, min, max);
 
 				for (int i = 0; i < Size; i++)
 				{
-					values[i] /= l / clamp;
+					values[i] /= l;
 				}
 			}
 		}
@@ -315,11 +315,11 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float floor = MathF.Floor(l);
+				l /= MathF.Floor(l);
 
 				for (int i = 0; i < Size; i++)
 				{
-					values[i] /= l / floor;
+					values[i] /= l;
 				}
 			}
 		}
@@ -440,17 +440,17 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Sets the length of the vector to length.
 		/// </summary>
-		public void Normalize(float length)
+		public void Normalize(float length = 1)
 		{
 			float l = LengthSquared();
 
 			if (l != 0)
 			{
-				l = MathF.Sqrt(l);
+				l = MathF.Sqrt(l) / length;
 
 				for (int i = 0; i < Size; i++)
 				{
-					values[i] /= l / length;
+					values[i] /= l;
 				}
 			}
 		}
@@ -458,7 +458,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the normalized vector.
 		/// </summary>
-		public VectorN Normalized()
+		public VectorN Normalized(float length = 1)
 		{
 			VectorN result = new VectorN(Size);
 			float l = LengthSquared();
@@ -466,7 +466,7 @@ namespace Com.Surbon.CSUtils.Math
 			if (l == 0)
 				throw new InvalidOperationException("The vector's length must be greater than 0");
 
-			l = MathF.Sqrt(l);
+			l = MathF.Sqrt(l) / length;
 
 			for (int i = 0; i < Size; i++)
 			{
@@ -534,11 +534,11 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float round = MathF.Round(l);
+				l /= MathF.Round(l);
 
 				for (int i = 0; i < Size; i++)
 				{
-					values[i] /= l / round;
+					values[i] /= l;
 				}
 			}
 		}
@@ -552,6 +552,21 @@ namespace Com.Surbon.CSUtils.Math
 			{
 				values[i] = MathF.Round(values[i]);
 			}
+		}
+
+		/// <summary>
+		/// Returns the signs of each value in the vector as a vector.
+		/// </summary>
+		public VectorN Sign()
+		{
+			VectorN lSign = new VectorN(Size);
+
+			for (int i = 0; i < Size; i++)
+			{
+				lSign[i] = MathF.Sign(values[i]);
+			}
+
+			return lSign;
 		}
 
 		#endregion INSTANCE
