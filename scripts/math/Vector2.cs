@@ -9,7 +9,7 @@ namespace Com.Surbon.CSUtils.Math
 	/// <summary>
 	/// Representation of a vector in a 2 dimensional space.
 	/// </summary>
-	public struct Vector2 : IVector<Vector2>
+	public struct Vector2 : IVector<Vector2>, IVectorX<Vector2>
 	{
 		public float x;
 		public float y;
