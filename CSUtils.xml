@@ -4,132 +4,28 @@
         <name>CSUtils</name>
     </assembly>
     <members>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT">
-            <summary>
-            Provides structs and methods for mathematical operations
-            </summary>
-        </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.Line2">
-            <summary>
-            Representation of a straight line in a 2 dimensional space.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
-            <summary>
-            The line deduced by two points.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
-            <summary>
-            The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
-            </summary>
-            <param name="m">The normal segment</param>
-            <param name="b">The y-intercept</param>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.#ctor(System.Single,System.Single)">
-            <summary>
-            The line given in the slope-intercept form (ax + b = y).
-            </summary>
-            <param name="a">The slope</param>
-            <param name="b">The y-intercept</param>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.#ctor(System.Single,System.Single,System.Single)">
-            <summary>
-            The line given in cartesian coordinates (ax + by = c).
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.Intersection(Com.Surbon.CSUtils.Math.MathT.Line2)">
-            <summary>
-            Returns the intersection of two lines. If there's no intersection, the point has <see cref="F:System.Single.NegativeInfinity"/> as coordinates.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.IsParallel(Com.Surbon.CSUtils.Math.MathT.Line2)">
-            <summary>
-            Says if the given line is parallel to this one.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.IsSecant(Com.Surbon.CSUtils.Math.MathT.Line2)">
-            <summary>
-            Says if the given line is secant to this one.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.Rotate(System.Single)">
-            <summary>
-            Rotates the line by phi radians.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line2.Rotated(System.Single)">
-            <summary>
-            Returns the line rotated by phi radians.
-            </summary>
-        </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.Line3">
-            <summary>
-            Representation of a straight line in a 3 dimensional space.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line3.GetPoint(System.Single)">
-            <summary>
-            Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line3.Intersection(Com.Surbon.CSUtils.Math.MathT.Line3)">
-            <summary>
-            Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line3.IsCoplanar(Com.Surbon.CSUtils.Math.MathT.Line3)">
-            <summary>
-            Says if both lines are on the same plan.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line3.IsParallel(Com.Surbon.CSUtils.Math.MathT.Line3)">
-            <summary>
-            Says if both lines are parallel.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Line3.IsSecant(Com.Surbon.CSUtils.Math.MathT.Line3)">
-            <summary>
-            Says if both lines are secant.
-            </summary>
-        </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.LineN">
-            <summary>
-            Representation of a straight line in a N dimensional space.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.LineN.GetPoint(System.Single)">
-            <summary>
-            Returns the point at the given value (the point is calculated with parametric equations).
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.LineN.IsParallel(Com.Surbon.CSUtils.Math.MathT.LineN)">
-            <summary>
-            Says if both lines are parallel.
-            </summary>
-        </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.Circle">
+        <member name="T:Com.Surbon.CSUtils.Math.Circle">
             <summary>
             Representation of a circle.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.CircleIntersect(Com.Surbon.CSUtils.Math.MathT.Circle)">
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.CircleIntersect(Com.Surbon.CSUtils.Math.Circle)">
             <summary>
             Returns the intersection points between the given circle and this circle.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.Contains(Com.Surbon.CSUtils.Math.Vector3)">
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.Contains(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
             Says if the given point is on the circle
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.GetPoint(System.Single)">
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.GetPoint(System.Single)">
             <summary>
             Returns the point on the circle at the given angle.
             </summary>
             <param name="angle">The angle of the point in radians.</param>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.GetArc(System.Single,System.Single,System.Int32)">
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.GetArc(System.Single,System.Single,System.Int32)">
             <summary>
             Returns a list of points corresponding to an arc on the circle.
             </summary>
@@ -137,46 +33,118 @@
             <param name="maxAngle">The ending angle of the arc in radians (if it's greater than minAngle the arc is clockwise).</param>
             <param name="nPoints">The number of points wanted on the arc.</param>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.LineIntersect(Com.Surbon.CSUtils.Math.MathT.Line2)">
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.LineIntersect(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
             Returns the intersection points between the given line and the circle.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Circle.ToString">
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.ToString">
             <summary>
             Returns the equation of the circle
             </summary>
         </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.Sphere">
+        <member name="T:Com.Surbon.CSUtils.Math.Line2">
             <summary>
-            Representation of a sphere in a 3 dimensional space.
+            Representation of a straight line in a 2 dimensional space.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Sphere.AreAntipodal(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Says if to points are antipodal on this circle.
+            The line deduced by two points.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Sphere.Contains(Com.Surbon.CSUtils.Math.Vector3)">
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
             <summary>
-            Says if the point is on the sphere.
+            The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
+            </summary>
+            <param name="m">The normal segment</param>
+            <param name="b">The y-intercept</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(System.Single,System.Single)">
+            <summary>
+            The line given in the slope-intercept form (ax + b = y).
+            </summary>
+            <param name="a">The slope</param>
+            <param name="b">The y-intercept</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            The line given in cartesian coordinates (ax + by = c).
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Sphere.GetPoint(System.Single,System.Single)">
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.Intersection(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
-            Returns the point on the circle with the given angles.
-            </summary>
-            <param name="phi">The azimuth angle.</param>
-            <param name="th">The polar angle</param>
-        </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.NSphere">
-            <summary>
-            Representation of a sphere in a N dimensional space.
+            Returns the intersection of two lines. If there's no intersection, the point has <see cref="F:System.Single.NegativeInfinity"/> as coordinates.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.NSphere.Contains(Com.Surbon.CSUtils.Math.VectorN)">
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.IsParallel(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
-            Says if the n-sphere contains the given point.
+            Says if the given line is parallel to this one.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.IsSecant(Com.Surbon.CSUtils.Math.Line2)">
+            <summary>
+            Says if the given line is secant to this one.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.Rotate(System.Single)">
+            <summary>
+            Rotates the line by phi radians.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.Rotated(System.Single)">
+            <summary>
+            Returns the line rotated by phi radians.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Line3">
+            <summary>
+            Representation of a straight line in a 3 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.GetPoint(System.Single)">
+            <summary>
+            Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.Intersection(Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.IsCoplanar(Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Says if both lines are on the same plan.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.IsParallel(Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Says if both lines are parallel.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.IsSecant(Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Says if both lines are secant.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.LineN">
+            <summary>
+            Representation of a straight line in a N dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.LineN.GetPoint(System.Single)">
+            <summary>
+            Returns the point at the given value (the point is calculated with parametric equations).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.LineN.IsParallel(Com.Surbon.CSUtils.Math.LineN)">
+            <summary>
+            Says if both lines are parallel.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.MathT">
+            <summary>
+            Provides structs and methods for mathematical operations
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.MathT.Rectangle">
@@ -269,6 +237,53 @@
             <summary>
             Returns a to the power of b.
             </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.NSphere">
+            <summary>
+            Representation of a sphere in a N dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.NSphere.Contains(Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Says if the n-sphere contains the given point.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Rectangle">
+            <summary>
+            Representation of a rectangle in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Rectangle.IsIn(Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Says if the given point is in the boundaries of the rectangle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Rectangle.Has(Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Says if the given point is on the rectangle.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Sphere">
+            <summary>
+            Representation of a sphere in a 3 dimensional space.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.AreAntipodal(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if to points are antipodal on this circle.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.Contains(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if the point is on the sphere.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.GetPoint(System.Single,System.Single)">
+            <summary>
+            Returns the point on the circle with the given angles.
+            </summary>
+            <param name="phi">The azimuth angle.</param>
+            <param name="th">The polar angle</param>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Vector2">
             <summary>
