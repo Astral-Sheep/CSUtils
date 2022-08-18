@@ -142,6 +142,8 @@ namespace Com.Surbon.CSUtils.Math
 			return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 		}
 
+		public override string ToString() => $"Origin : {p} | Direction : {n}";
+
 		#endregion INSTANCE
 	}
 }

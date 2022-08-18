@@ -166,6 +166,11 @@ namespace Com.Surbon.CSUtils.Math
 			return new Line2(new Vector2(MathF.Cos(angle), MathF.Sin(angle)), p);
 		}
 
+		public override string ToString()
+		{
+			return $"{SlopeInterceptForm.m}x + {SlopeInterceptForm.p} = y";
+		}
+
 		#endregion INSTANCE
 	}
 }
