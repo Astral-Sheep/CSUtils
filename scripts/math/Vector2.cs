@@ -9,7 +9,7 @@ namespace Com.Surbon.CSUtils.Math
 	/// <summary>
 	/// Representation of a vector in a 2 dimensional space.
 	/// </summary>
-	public struct Vector2 : IVector
+	public struct Vector2 : IVector<Vector2>
 	{
 		public float x;
 		public float y;
@@ -230,14 +230,16 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the normalized vector.
 		/// </summary>
-		public Vector2 Normalized()
+		public Vector2 Normalized(float length = 1)
 		{
 			float l = LengthSquared();
 
-			if (l == 0)
+			if (l < 0)
 				throw new InvalidOperationException("The vector's length must be greater than 0");
+			else if (l == 0)
+				return new Vector2(0, 0);
 
-			l = MathF.Sqrt(l);
+			l = MathF.Sqrt(l) / length;
 			return new Vector2(x / l, y / l);
 		}
 
@@ -249,7 +251,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Performs a modulus operation on x and y, where the result is in [0, modv.x[ for x, and [0, modv.y[ for y.
 		/// </summary>
-		public Vector2 PosModV(Vector2 modv) => new Vector2(MathT.Congruence(x, modv.x), MathT.Congruence(y, modv.y));
+		public Vector2 PosModv(Vector2 modv) => new Vector2(MathT.Congruence(x, modv.x), MathT.Congruence(y, modv.y));
 
 		/// <summary>
 		/// Returns the vector with x and y to the power of pow.

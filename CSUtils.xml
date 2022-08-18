@@ -4,6 +4,11 @@
         <name>CSUtils</name>
     </assembly>
     <members>
+        <member name="T:Com.Surbon.CSUtils.Math.IVector`1">
+            <summary>
+            Interface with vectorial methods.
+            </summary>
+        </member>
         <member name="T:Com.Surbon.CSUtils.Math.MathT">
             <summary>
             Provides structs and methods for mathematical operations
@@ -333,7 +338,7 @@
             Sets the length of the vector to the given length.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector2.Normalized">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.Normalized(System.Single)">
             <summary>
             Returns the normalized vector.
             </summary>
@@ -343,7 +348,7 @@
             Performs a modulus operation on x and y, where the result is in [0, mod[.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector2.PosModV(Com.Surbon.CSUtils.Math.Vector2)">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.PosModv(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
             Performs a modulus operation on x and y, where the result is in [0, modv.x[ for x, and [0, modv.y[ for y.
             </summary>

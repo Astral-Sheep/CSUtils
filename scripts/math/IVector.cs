@@ -10,35 +10,36 @@ namespace Com.Surbon.CSUtils.Math
 
 	/// <summary>
 	/// Interface with vectorial methods.
+	/// T is the type of the vector inheriting it.
 	/// </summary>
-	public interface IVector
+	public interface IVector<T>
 	{
-		public IVector Abs();
+		public T Abs();
 		public void CeilLength();
 		public void CeilValues();
 		public void ClampLength(float min, float max);
 		public void ClampValuesUniform(float min, float max);
-		public float Cross(IVector vector);
-		public float Distance(IVector vector);
-		public float DistanceSquared(IVector vector);
-		public float Dot(IVector vector);
+		public float Cross(T vector);
+		public float Distance(T vector);
+		public float DistanceSquared(T vector);
+		public float Dot(T vector);
 		public void FloorLength();
 		public void FloorValues();
 		public bool IsNormalized();
-		public IVector Lerp(IVector to, float ratio);
-		public IVector LerpRand(IVector to);
-		public IVector LerpUnclamped(IVector to, float ratio);
 		public float Length();
 		public float LengthSquared();
-		public IVector NegMod(float mod);
-		public IVector NegModv(IVector modv);
+		public T Lerp(T to, float ratio);
+		public T LerpRand(T to);
+		public T LerpUnclamped(T to, float ratio);
+		public T NegMod(float mod);
+		public T NegModv(T modv);
 		public void Normalize(float length = 1);
-		public IVector Normalized(float length = 1);
-		public IVector PosMod(float mod);
-		public IVector PosModv(IVector modv);
-		public IVector Pow(float pow);
+		public T Normalized(float length = 1);
+		public T PosMod(float mod);
+		public T PosModv(T modv);
+		public T Pow(float pow);
 		public void RoundLength();
 		public void RoundValues();
-		public IVector Sign();
+		public T Sign();
 	}
 }
