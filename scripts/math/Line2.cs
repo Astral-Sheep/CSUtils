@@ -73,6 +73,13 @@ namespace Com.Surbon.CSUtils.Math
 			p = (b.y - b.x * (n.y / n.x)) * MathF.Sin(n.Angle());
 		}
 
+		public Line2(Line2 line)
+		{
+			(float phi, float p) normal = line.NormalForm;
+			n = Vector2.PolarToCartesian(1, normal.phi);
+			p = normal.p;
+		}
+
 		/// <summary>
 		/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
 		/// </summary>
@@ -81,7 +88,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Line2(Vector2 m, float b)
 		{
 			if (m.LengthSquared() == 0)
-				throw new ArgumentOutOfRangeException("m must have length greater than 0.");
+				throw new ArgumentOutOfRangeException("m must have a length greater than 0.");
 
 			n = m;
 			p = b;

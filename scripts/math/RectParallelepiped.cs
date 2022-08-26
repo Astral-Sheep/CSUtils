@@ -15,6 +15,9 @@ namespace Com.Surbon.CSUtils.Math
 	{
 		#region PROPERTIES
 
+		/// <summary>
+		/// The width of the rectangle (on the x axis).
+		/// </summary>
 		public float Width
 		{
 			get => w;
@@ -27,6 +30,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The height of the rectangle (on the y axis).
+		/// </summary>
 		public float Height
 		{
 			get => h;
@@ -39,6 +45,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The length of the rectangle (on the z axis).
+		/// </summary>
 		public float Length
 		{
 			get => l;
@@ -51,14 +60,23 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The point on the front top left of the parallelepiped.
+		/// </summary>
 		public Vector3 Origin
 		{
 			get => o;
 			set { o = value; }
 		}
 
+		/// <summary>
+		/// The surface of the parallelepiped.
+		/// </summary>
 		public float Area => 2f * w * h + l * (w + h);
 
+		/// <summary>
+		/// The volume of the parallelepiped.
+		/// </summary>
 		public float Volume => w * h * l;
 
 		#endregion PROPERTIES
@@ -74,6 +92,14 @@ namespace Com.Surbon.CSUtils.Math
 			w = width;
 			h = height;
 			l = length;
+		}
+
+		public RectParallelepiped(RectParallelepiped rectParallelepiped)
+		{
+			o = rectParallelepiped.Origin;
+			w = rectParallelepiped.Width;
+			h = rectParallelepiped.Height;
+			l = rectParallelepiped.Length;
 		}
 
 		#region OPERATORS

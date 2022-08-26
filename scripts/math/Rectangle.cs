@@ -13,6 +13,9 @@ namespace Com.Surbon.CSUtils.Math
 	{
 		#region PROPERTIES
 
+		/// <summary>
+		/// The width of the rectangle (on the x axis).
+		/// </summary>
 		public float Width
 		{
 			get => w;
@@ -25,6 +28,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The height of the rectangle (on the y axis).
+		/// </summary>
 		public float Height
 		{
 			get => h;
@@ -37,14 +43,23 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The point on the top left of the rectangle.
+		/// </summary>
 		public Vector2 Origin
 		{
 			get => o;
 			set { o = value; }
 		}
 
+		/// <summary>
+		/// The perimeter of the rectangle.
+		/// </summary>
 		public float Perimeter => 2f * w + 2f * h;
 
+		/// <summary>
+		/// The area of the rectangle.
+		/// </summary>
 		public float Area => w * h;
 
 		#endregion PROPERTIES
@@ -58,6 +73,13 @@ namespace Com.Surbon.CSUtils.Math
 			o = origin;
 			w = width;
 			h = height;
+		}
+
+		public Rectangle(Rectangle rectangle)
+		{
+			o = rectangle.Origin;
+			w = rectangle.Width;
+			h = rectangle.Height;
 		}
 
 		#region OPERATORS
@@ -94,7 +116,8 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public bool Has(Vector2 point)
 		{
-			return (point.x >= o.x && point.x <= o.x + w && (point.y == o.y || point.y == o.y + h)) || (point.y >= o.y && point.y <= o.y + h && (point.x == o.x || point.x == o.x + w));
+			return (point.x >= o.x && point.x <= o.x + w && (point.y == o.y || point.y == o.y + h)) ||
+				(point.y >= o.y && point.y <= o.y + h && (point.x == o.x || point.x == o.x + w));
 		}
 
 		public override string ToString() => $"Origin : {o} | Width : {w} | Height : {h}";

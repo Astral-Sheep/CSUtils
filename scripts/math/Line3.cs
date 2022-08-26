@@ -94,6 +94,12 @@ namespace Com.Surbon.CSUtils.Math
 			p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
 		}
 
+		public Line3(Line3 line)
+		{
+			n = line.Direction;
+			p = line.Origin;
+		}
+
 		#region OPERATORS
 
 		public static bool operator ==(Line3 line1, Line3 line2) => line1.Direction == line2.Direction && line1.Origin == line2.Origin;

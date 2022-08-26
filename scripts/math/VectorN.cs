@@ -11,6 +11,9 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct VectorN
 	{
+		/// <summary>
+		/// The dimension of the vector.
+		/// </summary>
 		public readonly int Size;
 
 		/// <summary>

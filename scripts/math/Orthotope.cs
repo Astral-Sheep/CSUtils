@@ -11,12 +11,15 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Orthotope
 	{
-		public int Dimension => o.Size;
+		/// <summary>
+		/// The dimension of the rectangle.
+		/// </summary>
+		public readonly int Dimension;
 
 		#region PROPERTIES
 
 		/// <summary>
-		/// The length in the given dimension.
+		/// The length in the given dimension (starting at 0 for the x axis).
 		/// </summary>
 		public float this[int dimension]
 		{
@@ -39,6 +42,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The origin of the rectangle.
+		/// </summary>
 		public VectorN Origin
 		{
 			get => o;
@@ -61,6 +67,19 @@ namespace Com.Surbon.CSUtils.Math
 
 			o = origin;
 			l = lengths;
+			Dimension = o.Size;
+		}
+
+		public Orthotope(Orthotope orthotope)
+		{
+			o = orthotope.Origin;
+			Dimension = o.Size;
+			l = new float[Dimension];
+
+			for (int i = 0; i < o.Size; i++)
+			{
+				l[i] = orthotope[i];
+			}
 		}
 
 		#region OPERATORS

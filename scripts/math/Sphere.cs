@@ -15,6 +15,9 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region PROPERTIES
 
+		/// <summary>
+		/// The center of the sphere.
+		/// </summary>
 		public Vector3 Origin
 		{
 			get => o;
@@ -24,6 +27,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The radius of the sphere.
+		/// </summary>
 		public float Radius
 		{
 			get => r;
@@ -36,6 +42,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The diamater of the sphere.
+		/// </summary>
 		public float Diameter
 		{
 			get => 2f * r;
@@ -48,6 +57,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The surface of the sphere.
+		/// </summary>
 		public float Area
 		{
 			get => 4f * MathF.PI * r * r;
@@ -57,6 +69,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The volume of the sphere.
+		/// </summary>
 		public float Volume
 		{
 			get => (4f * MathF.PI * r * r * r) / 3f;
@@ -75,6 +90,12 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			o = origin;
 			r = radius;
+		}
+
+		public Sphere(Sphere sphere)
+		{
+			o = sphere.Origin;
+			r = sphere.Radius;
 		}
 
 		#region OPERATORS
@@ -101,10 +122,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if the point is on the sphere.
 		/// </summary>
-		public bool Contains(Vector3 point)
-		{
-			return (point - o).LengthSquared() == r * r;
-		}
+		public bool Contains(Vector3 point) => (point - o).LengthSquared() == r * r;
 
 		public override bool Equals(object obj)
 		{
@@ -119,15 +137,9 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		/// <param name="phi">The azimuth angle.</param>
 		/// <param name="th">The polar angle</param>
-		public Vector3 GetPoint(float phi, float th)
-		{
-			return Vector3.SphericToCartesian(r, phi, th);
-		}
+		public Vector3 GetPoint(float phi, float th) => Vector3.SphericToCartesian(r, phi, th);
 
-		public override string ToString()
-		{
-			return $"(x - {Origin.x})² + (y - {Origin.y})² + (z - {Origin.z})² = {Radius}²";
-		}
+		public override string ToString() => $"(x - {Origin.x})² + (y - {Origin.y})² + (z - {Origin.z})² = {Radius}²";
 
 		#endregion INSTANCE
 	}

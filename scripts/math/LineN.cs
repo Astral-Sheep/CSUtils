@@ -13,6 +13,9 @@ namespace Com.Surbon.CSUtils.Math
 	{
 		public static LineN AxisW = new LineN(new VectorN(0, 0, 0, 1), new VectorN(0, 0, 0, 0));
 
+		/// <summary>
+		/// The dimension of the line.
+		/// </summary>
 		public readonly int Dimension;
 
 		/// <summary>
@@ -59,6 +62,13 @@ namespace Com.Surbon.CSUtils.Math
 			Dimension = direction.Size;
 			n = direction;
 			p = origin;
+		}
+
+		public LineN(LineN line)
+		{
+			Dimension = line.Dimension;
+			n = line.Direction;
+			p = line.Origin;
 		}
 
 		#region OPERATORS
