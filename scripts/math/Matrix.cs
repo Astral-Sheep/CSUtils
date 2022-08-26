@@ -27,15 +27,15 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
-		public int Lines
+		public int Rows
 		{
-			get => _lines;
+			get => _rows;
 			private set
 			{
 				if (value < 0)
-					throw new ArgumentOutOfRangeException("The number of lines must be greater than 0.");
+					throw new ArgumentOutOfRangeException("The number of rows must be greater than 0.");
 
-				_lines = value;
+				_rows = value;
 			}
 		}
 
@@ -43,8 +43,8 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			get
 			{
-				if (line < 0 || line >= Lines)
-					throw new ArgumentOutOfRangeException($"The line must greater than or equal to 0 and lesser than {Lines}");
+				if (line < 0 || line >= Rows)
+					throw new ArgumentOutOfRangeException($"The row must greater than or equal to 0 and lesser than {Rows}");
 
 				if (column < 0 || column >= Columns)
 					throw new ArgumentOutOfRangeException($"The column must greater than or equal to 0 and lesser than {Columns}");
@@ -53,8 +53,8 @@ namespace Com.Surbon.CSUtils.Math
 			}
 			set
 			{
-				if (line < 0 || line >= Lines)
-					throw new ArgumentOutOfRangeException($"The line must greater than or equal to 0 and lesser than {Lines}");
+				if (line < 0 || line >= Rows)
+					throw new ArgumentOutOfRangeException($"The row must greater than or equal to 0 and lesser than {Rows}");
 				
 				if (column < 0 || column >= Columns)
 					throw new ArgumentOutOfRangeException($"The column must greater than or equal to 0 and lesser than {Columns}");
@@ -66,16 +66,16 @@ namespace Com.Surbon.CSUtils.Math
 		#endregion PROPERTIES
 
 		private int _columns;
-		private int _lines;
+		private int _rows;
 		private float[,] values;
 
 		public Matrix(int lines, int columns, params float[] numbers)
 		{
-			_lines = lines;
+			_rows = lines;
 			_columns = columns;
 
 			if (numbers.Length != lines * columns)
-				throw new TypeInitializationException("The number of lines and columns doesn't correspond to the number of values given.", new ArgumentException());
+				throw new TypeInitializationException("The number of rows and columns doesn't correspond to the number of values given.", new ArgumentException());
 
 			values = new float[lines, columns];
 			int index = 0;
@@ -90,14 +90,21 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		public Matrix(int lines, int columns)
+		{
+			_rows = lines;
+			_columns = columns;
+			values = new float[lines, columns];
+		}
+
 		public Matrix(Matrix matrix)
 		{
-			_lines = matrix.Lines;
+			_rows = matrix.Rows;
 			_columns = matrix.Columns;
 
-			values = new float[_lines, _columns];
+			values = new float[_rows, _columns];
 
-			for (int i = 0; i < _lines; i++)
+			for (int i = 0; i < _rows; i++)
 			{
 				for (int j = 0; j < _columns; j++)
 				{
@@ -105,5 +112,107 @@ namespace Com.Surbon.CSUtils.Math
 				}
 			}
 		}
+
+		#region OPERATOR
+
+		public static Matrix operator+(Matrix m1, Matrix m2)
+		{
+			if (!m1.SameSize(m2))
+				throw new ArgumentException("Both matrices must have the same size.");
+
+			Matrix matrix = new Matrix(m1.Rows, m1.Columns);
+
+			for (int i = 0; i < m1.Rows; i++)
+			{
+				for (int j = 0; j < m1.Columns; j++)
+				{
+					matrix[i, j] = m1[i, j] + m2[i, j];
+				}
+			}
+
+			return matrix;
+		}
+
+		public static Matrix operator-(Matrix m1, Matrix m2)
+		{
+			if (!m1.SameSize(m2))
+				throw new ArgumentException("Both matrices must have the same size.");
+
+			Matrix matrix = new Matrix(m1.Rows, m1.Columns);
+
+			for (int i = 0; i < m1.Rows; i++)
+			{
+				for (int j = 0; j < m1.Columns; j++)
+				{
+					matrix[i, j] = m1[i, j] - m2[i, j];
+				}
+			}
+
+			return matrix;
+		}
+
+		public static Matrix operator*(float scalar, Matrix m)
+		{
+			Matrix matrix = new Matrix(m.Rows, m.Columns);
+
+			for (int i = 0; i < m.Rows; i++)
+			{
+				for (int j = 0; j < m.Columns; j++)
+				{
+					matrix[i, j] = scalar * m[i, j];
+				}
+			}
+
+			return matrix;
+		}
+
+		public static Matrix operator *(Matrix m, float scalar)
+		{
+			Matrix matrix = new Matrix(m.Rows, m.Columns);
+
+			for (int i = 0; i < m.Rows; i++)
+			{
+				for (int j = 0; j < m.Columns; j++)
+				{
+					matrix[i, j] = m[i, j] * scalar;
+				}
+			}
+
+			return matrix;
+		}
+
+		public static Matrix operator*(Matrix m1, Matrix m2)
+		{
+			if (m1.Columns != m2.Rows)
+				throw new ArgumentException("The number of columns of the first matrix must be equal to the number of rows in the second matrix.");
+
+			Matrix matrix = new Matrix(m1.Rows, m2.Columns);
+			float n = 0;
+
+			for (int i = 0; i < matrix.Rows; i++)
+			{
+				for (int j = 0; j < matrix.Columns; j++)
+				{
+					n = 0;
+
+					for (int k = 0; k < m1.Columns; k++)
+					{
+						n += m1[i, k] * m2[k, j];
+					}
+
+					matrix[i, j] = n;
+				}
+			}
+
+			return matrix;
+		}
+
+		#endregion OPERATOR
+
+		#region INSTANCE
+
+		public bool SameSize(Matrix matrix) => Rows == matrix.Rows && Columns == matrix.Columns;
+
+		#endregion INSTANCE
 	}
 }
