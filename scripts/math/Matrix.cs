@@ -15,6 +15,9 @@ namespace Com.Surbon.CSUtils.Math
 	{
 		#region PROPERTIES
 
+		/// <summary>
+		/// The number of columns in the matrix.
+		/// </summary>
 		public int Columns
 		{
 			get => _columns;
@@ -27,6 +30,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The number of rows in the matrix.
+		/// </summary>
 		public int Rows
 		{
 			get => _rows;
@@ -39,6 +45,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The value at the given line and column
+		/// </summary>
 		public float this[int line, int column]
 		{
 			get
@@ -273,8 +282,14 @@ namespace Com.Surbon.CSUtils.Math
 			return false;
 		}
 
+		/// <summary>
+		/// Returns the adjugate of the matrix.
+		/// </summary>
 		public Matrix GetAdjugate() => GetCofactor().Transposed();
 
+		/// <summary>
+		/// Returns the cofactor of the matrix.
+		/// </summary>
 		public Matrix GetCofactor()
 		{
 			if (!IsSquare())
@@ -293,9 +308,12 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Returns the determinant of the matrix.
+		/// </summary>
 		public float GetDeterminant()
 		{
-			if (Rows != Columns)
+			if (!IsSquare())
 				throw new Exception("The determinant can only be computed on a square matrix.");
 
 			if (Rows == 1) { return values[0, 0]; }
@@ -313,6 +331,11 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// Returns the sub matrix which is the matrix without the given row and column.
+		/// </summary>
+		/// <param name="row">The row to delete.</param>
+		/// <param name="column">The column to delete.</param>
 		public Matrix GetSub(int row, int column)
 		{
 			if (row < 0 || row >= Rows || column < 0 || column >= Columns)
@@ -335,6 +358,9 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Sets the matrix to its inverse.
+		/// </summary>
 		public void Invert()
 		{
 			if (!IsSquare())
@@ -355,6 +381,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// Returns the inverse of this matrix.
+		/// </summary>
 		public Matrix Inverted()
 		{
 			if (!IsSquare())
@@ -368,10 +397,20 @@ namespace Com.Surbon.CSUtils.Math
 			return (1f / det) * GetAdjugate();
 		}
 
-		public bool IsInvertible() => GetDeterminant() != 0;
+		/// <summary>
+		/// Says if the matrix is invertible.
+		/// </summary>
+		public bool IsInvertible() => IsSquare() ? GetDeterminant() != 0 : false;
 
+		/// <summary>
+		/// Says if the matrix is a square matrix.
+		/// </summary>
 		public bool IsSquare() => Rows == Columns;
 
+		/// <summary>
+		/// Says if the matrix is skew-symmetric (equal to the opposite of it's transposed matrix).
+		/// </summary>
+		/// <returns></returns>
 		public bool IsSkewSymmetric()
 		{
 			if (!IsSquare())
@@ -389,6 +428,9 @@ namespace Com.Surbon.CSUtils.Math
 			return true;
 		}
 
+		/// <summary>
+		/// Says if the matrix is symmetric (equal to it's transposed matrix).
+		/// </summary>
 		public bool IsSymmetric()
 		{
 			if (!IsSquare())
@@ -406,6 +448,9 @@ namespace Com.Surbon.CSUtils.Math
 			return true;
 		}
 
+		/// <summary>
+		/// Returns this matrix to the given power.
+		/// </summary>
 		public Matrix Pow(int pow)
 		{
 			if (!IsSquare())
@@ -433,8 +478,14 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Says if this matrix and the given matrix have the same size.
+		/// </summary>
 		public bool SameSize(Matrix matrix) => Rows == matrix.Rows && Columns == matrix.Columns;
 
+		/// <summary>
+		/// Sets this matrix to it's transposed matrix.
+		/// </summary>
 		public void Transpose()
 		{
 			if (!IsSquare())
@@ -453,6 +504,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// Returns this matrix's transposed matrix.
+		/// </summary>
 		public Matrix Transposed()
 		{
 			if (!IsSquare())
@@ -464,7 +518,7 @@ namespace Com.Surbon.CSUtils.Math
 			{
 				for (int j = 0; j < Columns; j++)
 				{
-					matrix[j, i] = matrix[i, j];
+					matrix[j, i] = values[i, j];
 				}
 			}
 
@@ -475,6 +529,9 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region STATIC
 
+		/// <summary>
+		/// Returns the identity matrix to the given size.
+		/// </summary>
 		public static Matrix Identity(int size)
 		{
 			Matrix identity = new Matrix(size, size);
