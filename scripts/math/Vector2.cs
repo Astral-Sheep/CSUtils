@@ -19,13 +19,25 @@ namespace Com.Surbon.CSUtils.Math
 		public static readonly Vector2 UP = new Vector2(0, -1);
 		public static readonly Vector2 ZERO = new Vector2(0, 0);
 
+		/// <summary>
+		/// The position of the vector on the x axis.
+		/// </summary>
 		public float x;
+		/// <summary>
+		/// The position of the vector on the y axis.
+		/// </summary>
 		public float y;
 
 		public Vector2(float pX = 0f, float pY = 0f)
 		{
 			x = pX;
 			y = pY;
+		}
+
+		public Vector2(Vector2 vector)
+		{
+			x = vector.x;
+			y = vector.y;
 		}
 
 		#region OPERATORS
@@ -154,6 +166,7 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			if (obj is Vector2)
 				return (Vector2)obj == this;
+
 			return false;
 		}
 
@@ -227,6 +240,9 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public void Normalize(float length = 1)
 		{
+			if (length == 0)
+				throw new DivideByZeroException("The length must be different from zero.");
+
 			float l = x * x + y * y;
 
 			if (l != 0)
@@ -242,13 +258,14 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector2 Normalized(float length = 1)
 		{
-			float l = LengthSquared();
+			if (length == 0)
+				throw new DivideByZeroException("The length must be different from zero.");
 
-			if (l < 0)
-				throw new InvalidOperationException("The vector's length must be greater than 0");
-			else if (l == 0)
+			float l = x * x + y * y;
+
+			if(l == 0)
 				return new Vector2(0, 0);
-
+			
 			l = MathF.Sqrt(l) / length;
 			return new Vector2(x / l, y / l);
 		}

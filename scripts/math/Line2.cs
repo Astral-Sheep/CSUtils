@@ -14,6 +14,11 @@ namespace Com.Surbon.CSUtils.Math
 		public static readonly Line2 AxisX = new Line2(0, 0);
 		public static readonly Line2 AxisY = new Line2(new Vector2(0, 0), new Vector2(0, 1));
 
+		#region PROPERTIES
+
+		/// <summary>
+		/// The line as ax + by + c = 0.
+		/// </summary>
 		public (float a, float b, float c) CartesianForm
 		{
 			get
@@ -28,6 +33,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The line given with it's angle and it's origin.
+		/// </summary>
 		public (float phi, float p) NormalForm
 		{
 			get => (n.Angle(), p);
@@ -38,6 +46,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The line given as mx + p = y.
+		/// </summary>
 		public (float m, float p) SlopeInterceptForm
 		{
 			get => (n.y / n.x, p / MathF.Sin(n.Angle()));
@@ -47,6 +58,8 @@ namespace Com.Surbon.CSUtils.Math
 				p = value.p * MathF.Sin(n.Angle());
 			}
 		}
+
+		#endregion PROPERTIES
 
 		private Vector2 n;
 		private float p;
@@ -60,6 +73,13 @@ namespace Com.Surbon.CSUtils.Math
 			p = (b.y - b.x * (n.y / n.x)) * MathF.Sin(n.Angle());
 		}
 
+		public Line2(Line2 line)
+		{
+			(float phi, float p) normal = line.NormalForm;
+			n = Vector2.PolarToCartesian(1, normal.phi);
+			p = normal.p;
+		}
+
 		/// <summary>
 		/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
 		/// </summary>
@@ -68,7 +88,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Line2(Vector2 m, float b)
 		{
 			if (m.LengthSquared() == 0)
-				throw new ArgumentOutOfRangeException("m must have length greater than 0.");
+				throw new ArgumentOutOfRangeException("m must have a length greater than 0.");
 
 			n = m;
 			p = b;
@@ -153,23 +173,15 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public void Rotate(float phi)
 		{
-			float angle = n.Angle() + phi;
-			n = new Vector2(MathF.Cos(angle), MathF.Sin(angle));
+			n.Rotate(phi);
 		}
 
 		/// <summary>
 		/// Returns the line rotated by phi radians.
 		/// </summary>
-		public Line2 Rotated(float phi)
-		{
-			float angle = n.Angle() + phi;
-			return new Line2(new Vector2(MathF.Cos(angle), MathF.Sin(angle)), p);
-		}
+		public Line2 Rotated(float phi) => new Line2(n.Rotated(phi), p);
 
-		public override string ToString()
-		{
-			return $"{SlopeInterceptForm.m}x + {SlopeInterceptForm.p} = y";
-		}
+		public override string ToString() => $"{SlopeInterceptForm.m}x + {SlopeInterceptForm.p} = y";
 
 		#endregion INSTANCE
 	}

@@ -16,6 +16,9 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region PROPERTIES
 
+		/// <summary>
+		/// The center of the circle.
+		/// </summary>
 		public Vector2 Origin
 		{
 			get => o;
@@ -25,30 +28,39 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The radius of the circle.
+		/// </summary>
 		public float Radius
 		{
 			get => r;
 			set
 			{
-				if (value <= 0)
+				if (value < 0)
 					throw new ArgumentOutOfRangeException("The radius must be greater than 0.");
 
 				r = value;
 			}
 		}
 
+		/// <summary>
+		/// The diameter of the circle.
+		/// </summary>
 		public float Diameter
 		{
 			get => 2f * r;
 			set
 			{
-				if (value <= 0)
+				if (value < 0)
 					throw new ArgumentOutOfRangeException("The diameter must be greater than 0.");
 
 				r = value / 2f;
 			}
 		}
 
+		/// <summary>
+		/// The surface of the circle.
+		/// </summary>
 		public float Area
 		{
 			get => MathF.PI * r * r;
@@ -61,6 +73,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The perimeter of the circle.
+		/// </summary>
 		public float Perimeter
 		{
 			get => 2f * MathF.PI * r;
@@ -82,6 +97,12 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			o = origin;
 			r = radius;
+		}
+
+		public Circle(Circle circle)
+		{
+			o = circle.Origin;
+			r = circle.Radius;
 		}
 
 		#region OPERATOR
@@ -106,6 +127,9 @@ namespace Com.Surbon.CSUtils.Math
 		public List<Vector2> CircleIntersect(Circle circle)
 		{
 			List<Vector2> lPoints = new List<Vector2>();
+
+			if (o.y - circle.Origin.y == 0)
+				throw new DivideByZeroException("The subtraction of the origin of both circle has 0 as y.");
 
 			float z = (o.x - circle.Origin.x) / (o.y - circle.Origin.y);
 			float n = (circle.Radius * circle.Radius - r * r - circle.Origin.x * circle.Origin.x + o.x * o.x - circle.Origin.y * circle.Origin.y + o.y * o.y) /
@@ -134,10 +158,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if the given point is on the circle
 		/// </summary>
-		public bool Contains(Vector3 point)
-		{
-			return (point.x - o.x) * (point.x - o.x) + (point.y - o.y) * (point.y - o.y) == r * r;
-		}
+		public bool Contains(Vector3 point) => (point.x - o.x) * (point.x - o.x) + (point.y - o.y) * (point.y - o.y) == r * r;
 
 		public override bool Equals(object obj)
 		{
@@ -202,10 +223,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the equation of the circle
 		/// </summary>
-		public override string ToString()
-		{
-			return $"(x - {o.x})² + (y - {o.y})² = {r * r}";
-		}
+		public override string ToString() => $"(x - {o.x})² + (y - {o.y})² = {r}²";
 
 		#endregion INSTANCE
 	}
