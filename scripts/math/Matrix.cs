@@ -372,6 +372,67 @@ namespace Com.Surbon.CSUtils.Math
 
 		public bool IsSquare() => Rows == Columns;
 
+		public bool IsSkewSymmetric()
+		{
+			if (!IsSquare())
+				return false;
+
+			for (int i = 0; i < Rows; i++)
+			{
+				for (int j = 0; j < Columns; j++)
+				{
+					if (values[i, j] != -values[j, i])
+						return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool IsSymmetric()
+		{
+			if (!IsSquare())
+				return false;
+
+			for (int i = 0; i < Rows; i++)
+			{
+				for (int j = 0; j < Columns; j++)
+				{
+					if (values[i, j] != values[j, i])
+						return false;
+				}
+			}
+
+			return true;
+		}
+
+		public Matrix Pow(int pow)
+		{
+			if (!IsSquare())
+				throw new Exception($"Only square matrices can be given to the power of {pow}");
+
+			Matrix matrix = Identity(Rows);
+
+			if (pow >= 0)
+			{
+				for (int i = 0; i < pow; i++)
+				{
+					matrix *= this;
+				}
+			}
+			else
+			{
+				Matrix invert = Inverted();
+
+				for (int i = pow; i < 0; i++)
+				{
+					matrix *= invert;
+				}
+			}
+
+			return matrix;
+		}
+
 		public bool SameSize(Matrix matrix) => Rows == matrix.Rows && Columns == matrix.Columns;
 
 		public void Transpose()
@@ -411,5 +472,24 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		#endregion INSTANCE
+
+		#region STATIC
+
+		public static Matrix Identity(int size)
+		{
+			Matrix identity = new Matrix(size, size);
+
+			for (int i = 0; i < size; i++)
+			{
+				for (int j = 0; j < size; j++)
+				{
+					identity[i, j] = i == j ? 1 : 0;
+				}
+			}
+
+			return identity;
+		}
+
+		#endregion STATIC
 	}
 }
