@@ -13,6 +13,59 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct RectParallelepiped
 	{
+		#region PROPERTIES
 
+		public float Width
+		{
+			get => w;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException("The width must be greater than 0.");
+
+				w = value;
+			}
+		}
+
+		public float Height
+		{
+			get => h;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException("The height must be greater than 0.");
+
+				h = value;
+			}
+		}
+
+		public float Length
+		{
+			get => l;
+			set
+			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException("The length must be greater than 0.");
+
+				l = value;
+			}
+		}
+
+		public Vector3 Origin
+		{
+			get => o;
+			set { o = value; }
+		}
+
+		public float Area => 2f * w * h + l * (w + h);
+
+		public float Volume => w * h * l;
+
+		#endregion PROPERTIES
+
+		private Vector3 o;
+		private float w;
+		private float h;
+		private float l;
 	}
 }
