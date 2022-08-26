@@ -163,6 +163,16 @@ namespace Com.Surbon.CSUtils.Math
 			return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 		}
 
+		/// <summary>
+		/// Rotates the direction vector by the given angle in radians.
+		/// </summary>
+		public void Rotate(float angle)
+		{
+			n.Rotate(angle);
+		}
+
+		public Line3 Rotated(float angle) => new Line3(n.Rotated(angle), p);
+
 		public override string ToString() => $"Origin : {p} | Direction : {n}";
 
 		#endregion INSTANCE
