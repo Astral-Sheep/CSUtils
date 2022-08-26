@@ -67,5 +67,27 @@ namespace Com.Surbon.CSUtils.Math
 		private float w;
 		private float h;
 		private float l;
+
+		public RectParallelepiped(Vector3 origin, float width, float height, float length)
+		{
+			o = origin;
+			w = width;
+			h = height;
+			l = length;
+		}
+
+		#region OPERATORS
+
+		public static bool operator==(RectParallelepiped rect1, RectParallelepiped rect2)
+		{
+			return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height && rect1.Length == rect2.Length;
+		}
+
+		public static bool operator!=(RectParallelepiped rect1, RectParallelepiped rect2)
+		{
+			return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height || rect1.Length != rect2.Length;
+		}
+
+		#endregion OPERATORS
 	}
 }
