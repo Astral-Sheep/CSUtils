@@ -7,10 +7,6 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public static class MathT
 	{
-		#pragma warning disable CS0659 // Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
-		#pragma warning disable CS0661 // Le type définit l'opérateur == ou l'opérateur != mais ne se substitue pas à Object.GetHashCode()
-		#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
-
 		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
@@ -62,7 +58,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			int lFact = 1;
 
-			for (int i = 1; i <= value; i++)
+			for (int i = 2; i <= value; i++)
 			{
 				lFact *= i;
 			}

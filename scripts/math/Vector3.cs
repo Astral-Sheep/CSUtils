@@ -21,14 +21,26 @@ namespace Com.Surbon.CSUtils.Math
 		public static readonly Vector3 UP = new Vector3(0, -1, 0);
 		public static readonly Vector3 ZERO = new Vector3(0, 0, 0);
 
-		public enum ANGLE
+		/// <summary>
+		/// Represents the angle types in a 3-dimensional space.
+		/// </summary>
+		public enum AngleType
 		{
 			AZIMUTHAL = 0,
 			POLAR = 1
 		}
 
+		/// <summary>
+		/// The position of the vector on the x axis.
+		/// </summary>
 		public float x;
+		/// <summary>
+		/// The position of the vector on the y axis.
+		/// </summary>
 		public float y;
+		/// <summary>
+		/// The position of the vector on the z axis.
+		/// </summary>
 		public float z;
 
 		public Vector3(float pX = 0f, float pY = 0f, float pZ = 0f)
@@ -36,6 +48,13 @@ namespace Com.Surbon.CSUtils.Math
 			x = pX;
 			y = pY;
 			z = pZ;
+		}
+
+		public Vector3(Vector3 vector)
+		{
+			x = vector.x;
+			y = vector.y;
+			z = vector.z;
 		}
 
 		#region OPERATORS
@@ -88,7 +107,7 @@ namespace Com.Surbon.CSUtils.Math
 		#endregion OPERATORS
 
 		#region INSTANCE
-
+		
 		/// <summary>
 		/// Returns the vector with absolute values.
 		/// </summary>
@@ -98,13 +117,13 @@ namespace Com.Surbon.CSUtils.Math
 		/// Returns the azimuthal angle and the polar angle.
 		/// </summary>
 		/// <returns>Angles as (azimuthal, polar)</returns>
-		public float Angle(ANGLE type)
+		public float Angle(AngleType type = AngleType.AZIMUTHAL)
 		{
 			switch (type)
 			{
-				case ANGLE.AZIMUTHAL:
+				case AngleType.AZIMUTHAL:
 					return MathF.Atan2(y, x);
-				case ANGLE.POLAR:
+				case AngleType.POLAR:
 					return MathF.Atan2(z, new Vector2(x, y).Length());
 				default:
 					throw new Exception("How tf did you get there ?");
@@ -121,10 +140,10 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float ceil = MathF.Ceiling(l);
-				x /= l / ceil;
-				y /= l / ceil;
-				z /= l / ceil;
+				l /= MathF.Ceiling(l);
+				x /= l;
+				y /= l;
+				z /= l;
 			}
 		}
 
@@ -148,10 +167,10 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float clamped = MathT.Clamp(l, min, max);
-				x /= l / clamped;
-				y /= l / clamped;
-				z /= l / clamped;
+				l /= MathT.Clamp(l, min, max);
+				x /= l;
+				y /= l;
+				z /= l;
 			}
 		}
 
@@ -198,6 +217,7 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			if (obj is Vector3)
 				return (Vector3)obj == this;
+
 			return false;
 		}
 
@@ -211,10 +231,10 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float floor = MathF.Floor(l);
-				x /= l / floor;
-				y /= l / floor;
-				z /= l / floor;
+				l /= MathF.Floor(l);
+				x /= l;
+				y /= l;
+				z /= l;
 			}
 		}
 
@@ -246,30 +266,21 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
 		/// </summary>
-		public Vector3 Lerp(Vector3 to, float weight)
-		{
-			return LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
-		}
+		public Vector3 Lerp(Vector3 to, float weight) => LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
 
 		/// <summary>
 		/// Lerp the vector between this and to by a random number between 0 and 1.
 		/// </summary>
-		public Vector3 LerpRand(Vector3 to)
-		{
-			return LerpUnclamped(to, (float)(new Random().NextDouble()));
-		}
+		public Vector3 LerpRand(Vector3 to) => LerpUnclamped(to, (float)new Random().NextDouble());
 
 		/// <summary>
 		/// Lerp the vector between this and to by weight.
 		/// </summary>
-		public Vector3 LerpUnclamped(Vector3 to, float weight)
-		{
-			return new Vector3(
+		public Vector3 LerpUnclamped(Vector3 to, float weight) => new Vector3(
 				x + weight * (to.x - x),
 				y + weight * (to.y - y),
 				z + weight * (to.z - z)
 				);
-		}
 
 		/// <summary>
 		/// Performs a modulus operation on x, y and z, where the result is in ]-mod, 0].
@@ -292,6 +303,9 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public void Normalize(float length = 1f)
 		{
+			if (length == 0)
+				throw new DivideByZeroException("The length must be different from zero.");
+
 			float l = x * x + y * y + z * z;
 
 			if (l != 0)
@@ -308,11 +322,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 Normalized(float length = 1)
 		{
+			if (length == 0)
+				throw new DivideByZeroException("The length must be different from zero.");
+
 			float l = x * x + y * y + z * z;
 
-			if (l < 0)
-				throw new InvalidOperationException("The vector's length must be greater than 0");
-			else if (l == 0)
+			if (l == 0)
 				return new Vector3(0, 0, 0);
 
 			l = MathF.Sqrt(l) / length;
@@ -343,20 +358,24 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Rotates the vector by value radians on the given angle
 		/// </summary>
-		public void Rotate(float value, ANGLE angle = ANGLE.AZIMUTHAL)
+		public void Rotate(float value, AngleType angle = AngleType.AZIMUTHAL)
 		{
 			switch (angle)
 			{
-				case ANGLE.AZIMUTHAL:
-					float phi = MathF.Atan2(y, x);
-					float sin = MathF.Sin(phi);
-					float cos = MathF.Cos(phi);
+				case AngleType.AZIMUTHAL:
+					float sin = MathF.Sin(value);
+					float cos = MathF.Cos(value);
 					x = x * sin - y * cos;
 					y = x * cos + y * sin;
 					break;
-				case ANGLE.POLAR:
-					float theta = MathF.Atan2(z, new Vector2(x, y).Length());
-					throw new NotImplementedException("I'll do it later");
+				case AngleType.POLAR:
+					Vector3 vector = CartesianToSpheric(this);
+					vector.z += value;
+					vector = SphericToCartesian(vector);
+					x = vector.x;
+					y = vector.y;
+					z = vector.z;
+					break;
 				default:
 					throw new Exception("How tf did you get there ?");
 			}
@@ -365,23 +384,24 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the vector rotated by value radians on the given angle.
 		/// </summary>
-		public Vector3 Rotated(float value, ANGLE angle = ANGLE.AZIMUTHAL)
+		public Vector3 Rotated(float value, AngleType angle = AngleType.AZIMUTHAL)
 		{
 			Vector3 vector = new Vector3();
 
 			switch (angle)
 			{
-				case ANGLE.AZIMUTHAL:
-					float phi = MathF.Atan2(y, x);
-					float sin = MathF.Sin(phi);
-					float cos = MathF.Cos(phi);
+				case AngleType.AZIMUTHAL:
+					float sin = MathF.Sin(value);
+					float cos = MathF.Cos(value);
 					vector.x = x * sin - y * cos;
 					vector.y = x * cos + y * sin;
 					vector.z = z;
 					break;
-				case ANGLE.POLAR:
-					float theta = MathF.Atan2(z, new Vector2(x, y).Length());
-					throw new NotImplementedException("I'll do it later");
+				case AngleType.POLAR:
+					vector = CartesianToSpheric(this);
+					vector.z += value;
+					vector = SphericToCartesian(vector);
+					break;
 				default:
 					throw new Exception("How tf did you get there ?");
 			}
@@ -399,10 +419,10 @@ namespace Com.Surbon.CSUtils.Math
 			if (l != 0)
 			{
 				l = MathF.Sqrt(l);
-				float round = MathF.Round(l);
-				x /= l / round;
-				y /= l / round;
-				z /= l / round;
+				l /= MathF.Round(l);
+				x /= l;
+				y /= l;
+				z /= l;
 			}
 		}
 
