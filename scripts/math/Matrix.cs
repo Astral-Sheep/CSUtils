@@ -207,9 +207,71 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		public static Matrix operator/(Matrix m, float scalar)
+		{
+			Matrix matrix = new Matrix(m.Rows, m.Columns);
+
+			for (int i = 0; i < m.Rows; i++)
+			{
+				for (int j = 0; j < m.Columns; j++)
+				{
+					matrix[i, j] = m[i, j] / scalar;
+				}
+			}
+
+			return matrix;
+		}
+
+		public static Matrix operator/(Matrix m1, Matrix m2)
+		{
+			return m1 * m2.Inverted();
+		}
+
+		public static bool operator==(Matrix m1, Matrix m2)
+		{
+			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
+				return false;
+
+			for (int i = 0; i < m1.Rows; i++)
+			{
+				for (int j = 0; j < m1.Columns; j++)
+				{
+					if (m1[i, j] != m2[i, j])
+						return false;
+				}
+			}
+
+			return true;
+		}
+
+		public static bool operator!=(Matrix m1, Matrix m2)
+		{
+			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
+				return true;
+
+			for (int i = 0; i < m1.Rows; i++)
+			{
+				for (int j = 0; j < m1.Columns; j++)
+				{
+					if (m1[i, j] != m2[i, j])
+						return true;
+				}
+			}
+
+			return false;
+		}
+
 		#endregion OPERATOR
 
 		#region INSTANCE
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Matrix)
+				return (Matrix)obj == this;
+
+			return false;
+		}
 
 		public Matrix GetAdjugate() => GetCofactor().Transposed();
 
