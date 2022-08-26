@@ -100,17 +100,25 @@ namespace Com.Surbon.CSUtils.Math
 			return false;
 		}
 
+		/// <summary>
+		/// Says if the given point is in the parallelepiped.
+		/// </summary>
 		public bool IsIn(Vector3 point)
 		{
 			return point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l;
 		}
 
+		/// <summary>
+		/// Says if the given point is on one of the parallelepiped's faces.
+		/// </summary>
 		public bool Has(Vector3 point)
 		{
 			return ((point.x == o.x || point.x == o.x + w) && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l) ||
 				((point.y == o.y || point.y == o.y + h) && point.x >= o.x && point.x <= o.x + w && point.z >= o.z && point.z <= o.z + l) ||
 				((point.z == o.z || point.z == o.z + l) && point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h);
 		}
+
+		public override string ToString() => $"Origin : {o} | Width : {w} | Height {h} | Length {l}";
 
 		#endregion INSTANCE
 	}
