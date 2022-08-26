@@ -89,5 +89,29 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		#endregion OPERATORS
+
+		#region INSTANCE
+
+		public override bool Equals(object obj)
+		{
+			if (obj is RectParallelepiped)
+				return (RectParallelepiped)obj == this;
+
+			return false;
+		}
+
+		public bool IsIn(Vector3 point)
+		{
+			return point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l;
+		}
+
+		public bool Has(Vector3 point)
+		{
+			return ((point.x == o.x || point.x == o.x + w) && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l) ||
+				((point.y == o.y || point.y == o.y + h) && point.x >= o.x && point.x <= o.x + w && point.z >= o.z && point.z <= o.z + l) ||
+				((point.z == o.z || point.z == o.z + l) && point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h);
+		}
+
+		#endregion INSTANCE
 	}
 }
