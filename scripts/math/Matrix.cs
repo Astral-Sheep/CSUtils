@@ -211,7 +211,142 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region INSTANCE
 
+		public Matrix GetAdjugate() => GetCofactor().Transposed();
+
+		public Matrix GetCofactor()
+		{
+			if (!IsSquare())
+				throw new Exception("The cofactor can only be computed on a square matrix.");
+
+			Matrix matrix = new Matrix(Rows, Columns);
+
+			for (int i = 0; i < Rows; i++)
+			{
+				for (int j = 0; j < Columns; j++)
+				{
+					matrix[i, j] = GetSub(i, j).GetDeterminant() * ((i + 1) * (j + 1) % 2 == 0 ? 1 : -1);
+				}
+			}
+
+			return matrix;
+		}
+
+		public float GetDeterminant()
+		{
+			if (Rows != Columns)
+				throw new Exception("The determinant can only be computed on a square matrix.");
+
+			if (Rows == 1) { return values[0, 0]; }
+			else if (Rows == 2) { return values[0, 0] * values[1, 1] - values[0, 1] * values[1, 0]; }
+			else
+			{
+				float det = 0;
+
+				for (int i = 0; i < Columns; i++)
+				{
+					det += values[0, i] * GetSub(0, i).GetDeterminant() * (i % 2 == 0 ? 1 : -1);
+				}
+
+				return det;
+			}
+		}
+
+		public Matrix GetSub(int row, int column)
+		{
+			if (row < 0 || row >= Rows || column < 0 || column >= Columns)
+				throw new ArgumentOutOfRangeException($"The row must be in [0,{Rows}[ and the column must be in [0,{Columns}].");
+
+			Matrix matrix = new Matrix(Rows - 1, Columns - 1);
+
+			for (int i = 0; i < Rows; i++)
+			{
+				if (i == row) { continue; }
+
+				for (int j = 0; j < Columns; j++)
+				{
+					if (j == column) { continue; }
+
+					matrix[i, j] = values[i, j];
+				}
+			}
+
+			return matrix;
+		}
+
+		public void Invert()
+		{
+			if (!IsSquare())
+				throw new Exception("The invert matrix can only be computed on a square matrix.");
+
+			float det = GetDeterminant();
+
+			if (det == 0) { return; }
+
+			Matrix invert = (1f / det) * GetAdjugate();
+
+			for (int i = 0; i < Rows; i++)
+			{
+				for (int j = 0; j < Columns; j++)
+				{
+					values[i, j] = invert[i, j];
+				}
+			}
+		}
+
+		public Matrix Inverted()
+		{
+			if (!IsSquare())
+				throw new Exception("The invert matrix can only be computed on a square matrix.");
+
+			float det = GetDeterminant();
+
+			if (det == 0)
+				throw new DivideByZeroException("The determinant is equal to zero.");
+
+			return (1f / det) * GetAdjugate();
+		}
+
+		public bool IsInvertible() => GetDeterminant() != 0;
+
+		public bool IsSquare() => Rows == Columns;
+
 		public bool SameSize(Matrix matrix) => Rows == matrix.Rows && Columns == matrix.Columns;
+
+		public void Transpose()
+		{
+			if (!IsSquare())
+				throw new Exception("Only square matrices can be transposed.");
+
+			float n;
+
+			for (int i = 0; i < Rows; i++)
+			{
+				for (int j = 0; j < Columns; j++)
+				{
+					n = values[i, j];
+					values[i, j] = values[j, i];
+					values[j, i] = n;
+				}
+			}
+		}
+
+		public Matrix Transposed()
+		{
+			if (!IsSquare())
+				throw new Exception("The transposed matrix can only be computed on a square matrix.");
+
+			Matrix matrix = new Matrix(Rows, Columns);
+
+			for (int i = 0; i < Rows; i++)
+			{
+				for (int j = 0; j < Columns; j++)
+				{
+					matrix[j, i] = matrix[i, j];
+				}
+			}
+
+			return matrix;
+		}
 
 		#endregion INSTANCE
 	}
