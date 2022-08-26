@@ -94,5 +94,17 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		#endregion OPERATORS
+
+		#region INSTANCE
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Orthotope)
+				return (Orthotope)obj == this;
+
+			return false;
+		}
+
+		#endregion INSTANCE
 	}
 }
