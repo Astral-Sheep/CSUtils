@@ -193,7 +193,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cross product of both vector.
+		/// Returns the cross product of the vector (this) and the given vector.
 		/// </summary>
 		public Vector3 Cross(Vector3 vector)
 		{
