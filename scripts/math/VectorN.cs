@@ -268,11 +268,6 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
-		public VectorN Cross(VectorN vector)
-		{
-
-		}
-
 		/// <summary>
 		/// Returns the distance between the vector (this) and the given vector.
 		/// </summary>
