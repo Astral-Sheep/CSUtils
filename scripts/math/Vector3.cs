@@ -193,6 +193,18 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
+		/// Returns the cross product of both vector.
+		/// </summary>
+		public Vector3 Cross(Vector3 vector)
+		{
+			return new Vector3(
+				y * vector.z - z * vector.y,
+				z * vector.x - x * vector.z,
+				x * vector.y - y * vector.x
+				);
+		}
+
+		/// <summary>
 		/// Returns the distance between the vector (this) and the given vector.
 		/// </summary>
 		public float Distance(Vector3 vector)
