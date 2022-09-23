@@ -17,6 +17,9 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region PROPERTIES
 
+		/// <summary>
+		/// The direction of the line as a vector.
+		/// </summary>
 		public Vector3 Direction
 		{
 			get => n;
@@ -26,6 +29,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The point of the line with x = 0.
+		/// </summary>
 		public Vector3 Origin
 		{
 			get => p;
@@ -35,6 +41,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The constants of the x line in the parametric equation.
+		/// </summary>
 		public (float x, float a) ParametricX
 		{
 			get => (p.x, n.x);
@@ -45,6 +54,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The constants of the y line in the parametric equation.
+		/// </summary>
 		public (float y, float b) ParametricY
 		{
 			get => (p.y, n.y);
@@ -55,6 +67,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// The constants of the z line in the parametric equation.
+		/// </summary>
 		public (float z, float c) ParametricZ
 		{
 			get => (p.z, n.z);
@@ -77,6 +92,12 @@ namespace Com.Surbon.CSUtils.Math
 
 			n = direction;
 			p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
+		}
+
+		public Line3(Line3 line)
+		{
+			n = line.Direction;
+			p = line.Origin;
 		}
 
 		#region OPERATORS
@@ -141,6 +162,18 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 		}
+
+		/// <summary>
+		/// Rotates the direction vector by the given angle in radians.
+		/// </summary>
+		public void Rotate(float angle)
+		{
+			n.Rotate(angle);
+		}
+
+		public Line3 Rotated(float angle) => new Line3(n.Rotated(angle), p);
+
+		public override string ToString() => $"Origin : {p} | Direction : {n}";
 
 		#endregion INSTANCE
 	}
