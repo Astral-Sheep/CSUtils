@@ -44,6 +44,8 @@ namespace Com.Surbon.CSUtils.Math
 
 		public static Vector2 operator +(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
 
+		public static Vector2 operator-(Vector2 vector) => new Vector2(-vector.x, -vector.y);
+
 		public static Vector2 operator -(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
 
 		public static Vector2 operator *(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x * vector2.x, vector1.y * vector2.y);

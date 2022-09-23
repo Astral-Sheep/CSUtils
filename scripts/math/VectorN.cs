@@ -104,6 +104,19 @@ namespace Com.Surbon.CSUtils.Math
 			});
 		}
 
+		public static VectorN operator-(VectorN vector)
+		{
+			int dimension = vector.Size;
+			float[] lValues = new float[dimension];
+
+			for (int i = 0; i < dimension; i++)
+			{
+				lValues[i] = -vector[i];
+			}
+
+			return new VectorN(lValues);
+		}
+
 		public static VectorN operator -(VectorN vector1, VectorN vector2)
 		{
 			return Operate(vector1, vector2, delegate (float n1, float n2)
