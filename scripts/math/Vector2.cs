@@ -204,10 +204,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Clamps x and y between min and max.
 		/// </summary>
-		public void ClampValuesUniform(float min, float max)
-		{
-			ClampValues(min, max, min, max);
-		}
+		public void ClampValuesUniform(float min, float max) => ClampValues(min, max, min, max);
 
 		/// <summary>
 		/// Returns the cross product of the <see cref="Vector2"/> (this) and the given <see cref="Vector2"/>.
@@ -372,7 +369,6 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			float sin = MathF.Sin(phi);
 			float cos = MathF.Cos(phi);
-
 			return new Vector2(x * cos - y * sin, x * sin + y * cos);
 		}
 
