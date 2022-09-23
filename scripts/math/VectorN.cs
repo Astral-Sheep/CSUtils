@@ -11,6 +11,9 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct VectorN
 	{
+		/// <summary>
+		/// The dimension of the vector.
+		/// </summary>
 		public readonly int Size;
 
 		/// <summary>
@@ -18,9 +21,18 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public float this[int index]
 		{
-			get => values[index];
+			get
+			{
+				if (index < 0 || index >= Size)
+					throw new ArgumentOutOfRangeException($"The index must be greater than or equal to zero and lesser than {Size}");
+
+				return values[index];
+			}
 			set
 			{
+				if (index < 0 || index >= Size)
+					throw new ArgumentOutOfRangeException($"The index must be greater than or equal to zero and lesser than {Size}");
+
 				values[index] = value;
 			}
 		}
@@ -37,6 +49,18 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			values = new float[size];
 			Size = size;
+		}
+
+		public VectorN(VectorN vector)
+		{
+			values = new float[vector.Size];
+
+			for (int i = 0; i < vector.Size; i++)
+			{
+				values[i] = vector[i];
+			}
+
+			Size = vector.Size;
 		}
 
 		#region OPERATORS
@@ -302,6 +326,7 @@ namespace Com.Surbon.CSUtils.Math
 		{
 			if (obj is VectorN)
 				return (VectorN)obj == this;
+
 			return false;
 		}
 
@@ -343,18 +368,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Lerp between this and to by weight (weight is clamped between 0 and 1).
 		/// </summary>
-		public VectorN Lerp(VectorN to, float weight)
-		{
-			return LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
-		}
+		public VectorN Lerp(VectorN to, float weight) => LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
 
 		/// <summary>
 		/// Lerp between this and to by a random number between 0 and 1.
 		/// </summary>
-		public VectorN LerpRand(VectorN to)
-		{
-			return LerpUnclamped(to, (float)new Random().NextDouble());
-		}
+		public VectorN LerpRand(VectorN to) => LerpUnclamped(to, (float)new Random().NextDouble());
 
 		/// <summary>
 		/// Lerp between this and to by weight.
@@ -460,11 +479,14 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public VectorN Normalized(float length = 1)
 		{
+			if (length == 0)
+				throw new DivideByZeroException("The length must be different from zero.");
+
 			VectorN result = new VectorN(Size);
 			float l = LengthSquared();
 
 			if (l == 0)
-				throw new InvalidOperationException("The vector's length must be greater than 0");
+				return new VectorN(this);
 
 			l = MathF.Sqrt(l) / length;
 
