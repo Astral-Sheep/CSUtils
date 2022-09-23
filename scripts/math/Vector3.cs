@@ -11,15 +11,42 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Vector3
 	{
-		public static readonly Vector3 BACK = new Vector3(0, 0, -1);
-		public static readonly Vector3 DOWN = new Vector3(0, 1, 0);
-		public static readonly Vector3 FRONT = new Vector3(0, 0, 1);
-		public static readonly Vector3 LEFT = new Vector3(-1, 0, 0);
-		public static readonly Vector3 NEG_ONE = new Vector3(-1, -1, -1);
-		public static readonly Vector3 ONE = new Vector3(1, 1, 1);
-		public static readonly Vector3 RIGHT = new Vector3(1, 0, 0);
-		public static readonly Vector3 UP = new Vector3(0, -1, 0);
-		public static readonly Vector3 ZERO = new Vector3(0, 0, 0);
+		/// <summary>
+		/// Shorthand for writing Vector3(0, 0, -1).
+		/// </summary>
+		public static Vector3 Back => new Vector3(0, 0, -1);
+		/// <summary>
+		/// Shorthand for writing Vector3(0, -1, 0).
+		/// </summary>
+		public static Vector3 Down => new Vector3(0, -1, 0);
+		/// <summary>
+		/// Shorthand for writing Vector3(0, 0, 1).
+		/// </summary>
+		public static Vector3 Front => new Vector3(0, 0, 1);
+		/// <summary>
+		/// Shorthand for writing Vector3(-1, 0, 0).
+		/// </summary>
+		public static Vector3 Left => new Vector3(-1, 0, 0);
+		/// <summary>
+		/// Shorthand for writing Vector3(-1, -1, -1).
+		/// </summary>
+		public static Vector3 NegOne => new Vector3(-1, -1, -1);
+		/// <summary>
+		/// Shorthand for writing Vector3(1, 1, 1).
+		/// </summary>
+		public static Vector3 One => new Vector3(1, 1, 1);
+		/// <summary>
+		/// Shorthand for writing Vector3(1, 0, 0).
+		/// </summary>
+		public static Vector3 Right => new Vector3(1, 0, 0);
+		/// <summary>
+		/// Shorthand for writing Vector3(0, 1, 0).
+		/// </summary>
+		public static Vector3 Up => new Vector3(0, 1, 0);
+		/// <summary>
+		/// Shorthand for writing Vector3(0, 0, 0).
+		/// </summary>
+		public static Vector3 Zero => new Vector3(0, 0, 0);
 
 		/// <summary>
 		/// Represents the angle types in a 3-dimensional space.
@@ -31,25 +58,31 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The position of the vector on the x axis.
+		/// The position of the <see cref="Vector3"/> on the x axis.
 		/// </summary>
 		public float x;
 		/// <summary>
-		/// The position of the vector on the y axis.
+		/// The position of the <see cref="Vector3"/> on the y axis.
 		/// </summary>
 		public float y;
 		/// <summary>
-		/// The position of the vector on the z axis.
+		/// The position of the <see cref="Vector3"/> on the z axis.
 		/// </summary>
 		public float z;
 
-		public Vector3(float pX = 0f, float pY = 0f, float pZ = 0f)
+		/// <summary>
+		/// Creates a <see cref="Vector3"/> as (x, y, z).
+		/// </summary>
+		public Vector3(float x = 0f, float y = 0f, float z = 0f)
 		{
-			x = pX;
-			y = pY;
-			z = pZ;
+			this.x = x;
+			this.y = y;
+			this.z = z;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Vector3"/> with its values set to the given <see cref="Vector3"/>.
+		/// </summary>
 		public Vector3(Vector3 vector)
 		{
 			x = vector.x;
@@ -59,48 +92,86 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Adds the given <see cref="Vector3"/>.
+		/// </summary>
+		/// <returns>vector1 + vector2.</returns>
 		public static Vector3 operator +(Vector3 vector1, Vector3 vector2)
 		{
 			return new Vector3(vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z);
 		}
 
+		/// <summary>
+		/// Sets the values of the <see cref="Vector3"/> to the opposite values (equivalent to vector * -1).
+		/// </summary>
+		/// <returns>-vector.</returns>
 		public static Vector3 operator -(Vector3 vector) => new Vector3(-vector.x, -vector.y, -vector.z);
 
+		/// <summary>
+		/// Subtract the second <see cref="Vector3"/> to the first one.
+		/// </summary>
+		/// <returns>vector1 - vector2.</returns>
 		public static Vector3 operator -(Vector3 vector1, Vector3 vector2)
 		{
 			return new Vector3(vector1.x - vector2.x, vector1.y - vector2.y, vector1.z - vector2.z);
 		}
 
+		/// <summary>
+		/// Multiplies the values of the first <see cref="Vector3"/> by the values of the second one.
+		/// </summary>
+		/// <returns>vector1 * vector2.</returns>
 		public static Vector3 operator *(Vector3 vector1, Vector3 vector2)
 		{
 			return new Vector3(vector1.x * vector2.x, vector1.y * vector2.y, vector1.z * vector2.z);
 		}
 
+		/// <summary>
+		/// Multiplies the <see cref="Vector3"/> with the <see cref="float"/>.
+		/// </summary>
+		/// <returns>vector * scalar.</returns>
 		public static Vector3 operator *(Vector3 vector, float scalar)
 		{
 			return new Vector3(vector.x * scalar, vector.y * scalar, vector.z * scalar);
 		}
 
+		/// <summary>
+		/// Multiplies the <see cref="Vector3"/> with the <see cref="float"/>.
+		/// </summary>
+		/// <returns>scalar * vector.</returns>
 		public static Vector3 operator *(float scalar, Vector3 vector)
 		{
 			return vector * scalar;
 		}
 
+		/// <summary>
+		/// Divides the values of the first <see cref="Vector3"/> by the values of the second one.
+		/// </summary>
+		/// <returns>vector1 / vector2.</returns>
 		public static Vector3 operator /(Vector3 vector1, Vector3 vector2)
 		{
 			return new Vector3(vector1.x / vector2.x, vector1.y / vector2.y, vector1.z / vector2.z);
 		}
 
+		/// <summary>
+		/// Divides the <see cref="Vector3"/> by the <see cref="float"/>.
+		/// </summary>
+		/// <returns>vector / scalar.</returns>
 		public static Vector3 operator /(Vector3 vector, float scalar)
 		{
 			return new Vector3(vector.x / scalar, vector.y / scalar, vector.z / scalar);
 		}
 
+		/// <summary>
+		/// Says if both <see cref="Vector3"/> have the same values.
+		/// </summary>
 		public static bool operator ==(Vector3 vector1, Vector3 vector2)
 		{
 			return vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z;
 		}
 
+		/// <summary>
+		/// Says if both <see cref="Vector3"/> have different values.
+		/// </summary>
 		public static bool operator !=(Vector3 vector1, Vector3 vector2)
 		{
 			return vector1.x != vector2.x || vector1.y != vector2.y || vector1.z != vector2.z;
@@ -111,14 +182,14 @@ namespace Com.Surbon.CSUtils.Math
 		#region INSTANCE
 		
 		/// <summary>
-		/// Returns the vector with absolute values.
+		/// Returns the <see cref="Vector3"/> with absolute values.
 		/// </summary>
 		public Vector3 Abs() => new Vector3(MathF.Abs(x), MathF.Abs(y), MathF.Abs(z));
 
 		/// <summary>
-		/// Returns the azimuthal angle and the polar angle.
+		/// Returns the angle corresponding to the given <see cref="AngleType"/>.
 		/// </summary>
-		/// <returns>Angles as (azimuthal, polar)</returns>
+		/// <returns>The angle in radians.</returns>
 		public float Angle(AngleType type = AngleType.AZIMUTHAL)
 		{
 			switch (type)
@@ -133,7 +204,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds up the length of the vector.
+		/// Rounds up the length of the <see cref="Vector3"/>.
 		/// </summary>
 		public void CeilLength()
 		{
@@ -150,7 +221,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds up the values of the vector.
+		/// Rounds up the values of the <see cref="Vector3"/>.
 		/// </summary>
 		public void CeilValues()
 		{
@@ -160,7 +231,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Clamps the length of the vector between min and max.
+		/// Clamps the length of the <see cref="Vector3"/> between min and max.
 		/// </summary>
 		public void ClampLength(float min, float max)
 		{
@@ -195,7 +266,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cross product of the vector (this) and the given vector.
+		/// Returns the cross product of the <see cref="Vector3"/> (this) and the given <see cref="Vector3"/>.
 		/// </summary>
 		public Vector3 Cross(Vector3 vector)
 		{
@@ -207,7 +278,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the distance between the vector (this) and the given vector.
+		/// Returns the distance between the <see cref="Vector3"/> (this) and the given <see cref="Vector3"/>.
 		/// </summary>
 		public float Distance(Vector3 vector)
 		{
@@ -215,7 +286,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the distance squared between the vector (this) and the given vector.
+		/// Returns the distance squared between the <see cref="Vector3"/> (this) and the given <see cref="Vector3"/>.
 		/// </summary>
 		public float DistanceSquared(Vector3 vector)
 		{
@@ -223,7 +294,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the dot product of the vector (this) and the given the vector.
+		/// Returns the dot product of the <see cref="Vector3"/> (this) and the given the <see cref="Vector3"/>.
 		/// </summary>
 		public float Dot(Vector3 vector) => x * vector.x + y * vector.y + z * vector.z;
 
@@ -236,7 +307,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the length of the vector downward.
+		/// Rounds the length of the <see cref="Vector3"/> downward.
 		/// </summary>
 		public void FloorLength()
 		{
@@ -253,7 +324,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the values of the vector downward.
+		/// Rounds the values of the <see cref="Vector3"/> downward.
 		/// </summary>
 		public void FloorValues()
 		{
@@ -263,32 +334,32 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the vector is normalized (the length is equal to 1).
+		/// Says if the <see cref="Vector3"/> is normalized (the length is equal to 1).
 		/// </summary>
 		public bool IsNormalized() => LengthSquared() == 1;
 
 		/// <summary>
-		/// Returns the length of the vector.
+		/// Returns the length of the <see cref="Vector3"/>.
 		/// </summary>
 		public float Length() => MathF.Sqrt(x * x + y * y + z * z);
 
 		/// <summary>
-		/// Returns the squared length of the vector.
+		/// Returns the squared length of the <see cref="Vector3"/>.
 		/// </summary>
 		public float LengthSquared() => x * x + y * y + z * z;
 
 		/// <summary>
-		/// Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+		/// Lerps the <see cref="Vector3"/> between this and to by weight (weight is clamped between 0 and 1).
 		/// </summary>
 		public Vector3 Lerp(Vector3 to, float weight) => LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
 
 		/// <summary>
-		/// Lerp the vector between this and to by a random number between 0 and 1.
+		/// Lerps the <see cref="Vector3"/> between this and to by a random number between 0 and 1.
 		/// </summary>
 		public Vector3 LerpRand(Vector3 to) => LerpUnclamped(to, (float)new Random().NextDouble());
 
 		/// <summary>
-		/// Lerp the vector between this and to by weight.
+		/// Lerps the <see cref="Vector3"/> between this and to by weight.
 		/// </summary>
 		public Vector3 LerpUnclamped(Vector3 to, float weight) => new Vector3(
 				x + weight * (to.x - x),
@@ -313,7 +384,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Sets the length of the vector to length.
+		/// Sets the length of the <see cref="Vector3"/> to the given length.
 		/// </summary>
 		public void Normalize(float length = 1f)
 		{
@@ -332,7 +403,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the vector with its length set to 1.
+		/// Returns the <see cref="Vector3"/> with its length set to the given length.
 		/// </summary>
 		public Vector3 Normalized(float length = 1)
 		{
@@ -365,12 +436,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the vector with x, y and z to the power of pow.
+		/// Returns the <see cref="Vector3"/> with x, y and z to the power of pow.
 		/// </summary>
 		public Vector3 Pow(float pow) => new Vector3(MathF.Pow(x, pow), MathF.Pow(y, pow), MathF.Pow(z, pow));
 
 		/// <summary>
-		/// Rotates the vector by value radians on the given angle
+		/// Rotates the <see cref="Vector3"/> by value radians on the given angle
 		/// </summary>
 		public void Rotate(float value, AngleType angle = AngleType.AZIMUTHAL)
 		{
@@ -396,8 +467,9 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the vector rotated by value radians on the given angle.
+		/// Returns the vector <see cref="Vector3"/> by value radians on the given <see cref="AngleType"/>.
 		/// </summary>
+		/// <param name="value">The angle in radians.</param>
 		public Vector3 Rotated(float value, AngleType angle = AngleType.AZIMUTHAL)
 		{
 			Vector3 vector = new Vector3();
@@ -424,7 +496,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the length of the vector.
+		/// Rounds the length of the <see cref="Vector3"/>.
 		/// </summary>
 		public void RoundLength()
 		{
@@ -441,7 +513,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the values of the vector.
+		/// Rounds the values of the <see cref="Vector3"/>.
 		/// </summary>
 		public void RoundValues()
 		{
@@ -462,10 +534,10 @@ namespace Com.Surbon.CSUtils.Math
 		#region STATIC
 
 		/// <summary>
-		/// Returns the cylindric coordinates of the vector from the cartesian coordinates
+		/// Returns the cylindric coordinates of the <see cref="Vector3"/> from the cartesian coordinates.
 		/// </summary>
-		/// <param name="vector">Cartesian coordinates as (x, y, z)</param>
-		/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+		/// <param name="vector">Cartesian coordinates as (x, y, z).</param>
+		/// <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
 		public static Vector3 CartesianToCylindric(Vector3 vector)
 		{
 			Vector2 lPolarVector = Vector2.CartesianToPolar(vector.x, vector.y);
@@ -474,12 +546,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cylindric coordinates of the vector given in cartesian coordinates
+		/// Returns the cylindric coordinates of the <see cref="Vector3"/> given in cartesian coordinates.
 		/// </summary>
-		/// <param name="x">Cartesian coordinate x</param>
-		/// <param name="y">Cartesian coordinate y</param>
-		/// <param name="z">Cartesian coordinate z</param>
-		/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+		/// <param name="x">Cartesian coordinate x.</param>
+		/// <param name="y">Cartesian coordinate y.</param>
+		/// <param name="z">Cartesian coordinate z.</param>
+		/// <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
 		public static Vector3 CartesianToCylindric(float x, float y, float z)
 		{
 			Vector2 lPolarVector = Vector2.CartesianToPolar(x, y);
@@ -488,10 +560,10 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the spheric coordinates of the vector from the cartesian coordinates
+		/// Returns the spheric coordinates of the <see cref="Vector3"/> from the cartesian coordinates.
 		/// </summary>
-		/// <param name="vector">Cartesian coordinates as (x, y, z)</param>
-		/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+		/// <param name="vector">Cartesian coordinates as (x, y, z).</param>
+		/// <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
 		public static Vector3 CartesianToSpheric(Vector3 vector)
 		{
 			return new Vector3(
@@ -502,12 +574,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the spheric coordinates of the vector from the cartesian coordinates
+		/// Returns the spheric coordinates of the <see cref="Vector3"/> from the cartesian coordinates.
 		/// </summary>
-		/// <param name="x">Cartesian coordinate x</param>
-		/// <param name="y">Cartesian coordinate y</param>
-		/// <param name="z">Cartesian coordinate z</param>
-		/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+		/// <param name="x">Cartesian coordinate x.</param>
+		/// <param name="y">Cartesian coordinate y.</param>
+		/// <param name="z">Cartesian coordinate z.</param>
+		/// <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
 		public static Vector3 CartesianToSpheric(float x, float y, float z)
 		{
 			return new Vector3(
@@ -518,10 +590,10 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cartesian coordinates of the vector given in cylindric coordinates
+		/// Returns the cartesian coordinates of the <see cref="Vector3"/> given in cylindric coordinates.
 		/// </summary>
-		/// <param name="vector">Cylindric coordinates as (r, phi, z)</param>
-		/// <returns>Cartesian coordinates as (x, y, z)</returns>
+		/// <param name="vector">Cylindric coordinates as (r, phi, z) with phi in radians.</param>
+		/// <returns>Cartesian coordinates as (x, y, z).</returns>
 		public static Vector3 CylindricToCartesian(Vector3 vector)
 		{
 			Vector2 lCartesianVector = Vector2.PolarToCartesian(vector.x, vector.y);
@@ -530,12 +602,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cartesian coordinates of the vector given in cylindric coordinates
+		/// Returns the cartesian coordinates of the <see cref="Vector3"/> given in cylindric coordinates
 		/// </summary>
-		/// <param name="r">Polar radius</param>
-		/// <param name="phi">Azimuth angle</param>
-		/// <param name="z">Cartesian coordinate z</param>
-		/// <returns>Cartesian coordinates as (x, y, z)</returns>
+		/// <param name="r">Polar radius.</param>
+		/// <param name="phi">Azimuth angle in radians.</param>
+		/// <param name="z">Cartesian coordinate z.</param>
+		/// <returns>Cartesian coordinates as (x, y, z).</returns>
 		public static Vector3 CylindricToCartesian(float r, float phi, float z)
 		{
 			Vector2 lCartesianVector = Vector2.PolarToCartesian(r, phi);
@@ -544,10 +616,10 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the spheric coordinates of the vector given in cylindric coordinates
+		/// Returns the spheric coordinates of the <see cref="Vector3"/> given in cylindric coordinates.
 		/// </summary>
-		/// <param name="vector">Cylindric coordinates as (r, phi, z)</param>
-		/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+		/// <param name="vector">Cylindric coordinates as (r, phi, z) with phi in radians.</param>
+		/// <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
 		public static Vector3 CylindricToSpheric(Vector3 vector)
 		{
 			return new Vector3(
@@ -558,12 +630,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the spheric coordinates of the vector given in cylindric coordinates
+		/// Returns the spheric coordinates of the <see cref="Vector3"/> given in cylindric coordinates.
 		/// </summary>
-		/// <param name="r">Polar radius</param>
-		/// <param name="phi">Azimuth angle</param>
-		/// <param name="z">Cartesian coordinate z</param>
-		/// <returns>Spheric coordinates as (rho, phi, th)</returns>
+		/// <param name="r">Polar radius.</param>
+		/// <param name="phi">Azimuth angle in radians.</param>
+		/// <param name="z">Cartesian coordinate z.</param>
+		/// <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
 		public static Vector3 CylindricToSpheric(float r, float phi, float z)
 		{
 			return new Vector3(
@@ -574,10 +646,10 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cartesian coordinates of the vector given in spheric coordinates
+		/// Returns the cartesian coordinates of the <see cref="Vector3"/> given in spheric coordinates.
 		/// </summary>
-		/// <param name="vector">Spheric coordinates as (rho, phi, th)</param>
-		/// <returns>Cartesian coordinates as (x, y, z)</returns>
+		/// <param name="vector">Spheric coordinates as (rho, phi, th) with phi and th in radians.</param>
+		/// <returns>Cartesian coordinates as (x, y, z).</returns>
 		public static Vector3 SphericToCartesian(Vector3 vector)
 		{
 			return new Vector3(
@@ -588,12 +660,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cartesian coordinates of the vector given in spheric coordinates
+		/// Returns the cartesian coordinates of the <see cref="Vector3"/> given in spheric coordinates.
 		/// </summary>
-		/// <param name="rho">Spheric radius</param>
-		/// <param name="phi">Azimuth angle</param>
-		/// <param name="th">Polar angle</param>
-		/// <returns>Cartesian coordinates as (x, y, z)</returns>
+		/// <param name="rho">Spheric radius.</param>
+		/// <param name="phi">Azimuth angle in radians.</param>
+		/// <param name="th">Polar angle in radians.</param>
+		/// <returns>Cartesian coordinates as (x, y, z).</returns>
 		public static Vector3 SphericToCartesian(float rho, float phi, float th)
 		{
 			return new Vector3(
@@ -604,10 +676,10 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cylindric coordinates of the vector given in spheric coordinates
+		/// Returns the cylindric coordinates of the <see cref="Vector3"/> given in spheric coordinates.
 		/// </summary>
-		/// <param name="vector">Spheric coordinates as (rho, phi, th)</param>
-		/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+		/// <param name="vector">Spheric coordinates as (rho, phi, th) with phi and th in radians.</param>
+		/// <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
 		public static Vector3 SphericToCylindric(Vector3 vector)
 		{
 			return new Vector3(
@@ -618,12 +690,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the cylindric coordinates of the vector given in spheric coordinates
+		/// Returns the cylindric coordinates of the <see cref="Vector3"/> given in spheric coordinates.
 		/// </summary>
 		/// <param name="rho">Spheric radius</param>
-		/// <param name="phi">Azimuth angle</param>
-		/// <param name="th">Polar angle</param>
-		/// <returns>Cylindric coordinates as (r, phi, z)</returns>
+		/// <param name="phi">Azimuth angle in radians.</param>
+		/// <param name="th">Polar angle in radians.</param>
+		/// <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
 		public static Vector3 SphericToCylindric(float rho, float phi, float th)
 		{
 			return new Vector3(

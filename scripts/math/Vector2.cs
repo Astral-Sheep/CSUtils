@@ -12,40 +12,40 @@ namespace Com.Surbon.CSUtils.Math
 	public struct Vector2
 	{
 		/// <summary>
-		/// Constant corresponding to Vector2(0, 1).
+		/// Shorthand for writing Vector2(0, -1).
 		/// </summary>
-		public static readonly Vector2 DOWN = new Vector2(0, 1);
+		public static Vector2 Down => new Vector2(0, -1);
 		/// <summary>
-		/// Constant corresponding to Vector2(-1, 0).
+		/// Shorthand for writing Vector2(-1, 0).
 		/// </summary>
-		public static readonly Vector2 LEFT = new Vector2(-1, 0);
+		public static Vector2 Left => new Vector2(-1, 0);
 		/// <summary>
-		/// Constant corresponding to Vector2(-1, -1).
+		/// Shorthand for writing Vector2(-1, -1).
 		/// </summary>
-		public static readonly Vector2 NEG_ONE = new Vector2(-1, -1);
+		public static Vector2 NegOne => new Vector2(-1, -1);
 		/// <summary>
-		/// Constant corresponding to Vector2(1, 1).
+		/// Shorthand for writing Vector2(1, 1).
 		/// </summary>
-		public static readonly Vector2 ONE = new Vector2(1, 1);
+		public static Vector2 One => new Vector2(1, 1);
 		/// <summary>
-		/// Constant corresponding to Vector2(1, 0).
+		/// Shorthand for writing Vector2(1, 0).
 		/// </summary>
-		public static readonly Vector2 RIGHT = new Vector2(1, 0);
+		public static Vector2 Right => new Vector2(1, 0);
 		/// <summary>
-		/// Constant corresponding to Vector2(0, -1).
+		/// Shorthand for writing Vector2(0, 1).
 		/// </summary>
-		public static readonly Vector2 UP = new Vector2(0, -1);
+		public static Vector2 Up => new Vector2(0, 1);
 		/// <summary>
-		/// Constant corresponding to Vector2(0, 0).
+		/// Shorthand for writing Vector2(0, 0).
 		/// </summary>
-		public static readonly Vector2 ZERO = new Vector2(0, 0);
+		public static Vector2 Zero => new Vector2(0, 0);
 
 		/// <summary>
-		/// The position of the vector on the x axis.
+		/// The position of the <see cref="Vector2"/> on the x axis.
 		/// </summary>
 		public float x;
 		/// <summary>
-		/// The position of the vector on the y axis.
+		/// The position of the <see cref="Vector2"/> on the y axis.
 		/// </summary>
 		public float y;
 
@@ -88,7 +88,7 @@ namespace Com.Surbon.CSUtils.Math
 		public static Vector2 operator -(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
 
 		/// <summary>
-		/// Multiplies the given <see cref="Vector2"/>.
+		/// Multiplies the values of the first <see cref="Vector2"/> by the values of the second one.
 		/// </summary>
 		/// <returns>vector1 * vector2.</returns>
 		public static Vector2 operator *(Vector2 vector1, Vector2 vector2) => new Vector2(vector1.x * vector2.x, vector1.y * vector2.y);
@@ -278,17 +278,17 @@ namespace Com.Surbon.CSUtils.Math
 		public float LengthSquared() => x * x + y * y;
 
 		/// <summary>
-		/// Lerp the <see cref="Vector2"/> between this and to by weight (weight is clamped between 0 and 1).
+		/// Lerps the <see cref="Vector2"/> between this and to by weight (weight is clamped between 0 and 1).
 		/// </summary>
 		public Vector2 Lerp(Vector2 to, float weight) => LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
 
 		/// <summary>
-		/// Lerp the <see cref="Vector2"/> between this and to by a random <see cref="float"/> between 0 and 1.
+		/// Lerps the <see cref="Vector2"/> between this and to by a random <see cref="float"/> between 0 and 1.
 		/// </summary>
 		public Vector2 LerpRand(Vector2 to) => LerpUnclamped(to, (float)new Random().NextDouble());
 
 		/// <summary>
-		/// Lerp the <see cref="Vector2"/> between this and to by weight.
+		/// Lerps the <see cref="Vector2"/> between this and to by weight.
 		/// </summary>
 		public Vector2 LerpUnclamped(Vector2 to, float weight) => new Vector2(x + weight * (to.x - x), y + weight * (to.y - y));
 
