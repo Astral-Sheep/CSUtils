@@ -168,10 +168,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if the given <see cref="Line2"/> is parallel to this one.
 		/// </summary>
-		public bool IsParallel(Line2 line)
-		{
-			return n.Cross(Vector2.PolarToCartesian(1, line.NormalForm.phi)) == 0;
-		}
+		public bool IsParallel(Line2 line) => n.Cross(Vector2.PolarToCartesian(1, line.NormalForm.phi)) == 0;
 
 		/// <summary>
 		/// Says if the given <see cref="Line2"/> is secant to this one.
@@ -187,10 +184,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Rotates the <see cref="Line2"/> by phi radians.
 		/// </summary>
-		public void Rotate(float phi)
-		{
-			n.Rotate(phi);
-		}
+		public void Rotate(float phi) => n.Rotate(phi);
 
 		/// <summary>
 		/// Returns the <see cref="Line2"/> rotated by phi radians.
