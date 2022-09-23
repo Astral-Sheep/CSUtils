@@ -407,7 +407,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 NegMod(float mod)
 		{
-			return new Vector3(MathT.Congruence(x, mod, false), MathT.Congruence(y, mod, false), MathT.Congruence(z, mod, false));
+			return new Vector3(MathT.Mod(x, mod, false), MathT.Mod(y, mod, false), MathT.Mod(z, mod, false));
 		}
 
 		/// <summary>
@@ -415,7 +415,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 NegModv(Vector3 modv)
 		{
-			return new Vector3(MathT.Congruence(x, modv.x, false), MathT.Congruence(y, modv.y, false), MathT.Congruence(z, modv.z, false));
+			return new Vector3(MathT.Mod(x, modv.x, false), MathT.Mod(y, modv.y, false), MathT.Mod(z, modv.z, false));
 		}
 
 		/// <summary>
@@ -459,7 +459,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 PosMod(float mod)
 		{
-			return new Vector3(MathT.Congruence(x, mod), MathT.Congruence(y, mod), MathT.Congruence(z, mod));
+			return new Vector3(MathT.Mod(x, mod), MathT.Mod(y, mod), MathT.Mod(z, mod));
 		}
 
 		/// <summary>
@@ -467,7 +467,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 PosModv(Vector3 modv)
 		{
-			return new Vector3(MathT.Congruence(x, modv.x), MathT.Congruence(y, modv.y), MathT.Congruence(z, modv.z));
+			return new Vector3(MathT.Mod(x, modv.x), MathT.Mod(y, modv.y), MathT.Mod(z, modv.z));
 		}
 
 		/// <summary>

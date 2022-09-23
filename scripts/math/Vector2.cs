@@ -295,12 +295,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Performs a modulus operation on x and y, where the result is in ]-mod, 0].
 		/// </summary>
-		public Vector2 NegMod(float mod) => new Vector2(MathT.Congruence(x, mod, false), MathT.Congruence(y, mod, false));
+		public Vector2 NegMod(float mod) => new Vector2(MathT.Mod(x, mod, false), MathT.Mod(y, mod, false));
 
 		/// <summary>
 		/// Performs a modulus operation on x and y, where the result is in ]-modv.x, 0] for x, and ]-modv.y, 0] for y.
 		/// </summary>
-		public Vector2 NegModv(Vector2 modv) => new Vector2(MathT.Congruence(x, modv.x, false), MathT.Congruence(y, modv.y, false));
+		public Vector2 NegModv(Vector2 modv) => new Vector2(MathT.Mod(x, modv.x, false), MathT.Mod(y, modv.y, false));
 
 		/// <summary>
 		/// Sets the length of the <see cref="Vector2"/> to the given length.
@@ -340,12 +340,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Performs a modulus operation on x and y, where the result is in [0, mod[.
 		/// </summary>
-		public Vector2 PosMod(float mod) => new Vector2(MathT.Congruence(x, mod), MathT.Congruence(y, mod));
+		public Vector2 PosMod(float mod) => new Vector2(MathT.Mod(x, mod), MathT.Mod(y, mod));
 
 		/// <summary>
 		/// Performs a modulus operation on x and y, where the result is in [0, modv.x[ for x, and [0, modv.y[ for y.
 		/// </summary>
-		public Vector2 PosModv(Vector2 modv) => new Vector2(MathT.Congruence(x, modv.x), MathT.Congruence(y, modv.y));
+		public Vector2 PosModv(Vector2 modv) => new Vector2(MathT.Mod(x, modv.x), MathT.Mod(y, modv.y));
 
 		/// <summary>
 		/// Returns the <see cref="Vector2"/> with x and y to the power of pow.

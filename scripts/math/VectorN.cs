@@ -492,7 +492,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], mod, false);
+				result[i] = MathT.Mod(values[i], mod, false);
 			}
 
 			return result;
@@ -510,7 +510,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], modv[i], false);
+				result[i] = MathT.Mod(values[i], modv[i], false);
 			}
 
 			return result;
@@ -567,7 +567,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], mod);
+				result[i] = MathT.Mod(values[i], mod);
 			}
 
 			return result;
@@ -585,7 +585,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], modv[i]);
+				result[i] = MathT.Mod(values[i], modv[i]);
 			}
 
 			return result;
