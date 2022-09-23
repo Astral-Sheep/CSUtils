@@ -58,6 +58,16 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
+		/// Represents the axis in a 3-dimensional space.
+		/// </summary>
+		public enum Axis
+		{
+			X = 0,
+			Y = 1,
+			Z = 2
+		}
+
+		/// <summary>
 		/// The position of the <see cref="Vector3"/> on the x axis.
 		/// </summary>
 		public float x;
@@ -190,7 +200,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// Returns the angle corresponding to the given <see cref="AngleType"/>.
 		/// </summary>
 		/// <returns>The angle in radians.</returns>
-		public float Angle(AngleType type = AngleType.AZIMUTHAL)
+		public float Angle(AngleType type)
 		{
 			switch (type)
 			{
@@ -199,7 +209,26 @@ namespace Com.Surbon.CSUtils.Math
 				case AngleType.POLAR:
 					return MathF.Atan2(z, new Vector2(x, y).Length());
 				default:
-					throw new Exception("How tf did you get there ?");
+					throw new Exception("How tf did you get there?");
+			}
+		}
+
+		/// <summary>
+		/// Returns the angle on the given <see cref="Axis"/>.
+		/// </summary>
+		/// <returns>The angle in radians.</returns>
+		public float Angle(Axis axis)
+		{
+			switch(axis)
+			{
+				case Axis.X:
+					return MathF.Atan2(y, -z);
+				case Axis.Y:
+					return MathF.Atan2(x, z);
+				case Axis.Z:
+					return MathF.Atan2(y, x);
+				default;
+					throw new Exception("How tf did you get there?");
 			}
 		}
 
@@ -282,6 +311,9 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public float Distance(Vector3 vector)
 		{
+			if (vector == this)
+				return 0;
+
 			return MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z));
 		}
 
@@ -290,6 +322,9 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public float DistanceSquared(Vector3 vector)
 		{
+			if (vector == this)
+				return 0;
+
 			return (x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z);
 		}
 
@@ -443,56 +478,131 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Rotates the <see cref="Vector3"/> by value radians on the given angle
 		/// </summary>
-		public void Rotate(float value, AngleType angle = AngleType.AZIMUTHAL)
+		public void Rotate(float phi, AngleType angle)
 		{
+			if (x * x + y * y + z * z == 0)
+				return;
+
 			switch (angle)
 			{
 				case AngleType.AZIMUTHAL:
-					float sin = MathF.Sin(value);
-					float cos = MathF.Cos(value);
+					float sin = MathF.Sin(phi);
+					float cos = MathF.Cos(phi);
 					x = x * sin - y * cos;
 					y = x * cos + y * sin;
 					break;
 				case AngleType.POLAR:
 					Vector3 vector = CartesianToSpheric(this);
-					vector.z += value;
+					vector.z += phi;
 					vector = SphericToCartesian(vector);
 					x = vector.x;
 					y = vector.y;
 					z = vector.z;
 					break;
 				default:
-					throw new Exception("How tf did you get there ?");
+					throw new Exception("How tf did you get there?");
 			}
 		}
 
 		/// <summary>
-		/// Returns the vector <see cref="Vector3"/> by value radians on the given <see cref="AngleType"/>.
+		/// Rotates the <see cref="Vector3"/> on the given <see cref="Axis"/> by the given angle.
 		/// </summary>
-		/// <param name="value">The angle in radians.</param>
-		public Vector3 Rotated(float value, AngleType angle = AngleType.AZIMUTHAL)
+		/// <param name="phi">The angle in radians.</param>
+		/// <param name="axis">The axis on which to rotate.</param>
+		public void Rotate(float phi, Axis axis)
 		{
+			if (x * x + y * y + z * z == 0)
+				return;
+
+			float angle;
+			float length;
+
+			switch(axis)
+			{
+				case Axis.X:
+					angle = MathF.Atan2(y, -z) + phi;
+					length = MathF.Sqrt(y * y + z * z);
+					z = -MathF.Cos(angle) * length;
+					y = MathF.Sin(angle) * length;
+					break;
+				case Axis.Y:
+					angle = MathF.Atan2(x, z) + phi;
+					length = MathF.Sqrt(x * x + z * z);
+					z = MathF.Cos(angle) * length;
+					x = MathF.Sin(angle) * length;
+					break;
+				case Axis.Z:
+					angle = MathF.Atan2(y, x) + phi;
+					length = MathF.Sqrt(x * x + y * y);
+					x = MathF.Cos(angle) * length;
+					y = MathF.Sin(angle) * length;
+					break;
+				default:
+					throw new Exception("How tf did you get there?");
+			}
+		}
+
+		/// <summary>
+		/// Returns the <see cref="Vector3"/> rotated by phi radians on the given <see cref="AngleType"/>.
+		/// </summary>
+		/// <param name="phi">The angle in radians.</param>
+		public Vector3 Rotated(float phi, AngleType angle)
+		{
+			if (x * x + y * y + z * z == 0)
+				return new Vector3();
+
 			Vector3 vector = new Vector3();
 
 			switch (angle)
 			{
 				case AngleType.AZIMUTHAL:
-					float sin = MathF.Sin(value);
-					float cos = MathF.Cos(value);
+					float sin = MathF.Sin(phi);
+					float cos = MathF.Cos(phi);
 					vector.x = x * sin - y * cos;
 					vector.y = x * cos + y * sin;
 					vector.z = z;
 					break;
 				case AngleType.POLAR:
 					vector = CartesianToSpheric(this);
-					vector.z += value;
+					vector.z += phi;
 					vector = SphericToCartesian(vector);
 					break;
 				default:
-					throw new Exception("How tf did you get there ?");
+					throw new Exception("How tf did you get there?");
 			}
 
 			return vector;
+		}
+
+		/// <summary>
+		/// Returns the <see cref="Vector3"/> rotated by phi radians on the given <see cref="Axis"/>.
+		/// </summary>
+		/// <param name="phi">The angle in radians.</param>
+		public Vector3 Rotated(float phi, Axis axis)
+		{
+			if (x * x + y * y + z * z == 0)
+				return new Vector3();
+
+			float angle;
+			float length;
+
+			switch (axis)
+			{
+				case Axis.X:
+					angle = MathF.Atan2(y, -z) + phi;
+					length = MathF.Sqrt(y * y + z * z);
+					return new Vector3(x, MathF.Sin(angle) * length, -MathF.Cos(angle) * length);
+				case Axis.Y:
+					angle = MathF.Atan2(x, z) + phi;
+					length = MathF.Sqrt(x * x + z * z);
+					return new Vector3(MathF.Sin(angle) * length, y, MathF.Cos(angle) * length);
+				case Axis.Z:
+					angle = MathF.Atan2(y, x) + phi;
+					length = MathF.Sqrt(x * x + y * y);
+					return new Vector3(MathF.Cos(angle) * length, MathF.Sin(angle) * length, z);
+				default:
+					throw new Exception("How tf did you get there?");
+			}
 		}
 
 		/// <summary>
