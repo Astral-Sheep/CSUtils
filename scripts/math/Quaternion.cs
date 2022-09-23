@@ -3,11 +3,23 @@ using System.Collections.Generic;
 
 namespace Com.Surbon.CSUtils.Math
 {
+	#pragma warning disable CS0661 // Le type définit l'opérateur == ou l'opérateur != mais ne se substitue pas à Object.GetHashCode()
 	/// <summary>
 	/// Representation of a quaternion as a + bi + cj + dk
 	/// </summary>
 	public struct Quaternion
 	{
+		public Vector3 Vector
+		{
+			get => new Vector3(b, c, d);
+			set
+			{
+				b = value.x;
+				c = value.y;
+				d = value.z;
+			}
+		}
+
 		public float a;
 		public float b;
 		public float c;
@@ -72,11 +84,29 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region INSTANCE
 
+		public override bool Equals(object obj)
+		{
+			if (obj is Quaternion)
+				return (Quaternion)obj == this;
+
+			return false;
+		}
+
 		public Quaternion GetConjugate() => new Quaternion(a, -b, -c, -d);
 
 		public Quaternion GetInverse()
 		{
 			return (1f / (a * a + b * b + c * c + d * d)) * new Quaternion(a, -b, -c, -d);
+		}
+
+		public float GetNorm()
+		{
+			return MathF.Sqrt(a * a + b * b + c * c + d * d);
+		}
+
+		public float GetNormSquared()
+		{
+			return a * a + b * b + c * c + d * d;
 		}
 
 		#endregion INSTANCE
