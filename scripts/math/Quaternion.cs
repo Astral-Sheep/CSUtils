@@ -56,7 +56,27 @@ namespace Com.Surbon.CSUtils.Math
 			this.d = d;
 		}
 
+		/// <summary>
+		/// Creates a quaternion as a + bi + cj + dk.
+		/// </summary>
+		/// <param name="v">The vector component as (b, c, d).</param>
+		public Quaternion(float a, Vector3 v)
+		{
+			this.a = a;
+			b = v.x;
+			c = v.y;
+			d = v.z;
+		}
+
 		#region OPERATORS
+
+		/// <summary>
+		/// Sets the values of the quaternion to the opposite values.
+		/// </summary>
+		public static Quaternion operator-(Quaternion q)
+		{
+			return new Quaternion(-q.a, -q.b, -q.c, -q.d);
+		}
 
 		/// <summary>
 		/// Adds the given quaternions.
@@ -166,6 +186,38 @@ namespace Com.Surbon.CSUtils.Math
 		public float GetNormSquared()
 		{
 			return a * a + b * b + c * c + d * d;
+		}
+
+		/// <summary>
+		/// Rotates the quaternion on the given axis.
+		/// </summary>
+		public void Rotate(float angle, Vector3 axis)
+		{
+			float cos = MathF.Cos(angle);
+			Vector3 sinAxis = MathF.Sin(angle) * axis;
+
+			float a1 = -sinAxis.x * b - sinAxis.y * c - sinAxis.z * d;
+			float b1 = cos * b + sinAxis.y * d - sinAxis.z * c;
+			float c1 = cos * c + sinAxis.z * b - sinAxis.x * d;
+			float d1 = cos * d + sinAxis.x * c - sinAxis.y * b;
+
+			sinAxis *= -1;
+			a = a1 * cos - b1 * sinAxis.x - c1 * sinAxis.y - d1 * sinAxis.z;
+			b = a1 * sinAxis.x + b1 * cos + c1 * sinAxis.z - d1 * sinAxis.y;
+			c = a1 * sinAxis.y + c1 * cos + d1 * sinAxis.x - b1 * sinAxis.z;
+			d = a1 * sinAxis.z + d1 * cos + b1 * sinAxis.y - c1 * sinAxis.x;
+		}
+
+		/// <summary>
+		/// Returns the quaternion rotated on the given axis.
+		/// </summary>
+		public Quaternion Rotated(float angle, Vector3 axis)
+		{
+			float cos = MathF.Cos(angle);
+			Vector3 sinAxis = MathF.Sin(angle) * axis;
+			return new Quaternion(cos, sinAxis) *
+				new Quaternion(0, new Vector3(b, c, d)) *
+				new Quaternion(cos, sinAxis * -1);
 		}
 
 		#endregion INSTANCE
