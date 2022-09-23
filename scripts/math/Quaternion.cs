@@ -53,11 +53,31 @@ namespace Com.Surbon.CSUtils.Math
 			return new Quaternion(lambda * q.a, lambda * q.b, lambda * q.c, lambda * q.d);
 		}
 
+		public static Quaternion operator/(Quaternion q1, Quaternion q2)
+		{
+			return q1 * q2.GetInverse();
+		}
+
+		public static bool operator==(Quaternion q1, Quaternion q2)
+		{
+			return q1.a == q2.a && q1.b == q2.b && q1.c == q2.c && q1.d == q2.d;
+		}
+
+		public static bool operator!=(Quaternion q1, Quaternion q2)
+		{
+			return q1.a != q2.a || q1.b != q2.b || q1.c != q2.c || q1.d != q2.d;
+		}
+
 		#endregion OPERATORS
 
 		#region INSTANCE
 
 		public Quaternion GetConjugate() => new Quaternion(a, -b, -c, -d);
+
+		public Quaternion GetInverse()
+		{
+			return (1f / (a * a + b * b + c * c + d * d)) * new Quaternion(a, -b, -c, -d);
+		}
 
 		#endregion INSTANCE
 	}
