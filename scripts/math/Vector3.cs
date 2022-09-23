@@ -103,7 +103,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region OPERATORS
 
 		/// <summary>
-		/// Adds the given <see cref="Vector3"/>.
+		/// Adds both <see cref="Vector3"/>.
 		/// </summary>
 		/// <returns>vector1 + vector2.</returns>
 		public static Vector3 operator +(Vector3 vector1, Vector3 vector2)
