@@ -109,13 +109,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// Adds both <see cref="VectorN"/>.
 		/// </summary>
 		/// <returns>vector1 + vector2.</returns>
-		public static VectorN operator +(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 + n2;
-			});
-		}
+		public static VectorN operator +(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 + n2;
+				}
+			);
 
 		/// <summary>
 		/// Sets all the values of the <see cref="VectorN"/> to the opposite values (equivalent to vector * -1).
@@ -138,70 +137,67 @@ namespace Com.Surbon.CSUtils.Math
 		/// Subtract the second <see cref="VectorN"/> to the first one.
 		/// </summary>
 		/// <returns>vector1 - vector2.</returns>
-		public static VectorN operator -(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 - n2;
-			});
-		}
+		public static VectorN operator -(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 - n2;
+				}
+			);
 
 		/// <summary>
 		/// Multiplies the values of the first <see cref="VectorN"/> by the values of the second vector.
 		/// </summary>
 		/// <returns>vector1 * vector2.</returns>
-		public static VectorN operator *(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 * n2;
-			});
-		}
+		public static VectorN operator *(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				}
+			);
 
 		/// <summary>
 		/// Multiplies the <see cref="VectorN"/> with the <see cref="float"/>.
 		/// </summary>
 		/// <returns>vector * scalar.</returns>
-		public static VectorN operator *(VectorN vector, float scalar)
-		{
-			return Operate(vector, scalar, delegate (float n1, float n2)
-			{
-				return n1 * n2;
-			});
-		}
+		public static VectorN operator *(VectorN vector, float scalar) => Operate(
+			vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				}
+			);
 
 		/// <summary>
 		/// Multiplies the <see cref="VectorN"/> with the <see cref="float"/>.
 		/// </summary>
 		/// <returns>scalar * vector.</returns>
-		public static VectorN operator *(float scalar, VectorN vector)
-		{
-			return vector * scalar;
-		}
+		public static VectorN operator *(float scalar, VectorN vector) => Operate(
+			vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				}
+			);
 
 		/// <summary>
 		/// Divides the values of the first <see cref="VectorN"/> by the values of the second one.
 		/// </summary>
 		/// <returns>vector1 / vector2.</returns>
-		public static VectorN operator /(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 / n2;
-			});
-		}
+		public static VectorN operator /(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 / n2;
+				}
+			);
 
 		/// <summary>
 		/// Divides the <see cref="VectorN"/> by the <see cref="float"/>.
 		/// </summary>
 		/// <returns>vector / scalar.</returns>
-		public static VectorN operator /(VectorN vector, float scalar)
-		{
-			return Operate(vector, scalar, delegate (float n1, float n2)
-			{
-				return n1 / n2;
-			});
-		}
+		public static VectorN operator /(VectorN vector, float scalar) => Operate(
+			vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 / n2;
+				}
+			);
 
 		private static bool IsEqual(VectorN vector1, VectorN vector2, bool equality)
 		{
@@ -222,18 +218,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if both <see cref="VectorN"/> have the same values.
 		/// </summary>
-		public static bool operator ==(VectorN vector1, VectorN vector2)
-		{
-			return IsEqual(vector1, vector2, true);
-		}
+		public static bool operator ==(VectorN vector1, VectorN vector2) => IsEqual(vector1, vector2, true);
 
 		/// <summary>
 		/// Says if both <see cref="VectorN"/> have different values.
 		/// </summary>
-		public static bool operator !=(VectorN vector1, VectorN vector2)
-		{
-			return IsEqual(vector1, vector2, false);
-		}
+		public static bool operator !=(VectorN vector1, VectorN vector2) => IsEqual(vector1, vector2, false);
 
 		#endregion OPERATORS
 
