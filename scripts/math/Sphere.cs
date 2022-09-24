@@ -11,24 +11,24 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Sphere
 	{
-		public static readonly Sphere UNIT = new Sphere(new Vector3(0, 0, 0), 1);
+		/// <summary>
+		/// Shorthand for writing Sphere(Vector3(0, 0, 0), 1).
+		/// </summary>
+		public static Sphere UNIT => new Sphere(new Vector3(0, 0, 0), 1);
 
 		#region PROPERTIES
 
 		/// <summary>
-		/// The center of the sphere.
+		/// The center of the <see cref="Sphere"/>.
 		/// </summary>
 		public Vector3 Origin
 		{
 			get => o;
-			set
-			{
-				o = value;
-			}
+			set => o = value;
 		}
 
 		/// <summary>
-		/// The radius of the sphere.
+		/// The radius of the <see cref="Sphere"/>.
 		/// </summary>
 		public float Radius
 		{
@@ -43,7 +43,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The diamater of the sphere.
+		/// The diamater of the <see cref="Sphere"/>.
 		/// </summary>
 		public float Diameter
 		{
@@ -58,7 +58,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The surface of the sphere.
+		/// The surface of the <see cref="Sphere"/>.
 		/// </summary>
 		public float Area
 		{
@@ -70,7 +70,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The volume of the sphere.
+		/// The volume of the <see cref="Sphere"/>.
 		/// </summary>
 		public float Volume
 		{
@@ -86,12 +86,18 @@ namespace Com.Surbon.CSUtils.Math
 		private Vector3 o;
 		private float r;
 
+		/// <summary>
+		/// Creates a <see cref="Sphere"/> of the given radius at the given origin.
+		/// </summary>
 		public Sphere(Vector3 origin, float radius)
 		{
 			o = origin;
 			r = radius;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Sphere"/> with its values se to the values of the given <see cref="Sphere"/>.
+		/// </summary>
 		public Sphere(Sphere sphere)
 		{
 			o = sphere.Origin;
@@ -100,8 +106,14 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="Sphere"/> have the same values.
+		/// </summary>
 		public static bool operator ==(Sphere sphere1, Sphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
 
+		/// <summary>
+		/// Says if both <see cref="Sphere"/> have different values.
+		/// </summary>
 		public static bool operator !=(Sphere sphere1, Sphere sphere2) => sphere1.Origin != sphere2.Origin || sphere1.Radius != sphere2.Radius;
 
 		#endregion OPERATORS
@@ -109,35 +121,23 @@ namespace Com.Surbon.CSUtils.Math
 		#region INSTANCE
 
 		/// <summary>
-		/// Says if to points are antipodal on this circle.
+		/// Says if to <see cref="Vector3"/> are antipodal on this <see cref="Sphere"/>.
 		/// </summary>
-		public bool AreAntipodal(Vector3 p1, Vector3 p2)
-		{
-			if (Contains(p1) && Contains(p2))
-				return (p1 - p2).Length() == Diameter;
-
-			return false;
-		}
+		public bool AreAntipodal(Vector3 p1, Vector3 p2) => Contains(p1) && Contains(p2) ? (p1 - p2).Length() == Diameter : false;
 
 		/// <summary>
-		/// Says if the point is on the sphere.
+		/// Says if the <see cref="Vector3"/> is on the <see cref="Sphere"/>.
 		/// </summary>
 		public bool Contains(Vector3 point) => (point - o).LengthSquared() == r * r;
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Sphere)
-				return (Sphere)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Sphere sphere) && (sphere == this);
 
 		/// <summary>
-		/// Returns the point on the circle with the given angles.
+		/// Returns the <see cref="Vector3"/> on the <see cref="Sphere"/> with the given angles.
 		/// </summary>
-		/// <param name="phi">The azimuth angle.</param>
-		/// <param name="th">The polar angle</param>
-		public Vector3 GetPoint(float phi, float th) => Vector3.SphericToCartesian(r, phi, th);
+		/// <param name="phi">The azimuth angle in radians.</param>
+		/// <param name="th">The polar angle in radians.</param>
+		public Vector3 GetPoint(float phi, float th) => o + Vector3.SphericToCartesian(r, phi, th);
 
 		public override string ToString() => $"(x - {Origin.x})² + (y - {Origin.y})² + (z - {Origin.z})² = {Radius}²";
 

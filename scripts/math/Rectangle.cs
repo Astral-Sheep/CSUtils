@@ -14,7 +14,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region PROPERTIES
 
 		/// <summary>
-		/// The width of the rectangle (on the x axis).
+		/// The width of the <see cref="Rectangle"/> (on the x axis).
 		/// </summary>
 		public float Width
 		{
@@ -29,7 +29,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The height of the rectangle (on the y axis).
+		/// The height of the <see cref="Rectangle"/> (on the y axis).
 		/// </summary>
 		public float Height
 		{
@@ -44,21 +44,21 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The point on the top left of the rectangle.
+		/// The <see cref="Vector2"/> on the top left of the <see cref="Rectangle"/>.
 		/// </summary>
 		public Vector2 Origin
 		{
 			get => o;
-			set { o = value; }
+			set => o = value;
 		}
 
 		/// <summary>
-		/// The perimeter of the rectangle.
+		/// The perimeter of the <see cref="Rectangle"/>.
 		/// </summary>
 		public float Perimeter => 2f * w + 2f * h;
 
 		/// <summary>
-		/// The area of the rectangle.
+		/// The area of the <see cref="Rectangle"/>.
 		/// </summary>
 		public float Area => w * h;
 
@@ -68,6 +68,9 @@ namespace Com.Surbon.CSUtils.Math
 		private float w;
 		private float h;
 
+		/// <summary>
+		/// Creates a <see cref="Rectangle"/> of the given width and height, and with its top left point on the given origin.
+		/// </summary>
 		public Rectangle(Vector2 origin, float width, float height)
 		{
 			o = origin;
@@ -75,6 +78,9 @@ namespace Com.Surbon.CSUtils.Math
 			h = height;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Rectangle"/> with its values set to the values of the given <see cref="Rectangle"/>.
+		/// </summary>
 		public Rectangle(Rectangle rectangle)
 		{
 			o = rectangle.Origin;
@@ -84,35 +90,33 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
-		public static bool operator ==(Rectangle rect1, Rectangle rect2)
-		{
-			return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height;
-		}
+		/// <summary>
+		/// Says if both <see cref="Rectangle"/> have the same values.
+		/// </summary>
+		public static bool operator ==(Rectangle rect1, Rectangle rect2) => rect1.Origin == rect2.Origin &&
+			rect1.Width == rect2.Width &&
+			rect1.Height == rect2.Height;
 
-		public static bool operator !=(Rectangle rect1, Rectangle rect2)
-		{
-			return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height;
-		}
+		/// <summary>
+		/// Says if both <see cref="Rectangle"/> have different values.
+		/// </summary>
+		public static bool operator !=(Rectangle rect1, Rectangle rect2) => rect1.Origin != rect2.Origin ||
+			rect1.Width != rect2.Width ||
+			rect1.Height != rect2.Height;
 
 		#endregion OPERATORS
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Rectangle)
-				return (Rectangle)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Rectangle rect) && (rect == this);
 
 		/// <summary>
-		/// Says if the given point is in the boundaries of the rectangle.
+		/// Says if the given <see cref="Vector2"/> is within the boundaries of the <see cref="Rectangle"/>.
 		/// </summary>
 		public bool IsIn(Vector2 point) => point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h;
 
 		/// <summary>
-		/// Says if the given point is on the rectangle.
+		/// Says if the given <see cref="Vector2"/> is on the <see cref="Rectangle"/>.
 		/// </summary>
 		public bool Has(Vector2 point)
 		{

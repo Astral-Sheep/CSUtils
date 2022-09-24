@@ -11,34 +11,37 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Line3
 	{
-		public static readonly Line3 AxisX = new Line3(new Vector3(1, 0, 0), new Vector3(0, 0, 0));
-		public static readonly Line3 AxisY = new Line3(new Vector3(0, 1, 0), new Vector3(0, 0, 0));
-		public static readonly Line3 AxisZ = new Line3(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+		/// <summary>
+		/// Shorthand for writing Line3(Vector3(1, 0, 0), Vector3(0, 0, 0)).
+		/// </summary>
+		public static Line3 AxisX => new Line3(new Vector3(1, 0, 0), new Vector3(0, 0, 0));
+		/// <summary>
+		/// Shorthand for writing Line3(Vector3(0, 1, 0), Vector3(0, 0, 0)).
+		/// </summary>
+		public static Line3 AxisY => new Line3(new Vector3(0, 1, 0), new Vector3(0, 0, 0));
+		/// <summary>
+		/// Shorthand for writing Line3(Vector3(0, 0, 1), Vector3(0, 0, 0)).
+		/// </summary>
+		public static Line3 AxisZ => new Line3(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
 
 		#region PROPERTIES
 
 		/// <summary>
-		/// The direction of the line as a vector.
+		/// The direction of the <see cref="Line3"/> as a <see cref="Vector3"/>.
 		/// </summary>
 		public Vector3 Direction
 		{
 			get => n;
-			set
-			{
-				n = value;
-			}
+			set => n = value;
 		}
 
 		/// <summary>
-		/// The point of the line with x = 0.
+		/// The <see cref="Vector3"/> on the line with x = 0.
 		/// </summary>
 		public Vector3 Origin
 		{
 			get => p;
-			set
-			{
-				p = new Vector3(0, value.y - value.x * n.y, value.z - value.x * n.z);
-			}
+			set => p = new Vector3(0, value.y - value.x * n.y, value.z - value.x * n.z);
 		}
 
 		/// <summary>
@@ -85,6 +88,9 @@ namespace Com.Surbon.CSUtils.Math
 		private Vector3 n;
 		private Vector3 p;
 
+		/// <summary>
+		/// Creates a <see cref="Line3"/> with the given direction and point.
+		/// </summary>
 		public Line3(Vector3 direction, Vector3 point)
 		{
 			if (direction.LengthSquared() == 0)
@@ -94,6 +100,10 @@ namespace Com.Surbon.CSUtils.Math
 			p = new Vector3(0, point.y - point.x * n.y, point.z - point.x * n.z);
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Line3"/> with its values set to the values of the given <see cref="Line3"/>.
+		/// </summary>
+		/// <param name="line"></param>
 		public Line3(Line3 line)
 		{
 			n = line.Direction;
@@ -102,8 +112,14 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="Line3"/> have the same values.
+		/// </summary>
 		public static bool operator ==(Line3 line1, Line3 line2) => line1.Direction == line2.Direction && line1.Origin == line2.Origin;
 
+		/// <summary>
+		/// Says if both <see cref="Line3"/> have the same values.
+		/// </summary>
 		public static bool operator !=(Line3 line1, Line3 line2) => line1.Direction != line2.Direction || line1.Origin != line2.Origin;
 
 		#endregion OPERATORS
@@ -111,23 +127,14 @@ namespace Com.Surbon.CSUtils.Math
 		#region INSTANCE
 
 		/// <summary>
-		/// Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
+		/// Returns the <see cref="Vector3"/> on the <see cref="Line3"/> to the given <see cref="float"/> (it's calculated from the parametric equation of the line).
 		/// </summary>
-		public Vector3 GetPoint(float t)
-		{
-			return new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
-		}
+		public Vector3 GetPoint(float t) => new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Line3)
-				return (Line3)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Line3 line) && (line == this);
 
 		/// <summary>
-		/// Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
+		/// Returns the intersection between this and the given <see cref="Line3"/> (if there's no intersection, the <see cref="Vector3"/>'s values are set to negative infinity).
 		/// </summary>
 		public Vector3 Intersection(Line3 line)
 		{
@@ -143,35 +150,32 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if both lines are on the same plan.
+		/// Says if both <see cref="Line3"/> are on the same plan.
 		/// </summary>
 		public bool IsCoplanar(Line3 line) => IsParallel(line) || IsSecant(line);
 
 		/// <summary>
-		/// Says if both lines are parallel.
+		/// Says if both <see cref="Line3"/> are parallel.
 		/// </summary>
-		public bool IsParallel(Line3 line)
-		{
-			return n.x / line.Direction.x == n.y / line.Direction.y && n.z / line.Direction.z == n.z / line.Direction.z;
-		}
+		public bool IsParallel(Line3 line) => n.x / line.Direction.x == n.y / line.Direction.y &&
+			n.z / line.Direction.z == n.z / line.Direction.z;
 
 		/// <summary>
-		/// Says if both lines are secant.
+		/// Says if both <see cref="Line3"/> are secant.
 		/// </summary>
-		public bool IsSecant(Line3 line)
-		{
-			return Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
-		}
+		public bool IsSecant(Line3 line) => Intersection(line) != new Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
 
 		/// <summary>
-		/// Rotates the direction vector by the given angle in radians.
+		/// Rotates the direction <see cref="Vector3"/> by the given angle in radians.
 		/// </summary>
-		public void Rotate(float angle)
-		{
-			n.Rotate(angle);
-		}
+		/// <param name="angle">The angle in radians.</param>
+		public void Rotate(float angle) => n.Rotate(angle, Vector3.AngleType.AZIMUTHAL);
 
-		public Line3 Rotated(float angle) => new Line3(n.Rotated(angle), p);
+		/// <summary>
+		/// Returns the <see cref="Line3"/> with its direction <see cref="Vector3"/> rotated by the given angle in radians.
+		/// </summary>
+		/// <param name="angle">The angle in radians.</param>
+		public Line3 Rotated(float angle) => new Line3(n.Rotated(angle, Vector3.AngleType.AZIMUTHAL), p);
 
 		public override string ToString() => $"Origin : {p} | Direction : {n}";
 
