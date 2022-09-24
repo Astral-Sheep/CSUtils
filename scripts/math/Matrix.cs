@@ -16,7 +16,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region PROPERTIES
 
 		/// <summary>
-		/// The number of columns in the matrix.
+		/// The number of columns in the <see cref="Matrix"/>.
 		/// </summary>
 		public int Columns
 		{
@@ -31,7 +31,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The number of rows in the matrix.
+		/// The number of rows in the <see cref="Matrix"/>.
 		/// </summary>
 		public int Rows
 		{
@@ -78,13 +78,17 @@ namespace Com.Surbon.CSUtils.Math
 		private int _rows;
 		private float[,] values;
 
+		/// <summary>
+		/// Creates a <see cref="Matrix"/> lines x columns with the given <see cref="float"/>.
+		/// </summary>
 		public Matrix(int lines, int columns, params float[] numbers)
 		{
 			_rows = lines;
 			_columns = columns;
 
 			if (numbers.Length != lines * columns)
-				throw new TypeInitializationException("The number of rows and columns doesn't correspond to the number of values given.", new ArgumentException());
+				throw new TypeInitializationException("The number of rows and columns doesn't correspond to the number of values given.",
+					new ArgumentException());
 
 			values = new float[lines, columns];
 			int index = 0;
@@ -99,6 +103,9 @@ namespace Com.Surbon.CSUtils.Math
 			}
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Matrix"/> lines x columns with its values set to 0.
+		/// </summary>
 		public Matrix(int lines, int columns)
 		{
 			_rows = lines;
@@ -106,6 +113,9 @@ namespace Com.Surbon.CSUtils.Math
 			values = new float[lines, columns];
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Matrix"/> with its values set to the values of the given <see cref="Matrix"/>.
+		/// </summary>
 		public Matrix(Matrix matrix)
 		{
 			_rows = matrix.Rows;
@@ -124,6 +134,10 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATOR
 
+		/// <summary>
+		/// Adds both <see cref="Matrix"/>.
+		/// </summary>
+		/// <returns>m1 + m2.</returns>
 		public static Matrix operator+(Matrix m1, Matrix m2)
 		{
 			if (!m1.SameSize(m2))
@@ -142,6 +156,10 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Subtract the second <see cref="Matrix"/> to the first one.
+		/// </summary>
+		/// <returns>m1 - m2.</returns>
 		public static Matrix operator-(Matrix m1, Matrix m2)
 		{
 			if (!m1.SameSize(m2))
@@ -160,6 +178,10 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Multiplies the <see cref="Matrix"/> with the <see cref="float"/>.
+		/// </summary>
+		/// <returns>scalar * m.</returns>
 		public static Matrix operator*(float scalar, Matrix m)
 		{
 			Matrix matrix = new Matrix(m.Rows, m.Columns);
@@ -175,6 +197,10 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Multiplies the <see cref="Matrix"/> with the <see cref="float"/>.
+		/// </summary>
+		/// <returns>m * scalar.</returns>
 		public static Matrix operator *(Matrix m, float scalar)
 		{
 			Matrix matrix = new Matrix(m.Rows, m.Columns);
@@ -190,6 +216,10 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Multiplies both <see cref="Matrix" />.
+		/// </summary>
+		/// <returns>m1 * m2.</returns>
 		public static Matrix operator*(Matrix m1, Matrix m2)
 		{
 			if (m1.Columns != m2.Rows)
@@ -216,6 +246,10 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Divides the <see cref="Matrix"/> by the <see cref="float"/>.
+		/// </summary>
+		/// <returns>m / scalar.</returns>
 		public static Matrix operator/(Matrix m, float scalar)
 		{
 			Matrix matrix = new Matrix(m.Rows, m.Columns);
@@ -231,11 +265,18 @@ namespace Com.Surbon.CSUtils.Math
 			return matrix;
 		}
 
+		/// <summary>
+		/// Multiplies the first <see cref="Matrix"/> by the invert of the second <see cref="Matrix"/>.
+		/// </summary>
+		/// <returns>m1 * m2^(-1)</returns>
 		public static Matrix operator/(Matrix m1, Matrix m2)
 		{
 			return m1 * m2.Inverted();
 		}
 
+		/// <summary>
+		/// Says if both <see cref="Matrix"/> have the same values.
+		/// </summary>
 		public static bool operator==(Matrix m1, Matrix m2)
 		{
 			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
@@ -253,6 +294,9 @@ namespace Com.Surbon.CSUtils.Math
 			return true;
 		}
 
+		/// <summary>
+		/// Says if both <see cref="Matrix"/> have different values.
+		/// </summary>
 		public static bool operator!=(Matrix m1, Matrix m2)
 		{
 			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
@@ -283,12 +327,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the adjugate of the matrix.
+		/// Returns the adjugate of the <see cref="Matrix"/>.
 		/// </summary>
 		public Matrix GetAdjugate() => GetCofactor().Transposed();
 
 		/// <summary>
-		/// Returns the cofactor of the matrix.
+		/// Returns the cofactor of the <see cref="Matrix"/>.
 		/// </summary>
 		public Matrix GetCofactor()
 		{
@@ -309,7 +353,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the determinant of the matrix.
+		/// Returns the determinant of the <see cref="Matrix"/>.
 		/// </summary>
 		public float GetDeterminant()
 		{
@@ -332,7 +376,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the sub matrix which is the matrix without the given row and column.
+		/// Returns the sub <see cref="Matrix"/> which is the <see cref="Matrix"/> without the given row and column.
 		/// </summary>
 		/// <param name="row">The row to delete.</param>
 		/// <param name="column">The column to delete.</param>
@@ -359,7 +403,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Sets the matrix to its inverse.
+		/// Sets the <see cref="Matrix"/> to its inverse.
 		/// </summary>
 		public void Invert()
 		{
@@ -382,7 +426,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the inverse of this matrix.
+		/// Returns the inverse of this <see cref="Matrix"/>.
 		/// </summary>
 		public Matrix Inverted()
 		{
@@ -398,19 +442,18 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the matrix is invertible.
+		/// Says if the <see cref="Matrix"/> is invertible.
 		/// </summary>
 		public bool IsInvertible() => IsSquare() ? GetDeterminant() != 0 : false;
 
 		/// <summary>
-		/// Says if the matrix is a square matrix.
+		/// Says if the <see cref="Matrix"/> is a square <see cref="Matrix"/>.
 		/// </summary>
 		public bool IsSquare() => Rows == Columns;
 
 		/// <summary>
-		/// Says if the matrix is skew-symmetric (equal to the opposite of it's transposed matrix).
+		/// Says if the <see cref="Matrix"/> is skew-symmetric (equal to the opposite of it's transposed <see cref="Matrix"/>).
 		/// </summary>
-		/// <returns></returns>
 		public bool IsSkewSymmetric()
 		{
 			if (!IsSquare())
@@ -429,7 +472,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the matrix is symmetric (equal to it's transposed matrix).
+		/// Says if the <see cref="Matrix"/> is symmetric (equal to it's transposed <see cref="Matrix"/>).
 		/// </summary>
 		public bool IsSymmetric()
 		{
@@ -449,7 +492,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns this matrix to the given power.
+		/// Returns this <see cref="Matrix"/> to the given power.
 		/// </summary>
 		public Matrix Pow(int pow)
 		{
@@ -479,12 +522,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if this matrix and the given matrix have the same size.
+		/// Says if this <see cref="Matrix"/> and the given <see cref="Matrix"/> have the same size.
 		/// </summary>
 		public bool SameSize(Matrix matrix) => Rows == matrix.Rows && Columns == matrix.Columns;
 
 		/// <summary>
-		/// Sets this matrix to it's transposed matrix.
+		/// Sets this <see cref="Matrix"/> to it's transposed <see cref="Matrix"/>.
 		/// </summary>
 		public void Transpose()
 		{
@@ -505,7 +548,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns this matrix's transposed matrix.
+		/// Returns this <see cref="Matrix"/>'s transposed <see cref="Matrix"/>.
 		/// </summary>
 		public Matrix Transposed()
 		{
@@ -530,7 +573,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region STATIC
 
 		/// <summary>
-		/// Returns the identity matrix to the given size.
+		/// Returns the identity <see cref="Matrix"/> to the given size.
 		/// </summary>
 		public static Matrix Identity(int size)
 		{
