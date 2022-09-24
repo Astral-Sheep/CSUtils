@@ -68,6 +68,17 @@ namespace Com.Surbon.CSUtils.Math
 			d = v.z;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Quaternion"/> with its value set to the given <see cref="Quaternion"/>.
+		/// </summary>
+		public Quaternion(Quaternion q)
+		{
+			a = q.a;
+			b = q.b;
+			c = q.c;
+			d = q.d;
+		}
+
 		#region OPERATORS
 
 		/// <summary>
