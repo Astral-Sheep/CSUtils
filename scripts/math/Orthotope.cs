@@ -130,13 +130,7 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Orthotope)
-				return (Orthotope)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Orthotope ortho) && (ortho == this);
 
 		#endregion INSTANCE
 	}
