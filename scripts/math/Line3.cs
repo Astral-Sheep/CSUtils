@@ -32,10 +32,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Vector3 Direction
 		{
 			get => n;
-			set
-			{
-				n = value;
-			}
+			set => n = value;
 		}
 
 		/// <summary>
@@ -44,10 +41,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Vector3 Origin
 		{
 			get => p;
-			set
-			{
-				p = new Vector3(0, value.y - value.x * n.y, value.z - value.x * n.z);
-			}
+			set => p = new Vector3(0, value.y - value.x * n.y, value.z - value.x * n.z);
 		}
 
 		/// <summary>
@@ -137,13 +131,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public Vector3 GetPoint(float t) => new Vector3(p.x + n.x * t, p.y + n.y * t, p.z + n.z * t);
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Line3)
-				return (Line3)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Line3 line) && (line == this);
 
 		/// <summary>
 		/// Returns the intersection between this and the given <see cref="Line3"/> (if there's no intersection, the <see cref="Vector3"/>'s values are set to negative infinity).

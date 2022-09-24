@@ -114,13 +114,7 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is LineN)
-				return (LineN)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is LineN line) && (line == this);
 
 		/// <summary>
 		/// Returns the <see cref="VectorN"/> at the given value (the point is calculated with parametric equations).
