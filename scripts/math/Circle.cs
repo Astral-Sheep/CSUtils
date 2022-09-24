@@ -12,12 +12,15 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Circle
 	{
-		public static readonly Circle TRIGONOMETRIC = new Circle(new Vector2(0, 0), 1f);
+		/// <summary>
+		/// Shorthand for writing Circle(Vector2(0, 0), 1).
+		/// </summary>
+		public static Circle TRIGONOMETRIC => new Circle(new Vector2(0, 0), 1f);
 
 		#region PROPERTIES
 
 		/// <summary>
-		/// The center of the circle.
+		/// The center of the <see cref="Circle"/>.
 		/// </summary>
 		public Vector2 Origin
 		{
@@ -29,7 +32,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The radius of the circle.
+		/// The radius of the <see cref="Circle"/>.
 		/// </summary>
 		public float Radius
 		{
@@ -44,7 +47,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The diameter of the circle.
+		/// The diameter of the <see cref="Circle"/>.
 		/// </summary>
 		public float Diameter
 		{
@@ -59,7 +62,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The surface of the circle.
+		/// The surface of the <see cref="Circle"/>.
 		/// </summary>
 		public float Area
 		{
@@ -74,7 +77,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The perimeter of the circle.
+		/// The perimeter of the <see cref="Circle"/>.
 		/// </summary>
 		public float Perimeter
 		{
@@ -93,12 +96,19 @@ namespace Com.Surbon.CSUtils.Math
 		private Vector2 o;
 		private float r;
 
+		/// <summary>
+		/// Creates a <see cref="Circle"/> of the given radius at the given origin.
+		/// </summary>
 		public Circle(Vector2 origin, float radius)
 		{
 			o = origin;
 			r = radius;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Circle"/> with its values set to the values of the given circle.
+		/// </summary>
+		/// <param name="circle"></param>
 		public Circle(Circle circle)
 		{
 			o = circle.Origin;
@@ -107,11 +117,17 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATOR
 
+		/// <summary>
+		/// Says if both <see cref="Circle"/> have the same values.
+		/// </summary>
 		public static bool operator ==(Circle circle1, Circle circle2)
 		{
 			return circle1.Origin == circle2.Origin && circle1.Radius == circle2.Radius;
 		}
 
+		/// <summary>
+		/// Says if both <see cref="Circle"/> have different values.
+		/// </summary>
 		public static bool operator !=(Circle circle1, Circle circle2)
 		{
 			return circle1.Origin != circle2.Origin || circle1.Radius != circle2.Radius;
@@ -122,8 +138,9 @@ namespace Com.Surbon.CSUtils.Math
 		#region INSTANCE
 
 		/// <summary>
-		/// Returns the intersection points between the given circle and this circle.
+		/// Returns the intersection <see cref="Vector2"/> between the given <see cref="Circle"/> and this <see cref="Circle"/>.
 		/// </summary>
+		/// <returns>A list of the intersection <see cref="Vector2"/>.</returns>
 		public List<Vector2> CircleIntersect(Circle circle)
 		{
 			List<Vector2> lPoints = new List<Vector2>();
@@ -156,7 +173,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the given point is on the circle
+		/// Says if the given <see cref="Vector2"/> is on the <see cref="Circle"/>.
 		/// </summary>
 		public bool Contains(Vector3 point) => (point.x - o.x) * (point.x - o.x) + (point.y - o.y) * (point.y - o.y) == r * r;
 
@@ -169,17 +186,17 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the point on the circle at the given angle.
+		/// Returns the <see cref="Vector2"/> on the <see cref="Circle"/> at the given angle.
 		/// </summary>
-		/// <param name="angle">The angle of the point in radians.</param>
+		/// <param name="angle">The angle in radians.</param>
 		public Vector2 GetPoint(float angle) => Vector2.PolarToCartesian(r, angle) + o;
 
 		/// <summary>
-		/// Returns a list of points corresponding to an arc on the circle.
+		/// Returns a <see cref="List{T}"/> of <see cref="Vector2"/> corresponding to an arc on the <see cref="Circle"/>.
 		/// </summary>
-		/// <param name="minAngle">The starting angle of the arc in radians.</param>
-		/// <param name="maxAngle">The ending angle of the arc in radians (if it's greater than minAngle the arc is clockwise).</param>
-		/// <param name="nPoints">The number of points wanted on the arc.</param>
+		/// <param name="minAngle">The starting angle in radians.</param>
+		/// <param name="maxAngle">The ending angle in radians (if it's greater than minAngle the arc is clockwise).</param>
+		/// <param name="nPoints">The number of <see cref="Vector2"/> wanted on the arc.</param>
 		public List<Vector2> GetArc(float minAngle, float maxAngle, int nPoints = 100)
 		{
 			List<Vector2> lPoints = new List<Vector2>(nPoints);
@@ -193,7 +210,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the intersection points between the given line and the circle.
+		/// Returns the intersection <see cref="Vector2"/> between the given <see cref="Line2"/> and the <see cref="Circle"/>.
 		/// </summary>
 		public List<Vector2> LineIntersect(Line2 line)
 		{
@@ -221,7 +238,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the equation of the circle
+		/// Returns the equation of the <see cref="Circle"/>
 		/// </summary>
 		public override string ToString() => $"(x - {o.x})² + (y - {o.y})² = {r}²";
 
