@@ -93,30 +93,22 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if both <see cref="Rectangle"/> have the same values.
 		/// </summary>
-		public static bool operator ==(Rectangle rect1, Rectangle rect2)
-		{
-			return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height;
-		}
+		public static bool operator ==(Rectangle rect1, Rectangle rect2) => rect1.Origin == rect2.Origin &&
+			rect1.Width == rect2.Width &&
+			rect1.Height == rect2.Height;
 
 		/// <summary>
 		/// Says if both <see cref="Rectangle"/> have different values.
 		/// </summary>
-		public static bool operator !=(Rectangle rect1, Rectangle rect2)
-		{
-			return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height;
-		}
+		public static bool operator !=(Rectangle rect1, Rectangle rect2) => rect1.Origin != rect2.Origin ||
+			rect1.Width != rect2.Width ||
+			rect1.Height != rect2.Height;
 
 		#endregion OPERATORS
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Rectangle)
-				return (Rectangle)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Rectangle rect) && (rect == this);
 
 		/// <summary>
 		/// Says if the given <see cref="Vector2"/> is within the boundaries of the <see cref="Rectangle"/>.
