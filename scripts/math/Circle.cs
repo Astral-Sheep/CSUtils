@@ -120,14 +120,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if both <see cref="Circle"/> have the same values.
 		/// </summary>
-		public static bool operator ==(Circle circle1, Circle circle2) => circle1.Origin == circle2.Origin &&
-			circle1.Radius == circle2.Radius;
+		public static bool operator ==(Circle circle1, Circle circle2) => circle1.Origin == circle2.Origin && circle1.Radius == circle2.Radius;
 
 		/// <summary>
 		/// Says if both <see cref="Circle"/> have different values.
 		/// </summary>
-		public static bool operator !=(Circle circle1, Circle circle2) => circle1.Origin != circle2.Origin ||
-			circle1.Radius != circle2.Radius;
+		public static bool operator !=(Circle circle1, Circle circle2) => circle1.Origin != circle2.Origin || circle1.Radius != circle2.Radius;
 
 		#endregion OPERATOR
 
