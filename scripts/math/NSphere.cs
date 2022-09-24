@@ -218,13 +218,7 @@ namespace Com.Surbon.CSUtils.Math
 			return (vector - o).LengthSquared() == r * r;
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (obj is NSphere)
-				return (NSphere)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is NSphere sphere) && (sphere == this);
 
 		public override string ToString() => $"Origin : {o} | Radius : {r}";
 
