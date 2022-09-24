@@ -12,14 +12,14 @@ namespace Com.Surbon.CSUtils.Math
 	public struct NSphere
 	{
 		/// <summary>
-		/// The dimension of the sphere.
+		/// The dimension of the <see cref="NSphere"/>.
 		/// </summary>
 		public readonly int Dimension;
 
 		#region PROPERTIES
 
 		/// <summary>
-		/// The center of the sphere.
+		/// The center of the <see cref="NSphere"/>.
 		/// </summary>
 		public VectorN Origin
 		{
@@ -34,7 +34,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The radius of the sphere.
+		/// The radius of the <see cref="NSphere"/>.
 		/// </summary>
 		public float Radius
 		{
@@ -49,7 +49,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The diameter of the sphere.
+		/// The diameter of the <see cref="NSphere"/>.
 		/// </summary>
 		public float Diameter
 		{
@@ -64,7 +64,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The surface of the sphere.
+		/// The surface of the <see cref="NSphere"/>.
 		/// </summary>
 		public float Area
 		{
@@ -113,7 +113,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The volume of the sphere.
+		/// The volume of the <see cref="NSphere"/>.
 		/// </summary>
 		public float Volume
 		{
@@ -177,6 +177,9 @@ namespace Com.Surbon.CSUtils.Math
 		private VectorN o;
 		private float r;
 
+		/// <summary>
+		/// Creates a <see cref="NSphere"/> with the given radius at the given origin.
+		/// </summary>
 		public NSphere(VectorN origin, float radius)
 		{
 			o = origin;
@@ -184,6 +187,9 @@ namespace Com.Surbon.CSUtils.Math
 			Dimension = o.Size;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="NSphere"/> with its values set to the values of the given <see cref="NSphere"/>.
+		/// </summary>
 		public NSphere(NSphere nSphere)
 		{
 			Dimension = nSphere.Dimension;
@@ -202,7 +208,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region INSTANCE
 
 		/// <summary>
-		/// Says if the n-sphere contains the given point.
+		/// Says if the <see cref="NSphere"/> contains the given <see cref="VectorN"/>.
 		/// </summary>
 		public bool Contains(VectorN vector)
 		{
