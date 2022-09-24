@@ -199,8 +199,14 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="NSphere"/> have the same values.
+		/// </summary>
 		public static bool operator ==(NSphere sphere1, NSphere sphere2) => sphere1.Origin == sphere2.Origin && sphere1.Radius == sphere2.Radius;
 
+		/// <summary>
+		/// Says if both <see cref="NSphere"/> have different values.
+		/// </summary>
 		public static bool operator !=(NSphere sphere1, NSphere sphere2) => sphere1.Origin != sphere2.Origin || sphere1.Radius != sphere2.Radius;
 
 		#endregion OPERATORS
