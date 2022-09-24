@@ -11,13 +11,19 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct Line2
 	{
-		public static readonly Line2 AxisX = new Line2(0, 0);
-		public static readonly Line2 AxisY = new Line2(new Vector2(0, 0), new Vector2(0, 1));
+		/// <summary>
+		/// Shortand for writing Line2(0, 0).
+		/// </summary>
+		public static Line2 AxisX => new Line2(0, 0);
+		/// <summary>
+		/// Shortand for writing Line2(Vector2(0, 0), Vector2(1, 0)).
+		/// </summary>
+		public static Line2 AxisY => new Line2(new Vector2(0, 0), new Vector2(0, 1));
 
 		#region PROPERTIES
 
 		/// <summary>
-		/// The line as ax + by + c = 0.
+		/// The <see cref="Line2"/> as ax + by + c = 0.
 		/// </summary>
 		public (float a, float b, float c) CartesianForm
 		{
@@ -34,7 +40,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The line given with it's angle and it's origin.
+		/// The <see cref="Line2"/> given with it's angle in radians and it's origin.
 		/// </summary>
 		public (float phi, float p) NormalForm
 		{
@@ -47,7 +53,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The line given as mx + p = y.
+		/// The <see cref="Line2"/> given as mx + p = y.
 		/// </summary>
 		public (float m, float p) SlopeInterceptForm
 		{
@@ -65,7 +71,7 @@ namespace Com.Surbon.CSUtils.Math
 		private float p;
 
 		/// <summary>
-		/// The line deduced by two points.
+		/// Creates a <see cref="Line2"/> with two <see cref="Vector2"/>.
 		/// </summary>
 		public Line2(Vector2 a, Vector2 b)
 		{
@@ -73,6 +79,10 @@ namespace Com.Surbon.CSUtils.Math
 			p = (b.y - b.x * (n.y / n.x)) * MathF.Sin(n.Angle());
 		}
 
+		/// <summary>
+		/// Creates a <see cref="Line2"/> with its values set to the given <see cref="Line2"/>.
+		/// </summary>
+		/// <param name="line"></param>
 		public Line2(Line2 line)
 		{
 			(float phi, float p) normal = line.NormalForm;
@@ -81,7 +91,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
+		/// Creates a <see cref="Line2"/> with its normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment in radians).
 		/// </summary>
 		/// <param name="m">The normal segment</param>
 		/// <param name="b">The y-intercept</param>
@@ -95,7 +105,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The line given in the slope-intercept form (ax + b = y).
+		/// Creates a <see cref="Line2"/> with the slope-intercept form (ax + b = y).
 		/// </summary>
 		/// <param name="a">The slope</param>
 		/// <param name="b">The y-intercept</param>
@@ -106,7 +116,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The line given in cartesian coordinates (ax + by = c).
+		/// Creates a <see cref="Line2"/> with the cartesian coordinates (ax + by = c).
 		/// </summary>
 		public Line2(float a, float b, float c)
 		{
@@ -116,8 +126,14 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="Line2"/> have the same values.
+		/// </summary>
 		public static bool operator ==(Line2 line1, Line2 line2) => line1.SlopeInterceptForm == line2.SlopeInterceptForm;
 
+		/// <summary>
+		/// Says if both <see cref="Line2"/> have different values.
+		/// </summary>
 		public static bool operator !=(Line2 line1, Line2 line2) => line1.SlopeInterceptForm != line2.SlopeInterceptForm;
 
 		#endregion OPERATORS
@@ -125,7 +141,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region INSTANCE
 
 		/// <summary>
-		/// Returns the intersection of two lines. If there's no intersection, the point has <see cref="float.NegativeInfinity"/> as coordinates.
+		/// Returns the intersection of two <see cref="Line2"/>. If there's no intersection, the <see cref="Vector2"/> has <see cref="float.NegativeInfinity"/> as coordinates.
 		/// </summary>
 		public Vector2 Intersection(Line2 line)
 		{
@@ -141,24 +157,15 @@ namespace Com.Surbon.CSUtils.Math
 				);
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Line2)
-				return (Line2)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Line2 line) && (line == this);
 
 		/// <summary>
-		/// Says if the given line is parallel to this one.
+		/// Says if the given <see cref="Line2"/> is parallel to this one.
 		/// </summary>
-		public bool IsParallel(Line2 line)
-		{
-			return n.Cross(Vector2.PolarToCartesian(1, line.NormalForm.phi)) == 0;
-		}
+		public bool IsParallel(Line2 line) => n.Cross(Vector2.PolarToCartesian(1, line.NormalForm.phi)) == 0;
 
 		/// <summary>
-		/// Says if the given line is secant to this one.
+		/// Says if the given <see cref="Line2"/> is secant to this one.
 		/// </summary>
 		public bool IsSecant(Line2 line)
 		{
@@ -169,15 +176,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rotates the line by phi radians.
+		/// Rotates the <see cref="Line2"/> by phi radians.
 		/// </summary>
-		public void Rotate(float phi)
-		{
-			n.Rotate(phi);
-		}
+		public void Rotate(float phi) => n.Rotate(phi);
 
 		/// <summary>
-		/// Returns the line rotated by phi radians.
+		/// Returns the <see cref="Line2"/> rotated by phi radians.
 		/// </summary>
 		public Line2 Rotated(float phi) => new Line2(n.Rotated(phi), p);
 
