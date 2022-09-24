@@ -92,39 +92,31 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
-		/// <summary>
-		/// Says if both <see cref="Orthotope"/> have the same values.
-		/// </summary>
-		public static bool operator==(Orthotope orthotope1, Orthotope orthotope2)
+		private static bool IsEqual(Orthotope orthotope1, Orthotope orthotope2, bool equality)
 		{
 			if (orthotope1.Dimension != orthotope2.Dimension)
-				return false;
-
-			for (int i = orthotope1.Dimension - 1; i >= 0 ; i--)
-			{
-				if (orthotope1[i] != orthotope2[i])
-					return false;
-			}
-
-			return orthotope1.Origin == orthotope2.Origin;
-		}
-
-		/// <summary>
-		/// Says if both <see cref="Orthotope"/> have the same values.
-		/// </summary>
-		public static bool operator!=(Orthotope orthotope1, Orthotope orthotope2)
-		{
-			if (orthotope1.Dimension != orthotope2.Dimension)
-				return true;
+				return !equality;
 
 			for (int i = orthotope1.Dimension - 1; i >= 0; i--)
 			{
 				if (orthotope1[i] != orthotope2[i])
-					return true;
+					return !equality;
 			}
 
-			return orthotope1.Origin != orthotope2.Origin;
+			return equality;
 		}
+
+		/// <summary>
+		/// Says if both <see cref="Orthotope"/> have the same values.
+		/// </summary>
+		public static bool operator==(Orthotope orthotope1, Orthotope orthotope2) => IsEqual(orthotope1, orthotope2, true) &&
+			orthotope1.Origin == orthotope2.Origin;
+
+		/// <summary>
+		/// Says if both <see cref="Orthotope"/> have the same values.
+		/// </summary>
+		public static bool operator!=(Orthotope orthotope1, Orthotope orthotope2) => IsEqual(orthotope1, orthotope2, false) ||
+			orthotope1.Origin != orthotope2.Origin;
 
 		#endregion OPERATORS
 
