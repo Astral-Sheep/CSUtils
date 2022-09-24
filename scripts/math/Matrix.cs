@@ -269,10 +269,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// Multiplies the first <see cref="Matrix"/> by the invert of the second <see cref="Matrix"/>.
 		/// </summary>
 		/// <returns>m1 * m2^(-1)</returns>
-		public static Matrix operator/(Matrix m1, Matrix m2)
-		{
-			return m1 * m2.Inverted();
-		}
+		public static Matrix operator/(Matrix m1, Matrix m2) => m1 * m2.Inverted();
 
 		/// <summary>
 		/// Says if both <see cref="Matrix"/> have the same values.
@@ -318,13 +315,7 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Matrix)
-				return (Matrix)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Matrix matrix) && (matrix == this);
 
 		/// <summary>
 		/// Returns the adjugate of the <see cref="Matrix"/>.
