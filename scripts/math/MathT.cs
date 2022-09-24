@@ -2,19 +2,27 @@
 
 namespace Com.Surbon.CSUtils.Math
 {
+	using MathSys = System.Math;
+
 	/// <summary>
 	/// Provides structs and methods for mathematical operations
 	/// </summary>
 	public static class MathT
 	{
-		#pragma warning disable CS0659 // Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
-		#pragma warning disable CS0661 // Le type définit l'opérateur == ou l'opérateur != mais ne se substitue pas à Object.GetHashCode()
-		#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
-
 		/// <summary>
 		/// Clamps value between min and max.
 		/// </summary>
 		public static float Clamp(float value, float min, float max)
+		{
+			if (value <= min) return min;
+			else if (value >= max) return max;
+			return value;
+		}
+
+		/// <summary>
+		/// Clamps value between min and max.
+		/// </summary>
+		public static double Clamp(double value, double min, double max)
 		{
 			if (value <= min) return min;
 			else if (value >= max) return max;
@@ -27,7 +35,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// <param name="a">The dividend.</param>
 		/// <param name="b">The divisor.</param>
 		/// <param name="isPos">If true, the remainder is negative.</param>
-		public static float Congruence(float a, float b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
+		public static float Mod(float a, float b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
 
 		/// <summary>
 		/// Returns a modulo b.
@@ -35,7 +43,15 @@ namespace Com.Surbon.CSUtils.Math
 		/// <param name="a">The dividend.</param>
 		/// <param name="b">The divisor.</param>
 		/// <param name="isPos">If true, the remainder is negative.</param>
-		public static int Congruence(int a, int b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
+		public static double Mod(double a, double b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
+
+		/// <summary>
+		/// Returns a modulo b.
+		/// </summary>
+		/// <param name="a">The dividend.</param>
+		/// <param name="b">The divisor.</param>
+		/// <param name="isPos">If true, the remainder is negative.</param>
+		public static int Mod(int a, int b, bool isPos = true) => EuclidianRemainder(a, b) - (isPos ? 0 : b);
 
 		/// <summary>
 		/// Returns the euclidian quotient of a / b.
@@ -43,9 +59,19 @@ namespace Com.Surbon.CSUtils.Math
 		public static float EuclidianQuotient(float a, float b) => MathF.Floor(a / b);
 
 		/// <summary>
+		/// Returns the euclidian quotient of a / b.
+		/// </summary>
+		public static double EuclidianQuotient(double a, double b) => MathSys.Floor(a / b);
+
+		/// <summary>
 		/// Returns the euclidian remainder of a / b.
 		/// </summary>
 		public static float EuclidianRemainder(float a, float b) => a - EuclidianQuotient(a, b) * b;
+
+		/// <summary>
+		/// Returns the euclidian remainder of a / b.
+		/// </summary>
+		public static double EuclidianRemainder(double a, double b) => a - EuclidianQuotient(a, b) * b;
 
 		/// <summary>
 		/// Returns the euclidian remainder of a / b.
@@ -62,7 +88,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			int lFact = 1;
 
-			for (int i = 1; i <= value; i++)
+			for (int i = 2; i <= value; i++)
 			{
 				lFact *= i;
 			}
@@ -76,14 +102,29 @@ namespace Com.Surbon.CSUtils.Math
 		public static float Lerp(float a, float b, float ratio) => LerpUnclamped(a, b, Clamp(ratio, 0, 1));
 
 		/// <summary>
+		/// Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
+		/// </summary>
+		public static double Lerp(double a, double b, double ratio) => LerpUnclamped(a, b, Clamp(ratio, 0, 1));
+
+		/// <summary>
 		/// Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
 		/// </summary>
 		public static float LerpRand(float a, float b) => LerpUnclamped(a, b, (float)new Random().NextDouble());
 
 		/// <summary>
+		/// Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
+		/// </summary>
+		public static double LerpRand(double a, double b) => LerpUnclamped(a, b, new Random().NextDouble());
+
+		/// <summary>
 		/// Linearly interpolates between to values by a given ratio.
 		/// </summary>
 		public static float LerpUnclamped(float a, float b, float ratio) => a + (b - a) * ratio;
+
+		/// <summary>
+		/// Linearly interpolates between to values by a given ratio.
+		/// </summary>
+		public static double LerpUnclamped(double a, double b, double ratio) => a + (b - a) * ratio;
 
 		/// <summary>
 		/// Returns a to the power of -b.
@@ -97,13 +138,33 @@ namespace Com.Surbon.CSUtils.Math
 				pow /= a;
 			}
 
-			return a;
+			return pow;
+		}
+
+		/// <summary>
+		/// Returns a to the power of -b.
+		/// </summary>
+		public static double NegPow(double a, int b)
+		{
+			double pow = 1d;
+
+			for (int i = 0; i < b; i++)
+			{
+				pow /= a;
+			}
+
+			return pow;
 		}
 
 		/// <summary>
 		/// Returns the nth root of the given number.
 		/// </summary>
-		public static float NRoot(float value, float n) => MathF.Exp((1f / n) * MathF.Log(value));
+		public static float NRoot(float value, float n) => MathF.Exp(MathF.Log(value) / n);
+
+		/// <summary>
+		/// Returns the nth root of the given number.
+		/// </summary>
+		public static double NRoot(double value, double n) => MathSys.Exp(MathSys.Log(value) / n);
 
 		/// <summary>
 		/// Returns a to the power of b.
@@ -123,9 +184,26 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns a to the power of b.
 		/// </summary>
-		public static float Pow(float a, int b)
+		public static double PosPow(double a, int b)
 		{
-			return b < 0 ? NegPow(a, -b) : PosPow(a, b);
+			double pow = 1f;
+
+			for (int i = 0; i < b; i++)
+			{
+				pow *= a;
+			}
+
+			return pow;
 		}
+
+		/// <summary>
+		/// Returns a to the power of b.
+		/// </summary>
+		public static float Pow(float a, int b) => b < 0 ? NegPow(a, -b) : PosPow(a, b);
+
+		/// <summary>
+		/// Returns a to the power of b.
+		/// </summary>
+		public static double Pow(double a, int b) => b < 0 ? NegPow(a, -b) : PosPow(a, b);
 	}
 }

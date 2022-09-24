@@ -9,6 +9,31 @@
             Representation of a circle.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Circle.Origin">
+            <summary>
+            The center of the circle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Circle.Radius">
+            <summary>
+            The radius of the circle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Circle.Diameter">
+            <summary>
+            The diameter of the circle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Circle.Area">
+            <summary>
+            The surface of the circle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Circle.Perimeter">
+            <summary>
+            The perimeter of the circle.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.CircleIntersect(Com.Surbon.CSUtils.Math.Circle)">
             <summary>
             Returns the intersection points between the given circle and this circle.
@@ -46,6 +71,21 @@
         <member name="T:Com.Surbon.CSUtils.Math.Line2">
             <summary>
             Representation of a straight line in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line2.CartesianForm">
+            <summary>
+            The line as ax + by + c = 0.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line2.NormalForm">
+            <summary>
+            The line given with it's angle and it's origin.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line2.SlopeInterceptForm">
+            <summary>
+            The line given as mx + p = y.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
@@ -102,6 +142,31 @@
             Representation of a straight line in a 3 dimensional space.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.Direction">
+            <summary>
+            The direction of the line as a vector.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.Origin">
+            <summary>
+            The point of the line with x = 0.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.ParametricX">
+            <summary>
+            The constants of the x line in the parametric equation.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.ParametricY">
+            <summary>
+            The constants of the y line in the parametric equation.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.ParametricZ">
+            <summary>
+            The constants of the z line in the parametric equation.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.GetPoint(System.Single)">
             <summary>
             Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
@@ -127,9 +192,29 @@
             Says if both lines are secant.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.Rotate(System.Single)">
+            <summary>
+            Rotates the direction vector by the given angle in radians.
+            </summary>
+        </member>
         <member name="T:Com.Surbon.CSUtils.Math.LineN">
             <summary>
             Representation of a straight line in a N dimensional space.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.LineN.Dimension">
+            <summary>
+            The dimension of the line.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.LineN.Direction">
+            <summary>
+            The direction of the line as a vector.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.LineN.Origin">
+            <summary>
+            The point of the line with x = 0.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.LineN.GetPoint(System.Single)">
@@ -145,21 +230,6 @@
         <member name="T:Com.Surbon.CSUtils.Math.MathT">
             <summary>
             Provides structs and methods for mathematical operations
-            </summary>
-        </member>
-        <member name="T:Com.Surbon.CSUtils.Math.MathT.Rectangle">
-            <summary>
-            Representation of a rectangle in a 2 dimensional space.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Rectangle.IsIn(Com.Surbon.CSUtils.Math.Vector2)">
-            <summary>
-            Says if the given point is in the boundaries of the rectangle.
-            </summary>
-        </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Rectangle.Has(Com.Surbon.CSUtils.Math.Vector2)">
-            <summary>
-            Says if the given point is on the rectangle.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.Clamp(System.Single,System.Single,System.Single)">
@@ -238,9 +308,44 @@
             Returns a to the power of b.
             </summary>
         </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Matrix">
+            <summary>
+            Representation of a matrix
+            </summary>
+        </member>
         <member name="T:Com.Surbon.CSUtils.Math.NSphere">
             <summary>
             Representation of a sphere in a N dimensional space.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.NSphere.Dimension">
+            <summary>
+            The dimension of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.NSphere.Origin">
+            <summary>
+            The center of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.NSphere.Radius">
+            <summary>
+            The radius of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.NSphere.Diameter">
+            <summary>
+            The diameter of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.NSphere.Area">
+            <summary>
+            The surface of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.NSphere.Volume">
+            <summary>
+            The volume of the sphere.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.NSphere.Contains(Com.Surbon.CSUtils.Math.VectorN)">
@@ -248,9 +353,54 @@
             Says if the n-sphere contains the given point.
             </summary>
         </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Orthotope">
+            <summary>
+            Representation of a rectangle in N dimensions.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Orthotope.Dimension">
+            <summary>
+            The dimension of the rectangle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Orthotope.Item(System.Int32)">
+            <summary>
+            The length in the given dimension (starting at 0 for the x axis).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Orthotope.Origin">
+            <summary>
+            The origin of the rectangle.
+            </summary>
+        </member>
         <member name="T:Com.Surbon.CSUtils.Math.Rectangle">
             <summary>
             Representation of a rectangle in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Width">
+            <summary>
+            The width of the rectangle (on the x axis).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Height">
+            <summary>
+            The height of the rectangle (on the y axis).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Origin">
+            <summary>
+            The point on the top left of the rectangle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Perimeter">
+            <summary>
+            The perimeter of the rectangle.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Area">
+            <summary>
+            The area of the rectangle.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Rectangle.IsIn(Com.Surbon.CSUtils.Math.Vector2)">
@@ -263,9 +413,79 @@
             Says if the given point is on the rectangle.
             </summary>
         </member>
+        <member name="T:Com.Surbon.CSUtils.Math.RectParallelepiped">
+            <summary>
+            Representation of a rectangular parallelepiped.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Width">
+            <summary>
+            The width of the rectangle (on the x axis).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Height">
+            <summary>
+            The height of the rectangle (on the y axis).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Length">
+            <summary>
+            The length of the rectangle (on the z axis).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Origin">
+            <summary>
+            The point on the front top left of the parallelepiped.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Area">
+            <summary>
+            The surface of the parallelepiped.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Volume">
+            <summary>
+            The volume of the parallelepiped.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.IsIn(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if the given point is in the parallelepiped.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.Has(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if the given point is on one of the parallelepiped's faces.
+            </summary>
+        </member>
         <member name="T:Com.Surbon.CSUtils.Math.Sphere">
             <summary>
             Representation of a sphere in a 3 dimensional space.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Sphere.Origin">
+            <summary>
+            The center of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Sphere.Radius">
+            <summary>
+            The radius of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Sphere.Diameter">
+            <summary>
+            The diamater of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Sphere.Area">
+            <summary>
+            The surface of the sphere.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Sphere.Volume">
+            <summary>
+            The volume of the sphere.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Sphere.AreAntipodal(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
@@ -288,6 +508,16 @@
         <member name="T:Com.Surbon.CSUtils.Math.Vector2">
             <summary>
             Representation of a vector in a 2 dimensional space.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Vector2.x">
+            <summary>
+            The position of the vector on the x axis.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Vector2.y">
+            <summary>
+            The position of the vector on the y axis.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Abs">
@@ -489,12 +719,32 @@
             Representation of a vector in a 3 dimensional space
             </summary>
         </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Vector3.AngleType">
+            <summary>
+            Represents the angle types in a 3-dimensional space.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Vector3.x">
+            <summary>
+            The position of the vector on the x axis.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Vector3.y">
+            <summary>
+            The position of the vector on the y axis.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Vector3.z">
+            <summary>
+            The position of the vector on the z axis.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Abs">
             <summary>
             Returns the vector with absolute values.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Angle(Com.Surbon.CSUtils.Math.Vector3.ANGLE)">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Angle(Com.Surbon.CSUtils.Math.Vector3.AngleType)">
             <summary>
             Returns the azimuthal angle and the polar angle.
             </summary>
@@ -615,12 +865,12 @@
             Returns the vector with x, y and z to the power of pow.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotate(System.Single,Com.Surbon.CSUtils.Math.Vector3.ANGLE)">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotate(System.Single,Com.Surbon.CSUtils.Math.Vector3.AngleType)">
             <summary>
             Rotates the vector by value radians on the given angle
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotated(System.Single,Com.Surbon.CSUtils.Math.Vector3.ANGLE)">
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotated(System.Single,Com.Surbon.CSUtils.Math.Vector3.AngleType)">
             <summary>
             Returns the vector rotated by value radians on the given angle.
             </summary>
@@ -739,6 +989,11 @@
         <member name="T:Com.Surbon.CSUtils.Math.VectorN">
             <summary>
             Representation of a vector in a N dimensional space
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.VectorN.Size">
+            <summary>
+            The dimension of the vector.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.VectorN.Item(System.Int32)">

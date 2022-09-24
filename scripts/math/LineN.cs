@@ -11,30 +11,42 @@ namespace Com.Surbon.CSUtils.Math
 	/// </summary>
 	public struct LineN
 	{
-		public static LineN AxisW = new LineN(new VectorN(0, 0, 0, 1), new VectorN(0, 0, 0, 0));
+		/// <summary>
+		/// Shortand for writing LineN(VectorN(0, 0, 0, 1), VectorN(0, 0, 0, 0)).
+		/// </summary>
+		public static LineN AxisW => new LineN(new VectorN(0, 0, 0, 1), new VectorN(0, 0, 0, 0));
 
-		public readonly int Size;
+		/// <summary>
+		/// The dimension of the <see cref="LineN"/>.
+		/// </summary>
+		public readonly int Dimension;
 
+		/// <summary>
+		/// The direction of the <see cref="LineN"/> as a <see cref="VectorN"/>.
+		/// </summary>
 		public VectorN Direction
 		{
 			get => n;
 			set
 			{
-				if (value.Size == Size)
+				if (value.Size == Dimension)
 					n = value;
 			}
 		}
 
+		/// <summary>
+		/// The <see cref="VectorN"/> of the <see cref="LineN"/> with x = 0.
+		/// </summary>
 		public VectorN Origin
 		{
 			get => p;
 			set
 			{
-				if (value.Size == Size)
+				if (value.Size == Dimension)
 				{
 					p[0] = 0f;
 
-					for (int i = 1; i < Size; i++)
+					for (int i = 1; i < Dimension; i++)
 					{
 						p[i] = value[i] - value[0] * n[i];
 					}
@@ -45,21 +57,39 @@ namespace Com.Surbon.CSUtils.Math
 		private VectorN n;
 		private VectorN p;
 
+		/// <summary>
+		/// Creates a <see cref="LineN"/> with the given direction and origin.
+		/// </summary>
+		/// <param name="direction"></param>
+		/// <param name="origin"></param>
 		public LineN(VectorN direction, VectorN origin)
 		{
 			if (direction.Size != origin.Size)
 				throw new ArgumentException("The direction and the origin must have the same Size.");
 
-			Size = direction.Size;
+			Dimension = direction.Size;
 			n = direction;
 			p = origin;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="LineN"/> with its values set to the values of the given <see cref="LineN"/>.
+		/// </summary>
+		public LineN(LineN line)
+		{
+			Dimension = line.Dimension;
+			n = line.Direction;
+			p = line.Origin;
+		}
+
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="LineN"/> have the same dimension and same values.
+		/// </summary>
 		public static bool operator ==(LineN line1, LineN line2)
 		{
-			if (line1.Size == line2.Size)
+			if (line1.Dimension == line2.Dimension)
 			{
 				return line1.Direction == line2.Direction && line1.Origin == line2.Origin;
 			}
@@ -67,9 +97,12 @@ namespace Com.Surbon.CSUtils.Math
 			return false;
 		}
 
+		/// <summary>
+		/// Says if both <see cref="LineN"/> have a different dimension or different values.
+		/// </summary>
 		public static bool operator !=(LineN line1, LineN line2)
 		{
-			if (line1.Size == line2.Size)
+			if (line1.Dimension == line2.Dimension)
 			{
 				return line1.Direction != line2.Direction || line1.Origin != line2.Origin;
 			}
@@ -81,40 +114,34 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is LineN)
-				return (LineN)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is LineN line) && (line == this);
 
 		/// <summary>
-		/// Returns the point at the given value (the point is calculated with parametric equations).
+		/// Returns the <see cref="VectorN"/> at the given value (the point is calculated with parametric equations).
 		/// </summary>
 		public VectorN GetPoint(float t)
 		{
-			float[] coordinates = new float[Size];
+			VectorN point = new VectorN(Dimension);
 
-			for (int i = 0; i < Size; i++)
+			for (int i = 0; i < Dimension; i++)
 			{
-				coordinates[i] = p[i] + n[i] * t;
+				point[i] = p[i] + n[i] * t;
 			}
 
-			return new VectorN(coordinates);
+			return point;
 		}
 
 		/// <summary>
-		/// Says if both lines are parallel.
+		/// Says if both <see cref="LineN"/> are parallel.
 		/// </summary>
 		public bool IsParallel(LineN line)
 		{
-			if (line.Size != Size)
+			if (line.Dimension != Dimension)
 				throw new ArgumentException("Both lines must have the same Size.");
 
 			float lRatio = n[0] / line.Direction[0];
 
-			for (int i = 1; i < Size; i++)
+			for (int i = 1; i < Dimension; i++)
 			{
 				if (n[i] / line.Direction[i] != lRatio)
 					return false;

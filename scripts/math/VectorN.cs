@@ -7,10 +7,13 @@ namespace Com.Surbon.CSUtils.Math
 	#pragma warning disable CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
 
 	/// <summary>
-	/// Representation of a vector in a N dimensional space
+	/// Representation of a vector in a N-dimensional space.
 	/// </summary>
 	public struct VectorN
 	{
+		/// <summary>
+		/// The dimension of the <see cref="VectorN"/>.
+		/// </summary>
 		public readonly int Size;
 
 		/// <summary>
@@ -18,25 +21,55 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public float this[int index]
 		{
-			get => values[index];
+			get
+			{
+				if (index < 0 || index >= Size)
+					throw new ArgumentOutOfRangeException($"The index must be greater than or equal to zero and lesser than {Size}");
+
+				return values[index];
+			}
 			set
 			{
+				if (index < 0 || index >= Size)
+					throw new ArgumentOutOfRangeException($"The index must be greater than or equal to zero and lesser than {Size}");
+
 				values[index] = value;
 			}
 		}
 
 		private float[] values;
 
+		/// <summary>
+		/// Creates a <see cref="VectorN"/> with the given values.
+		/// </summary>
 		public VectorN(params float[] pValues)
 		{
 			values = pValues == null ? new float[4] : pValues;
 			Size = values.Length;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="VectorN"/> with the given size and all its values set to 0.
+		/// </summary>
 		public VectorN(int size)
 		{
 			values = new float[size];
 			Size = size;
+		}
+
+		/// <summary>
+		/// Creates a <see cref="VectorN"/> with its values set to the given <see cref="VectorN"/>.
+		/// </summary>
+		public VectorN(VectorN vector)
+		{
+			values = new float[vector.Size];
+
+			for (int i = 0; i < vector.Size; i++)
+			{
+				values[i] = vector[i];
+			}
+
+			Size = vector.Size;
 		}
 
 		#region OPERATORS
@@ -72,58 +105,99 @@ namespace Com.Surbon.CSUtils.Math
 			return new VectorN(lValues);
 		}
 
-		public static VectorN operator +(VectorN vector1, VectorN vector2)
+		/// <summary>
+		/// Adds both <see cref="VectorN"/>.
+		/// </summary>
+		/// <returns>vector1 + vector2.</returns>
+		public static VectorN operator +(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 + n2;
+				}
+			);
+
+		/// <summary>
+		/// Sets all the values of the <see cref="VectorN"/> to the opposite values (equivalent to vector * -1).
+		/// </summary>
+		/// <returns>-vector.</returns>
+		public static VectorN operator-(VectorN vector)
 		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
+			int dimension = vector.Size;
+			float[] lValues = new float[dimension];
+
+			for (int i = 0; i < dimension; i++)
 			{
-				return n1 + n2;
-			});
+				lValues[i] = -vector[i];
+			}
+
+			return new VectorN(lValues);
 		}
 
-		public static VectorN operator -(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 - n2;
-			});
-		}
+		/// <summary>
+		/// Subtract the second <see cref="VectorN"/> to the first one.
+		/// </summary>
+		/// <returns>vector1 - vector2.</returns>
+		public static VectorN operator -(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 - n2;
+				}
+			);
 
-		public static VectorN operator *(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 * n2;
-			});
-		}
+		/// <summary>
+		/// Multiplies the values of the first <see cref="VectorN"/> by the values of the second vector.
+		/// </summary>
+		/// <returns>vector1 * vector2.</returns>
+		public static VectorN operator *(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				}
+			);
 
-		public static VectorN operator *(VectorN vector, float scalar)
-		{
-			return Operate(vector, scalar, delegate (float n1, float n2)
-			{
-				return n1 * n2;
-			});
-		}
+		/// <summary>
+		/// Multiplies the <see cref="VectorN"/> with the <see cref="float"/>.
+		/// </summary>
+		/// <returns>vector * scalar.</returns>
+		public static VectorN operator *(VectorN vector, float scalar) => Operate(
+			vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				}
+			);
 
-		public static VectorN operator *(float scalar, VectorN vector)
-		{
-			return vector * scalar;
-		}
+		/// <summary>
+		/// Multiplies the <see cref="VectorN"/> with the <see cref="float"/>.
+		/// </summary>
+		/// <returns>scalar * vector.</returns>
+		public static VectorN operator *(float scalar, VectorN vector) => Operate(
+			vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 * n2;
+				}
+			);
 
-		public static VectorN operator /(VectorN vector1, VectorN vector2)
-		{
-			return Operate(vector1, vector2, delegate (float n1, float n2)
-			{
-				return n1 / n2;
-			});
-		}
+		/// <summary>
+		/// Divides the values of the first <see cref="VectorN"/> by the values of the second one.
+		/// </summary>
+		/// <returns>vector1 / vector2.</returns>
+		public static VectorN operator /(VectorN vector1, VectorN vector2) => Operate(
+			vector1, vector2, delegate (float n1, float n2)
+				{
+					return n1 / n2;
+				}
+			);
 
-		public static VectorN operator /(VectorN vector, float scalar)
-		{
-			return Operate(vector, scalar, delegate (float n1, float n2)
-			{
-				return n1 / n2;
-			});
-		}
+		/// <summary>
+		/// Divides the <see cref="VectorN"/> by the <see cref="float"/>.
+		/// </summary>
+		/// <returns>vector / scalar.</returns>
+		public static VectorN operator /(VectorN vector, float scalar) => Operate(
+			vector, scalar, delegate (float n1, float n2)
+				{
+					return n1 / n2;
+				}
+			);
 
 		private static bool IsEqual(VectorN vector1, VectorN vector2, bool equality)
 		{
@@ -141,22 +215,22 @@ namespace Com.Surbon.CSUtils.Math
 			return !equality;
 		}
 
-		public static bool operator ==(VectorN vector1, VectorN vector2)
-		{
-			return IsEqual(vector1, vector2, true);
-		}
+		/// <summary>
+		/// Says if both <see cref="VectorN"/> have the same values.
+		/// </summary>
+		public static bool operator ==(VectorN vector1, VectorN vector2) => IsEqual(vector1, vector2, true);
 
-		public static bool operator !=(VectorN vector1, VectorN vector2)
-		{
-			return IsEqual(vector1, vector2, false);
-		}
+		/// <summary>
+		/// Says if both <see cref="VectorN"/> have different values.
+		/// </summary>
+		public static bool operator !=(VectorN vector1, VectorN vector2) => IsEqual(vector1, vector2, false);
 
 		#endregion OPERATORS
 
 		#region INSTANCE
 
 		/// <summary>
-		/// Returns the vector with absolute values.
+		/// Returns the <see cref="VectorN"/> with absolute values.
 		/// </summary>
 		public VectorN Abs()
 		{
@@ -171,7 +245,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds up the length of the vector.
+		/// Rounds up the length of the <see cref="VectorN"/>.
 		/// </summary>
 		public void CeilLength()
 		{
@@ -190,7 +264,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds up the values of the vector.
+		/// Rounds up the values of the <see cref="VectorN"/>.
 		/// </summary>
 		public void CeilValues()
 		{
@@ -201,7 +275,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Clamps the length of the vector between min and max.
+		/// Clamps the length of the <see cref="VectorN"/> between min and max.
 		/// </summary>
 		public void ClampLength(float min, float max)
 		{
@@ -220,7 +294,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Clamps the values of the vector between the corresponding min and max in range.
+		/// Clamps the values of the <see cref="VectorN"/> between the corresponding min and max in range.
 		/// </summary>
 		public void ClampValues(params (float min, float max)[] range)
 		{
@@ -234,7 +308,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Clamps the values of the vector between min and max.
+		/// Clamps the values of the <see cref="VectorN"/> between min and max.
 		/// </summary>
 		public void ClampValuesUniform(float min, float max)
 		{
@@ -245,7 +319,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the distance between the vector (this) and the given vector.
+		/// Returns the distance between the <see cref="VectorN"/> (this) and the given <see cref="VectorN"/>.
 		/// </summary>
 		public float Distance(VectorN vector)
 		{
@@ -263,7 +337,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the squared distance between the vector (this) and the given vector.
+		/// Returns the squared distance between the <see cref="VectorN"/> (this) and the given <see cref="VectorN"/>.
 		/// </summary>
 		public float DistanceSquared(VectorN vector)
 		{
@@ -281,7 +355,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the dot product of the vector (this) and the given vector.
+		/// Returns the dot product of the <see cref="VectorN"/> (this) and the given <see cref="VectorN"/>.
 		/// </summary>
 		public float Dot(VectorN vector)
 		{
@@ -298,15 +372,10 @@ namespace Com.Surbon.CSUtils.Math
 			return result;
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (obj is VectorN)
-				return (VectorN)obj == this;
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is VectorN vector) && (vector == this);
 
 		/// <summary>
-		/// Rounds the length of the vector downward.
+		/// Rounds the length of the <see cref="VectorN"/> downward.
 		/// </summary>
 		public void FloorLength()
 		{
@@ -325,7 +394,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the values of the vector downward.
+		/// Rounds the values of the <see cref="VectorN"/> downward.
 		/// </summary>
 		public void FloorValues()
 		{
@@ -336,28 +405,22 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the vector is normalized (if the length is equal to 1).
+		/// Says if the <see cref="VectorN"/> is normalized (if the length is equal to 1).
 		/// </summary>
 		public bool IsNormalized() => LengthSquared() == 1;
 
 		/// <summary>
-		/// Lerp between this and to by weight (weight is clamped between 0 and 1).
+		/// Lerps between this and to by weight (weight is clamped between 0 and 1).
 		/// </summary>
-		public VectorN Lerp(VectorN to, float weight)
-		{
-			return LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
-		}
+		public VectorN Lerp(VectorN to, float weight) => LerpUnclamped(to, MathT.Clamp(weight, 0, 1));
 
 		/// <summary>
-		/// Lerp between this and to by a random number between 0 and 1.
+		/// Lerps between this and to by a random number between 0 and 1.
 		/// </summary>
-		public VectorN LerpRand(VectorN to)
-		{
-			return LerpUnclamped(to, (float)new Random().NextDouble());
-		}
+		public VectorN LerpRand(VectorN to) => LerpUnclamped(to, (float)new Random().NextDouble());
 
 		/// <summary>
-		/// Lerp between this and to by weight.
+		/// Lerps between this and to by weight.
 		/// </summary>
 		public VectorN LerpUnclamped(VectorN to, float weight)
 		{
@@ -375,7 +438,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the length of the vector.
+		/// Returns the length of the <see cref="VectorN"/>.
 		/// </summary>
 		public float Length()
 		{
@@ -390,7 +453,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the squared length of the vector.
+		/// Returns the squared length of the <see cref="VectorN"/>.
 		/// </summary>
 		public float LengthSquared()
 		{
@@ -413,7 +476,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], mod, false);
+				result[i] = MathT.Mod(values[i], mod, false);
 			}
 
 			return result;
@@ -431,14 +494,14 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], modv[i], false);
+				result[i] = MathT.Mod(values[i], modv[i], false);
 			}
 
 			return result;
 		}
 
 		/// <summary>
-		/// Sets the length of the vector to length.
+		/// Sets the length of the <see cref="VectorN"/> to the given length.
 		/// </summary>
 		public void Normalize(float length = 1)
 		{
@@ -456,15 +519,18 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the normalized vector.
+		/// Returns the <see cref="VectorN"/> with its length set to the given length.
 		/// </summary>
 		public VectorN Normalized(float length = 1)
 		{
+			if (length == 0)
+				throw new DivideByZeroException("The length must be different from zero.");
+
 			VectorN result = new VectorN(Size);
 			float l = LengthSquared();
 
 			if (l == 0)
-				throw new InvalidOperationException("The vector's length must be greater than 0");
+				return new VectorN(this);
 
 			l = MathF.Sqrt(l) / length;
 
@@ -485,7 +551,7 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], mod);
+				result[i] = MathT.Mod(values[i], mod);
 			}
 
 			return result;
@@ -503,14 +569,14 @@ namespace Com.Surbon.CSUtils.Math
 
 			for (int i = 0; i < Size; i++)
 			{
-				result[i] = MathT.Congruence(values[i], modv[i]);
+				result[i] = MathT.Mod(values[i], modv[i]);
 			}
 
 			return result;
 		}
 
 		/// <summary>
-		/// Returns the vector with its values to the power of pow.
+		/// Returns the <see cref="VectorN"/> with its values to the power of pow.
 		/// </summary>
 		public VectorN Pow(float pow)
 		{
@@ -525,7 +591,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the length of the vector.
+		/// Rounds the length of the <see cref="VectorN"/>.
 		/// </summary>
 		public void RoundLength()
 		{
@@ -544,7 +610,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Rounds the values of the vector.
+		/// Rounds the values of the <see cref="VectorN"/>.
 		/// </summary>
 		public void RoundValues()
 		{
@@ -555,7 +621,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Returns the signs of each value in the vector as a vector.
+		/// Returns the signs of each value in the <see cref="VectorN"/> as a <see cref="VectorN"/>.
 		/// </summary>
 		public VectorN Sign()
 		{
