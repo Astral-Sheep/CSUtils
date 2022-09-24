@@ -25,10 +25,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Vector2 Origin
 		{
 			get => o;
-			set
-			{
-				o = value;
-			}
+			set => o = value;
 		}
 
 		/// <summary>
@@ -171,13 +168,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public bool Contains(Vector3 point) => (point.x - o.x) * (point.x - o.x) + (point.y - o.y) * (point.y - o.y) == r * r;
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Circle)
-				return (Circle)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Circle circle) && (circle == this);
 
 		/// <summary>
 		/// Returns the <see cref="Vector2"/> on the <see cref="Circle"/> at the given angle.

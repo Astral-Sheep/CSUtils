@@ -304,37 +304,21 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the distance between the <see cref="Vector3"/> (this) and the given <see cref="Vector3"/>.
 		/// </summary>
-		public float Distance(Vector3 vector)
-		{
-			if (vector == this)
-				return 0;
-
-			return MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z));
-		}
+		public float Distance(Vector3 vector) => (vector == this) ? 0 :
+			MathF.Sqrt((x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z));
 
 		/// <summary>
 		/// Returns the distance squared between the <see cref="Vector3"/> (this) and the given <see cref="Vector3"/>.
 		/// </summary>
-		public float DistanceSquared(Vector3 vector)
-		{
-			if (vector == this)
-				return 0;
-
-			return (x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z);
-		}
+		public float DistanceSquared(Vector3 vector) => (vector == this) ? 0 :
+			(x - vector.x) * (x - vector.x) + (y - vector.y) * (y - vector.y) + (z - vector.z) * (z - vector.z);
 
 		/// <summary>
 		/// Returns the dot product of the <see cref="Vector3"/> (this) and the given the <see cref="Vector3"/>.
 		/// </summary>
 		public float Dot(Vector3 vector) => x * vector.x + y * vector.y + z * vector.z;
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Vector3)
-				return (Vector3)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Vector3 vector) && (vector == this);
 
 		/// <summary>
 		/// Rounds the length of the <see cref="Vector3"/> downward.

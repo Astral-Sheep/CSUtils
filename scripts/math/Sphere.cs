@@ -24,10 +24,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Vector3 Origin
 		{
 			get => o;
-			set
-			{
-				o = value;
-			}
+			set => o = value;
 		}
 
 		/// <summary>
@@ -133,13 +130,7 @@ namespace Com.Surbon.CSUtils.Math
 		/// </summary>
 		public bool Contains(Vector3 point) => (point - o).LengthSquared() == r * r;
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Sphere)
-				return (Sphere)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Sphere sphere) && (sphere == this);
 
 		/// <summary>
 		/// Returns the <see cref="Vector3"/> on the <see cref="Sphere"/> with the given angles.

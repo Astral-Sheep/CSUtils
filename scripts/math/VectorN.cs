@@ -372,13 +372,7 @@ namespace Com.Surbon.CSUtils.Math
 			return result;
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (obj is VectorN)
-				return (VectorN)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is VectorN vector) && (vector == this);
 
 		/// <summary>
 		/// Rounds the length of the <see cref="VectorN"/> downward.

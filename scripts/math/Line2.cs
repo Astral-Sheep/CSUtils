@@ -157,13 +157,7 @@ namespace Com.Surbon.CSUtils.Math
 				);
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Line2)
-				return (Line2)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Line2 line) && (line == this);
 
 		/// <summary>
 		/// Says if the given <see cref="Line2"/> is parallel to this one.
