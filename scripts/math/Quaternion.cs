@@ -84,91 +84,58 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Adds both <see cref="Quaternion"/>.
 		/// </summary>
-		public static Quaternion operator+(Quaternion q1, Quaternion q2)
-		{
-			return new Quaternion(q1.a + q2.a, q1.b + q2.b, q1.c + q2.c, q1.d + q2.d);
-		}
+		public static Quaternion operator+(Quaternion q1, Quaternion q2) => new Quaternion(q1.a + q2.a, q1.b + q2.b, q1.c + q2.c, q1.d + q2.d);
 
 		/// <summary>
 		/// Sets the values of the <see cref="Quaternion"/> to the opposite values.
 		/// </summary>
-		public static Quaternion operator-(Quaternion q)
-		{
-			return new Quaternion(-q.a, -q.b, -q.c, -q.d);
-		}
+		public static Quaternion operator-(Quaternion q) => new Quaternion(-q.a, -q.b, -q.c, -q.d);
 
 		/// <summary>
 		/// Subtract the second <see cref="Quaternion"/> to the first one.
 		/// </summary>
-		public static Quaternion operator-(Quaternion q1, Quaternion q2)
-		{
-			return new Quaternion(q1.a - q2.a, q1.b - q2.b, q1.c - q2.c, q1.d - q2.d);
-		}
+		public static Quaternion operator-(Quaternion q1, Quaternion q2) => new Quaternion(q1.a - q2.a, q1.b - q2.b, q1.c - q2.c, q1.d - q2.d);
 
 		/// <summary>
 		/// Multiplies both <see cref="Quaternion"/>.
 		/// </summary>
-		public static Quaternion operator*(Quaternion q1, Quaternion q2)
-		{
-			return new Quaternion(
+		public static Quaternion operator*(Quaternion q1, Quaternion q2) => new Quaternion(
 				q1.a * q2.a - q1.b * q2.b - q1.c * q2.c - q1.d * q2.d,
 				q1.a * q2.b + q1.b * q2.a + q1.c * q2.d - q1.d * q2.c,
 				q1.a * q2.c + q1.c * q2.a + q1.d * q2.b - q1.b * q2.d,
 				q1.a * q2.d + q1.d * q2.a + q1.b * q2.c - q1.c * q2.b
 				);
-		}
 
 		/// <summary>
 		/// Multiplies the <see cref="Quaternion"/> with the <see cref="float"/>.
 		/// </summary>
-		public static Quaternion operator*(Quaternion q, float lambda)
-		{
-			return new Quaternion(q.a * lambda, q.b * lambda, q.c * lambda, q.d * lambda);
-		}
+		public static Quaternion operator*(Quaternion q, float lambda) => new Quaternion(q.a * lambda, q.b * lambda, q.c * lambda, q.d * lambda);
 
 		/// <summary>
 		/// Multiplies the <see cref="Quaternion"/> with the <see cref="float"/>.
 		/// </summary>
-		public static Quaternion operator*(float lambda, Quaternion q)
-		{
-			return new Quaternion(lambda * q.a, lambda * q.b, lambda * q.c, lambda * q.d);
-		}
+		public static Quaternion operator*(float lambda, Quaternion q) => new Quaternion(lambda * q.a, lambda * q.b, lambda * q.c, lambda * q.d);
 
 		/// <summary>
 		/// Multiplies the first <see cref="Quaternion"/> by the inverse of the second <see cref="Quaternion"/>.
 		/// </summary>
-		public static Quaternion operator/(Quaternion q1, Quaternion q2)
-		{
-			return q1 * q2.GetInverse();
-		}
+		public static Quaternion operator/(Quaternion q1, Quaternion q2) => q1 * q2.GetInverse();
 
 		/// <summary>
 		/// Says if both <see cref="Quaternion"/> have the same value.
 		/// </summary>
-		public static bool operator==(Quaternion q1, Quaternion q2)
-		{
-			return q1.a == q2.a && q1.b == q2.b && q1.c == q2.c && q1.d == q2.d;
-		}
+		public static bool operator==(Quaternion q1, Quaternion q2) => q1.a == q2.a && q1.b == q2.b && q1.c == q2.c && q1.d == q2.d;
 
 		/// <summary>
 		/// Says if both <see cref="Quaternion"/> have a different value.
 		/// </summary>
-		public static bool operator!=(Quaternion q1, Quaternion q2)
-		{
-			return q1.a != q2.a || q1.b != q2.b || q1.c != q2.c || q1.d != q2.d;
-		}
+		public static bool operator!=(Quaternion q1, Quaternion q2) => q1.a != q2.a || q1.b != q2.b || q1.c != q2.c || q1.d != q2.d;
 
 		#endregion OPERATORS
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is Quaternion)
-				return (Quaternion)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is Quaternion q) && (q == this);
 
 		/// <summary>
 		/// Returns the conjugate of the <see cref="Quaternion"/> (q*).
@@ -178,26 +145,17 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Returns the inverse of the <see cref="Quaternion"/>(q^-1).
 		/// </summary>
-		public Quaternion GetInverse()
-		{
-			return (1f / (a * a + b * b + c * c + d * d)) * new Quaternion(a, -b, -c, -d);
-		}
+		public Quaternion GetInverse() => (1f / (a * a + b * b + c * c + d * d)) * new Quaternion(a, -b, -c, -d);
 
 		/// <summary>
 		/// Returns the norm of the <see cref="Quaternion"/>.
 		/// </summary>
-		public float GetNorm()
-		{
-			return MathF.Sqrt(a * a + b * b + c * c + d * d);
-		}
+		public float GetNorm() => MathF.Sqrt(a * a + b * b + c * c + d * d);
 
 		/// <summary>
 		/// Returns the squared norm of the <see cref="Quaternion"/>.
 		/// </summary>
-		public float GetNormSquared()
-		{
-			return a * a + b * b + c * c + d * d;
-		}
+		public float GetNormSquared() => a * a + b * b + c * c + d * d;
 
 		/// <summary>
 		/// Rotates the <see cref="Quaternion"/> on the given axis.
