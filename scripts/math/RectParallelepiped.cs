@@ -16,7 +16,7 @@ namespace Com.Surbon.CSUtils.Math
 		#region PROPERTIES
 
 		/// <summary>
-		/// The width of the rectangle (on the x axis).
+		/// The width of the <see cref="RectParallelepiped"/> (on the x axis).
 		/// </summary>
 		public float Width
 		{
@@ -31,7 +31,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The height of the rectangle (on the y axis).
+		/// The height of the <see cref="RectParallelepiped"/> (on the y axis).
 		/// </summary>
 		public float Height
 		{
@@ -46,7 +46,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The length of the rectangle (on the z axis).
+		/// The length of the <see cref="RectParallelepiped"/> (on the z axis).
 		/// </summary>
 		public float Length
 		{
@@ -61,7 +61,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The point on the front top left of the parallelepiped.
+		/// The <see cref="Vector3"/> on the front top left of the <see cref="RectParallelepiped"/>.
 		/// </summary>
 		public Vector3 Origin
 		{
@@ -70,12 +70,12 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The surface of the parallelepiped.
+		/// The surface of the <see cref="RectParallelepiped"/>.
 		/// </summary>
 		public float Area => 2f * w * h + l * (w + h);
 
 		/// <summary>
-		/// The volume of the parallelepiped.
+		/// The volume of the <see cref="RectParallelepiped"/>.
 		/// </summary>
 		public float Volume => w * h * l;
 
@@ -86,6 +86,9 @@ namespace Com.Surbon.CSUtils.Math
 		private float h;
 		private float l;
 
+		/// <summary>
+		/// Creates a <see cref="RectParallelepiped"/> with the given width, height and length, and with its top left point on the given origin.
+		/// </summary>
 		public RectParallelepiped(Vector3 origin, float width, float height, float length)
 		{
 			o = origin;
@@ -94,6 +97,9 @@ namespace Com.Surbon.CSUtils.Math
 			l = length;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="RectParallelepiped"/> with its values set to the values of the given <see cref="RectParallelepiped"/>.
+		/// </summary>
 		public RectParallelepiped(RectParallelepiped rectParallelepiped)
 		{
 			o = rectParallelepiped.Origin;
@@ -104,11 +110,17 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="RectParallelepiped"/> have the same values.
+		/// </summary>
 		public static bool operator==(RectParallelepiped rect1, RectParallelepiped rect2)
 		{
 			return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height && rect1.Length == rect2.Length;
 		}
 
+		/// <summary>
+		/// Says if both <see cref="RectParallelepiped"/> have different values.
+		/// </summary>
 		public static bool operator!=(RectParallelepiped rect1, RectParallelepiped rect2)
 		{
 			return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height || rect1.Length != rect2.Length;
@@ -127,7 +139,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the given point is in the parallelepiped.
+		/// Says if the given <see cref="Vector3"/> is within the <see cref="RectParallelepiped"/>.
 		/// </summary>
 		public bool IsIn(Vector3 point)
 		{
@@ -135,7 +147,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// Says if the given point is on one of the parallelepiped's faces.
+		/// Says if the given <see cref="Vector3"/> is on one of the <see cref="RectParallelepiped"/>'s faces.
 		/// </summary>
 		public bool Has(Vector3 point)
 		{
