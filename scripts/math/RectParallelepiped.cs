@@ -113,48 +113,39 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if both <see cref="RectParallelepiped"/> have the same values.
 		/// </summary>
-		public static bool operator==(RectParallelepiped rect1, RectParallelepiped rect2)
-		{
-			return rect1.Origin == rect2.Origin && rect1.Width == rect2.Width && rect1.Height == rect2.Height && rect1.Length == rect2.Length;
-		}
+		public static bool operator==(RectParallelepiped rect1, RectParallelepiped rect2) => rect1.Origin == rect2.Origin &&
+			rect1.Width == rect2.Width &&
+			rect1.Height == rect2.Height &&
+			rect1.Length == rect2.Length;
 
 		/// <summary>
 		/// Says if both <see cref="RectParallelepiped"/> have different values.
 		/// </summary>
-		public static bool operator!=(RectParallelepiped rect1, RectParallelepiped rect2)
-		{
-			return rect1.Origin != rect2.Origin || rect1.Width != rect2.Width || rect1.Height != rect2.Height || rect1.Length != rect2.Length;
-		}
+		public static bool operator!=(RectParallelepiped rect1, RectParallelepiped rect2) => rect1.Origin != rect2.Origin ||
+			rect1.Width != rect2.Width ||
+			rect1.Height != rect2.Height ||
+			rect1.Length != rect2.Length;
 
 		#endregion OPERATORS
 
 		#region INSTANCE
 
-		public override bool Equals(object obj)
-		{
-			if (obj is RectParallelepiped)
-				return (RectParallelepiped)obj == this;
-
-			return false;
-		}
+		public override bool Equals(object obj) => (obj is RectParallelepiped rect) && (rect == this);
 
 		/// <summary>
 		/// Says if the given <see cref="Vector3"/> is within the <see cref="RectParallelepiped"/>.
 		/// </summary>
-		public bool IsIn(Vector3 point)
-		{
-			return point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l;
-		}
+		public bool IsIn(Vector3 point) => point.x >= o.x && point.x <= o.x + w &&
+			point.y >= o.y && point.y <= o.y + h &&
+			point.z >= o.z && point.z <= o.z + l;
 
 		/// <summary>
 		/// Says if the given <see cref="Vector3"/> is on one of the <see cref="RectParallelepiped"/>'s faces.
 		/// </summary>
-		public bool Has(Vector3 point)
-		{
-			return ((point.x == o.x || point.x == o.x + w) && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l) ||
+		public bool Has(Vector3 point) =>
+			((point.x == o.x || point.x == o.x + w) && point.y >= o.y && point.y <= o.y + h && point.z >= o.z && point.z <= o.z + l) ||
 				((point.y == o.y || point.y == o.y + h) && point.x >= o.x && point.x <= o.x + w && point.z >= o.z && point.z <= o.z + l) ||
 				((point.z == o.z || point.z == o.z + l) && point.x >= o.x && point.x <= o.x + w && point.y >= o.y && point.y <= o.y + h);
-		}
 
 		public override string ToString() => $"Origin : {o} | Width : {w} | Height {h} | Length {l}";
 
