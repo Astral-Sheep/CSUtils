@@ -134,11 +134,7 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATOR
 
-		/// <summary>
-		/// Adds both <see cref="Matrix"/>.
-		/// </summary>
-		/// <returns>m1 + m2.</returns>
-		public static Matrix operator+(Matrix m1, Matrix m2)
+		private static Matrix Operate(Matrix m1, Matrix m2, Func<float, float, float> operation)
 		{
 			if (!m1.SameSize(m2))
 				throw new ArgumentException("Both matrices must have the same size.");
@@ -149,72 +145,88 @@ namespace Com.Surbon.CSUtils.Math
 			{
 				for (int j = 0; j < m1.Columns; j++)
 				{
-					matrix[i, j] = m1[i, j] + m2[i, j];
+					matrix[i, j] = operation(m1[i, j], m2[i, j]);
 				}
 			}
 
 			return matrix;
 		}
+
+		private static Matrix Operate(Matrix m, float scalar, Func<float, float, float> operation)
+		{
+			Matrix matrix = new Matrix(m.Rows, m.Columns);
+
+			for (int i = 0; i < m.Rows; i++)
+			{
+				for (int j = 0; j < m.Columns; j++)
+				{
+					matrix[i, j] = operation(m[i, j], scalar);
+				}
+			}
+
+			return matrix;
+		}
+
+		private static bool IsEqual(Matrix m1, Matrix m2, bool equality)
+		{
+			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
+				return !equality;
+
+			for (int i = 0; i < m1.Rows; i++)
+			{
+				for (int j = 0; j < m1.Columns; j++)
+				{
+					if (m1[i, j] != m2[i, j])
+						return !equality;
+				}
+			}
+
+			return equality;
+		}
+
+		/// <summary>
+		/// Adds both <see cref="Matrix"/>.
+		/// </summary>
+		/// <returns>m1 + m2.</returns>
+		public static Matrix operator+(Matrix m1, Matrix m2) => Operate(
+			m1, m2, delegate (float f1, float f2)
+				{
+					return f1 + f2;
+				}
+			);
 
 		/// <summary>
 		/// Subtract the second <see cref="Matrix"/> to the first one.
 		/// </summary>
 		/// <returns>m1 - m2.</returns>
-		public static Matrix operator-(Matrix m1, Matrix m2)
-		{
-			if (!m1.SameSize(m2))
-				throw new ArgumentException("Both matrices must have the same size.");
-
-			Matrix matrix = new Matrix(m1.Rows, m1.Columns);
-
-			for (int i = 0; i < m1.Rows; i++)
-			{
-				for (int j = 0; j < m1.Columns; j++)
+		public static Matrix operator-(Matrix m1, Matrix m2) => Operate(
+			m1, m2, delegate (float f1, float f2)
 				{
-					matrix[i, j] = m1[i, j] - m2[i, j];
+					return f1 - f2;
 				}
-			}
-
-			return matrix;
-		}
+			);
 
 		/// <summary>
 		/// Multiplies the <see cref="Matrix"/> with the <see cref="float"/>.
 		/// </summary>
 		/// <returns>scalar * m.</returns>
-		public static Matrix operator*(float scalar, Matrix m)
-		{
-			Matrix matrix = new Matrix(m.Rows, m.Columns);
-
-			for (int i = 0; i < m.Rows; i++)
-			{
-				for (int j = 0; j < m.Columns; j++)
+		public static Matrix operator*(float scalar, Matrix m) => Operate(
+			m, scalar, delegate (float f1, float f2)
 				{
-					matrix[i, j] = scalar * m[i, j];
+					return f1 * f2;
 				}
-			}
-
-			return matrix;
-		}
+			);
 
 		/// <summary>
 		/// Multiplies the <see cref="Matrix"/> with the <see cref="float"/>.
 		/// </summary>
 		/// <returns>m * scalar.</returns>
-		public static Matrix operator *(Matrix m, float scalar)
-		{
-			Matrix matrix = new Matrix(m.Rows, m.Columns);
-
-			for (int i = 0; i < m.Rows; i++)
-			{
-				for (int j = 0; j < m.Columns; j++)
+		public static Matrix operator *(Matrix m, float scalar) => Operate(
+			m, scalar, delegate (float f1, float f2)
 				{
-					matrix[i, j] = m[i, j] * scalar;
+					return f1 * f2;
 				}
-			}
-
-			return matrix;
-		}
+			);
 
 		/// <summary>
 		/// Multiplies both <see cref="Matrix" />.
@@ -250,20 +262,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// Divides the <see cref="Matrix"/> by the <see cref="float"/>.
 		/// </summary>
 		/// <returns>m / scalar.</returns>
-		public static Matrix operator/(Matrix m, float scalar)
-		{
-			Matrix matrix = new Matrix(m.Rows, m.Columns);
-
-			for (int i = 0; i < m.Rows; i++)
-			{
-				for (int j = 0; j < m.Columns; j++)
+		public static Matrix operator/(Matrix m, float scalar) => Operate(
+			m, scalar, delegate (float f1, float f2)
 				{
-					matrix[i, j] = m[i, j] / scalar;
+					return f1 / f2;
 				}
-			}
-
-			return matrix;
-		}
+			);
 
 		/// <summary>
 		/// Multiplies the first <see cref="Matrix"/> by the invert of the second <see cref="Matrix"/>.
@@ -274,42 +278,12 @@ namespace Com.Surbon.CSUtils.Math
 		/// <summary>
 		/// Says if both <see cref="Matrix"/> have the same values.
 		/// </summary>
-		public static bool operator==(Matrix m1, Matrix m2)
-		{
-			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
-				return false;
-
-			for (int i = 0; i < m1.Rows; i++)
-			{
-				for (int j = 0; j < m1.Columns; j++)
-				{
-					if (m1[i, j] != m2[i, j])
-						return false;
-				}
-			}
-
-			return true;
-		}
+		public static bool operator ==(Matrix m1, Matrix m2) => IsEqual(m1, m2, true);
 
 		/// <summary>
 		/// Says if both <see cref="Matrix"/> have different values.
 		/// </summary>
-		public static bool operator!=(Matrix m1, Matrix m2)
-		{
-			if (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
-				return true;
-
-			for (int i = 0; i < m1.Rows; i++)
-			{
-				for (int j = 0; j < m1.Columns; j++)
-				{
-					if (m1[i, j] != m2[i, j])
-						return true;
-				}
-			}
-
-			return false;
-		}
+		public static bool operator !=(Matrix m1, Matrix m2) => IsEqual(m1, m2, false);
 
 		#endregion OPERATOR
 
