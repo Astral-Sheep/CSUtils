@@ -49,7 +49,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Vector2 Origin
 		{
 			get => o;
-			set { o = value; }
+			set => o = value;
 		}
 
 		/// <summary>

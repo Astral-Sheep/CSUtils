@@ -66,7 +66,7 @@ namespace Com.Surbon.CSUtils.Math
 		public Vector3 Origin
 		{
 			get => o;
-			set { o = value; }
+			set => o = value;
 		}
 
 		/// <summary>

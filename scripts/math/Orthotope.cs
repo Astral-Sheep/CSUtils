@@ -12,7 +12,7 @@ namespace Com.Surbon.CSUtils.Math
 	public struct Orthotope
 	{
 		/// <summary>
-		/// The dimension of the rectangle.
+		/// The dimension of the <see cref="Orthotope"/>.
 		/// </summary>
 		public readonly int Dimension;
 
@@ -43,7 +43,7 @@ namespace Com.Surbon.CSUtils.Math
 		}
 
 		/// <summary>
-		/// The origin of the rectangle.
+		/// The origin of the <see cref="Orthotope"/>.
 		/// </summary>
 		public VectorN Origin
 		{
@@ -52,6 +52,8 @@ namespace Com.Surbon.CSUtils.Math
 			{
 				if (value.Size != Dimension)
 					throw new ArgumentException($"The vector must be in {Dimension} dimensions.");
+
+				o = value;
 			}
 		}
 
@@ -60,6 +62,9 @@ namespace Com.Surbon.CSUtils.Math
 		private VectorN o;
 		private float[] l;
 
+		/// <summary>
+		/// Creates an <see cref="Orthotope"/> of the given lengths at the given origin.
+		/// </summary>
 		public Orthotope(VectorN origin, params float[] lengths)
 		{
 			if (origin.Size != lengths.Length)
@@ -70,6 +75,9 @@ namespace Com.Surbon.CSUtils.Math
 			Dimension = o.Size;
 		}
 
+		/// <summary>
+		/// Creates an <see cref="Orthotope"/> with its values set to the values of the given <see cref="Orthotope"/>.
+		/// </summary>
 		public Orthotope(Orthotope orthotope)
 		{
 			o = orthotope.Origin;
@@ -84,6 +92,9 @@ namespace Com.Surbon.CSUtils.Math
 
 		#region OPERATORS
 
+		/// <summary>
+		/// Says if both <see cref="Orthotope"/> have the same values.
+		/// </summary>
 		public static bool operator==(Orthotope orthotope1, Orthotope orthotope2)
 		{
 			if (orthotope1.Dimension != orthotope2.Dimension)
@@ -98,6 +109,9 @@ namespace Com.Surbon.CSUtils.Math
 			return orthotope1.Origin == orthotope2.Origin;
 		}
 
+		/// <summary>
+		/// Says if both <see cref="Orthotope"/> have the same values.
+		/// </summary>
 		public static bool operator!=(Orthotope orthotope1, Orthotope orthotope2)
 		{
 			if (orthotope1.Dimension != orthotope2.Dimension)
