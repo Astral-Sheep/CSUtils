@@ -11,6 +11,68 @@ namespace Com.Surbon.CSUtils.Collections
 	public static class QueueT
 	{
 		public static Queue<T> Clone<T>(Queue<T> queue) => new Queue<T>(queue);
+
+		public static Queue<T> Sort<T>(Queue<T> queue, bool reversed = false) where T : IComparable
+		{
+			T[] array = new T[queue.Count];
+			Queue<T> subQueue = new Queue<T>();
+
+			for (int i = 0; i < array.Length; i++)
+			{
+				subQueue.Enqueue(queue.Dequeue());
+				array[i] = subQueue.Peek();
+			}
+
+			array = ArrayT.Sort(array);
+
+			if (reversed)
+			{
+				for (int i = array.Length - 1; i >= 0; i--)
+				{
+					queue.Enqueue(array[i]);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < array.Length; i++)
+				{
+					queue.Enqueue(array[i]);
+				}
+			}
+
+			return queue;
+		}
+
+		public static Queue<T> Sort<T>(Queue<T> queue, IComparer<T> comparer, bool reversed = false)
+		{
+			T[] array = new T[queue.Count];
+			Queue<T> subQueue = new Queue<T>();
+
+			for (int i = 0; i < array.Length; i++)
+			{
+				subQueue.Enqueue(queue.Dequeue());
+				array[i] = subQueue.Peek();
+			}
+
+			array = ArrayT.Sort(array, comparer);
+
+			if (reversed)
+			{
+				for (int i = array.Length - 1; i >= 0; i--)
+				{
+					queue.Enqueue(array[i]);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < array.Length; i++)
+				{
+					queue.Enqueue(array[i]);
+				}
+			}
+
+			return queue;
+		}
 	}
 
 	public static class StackT
@@ -22,13 +84,13 @@ namespace Com.Surbon.CSUtils.Collections
 			T[] array = new T[stack.Count];
 			Stack<T> subStack = new Stack<T>();
 
-			for (int i = 0; i < stack.Count; i++)
+			for (int i = 0; i < array.Length; i++)
 			{
 				subStack.Push(stack.Pop());
 				array[i] = subStack.Peek();
 			}
 
-			array = FusionSort(array);
+			array = ArrayT.Sort(array);
 
 			if (reversed)
 			{
@@ -53,13 +115,13 @@ namespace Com.Surbon.CSUtils.Collections
 			T[] array = new T[stack.Count];
 			Stack<T> subStack = new Stack<T>();
 
-			for (int i = 0; i < stack.Count; i++)
+			for (int i = 0; i < array.Length; i++)
 			{
 				subStack.Push(stack.Pop());
 				array[i] = subStack.Peek();
 			}
 
-			array = FusionSort(array, comparer);
+			array = ArrayT.Sort(array, comparer);
 
 			if (reversed)
 			{
@@ -77,122 +139,6 @@ namespace Com.Surbon.CSUtils.Collections
 			}
 
 			return stack;
-		}
-
-		private static T[] FusionSort<T>(T[] array) where T : IComparable
-		{
-			if (array.Length <= 1) return array;
-
-			int half = array.Length / 2;
-			T[] subArray1 = new T[half];
-			T[] subArray2 = new T[array.Length - half];
-
-			for (int i = 0; i < array.Length; i++)
-			{
-				if (i < half) subArray1[i] = array[i];
-				else subArray2[i - half] = array[i];
-			}
-
-			subArray1 = FusionSort(subArray1);
-			subArray2 = FusionSort(subArray2);
-			return Fusion(subArray1, subArray2);
-		}
-
-		private static T[] FusionSort<T>(T[] array, IComparer<T> comparer)
-		{
-			if (array.Length <= 1) return array;
-
-			int half = array.Length / 2;
-			T[] subArray1 = new T[half];
-			T[] subArray2 = new T[array.Length - half];
-
-			for (int i = 0; i < array.Length; i++)
-			{
-				if (i < half) subArray1[i] = array[i];
-				else subArray2[i - half] = array[i];
-			}
-
-			subArray1 = FusionSort(subArray1, comparer);
-			subArray2 = FusionSort(subArray2, comparer);
-			return Fusion(subArray1, subArray2, comparer);
-		}
-
-		private static T[] Fusion<T>(T[] array1, T[] array2) where T : IComparable
-		{
-			int l1 = array1.Length;
-			int l2 = array2.Length;
-			int idx1 = 0, idx2 = 0;
-			T[] result = new T[l1 + l2];
-
-			while (idx1 < l1 && idx2 < l2)
-			{
-				if (array1[idx1].CompareTo(array2[idx2]) <= 0)
-				{
-					result[idx1 + idx2] = array1[idx1];
-					++idx1;
-				}
-				else
-				{
-					result[idx1 + idx2] = array2[idx2];
-					++idx2;
-				}
-			}
-
-			if (idx1 < l1)
-			{
-				for (int i = idx1; i < l1; i++)
-				{
-					result[idx1 + idx2] = array1[idx1];
-				}
-			}
-			else if (idx2 < l2)
-			{
-				for (int i = idx2; i < l2; i++)
-				{
-					result[idx1 + idx2] = array1[idx2];
-				}
-			}
-
-			return result;
-		}
-
-		private static T[] Fusion<T>(T[] array1, T[] array2, IComparer<T> comparer)
-		{
-			int l1 = array1.Length;
-			int l2 = array2.Length;
-			int idx1 = 0, idx2 = 0;
-			T[] result = new T[l1 + l2];
-
-			while (idx1 < l1 && idx2 < l2)
-			{
-				if (comparer.Compare(array1[idx1], array2[idx2]) <= 0)
-				{
-					result[idx1 + idx2] = array1[idx1];
-					++idx1;
-				}
-				else
-				{
-					result[idx1 + idx2] = array2[idx2];
-					++idx2;
-				}
-			}
-
-			if (idx1 < l1)
-			{
-				for (int i = idx1; i < l1; i++)
-				{
-					result[idx1 + idx2] = array1[i];
-				}
-			}
-			else if (idx2 < l2)
-			{
-				for (int i = idx2; i < l2; i++)
-				{
-					result[idx1 + idx2] = array2[i];
-				}
-			}
-
-			return result;
 		}
 	}
 
