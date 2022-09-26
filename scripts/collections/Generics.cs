@@ -3,6 +3,19 @@ using System.Collections.Generic;
 
 namespace Com.Surbon.CSUtils.Collections
 {
+	#pragma warning disable CS1573 // Le paramètre n'a pas de balise param correspondante dans le commentaire XML (contrairement à d'autres paramètres)
+
+	/// <summary>
+	/// Provides static methods for <see cref="Dictionary{TKey, TValue}"/>.
+	/// </summary>
+	public static class DictionaryT
+	{
+		/// <summary>
+		/// Returns a copy of the given <see cref="Dictionary{TKey, TValue}"/>.
+		/// </summary>
+		public static Dictionary<TKey, TValue> Clone<TKey, TValue>(Dictionary<TKey, TValue> dictionary) => new Dictionary<TKey, TValue>(dictionary);
+	}
+
 	/// <summary>
 	/// Provides static methods for <see cref="List{T}"/>.
 	/// </summary>
@@ -95,6 +108,14 @@ namespace Com.Surbon.CSUtils.Collections
 		}
 	}
 
+	public static class SortedDictionaryT
+	{
+		public static SortedDictionary<TKey, TValue> Clone<TKey, TValue>(SortedDictionary<TKey, TValue> sortedDictionary)
+		{
+			return new SortedDictionary<TKey, TValue>(sortedDictionary);
+		}
+	}
+
 	/// <summary>
 	/// Provides static methods for <see cref="Stack{T}"/>.
 	/// </summary>
@@ -174,16 +195,5 @@ namespace Com.Surbon.CSUtils.Collections
 
 			return stack;
 		}
-	}
-
-	/// <summary>
-	/// Provides static methods for <see cref="Dictionary{TKey, TValue}"/>.
-	/// </summary>
-	public static class DictionaryT
-	{
-		/// <summary>
-		/// Returns a copy of the given <see cref="Dictionary{TKey, TValue}"/>.
-		/// </summary>
-		public static Dictionary<TKey, TValue> Clone<TKey, TValue>(Dictionary<TKey, TValue> dictionary) => new Dictionary<TKey, TValue>(dictionary);
 	}
 }
