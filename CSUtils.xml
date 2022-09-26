@@ -9,63 +9,90 @@
             Representation of a circle.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Circle.TRIGONOMETRIC">
+            <summary>
+            Shorthand for writing Circle(Vector2(0, 0), 1).
+            </summary>
+        </member>
         <member name="P:Com.Surbon.CSUtils.Math.Circle.Origin">
             <summary>
-            The center of the circle.
+            The center of the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Circle.Radius">
             <summary>
-            The radius of the circle.
+            The radius of the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Circle.Diameter">
             <summary>
-            The diameter of the circle.
+            The diameter of the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Circle.Area">
             <summary>
-            The surface of the circle.
+            The surface of the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Circle.Perimeter">
             <summary>
-            The perimeter of the circle.
+            The perimeter of the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.#ctor(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Circle"/> of the given radius at the given origin.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.#ctor(Com.Surbon.CSUtils.Math.Circle)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Circle"/> with its values set to the values of the given circle.
+            </summary>
+            <param name="circle"></param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.op_Equality(Com.Surbon.CSUtils.Math.Circle,Com.Surbon.CSUtils.Math.Circle)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Circle"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Circle.op_Inequality(Com.Surbon.CSUtils.Math.Circle,Com.Surbon.CSUtils.Math.Circle)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Circle"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.CircleIntersect(Com.Surbon.CSUtils.Math.Circle)">
             <summary>
-            Returns the intersection points between the given circle and this circle.
+            Returns the intersection <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> between the given <see cref="T:Com.Surbon.CSUtils.Math.Circle"/> and this <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
+            <returns>A list of the intersection <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.Contains(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Says if the given point is on the circle
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> is on the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.GetPoint(System.Single)">
             <summary>
-            Returns the point on the circle at the given angle.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> on the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/> at the given angle.
             </summary>
-            <param name="angle">The angle of the point in radians.</param>
+            <param name="angle">The angle in radians.</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.GetArc(System.Single,System.Single,System.Int32)">
             <summary>
-            Returns a list of points corresponding to an arc on the circle.
+            Returns a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> corresponding to an arc on the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
-            <param name="minAngle">The starting angle of the arc in radians.</param>
-            <param name="maxAngle">The ending angle of the arc in radians (if it's greater than minAngle the arc is clockwise).</param>
-            <param name="nPoints">The number of points wanted on the arc.</param>
+            <param name="minAngle">The starting angle in radians.</param>
+            <param name="maxAngle">The ending angle in radians (if it's greater than minAngle the arc is clockwise).</param>
+            <param name="nPoints">The number of <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> wanted on the arc.</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.LineIntersect(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
-            Returns the intersection points between the given line and the circle.
+            Returns the intersection <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> between the given <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> and the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Circle.ToString">
             <summary>
-            Returns the equation of the circle
+            Returns the equation of the <see cref="T:Com.Surbon.CSUtils.Math.Circle"/>
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Line2">
@@ -73,68 +100,94 @@
             Representation of a straight line in a 2 dimensional space.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line2.AxisX">
+            <summary>
+            Shortand for writing Line2(0, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line2.AxisY">
+            <summary>
+            Shortand for writing Line2(Vector2(0, 0), Vector2(1, 0)).
+            </summary>
+        </member>
         <member name="P:Com.Surbon.CSUtils.Math.Line2.CartesianForm">
             <summary>
-            The line as ax + by + c = 0.
+            The <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> as ax + by + c = 0.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Line2.NormalForm">
             <summary>
-            The line given with it's angle and it's origin.
+            The <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> given with it's angle in radians and it's origin.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Line2.SlopeInterceptForm">
             <summary>
-            The line given as mx + p = y.
+            The <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> given as mx + p = y.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            The line deduced by two points.
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> with two <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(Com.Surbon.CSUtils.Math.Line2)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> with its values set to the given <see cref="T:Com.Surbon.CSUtils.Math.Line2"/>.
+            </summary>
+            <param name="line"></param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
             <summary>
-            The line given in the normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment).
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> with its normal form (xcos(phi) + ysin(phi) - p = 0 with phi the angle of the normal segment in radians).
             </summary>
             <param name="m">The normal segment</param>
             <param name="b">The y-intercept</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(System.Single,System.Single)">
             <summary>
-            The line given in the slope-intercept form (ax + b = y).
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> with the slope-intercept form (ax + b = y).
             </summary>
             <param name="a">The slope</param>
             <param name="b">The y-intercept</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.#ctor(System.Single,System.Single,System.Single)">
             <summary>
-            The line given in cartesian coordinates (ax + by = c).
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> with the cartesian coordinates (ax + by = c).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.op_Equality(Com.Surbon.CSUtils.Math.Line2,Com.Surbon.CSUtils.Math.Line2)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line2.op_Inequality(Com.Surbon.CSUtils.Math.Line2,Com.Surbon.CSUtils.Math.Line2)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.Intersection(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
-            Returns the intersection of two lines. If there's no intersection, the point has <see cref="F:System.Single.NegativeInfinity"/> as coordinates.
+            Returns the intersection of two <see cref="T:Com.Surbon.CSUtils.Math.Line2"/>. If there's no intersection, the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> has <see cref="F:System.Single.NegativeInfinity"/> as coordinates.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.IsParallel(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
-            Says if the given line is parallel to this one.
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> is parallel to this one.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.IsSecant(Com.Surbon.CSUtils.Math.Line2)">
             <summary>
-            Says if the given line is secant to this one.
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> is secant to this one.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.Rotate(System.Single)">
             <summary>
-            Rotates the line by phi radians.
+            Rotates the <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> by phi radians.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line2.Rotated(System.Single)">
             <summary>
-            Returns the line rotated by phi radians.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Line2"/> rotated by phi radians.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Line3">
@@ -142,14 +195,29 @@
             Representation of a straight line in a 3 dimensional space.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.AxisX">
+            <summary>
+            Shorthand for writing Line3(Vector3(1, 0, 0), Vector3(0, 0, 0)).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.AxisY">
+            <summary>
+            Shorthand for writing Line3(Vector3(0, 1, 0), Vector3(0, 0, 0)).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Line3.AxisZ">
+            <summary>
+            Shorthand for writing Line3(Vector3(0, 0, 1), Vector3(0, 0, 0)).
+            </summary>
+        </member>
         <member name="P:Com.Surbon.CSUtils.Math.Line3.Direction">
             <summary>
-            The direction of the line as a vector.
+            The direction of the <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> as a <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Line3.Origin">
             <summary>
-            The point of the line with x = 0.
+            The <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the line with x = 0.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Line3.ParametricX">
@@ -167,64 +235,119 @@
             The constants of the z line in the parametric equation.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.#ctor(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> with the given direction and point.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.#ctor(Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.Line3"/>.
+            </summary>
+            <param name="line"></param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.op_Equality(Com.Surbon.CSUtils.Math.Line3,Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.op_Inequality(Com.Surbon.CSUtils.Math.Line3,Com.Surbon.CSUtils.Math.Line3)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> have the same values.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.GetPoint(System.Single)">
             <summary>
-            Returns the point on the line to the given value (it's calculated from the parametric equation of the line).
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> to the given <see cref="T:System.Single"/> (it's calculated from the parametric equation of the line).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.Intersection(Com.Surbon.CSUtils.Math.Line3)">
             <summary>
-            Returns the intersection between this and the given line (if there's no intersection, the point's values are set to negative infinity).
+            Returns the intersection between this and the given <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> (if there's no intersection, the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>'s values are set to negative infinity).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.IsCoplanar(Com.Surbon.CSUtils.Math.Line3)">
             <summary>
-            Says if both lines are on the same plan.
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> are on the same plan.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.IsParallel(Com.Surbon.CSUtils.Math.Line3)">
             <summary>
-            Says if both lines are parallel.
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> are parallel.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.IsSecant(Com.Surbon.CSUtils.Math.Line3)">
             <summary>
-            Says if both lines are secant.
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> are secant.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Line3.Rotate(System.Single)">
             <summary>
-            Rotates the direction vector by the given angle in radians.
+            Rotates the direction <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> by the given angle in radians.
             </summary>
+            <param name="angle">The angle in radians.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Line3.Rotated(System.Single)">
+            <summary>
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Line3"/> with its direction <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> rotated by the given angle in radians.
+            </summary>
+            <param name="angle">The angle in radians.</param>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.LineN">
             <summary>
             Representation of a straight line in a N dimensional space.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.LineN.AxisW">
+            <summary>
+            Shortand for writing LineN(VectorN(0, 0, 0, 1), VectorN(0, 0, 0, 0)).
+            </summary>
+        </member>
         <member name="F:Com.Surbon.CSUtils.Math.LineN.Dimension">
             <summary>
-            The dimension of the line.
+            The dimension of the <see cref="T:Com.Surbon.CSUtils.Math.LineN"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.LineN.Direction">
             <summary>
-            The direction of the line as a vector.
+            The direction of the <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> as a <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.LineN.Origin">
             <summary>
-            The point of the line with x = 0.
+            The <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> of the <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> with x = 0.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.LineN.#ctor(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> with the given direction and origin.
+            </summary>
+            <param name="direction"></param>
+            <param name="origin"></param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.LineN.#ctor(Com.Surbon.CSUtils.Math.LineN)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.LineN"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.LineN.op_Equality(Com.Surbon.CSUtils.Math.LineN,Com.Surbon.CSUtils.Math.LineN)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> have the same dimension and same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.LineN.op_Inequality(Com.Surbon.CSUtils.Math.LineN,Com.Surbon.CSUtils.Math.LineN)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> have a different dimension or different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.LineN.GetPoint(System.Single)">
             <summary>
-            Returns the point at the given value (the point is calculated with parametric equations).
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> at the given value (the point is calculated with parametric equations).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.LineN.IsParallel(Com.Surbon.CSUtils.Math.LineN)">
             <summary>
-            Says if both lines are parallel.
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.LineN"/> are parallel.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.MathT">
@@ -237,7 +360,12 @@
             Clamps value between min and max.
             </summary>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Congruence(System.Single,System.Single,System.Boolean)">
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Clamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Clamps value between min and max.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Mod(System.Single,System.Single,System.Boolean)">
             <summary>
             Returns a modulo b.
             </summary>
@@ -245,7 +373,15 @@
             <param name="b">The divisor.</param>
             <param name="isPos">If true, the remainder is negative.</param>
         </member>
-        <member name="M:Com.Surbon.CSUtils.Math.MathT.Congruence(System.Int32,System.Int32,System.Boolean)">
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Mod(System.Double,System.Double,System.Boolean)">
+            <summary>
+            Returns a modulo b.
+            </summary>
+            <param name="a">The dividend.</param>
+            <param name="b">The divisor.</param>
+            <param name="isPos">If true, the remainder is negative.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Mod(System.Int32,System.Int32,System.Boolean)">
             <summary>
             Returns a modulo b.
             </summary>
@@ -258,7 +394,17 @@
             Returns the euclidian quotient of a / b.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.EuclidianQuotient(System.Double,System.Double)">
+            <summary>
+            Returns the euclidian quotient of a / b.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.EuclidianRemainder(System.Single,System.Single)">
+            <summary>
+            Returns the euclidian remainder of a / b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.EuclidianRemainder(System.Double,System.Double)">
             <summary>
             Returns the euclidian remainder of a / b.
             </summary>
@@ -278,7 +424,17 @@
             Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Lerp(System.Double,System.Double,System.Double)">
+            <summary>
+            Linearly interpolates between to values by a normalized ratio (clamped between 0 and 1).
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.LerpRand(System.Single,System.Single)">
+            <summary>
+            Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.LerpRand(System.Double,System.Double)">
             <summary>
             Linearly interpolates between to values by a random normalized ratio (between 0 and 1).
             </summary>
@@ -288,7 +444,17 @@
             Linearly interpolates between to values by a given ratio.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.LerpUnclamped(System.Double,System.Double,System.Double)">
+            <summary>
+            Linearly interpolates between to values by a given ratio.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.NegPow(System.Single,System.Int32)">
+            <summary>
+            Returns a to the power of -b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.NegPow(System.Double,System.Int32)">
             <summary>
             Returns a to the power of -b.
             </summary>
@@ -298,7 +464,17 @@
             Returns the nth root of the given number.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.NRoot(System.Double,System.Double)">
+            <summary>
+            Returns the nth root of the given number.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.MathT.PosPow(System.Single,System.Int32)">
+            <summary>
+            Returns a to the power of b.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.PosPow(System.Double,System.Int32)">
             <summary>
             Returns a to the power of b.
             </summary>
@@ -308,9 +484,173 @@
             Returns a to the power of b.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.MathT.Pow(System.Double,System.Int32)">
+            <summary>
+            Returns a to the power of b.
+            </summary>
+        </member>
         <member name="T:Com.Surbon.CSUtils.Math.Matrix">
             <summary>
             Representation of a matrix
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Matrix.Columns">
+            <summary>
+            The number of columns in the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Matrix.Rows">
+            <summary>
+            The number of rows in the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Matrix.Item(System.Int32,System.Int32)">
+            <summary>
+            The value at the given line and column
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.#ctor(System.Int32,System.Int32,System.Single[])">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> lines x columns with the given <see cref="T:System.Single"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> lines x columns with its values set to 0.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.#ctor(Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Addition(Com.Surbon.CSUtils.Math.Matrix,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Adds both <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+            <returns>m1 + m2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Subtraction(Com.Surbon.CSUtils.Math.Matrix,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Subtract the second <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> to the first one.
+            </summary>
+            <returns>m1 - m2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Multiply(System.Single,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>scalar * m.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Multiply(Com.Surbon.CSUtils.Math.Matrix,System.Single)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>m * scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Multiply(Com.Surbon.CSUtils.Math.Matrix,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Multiplies both <see cref="T:Com.Surbon.CSUtils.Math.Matrix" />.
+            </summary>
+            <returns>m1 * m2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Division(Com.Surbon.CSUtils.Math.Matrix,System.Single)">
+            <summary>
+            Divides the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> by the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>m / scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Division(Com.Surbon.CSUtils.Math.Matrix,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Multiplies the first <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> by the invert of the second <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+            <returns>m1 * m2^(-1)</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Equality(Com.Surbon.CSUtils.Math.Matrix,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.op_Inequality(Com.Surbon.CSUtils.Math.Matrix,Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> have different values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.GetAdjugate">
+            <summary>
+            Returns the adjugate of the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.GetCofactor">
+            <summary>
+            Returns the cofactor of the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.GetDeterminant">
+            <summary>
+            Returns the determinant of the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.GetSub(System.Int32,System.Int32)">
+            <summary>
+            Returns the sub <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> which is the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> without the given row and column.
+            </summary>
+            <param name="row">The row to delete.</param>
+            <param name="column">The column to delete.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.Invert">
+            <summary>
+            Sets the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> to its inverse.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.Inverted">
+            <summary>
+            Returns the inverse of this <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.IsInvertible">
+            <summary>
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> is invertible.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.IsSquare">
+            <summary>
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> is a square <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.IsSkewSymmetric">
+            <summary>
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> is skew-symmetric (equal to the opposite of it's transposed <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.IsSymmetric">
+            <summary>
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> is symmetric (equal to it's transposed <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.Pow(System.Int32)">
+            <summary>
+            Returns this <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> to the given power.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.SameSize(Com.Surbon.CSUtils.Math.Matrix)">
+            <summary>
+            Says if this <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> and the given <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> have the same size.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.Transpose">
+            <summary>
+            Sets this <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> to it's transposed <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.Transposed">
+            <summary>
+            Returns this <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>'s transposed <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Matrix.Identity(System.Int32)">
+            <summary>
+            Returns the identity <see cref="T:Com.Surbon.CSUtils.Math.Matrix"/> to the given size.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.NSphere">
@@ -320,37 +660,57 @@
         </member>
         <member name="F:Com.Surbon.CSUtils.Math.NSphere.Dimension">
             <summary>
-            The dimension of the sphere.
+            The dimension of the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.NSphere.Origin">
             <summary>
-            The center of the sphere.
+            The center of the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.NSphere.Radius">
             <summary>
-            The radius of the sphere.
+            The radius of the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.NSphere.Diameter">
             <summary>
-            The diameter of the sphere.
+            The diameter of the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.NSphere.Area">
             <summary>
-            The surface of the sphere.
+            The surface of the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.NSphere.Volume">
             <summary>
-            The volume of the sphere.
+            The volume of the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.NSphere.#ctor(Com.Surbon.CSUtils.Math.VectorN,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/> with the given radius at the given origin.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.NSphere.#ctor(Com.Surbon.CSUtils.Math.NSphere)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.NSphere.op_Equality(Com.Surbon.CSUtils.Math.NSphere,Com.Surbon.CSUtils.Math.NSphere)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.NSphere.op_Inequality(Com.Surbon.CSUtils.Math.NSphere,Com.Surbon.CSUtils.Math.NSphere)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.NSphere.Contains(Com.Surbon.CSUtils.Math.VectorN)">
             <summary>
-            Says if the n-sphere contains the given point.
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.NSphere"/> contains the given <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Orthotope">
@@ -360,7 +720,7 @@
         </member>
         <member name="F:Com.Surbon.CSUtils.Math.Orthotope.Dimension">
             <summary>
-            The dimension of the rectangle.
+            The dimension of the <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Orthotope.Item(System.Int32)">
@@ -370,7 +730,152 @@
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Orthotope.Origin">
             <summary>
-            The origin of the rectangle.
+            The origin of the <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Orthotope.#ctor(Com.Surbon.CSUtils.Math.VectorN,System.Single[])">
+            <summary>
+            Creates an <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/> of the given lengths at the given origin.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Orthotope.#ctor(Com.Surbon.CSUtils.Math.Orthotope)">
+            <summary>
+            Creates an <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Orthotope.op_Equality(Com.Surbon.CSUtils.Math.Orthotope,Com.Surbon.CSUtils.Math.Orthotope)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Orthotope.op_Inequality(Com.Surbon.CSUtils.Math.Orthotope,Com.Surbon.CSUtils.Math.Orthotope)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Orthotope"/> have the same values.
+            </summary>
+        </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Quaternion">
+            <summary>
+            Representation of a quaternion as a + bi + cj + dk.
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Quaternion.Vector">
+            <summary>
+            The <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> component of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> (b, c, d).
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Quaternion.a">
+            <summary>
+            The real part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Quaternion.b">
+            <summary>
+            The i imaginary part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Quaternion.c">
+            <summary>
+            The j imaginary part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="F:Com.Surbon.CSUtils.Math.Quaternion.d">
+            <summary>
+            The k imaginary part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> as a + bi + cj + dk.
+            </summary>
+            <param name="a">The real part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.</param>
+            <param name="b">The i imaginary part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.</param>
+            <param name="c">The j imaginary part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.</param>
+            <param name="d">The k imaginary part of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.#ctor(System.Single,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> as a + bi + cj + dk.
+            </summary>
+            <param name="v">The vector component as (b, c, d).</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.#ctor(Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> with its value set to the given <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Addition(Com.Surbon.CSUtils.Math.Quaternion,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Adds both <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_UnaryNegation(Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Sets the values of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> to the opposite values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Subtraction(Com.Surbon.CSUtils.Math.Quaternion,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Subtract the second <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> to the first one.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Multiply(Com.Surbon.CSUtils.Math.Quaternion,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Multiplies both <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Multiply(Com.Surbon.CSUtils.Math.Quaternion,System.Single)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> with the <see cref="T:System.Single"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Multiply(System.Single,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> with the <see cref="T:System.Single"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Division(Com.Surbon.CSUtils.Math.Quaternion,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Multiplies the first <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> by the inverse of the second <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Equality(Com.Surbon.CSUtils.Math.Quaternion,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> have the same value.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.op_Inequality(Com.Surbon.CSUtils.Math.Quaternion,Com.Surbon.CSUtils.Math.Quaternion)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> have a different value.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.GetConjugate">
+            <summary>
+            Returns the conjugate of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> (q*).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.GetInverse">
+            <summary>
+            Returns the inverse of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>(q^-1).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.GetNorm">
+            <summary>
+            Returns the norm of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.GetNormSquared">
+            <summary>
+            Returns the squared norm of the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.Rotate(System.Single,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Rotates the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> on the given axis.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Quaternion.Rotated(System.Single,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Quaternion"/> rotated on the given axis.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Rectangle">
@@ -380,37 +885,57 @@
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Width">
             <summary>
-            The width of the rectangle (on the x axis).
+            The width of the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/> (on the x axis).
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Height">
             <summary>
-            The height of the rectangle (on the y axis).
+            The height of the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/> (on the y axis).
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Origin">
             <summary>
-            The point on the top left of the rectangle.
+            The <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> on the top left of the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Perimeter">
             <summary>
-            The perimeter of the rectangle.
+            The perimeter of the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Rectangle.Area">
             <summary>
-            The area of the rectangle.
+            The area of the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Rectangle.#ctor(Com.Surbon.CSUtils.Math.Vector2,System.Single,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/> of the given width and height, and with its top left point on the given origin.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Rectangle.#ctor(Com.Surbon.CSUtils.Math.Rectangle)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Rectangle.op_Equality(Com.Surbon.CSUtils.Math.Rectangle,Com.Surbon.CSUtils.Math.Rectangle)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Rectangle.op_Inequality(Com.Surbon.CSUtils.Math.Rectangle,Com.Surbon.CSUtils.Math.Rectangle)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Rectangle.IsIn(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Says if the given point is in the boundaries of the rectangle.
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> is within the boundaries of the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Rectangle.Has(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Says if the given point is on the rectangle.
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> is on the <see cref="T:Com.Surbon.CSUtils.Math.Rectangle"/>.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.RectParallelepiped">
@@ -420,42 +945,62 @@
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Width">
             <summary>
-            The width of the rectangle (on the x axis).
+            The width of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> (on the x axis).
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Height">
             <summary>
-            The height of the rectangle (on the y axis).
+            The height of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> (on the y axis).
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Length">
             <summary>
-            The length of the rectangle (on the z axis).
+            The length of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> (on the z axis).
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Origin">
             <summary>
-            The point on the front top left of the parallelepiped.
+            The <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the front top left of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Area">
             <summary>
-            The surface of the parallelepiped.
+            The surface of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.RectParallelepiped.Volume">
             <summary>
-            The volume of the parallelepiped.
+            The volume of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.#ctor(Com.Surbon.CSUtils.Math.Vector3,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> with the given width, height and length, and with its top left point on the given origin.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.#ctor(Com.Surbon.CSUtils.Math.RectParallelepiped)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> with its values set to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.op_Equality(Com.Surbon.CSUtils.Math.RectParallelepiped,Com.Surbon.CSUtils.Math.RectParallelepiped)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.op_Inequality(Com.Surbon.CSUtils.Math.RectParallelepiped,Com.Surbon.CSUtils.Math.RectParallelepiped)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.IsIn(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Says if the given point is in the parallelepiped.
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> is within the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.RectParallelepiped.Has(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Says if the given point is on one of the parallelepiped's faces.
+            Says if the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> is on one of the <see cref="T:Com.Surbon.CSUtils.Math.RectParallelepiped"/>'s faces.
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Sphere">
@@ -463,96 +1008,224 @@
             Representation of a sphere in a 3 dimensional space.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Sphere.UNIT">
+            <summary>
+            Shorthand for writing Sphere(Vector3(0, 0, 0), 1).
+            </summary>
+        </member>
         <member name="P:Com.Surbon.CSUtils.Math.Sphere.Origin">
             <summary>
-            The center of the sphere.
+            The center of the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Sphere.Radius">
             <summary>
-            The radius of the sphere.
+            The radius of the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Sphere.Diameter">
             <summary>
-            The diamater of the sphere.
+            The diamater of the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Sphere.Area">
             <summary>
-            The surface of the sphere.
+            The surface of the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.Sphere.Volume">
             <summary>
-            The volume of the sphere.
+            The volume of the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.#ctor(Com.Surbon.CSUtils.Math.Vector3,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/> of the given radius at the given origin.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.#ctor(Com.Surbon.CSUtils.Math.Sphere)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/> with its values se to the values of the given <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.op_Equality(Com.Surbon.CSUtils.Math.Sphere,Com.Surbon.CSUtils.Math.Sphere)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Sphere.op_Inequality(Com.Surbon.CSUtils.Math.Sphere,Com.Surbon.CSUtils.Math.Sphere)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Sphere.AreAntipodal(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Says if to points are antipodal on this circle.
+            Says if to <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> are antipodal on this <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Sphere.Contains(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Says if the point is on the sphere.
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> is on the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Sphere.GetPoint(System.Single,System.Single)">
             <summary>
-            Returns the point on the circle with the given angles.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the <see cref="T:Com.Surbon.CSUtils.Math.Sphere"/> with the given angles.
             </summary>
-            <param name="phi">The azimuth angle.</param>
-            <param name="th">The polar angle</param>
+            <param name="phi">The azimuth angle in radians.</param>
+            <param name="th">The polar angle in radians.</param>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Vector2">
             <summary>
             Representation of a vector in a 2 dimensional space.
             </summary>
         </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.Down">
+            <summary>
+            Shorthand for writing Vector2(0, -1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.Left">
+            <summary>
+            Shorthand for writing Vector2(-1, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.NegOne">
+            <summary>
+            Shorthand for writing Vector2(-1, -1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.One">
+            <summary>
+            Shorthand for writing Vector2(1, 1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.Right">
+            <summary>
+            Shorthand for writing Vector2(1, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.Up">
+            <summary>
+            Shorthand for writing Vector2(0, 1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector2.Zero">
+            <summary>
+            Shorthand for writing Vector2(0, 0).
+            </summary>
+        </member>
         <member name="F:Com.Surbon.CSUtils.Math.Vector2.x">
             <summary>
-            The position of the vector on the x axis.
+            The position of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> on the x axis.
             </summary>
         </member>
         <member name="F:Com.Surbon.CSUtils.Math.Vector2.y">
             <summary>
-            The position of the vector on the y axis.
+            The position of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> on the y axis.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> as (x, y).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.#ctor(Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> with its values set to the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Addition(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Adds both <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
+            </summary>
+            <returns>vector1 + vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_UnaryNegation(Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Sets the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> to the opposite values (equivalent to vector * -1).
+            </summary>
+            <returns>-vector.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Subtraction(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Subtract the second <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> to the first one.
+            </summary>
+            <returns>vector1 - vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Multiply(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Multiplies the values of the first <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> by the values of the second one.
+            </summary>
+            <returns>vector1 * vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Multiply(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector * scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Multiply(System.Single,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector * scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Division(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Divides the values of the first <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> by the values of the second <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
+            </summary>
+            <returns>vector1 / vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Division(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
+            <summary>
+            Divides the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> by the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector / scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Equality(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Says if both vectors have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector2.op_Inequality(Com.Surbon.CSUtils.Math.Vector2,Com.Surbon.CSUtils.Math.Vector2)">
+            <summary>
+            Says if both vector have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Abs">
             <summary>
-            Returns the vector with absolute values.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> with absolute values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Angle">
             <summary>
-            Returns the vector's angle in radians.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>'s angle in radians.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.AngleTo(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the angle between the vector (this) and the given vector.
+            Returns the angle between the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.AngleToPoint(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the angle between the line passing through both points, and the x axis.
+            Returns the angle between the line passing through both <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>, and the x axis.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.CeilLength">
             <summary>
-            Rounds up the length of the vector.
+            Rounds up the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.CeilValues">
             <summary>
-            Rounds up the values of the vector.
+            Rounds up the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.ClampLength(System.Single,System.Single)">
             <summary>
-            Sets the length of the vector between min and max.
+            Sets the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> between min and max.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.ClampValues(System.Single,System.Single,System.Single,System.Single)">
@@ -567,62 +1240,62 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Cross(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the cross product of the vector (this) and the given vector.
+            Returns the cross product of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Distance(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the distance between the vector (this) and the given vector.
+            Returns the distance between the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.DistanceSquared(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the distance squared of the vector (this) and the given vector.
+            Returns the distance squared of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Dot(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the dot product of the vector (this) and the given vector.
+            Returns the dot product of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.FloorLength">
             <summary>
-            Rounds the length of the vector downward.
+            Rounds the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> downward.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.FloorValues">
             <summary>
-            Rounds the values of the vector downward.
+            Rounds the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> downward.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.IsNormalized">
             <summary>
-            Says if the vector is normalized (if the length is equal to 1).
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> is normalized (if the length is equal to 1).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Length">
             <summary>
-            Returns the length of the vector.
+            Returns the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.LengthSquared">
             <summary>
-            Returns the length squared of the vector.
+            Returns the length squared of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Lerp(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
             <summary>
-            Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+            Lerps the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> between this and to by weight (weight is clamped between 0 and 1).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.LerpRand(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Lerp the vector between this and to by a random number between 0 and 1.
+            Lerps the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> between this and to by a random <see cref="T:System.Single"/> between 0 and 1.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.LerpUnclamped(Com.Surbon.CSUtils.Math.Vector2,System.Single)">
             <summary>
-            Lerp the vector between this and to by weight.
+            Lerps the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> between this and to by weight.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.NegMod(System.Single)">
@@ -637,12 +1310,12 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Normalize(System.Single)">
             <summary>
-            Sets the length of the vector to the given length.
+            Sets the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> to the given length.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Normalized(System.Single)">
             <summary>
-            Returns the normalized vector.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> with its length set to the given length.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.PosMod(System.Single)">
@@ -657,66 +1330,112 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Pow(System.Single)">
             <summary>
-            Returns the vector with x and y to the power of pow.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> with x and y to the power of pow.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Rotate(System.Single)">
             <summary>
-            Rotates the vector by phi radians.
+            Rotates the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> by phi radians.
             </summary>
-            <param name="phi"></param>
+            <param name="phi">The angle in radians.</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Rotated(System.Single)">
             <summary>
-            Returns the vector rotated by phi radians.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> rotated by phi radians.
             </summary>
+            <param name="phi">The angle in radians.</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.RoundLength">
             <summary>
-            Rounds the length of the vector.
+            Rounds the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.RoundValues">
             <summary>
-            Rounds the values of the vector.
+            Rounds the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.Sign">
             <summary>
-            Returns the signs of the vector as (sign x, sign y).
+            Returns the signs of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> as (sign x, sign y).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.CartesianToPolar(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the polar coordinates of the vector given in cartesian coordinates
+            Returns the polar coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> given in cartesian coordinates.
             </summary>
-            <param name="vector">Cartesian coordinates as (x, y)</param>
-            <returns>Polar coordinates as (r, th)</returns>
+            <param name="vector">Cartesian coordinates as (x, y).</param>
+            <returns>Polar coordinates as (r, th) with th in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.CartesianToPolar(System.Single,System.Single)">
             <summary>
-            Returns the polar coordinates of the vector given in cartesian coordinates
+            Returns the polar coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> given in cartesian coordinates.
             </summary>
-            <returns>Polar coordinates as (r, th)</returns>
+            <returns>Polar coordinates as (r, th) with th in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.PolarToCartesian(Com.Surbon.CSUtils.Math.Vector2)">
             <summary>
-            Returns the cartesian coordinates of the vector given in polar coordinates
+            Returns the cartesian coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> given in polar coordinates.
             </summary>
-            <param name="vector">Polar coordinates as (r, th)</param>
-            <returns>Cartesian coordinates as (x, y)</returns>
+            <param name="vector">Polar coordinates as (r, th) with th in radians.</param>
+            <returns>Cartesian coordinates as (x, y).</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector2.PolarToCartesian(System.Single,System.Single)">
             <summary>
-            Returns the cartesian coordinates of the vector given in polar coordinates
+            Returns the cartesian coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector2"/> given in polar coordinates.
             </summary>
-            <param name="r">Radius</param>
-            <param name="th">Angle</param>
-            <returns>Cartesian coordinates as (x, y)</returns>
+            <param name="r">Radius.</param>
+            <param name="th">Angle in radians.</param>
+            <returns>Cartesian coordinates as (x, y).</returns>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Vector3">
             <summary>
             Representation of a vector in a 3 dimensional space
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Back">
+            <summary>
+            Shorthand for writing Vector3(0, 0, -1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Down">
+            <summary>
+            Shorthand for writing Vector3(0, -1, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Front">
+            <summary>
+            Shorthand for writing Vector3(0, 0, 1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Left">
+            <summary>
+            Shorthand for writing Vector3(-1, 0, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.NegOne">
+            <summary>
+            Shorthand for writing Vector3(-1, -1, -1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.One">
+            <summary>
+            Shorthand for writing Vector3(1, 1, 1).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Right">
+            <summary>
+            Shorthand for writing Vector3(1, 0, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Up">
+            <summary>
+            Shorthand for writing Vector3(0, 1, 0).
+            </summary>
+        </member>
+        <member name="P:Com.Surbon.CSUtils.Math.Vector3.Zero">
+            <summary>
+            Shorthand for writing Vector3(0, 0, 0).
             </summary>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.Vector3.AngleType">
@@ -724,45 +1443,124 @@
             Represents the angle types in a 3-dimensional space.
             </summary>
         </member>
+        <member name="T:Com.Surbon.CSUtils.Math.Vector3.Axis">
+            <summary>
+            Represents the axis in a 3-dimensional space.
+            </summary>
+        </member>
         <member name="F:Com.Surbon.CSUtils.Math.Vector3.x">
             <summary>
-            The position of the vector on the x axis.
+            The position of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the x axis.
             </summary>
         </member>
         <member name="F:Com.Surbon.CSUtils.Math.Vector3.y">
             <summary>
-            The position of the vector on the y axis.
+            The position of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the y axis.
             </summary>
         </member>
         <member name="F:Com.Surbon.CSUtils.Math.Vector3.z">
             <summary>
-            The position of the vector on the z axis.
+            The position of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the z axis.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> as (x, y, z).
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.#ctor(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> with its values set to the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Addition(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Adds both <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
+            </summary>
+            <returns>vector1 + vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_UnaryNegation(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Sets the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> to the opposite values (equivalent to vector * -1).
+            </summary>
+            <returns>-vector.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Subtraction(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Subtract the second <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> to the first one.
+            </summary>
+            <returns>vector1 - vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Multiply(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Multiplies the values of the first <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> by the values of the second one.
+            </summary>
+            <returns>vector1 * vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Multiply(Com.Surbon.CSUtils.Math.Vector3,System.Single)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector * scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Multiply(System.Single,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>scalar * vector.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Division(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Divides the values of the first <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> by the values of the second one.
+            </summary>
+            <returns>vector1 / vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Division(Com.Surbon.CSUtils.Math.Vector3,System.Single)">
+            <summary>
+            Divides the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> by the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector / scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Equality(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.op_Inequality(Com.Surbon.CSUtils.Math.Vector3,Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> have different values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Abs">
             <summary>
-            Returns the vector with absolute values.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> with absolute values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Angle(Com.Surbon.CSUtils.Math.Vector3.AngleType)">
             <summary>
-            Returns the azimuthal angle and the polar angle.
+            Returns the angle corresponding to the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3.AngleType"/>.
             </summary>
-            <returns>Angles as (azimuthal, polar)</returns>
+            <returns>The angle in radians.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Angle(Com.Surbon.CSUtils.Math.Vector3.Axis)">
+            <summary>
+            Returns the angle on the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3.Axis"/>.
+            </summary>
+            <returns>The angle in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CeilLength">
             <summary>
-            Rounds up the length of the vector.
+            Rounds up the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CeilValues">
             <summary>
-            Rounds up the values of the vector.
+            Rounds up the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.ClampLength(System.Single,System.Single)">
             <summary>
-            Clamps the length of the vector between min and max.
+            Clamps the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> between min and max.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.ClampValues(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
@@ -775,59 +1573,64 @@
             Clamps x, y and z between min and max.
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Cross(Com.Surbon.CSUtils.Math.Vector3)">
+            <summary>
+            Returns the cross product of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Distance(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the distance between the vector (this) and the given vector.
+            Returns the distance between the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.DistanceSquared(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the distance squared between the vector (this) and the given vector.
+            Returns the distance squared between the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Dot(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the dot product of the vector (this) and the given the vector.
+            Returns the dot product of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> (this) and the given the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.FloorLength">
             <summary>
-            Rounds the length of the vector downward.
+            Rounds the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> downward.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.FloorValues">
             <summary>
-            Rounds the values of the vector downward.
+            Rounds the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> downward.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.IsNormalized">
             <summary>
-            Says if the vector is normalized (the length is equal to 1).
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> is normalized (the length is equal to 1).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Length">
             <summary>
-            Returns the length of the vector.
+            Returns the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.LengthSquared">
             <summary>
-            Returns the squared length of the vector.
+            Returns the squared length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Lerp(Com.Surbon.CSUtils.Math.Vector3,System.Single)">
             <summary>
-            Lerp the vector between this and to by weight (weight is clamped between 0 and 1).
+            Lerps the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> between this and to by weight (weight is clamped between 0 and 1).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.LerpRand(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Lerp the vector between this and to by a random number between 0 and 1.
+            Lerps the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> between this and to by a random number between 0 and 1.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.LerpUnclamped(Com.Surbon.CSUtils.Math.Vector3,System.Single)">
             <summary>
-            Lerp the vector between this and to by weight.
+            Lerps the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> between this and to by weight.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.NegMod(System.Single)">
@@ -842,12 +1645,12 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Normalize(System.Single)">
             <summary>
-            Sets the length of the vector to length.
+            Sets the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> to the given length.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Normalized(System.Single)">
             <summary>
-            Returns the vector with its length set to 1.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> with its length set to the given length.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.PosMod(System.Single)">
@@ -862,27 +1665,41 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Pow(System.Single)">
             <summary>
-            Returns the vector with x, y and z to the power of pow.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> with x, y and z to the power of pow.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotate(System.Single,Com.Surbon.CSUtils.Math.Vector3.AngleType)">
             <summary>
-            Rotates the vector by value radians on the given angle
+            Rotates the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> by value radians on the given angle
             </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotate(System.Single,Com.Surbon.CSUtils.Math.Vector3.Axis)">
+            <summary>
+            Rotates the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> on the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3.Axis"/> by the given angle.
+            </summary>
+            <param name="phi">The angle in radians.</param>
+            <param name="axis">The axis on which to rotate.</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotated(System.Single,Com.Surbon.CSUtils.Math.Vector3.AngleType)">
             <summary>
-            Returns the vector rotated by value radians on the given angle.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> rotated by phi radians on the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3.AngleType"/>.
             </summary>
+            <param name="phi">The angle in radians.</param>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.Vector3.Rotated(System.Single,Com.Surbon.CSUtils.Math.Vector3.Axis)">
+            <summary>
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> rotated by phi radians on the given <see cref="T:Com.Surbon.CSUtils.Math.Vector3.Axis"/>.
+            </summary>
+            <param name="phi">The angle in radians.</param>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.RoundLength">
             <summary>
-            Rounds the length of the vector.
+            Rounds the length of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.RoundValues">
             <summary>
-            Rounds the values of the vector.
+            Rounds the values of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.Sign">
@@ -892,108 +1709,108 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CartesianToCylindric(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the cylindric coordinates of the vector from the cartesian coordinates
+            Returns the cylindric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> from the cartesian coordinates.
             </summary>
-            <param name="vector">Cartesian coordinates as (x, y, z)</param>
-            <returns>Cylindric coordinates as (r, phi, z)</returns>
+            <param name="vector">Cartesian coordinates as (x, y, z).</param>
+            <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CartesianToCylindric(System.Single,System.Single,System.Single)">
             <summary>
-            Returns the cylindric coordinates of the vector given in cartesian coordinates
+            Returns the cylindric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in cartesian coordinates.
             </summary>
-            <param name="x">Cartesian coordinate x</param>
-            <param name="y">Cartesian coordinate y</param>
-            <param name="z">Cartesian coordinate z</param>
-            <returns>Cylindric coordinates as (r, phi, z)</returns>
+            <param name="x">Cartesian coordinate x.</param>
+            <param name="y">Cartesian coordinate y.</param>
+            <param name="z">Cartesian coordinate z.</param>
+            <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CartesianToSpheric(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the spheric coordinates of the vector from the cartesian coordinates
+            Returns the spheric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> from the cartesian coordinates.
             </summary>
-            <param name="vector">Cartesian coordinates as (x, y, z)</param>
-            <returns>Spheric coordinates as (rho, phi, th)</returns>
+            <param name="vector">Cartesian coordinates as (x, y, z).</param>
+            <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CartesianToSpheric(System.Single,System.Single,System.Single)">
             <summary>
-            Returns the spheric coordinates of the vector from the cartesian coordinates
+            Returns the spheric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> from the cartesian coordinates.
             </summary>
-            <param name="x">Cartesian coordinate x</param>
-            <param name="y">Cartesian coordinate y</param>
-            <param name="z">Cartesian coordinate z</param>
-            <returns>Spheric coordinates as (rho, phi, th)</returns>
+            <param name="x">Cartesian coordinate x.</param>
+            <param name="y">Cartesian coordinate y.</param>
+            <param name="z">Cartesian coordinate z.</param>
+            <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CylindricToCartesian(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the cartesian coordinates of the vector given in cylindric coordinates
+            Returns the cartesian coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in cylindric coordinates.
             </summary>
-            <param name="vector">Cylindric coordinates as (r, phi, z)</param>
-            <returns>Cartesian coordinates as (x, y, z)</returns>
+            <param name="vector">Cylindric coordinates as (r, phi, z) with phi in radians.</param>
+            <returns>Cartesian coordinates as (x, y, z).</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CylindricToCartesian(System.Single,System.Single,System.Single)">
             <summary>
-            Returns the cartesian coordinates of the vector given in cylindric coordinates
+            Returns the cartesian coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in cylindric coordinates
             </summary>
-            <param name="r">Polar radius</param>
-            <param name="phi">Azimuth angle</param>
-            <param name="z">Cartesian coordinate z</param>
-            <returns>Cartesian coordinates as (x, y, z)</returns>
+            <param name="r">Polar radius.</param>
+            <param name="phi">Azimuth angle in radians.</param>
+            <param name="z">Cartesian coordinate z.</param>
+            <returns>Cartesian coordinates as (x, y, z).</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CylindricToSpheric(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the spheric coordinates of the vector given in cylindric coordinates
+            Returns the spheric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in cylindric coordinates.
             </summary>
-            <param name="vector">Cylindric coordinates as (r, phi, z)</param>
-            <returns>Spheric coordinates as (rho, phi, th)</returns>
+            <param name="vector">Cylindric coordinates as (r, phi, z) with phi in radians.</param>
+            <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.CylindricToSpheric(System.Single,System.Single,System.Single)">
             <summary>
-            Returns the spheric coordinates of the vector given in cylindric coordinates
+            Returns the spheric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in cylindric coordinates.
             </summary>
-            <param name="r">Polar radius</param>
-            <param name="phi">Azimuth angle</param>
-            <param name="z">Cartesian coordinate z</param>
-            <returns>Spheric coordinates as (rho, phi, th)</returns>
+            <param name="r">Polar radius.</param>
+            <param name="phi">Azimuth angle in radians.</param>
+            <param name="z">Cartesian coordinate z.</param>
+            <returns>Spheric coordinates as (rho, phi, th) with phi and th in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.SphericToCartesian(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the cartesian coordinates of the vector given in spheric coordinates
+            Returns the cartesian coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in spheric coordinates.
             </summary>
-            <param name="vector">Spheric coordinates as (rho, phi, th)</param>
-            <returns>Cartesian coordinates as (x, y, z)</returns>
+            <param name="vector">Spheric coordinates as (rho, phi, th) with phi and th in radians.</param>
+            <returns>Cartesian coordinates as (x, y, z).</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.SphericToCartesian(System.Single,System.Single,System.Single)">
             <summary>
-            Returns the cartesian coordinates of the vector given in spheric coordinates
+            Returns the cartesian coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in spheric coordinates.
             </summary>
-            <param name="rho">Spheric radius</param>
-            <param name="phi">Azimuth angle</param>
-            <param name="th">Polar angle</param>
-            <returns>Cartesian coordinates as (x, y, z)</returns>
+            <param name="rho">Spheric radius.</param>
+            <param name="phi">Azimuth angle in radians.</param>
+            <param name="th">Polar angle in radians.</param>
+            <returns>Cartesian coordinates as (x, y, z).</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.SphericToCylindric(Com.Surbon.CSUtils.Math.Vector3)">
             <summary>
-            Returns the cylindric coordinates of the vector given in spheric coordinates
+            Returns the cylindric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in spheric coordinates.
             </summary>
-            <param name="vector">Spheric coordinates as (rho, phi, th)</param>
-            <returns>Cylindric coordinates as (r, phi, z)</returns>
+            <param name="vector">Spheric coordinates as (rho, phi, th) with phi and th in radians.</param>
+            <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.Vector3.SphericToCylindric(System.Single,System.Single,System.Single)">
             <summary>
-            Returns the cylindric coordinates of the vector given in spheric coordinates
+            Returns the cylindric coordinates of the <see cref="T:Com.Surbon.CSUtils.Math.Vector3"/> given in spheric coordinates.
             </summary>
             <param name="rho">Spheric radius</param>
-            <param name="phi">Azimuth angle</param>
-            <param name="th">Polar angle</param>
-            <returns>Cylindric coordinates as (r, phi, z)</returns>
+            <param name="phi">Azimuth angle in radians.</param>
+            <param name="th">Polar angle in radians.</param>
+            <returns>Cylindric coordinates as (r, phi, z) with phi in radians.</returns>
         </member>
         <member name="T:Com.Surbon.CSUtils.Math.VectorN">
             <summary>
-            Representation of a vector in a N dimensional space
+            Representation of a vector in a N-dimensional space.
             </summary>
         </member>
         <member name="F:Com.Surbon.CSUtils.Math.VectorN.Size">
             <summary>
-            The dimension of the vector.
+            The dimension of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="P:Com.Surbon.CSUtils.Math.VectorN.Item(System.Int32)">
@@ -1001,89 +1818,162 @@
             Returns the coordinate on the given axis. Example: x for 0, y for 1, z for 2, w for 3...
             </summary>
         </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.#ctor(System.Single[])">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with the given values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.#ctor(System.Int32)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with the given size and all its values set to 0.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.#ctor(Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Creates a <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with its values set to the given <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Addition(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Adds both <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
+            </summary>
+            <returns>vector1 + vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_UnaryNegation(Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Sets all the values of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> to the opposite values (equivalent to vector * -1).
+            </summary>
+            <returns>-vector.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Subtraction(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Subtract the second <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> to the first one.
+            </summary>
+            <returns>vector1 - vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Multiply(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Multiplies the values of the first <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> by the values of the second vector.
+            </summary>
+            <returns>vector1 * vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Multiply(Com.Surbon.CSUtils.Math.VectorN,System.Single)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector * scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Multiply(System.Single,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Multiplies the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>scalar * vector.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Division(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Divides the values of the first <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> by the values of the second one.
+            </summary>
+            <returns>vector1 / vector2.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Division(Com.Surbon.CSUtils.Math.VectorN,System.Single)">
+            <summary>
+            Divides the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> by the <see cref="T:System.Single"/>.
+            </summary>
+            <returns>vector / scalar.</returns>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Equality(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> have the same values.
+            </summary>
+        </member>
+        <member name="M:Com.Surbon.CSUtils.Math.VectorN.op_Inequality(Com.Surbon.CSUtils.Math.VectorN,Com.Surbon.CSUtils.Math.VectorN)">
+            <summary>
+            Says if both <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> have different values.
+            </summary>
+        </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Abs">
             <summary>
-            Returns the vector with absolute values.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with absolute values.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.CeilLength">
             <summary>
-            Rounds up the length of the vector.
+            Rounds up the length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.CeilValues">
             <summary>
-            Rounds up the values of the vector.
+            Rounds up the values of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.ClampLength(System.Single,System.Single)">
             <summary>
-            Clamps the length of the vector between min and max.
+            Clamps the length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> between min and max.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.ClampValues(System.ValueTuple{System.Single,System.Single}[])">
             <summary>
-            Clamps the values of the vector between the corresponding min and max in range.
+            Clamps the values of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> between the corresponding min and max in range.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.ClampValuesUniform(System.Single,System.Single)">
             <summary>
-            Clamps the values of the vector between min and max.
+            Clamps the values of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> between min and max.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Distance(Com.Surbon.CSUtils.Math.VectorN)">
             <summary>
-            Returns the distance between the vector (this) and the given vector.
+            Returns the distance between the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.DistanceSquared(Com.Surbon.CSUtils.Math.VectorN)">
             <summary>
-            Returns the squared distance between the vector (this) and the given vector.
+            Returns the squared distance between the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Dot(Com.Surbon.CSUtils.Math.VectorN)">
             <summary>
-            Returns the dot product of the vector (this) and the given vector.
+            Returns the dot product of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> (this) and the given <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.FloorLength">
             <summary>
-            Rounds the length of the vector downward.
+            Rounds the length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> downward.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.FloorValues">
             <summary>
-            Rounds the values of the vector downward.
+            Rounds the values of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> downward.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.IsNormalized">
             <summary>
-            Says if the vector is normalized (if the length is equal to 1).
+            Says if the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> is normalized (if the length is equal to 1).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Lerp(Com.Surbon.CSUtils.Math.VectorN,System.Single)">
             <summary>
-            Lerp between this and to by weight (weight is clamped between 0 and 1).
+            Lerps between this and to by weight (weight is clamped between 0 and 1).
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.LerpRand(Com.Surbon.CSUtils.Math.VectorN)">
             <summary>
-            Lerp between this and to by a random number between 0 and 1.
+            Lerps between this and to by a random number between 0 and 1.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.LerpUnclamped(Com.Surbon.CSUtils.Math.VectorN,System.Single)">
             <summary>
-            Lerp between this and to by weight.
+            Lerps between this and to by weight.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Length">
             <summary>
-            Returns the length of the vector.
+            Returns the length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.LengthSquared">
             <summary>
-            Returns the squared length of the vector.
+            Returns the squared length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.NegMod(System.Single)">
@@ -1098,12 +1988,12 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Normalize(System.Single)">
             <summary>
-            Sets the length of the vector to length.
+            Sets the length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> to the given length.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Normalized(System.Single)">
             <summary>
-            Returns the normalized vector.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with its length set to the given length.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.PosMod(System.Single)">
@@ -1118,22 +2008,22 @@
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Pow(System.Single)">
             <summary>
-            Returns the vector with its values to the power of pow.
+            Returns the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> with its values to the power of pow.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.RoundLength">
             <summary>
-            Rounds the length of the vector.
+            Rounds the length of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.RoundValues">
             <summary>
-            Rounds the values of the vector.
+            Rounds the values of the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
         <member name="M:Com.Surbon.CSUtils.Math.VectorN.Sign">
             <summary>
-            Returns the signs of each value in the vector as a vector.
+            Returns the signs of each value in the <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/> as a <see cref="T:Com.Surbon.CSUtils.Math.VectorN"/>.
             </summary>
         </member>
     </members>
