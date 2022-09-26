@@ -11,4 +11,8 @@
     <DocumentationFile>C:\Users\thoma\Documents\tools\CSUtils\CSUtils.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\thoma\Documents\tools\CSUtils\CSUtils.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

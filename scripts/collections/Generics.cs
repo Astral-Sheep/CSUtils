@@ -3,15 +3,31 @@ using System.Collections.Generic;
 
 namespace Com.Surbon.CSUtils.Collections
 {
+	/// <summary>
+	/// Provides static methods for <see cref="List{T}"/>.
+	/// </summary>
 	public static class ListT
 	{
+		/// <summary>
+		/// Returns a copy of the given <see cref="List{T}"/>.
+		/// </summary>
 		public static List<T> Clone<T>(List<T> list) => new List<T>(list);
 	}
 
+	/// <summary>
+	/// Provides static methods for <see cref="Queue{T}"/>.
+	/// </summary>
 	public static class QueueT
 	{
+		/// <summary>
+		/// Returns a copy of the given <see cref="Queue{T}"/>.
+		/// </summary>
 		public static Queue<T> Clone<T>(Queue<T> queue) => new Queue<T>(queue);
 
+		/// <summary>
+		/// Sorts the <see cref="Queue{T}"/> to put the lowest element in first position and the greatest in last position.
+		/// </summary>
+		/// <param name="reversed">If true, the lowest element is in last position and the greatest element is in first position.</param>
 		public static Queue<T> Sort<T>(Queue<T> queue, bool reversed = false) where T : IComparable
 		{
 			T[] array = new T[queue.Count];
@@ -43,6 +59,10 @@ namespace Com.Surbon.CSUtils.Collections
 			return queue;
 		}
 
+		/// <summary>
+		/// Sorts the <see cref="Queue{T}"/> to put the lowest element in first position and the greatest in last position.
+		/// </summary>
+		/// <param name="reversed">If true, the lowest element is in last position and the greatest element is in first position.</param>
 		public static Queue<T> Sort<T>(Queue<T> queue, IComparer<T> comparer, bool reversed = false)
 		{
 			T[] array = new T[queue.Count];
@@ -75,10 +95,20 @@ namespace Com.Surbon.CSUtils.Collections
 		}
 	}
 
+	/// <summary>
+	/// Provides static methods for <see cref="Stack{T}"/>.
+	/// </summary>
 	public static class StackT
 	{
+		/// <summary>
+		/// Returns a copy of the given <see cref="Stack{T}"/>.
+		/// </summary>
 		public static Stack<T> Clone<T>(Stack<T> stack) => new Stack<T>(stack);
 
+		/// <summary>
+		/// Sorts the <see cref="Stack{T}"/> to put the lowest element at the bottom and the greatest at the top.
+		/// </summary>
+		/// <param name="reversed">If true, the lowest element is at the top and the greatest element is at the bottom.</param>
 		public static Stack<T> Sort<T>(Stack<T> stack, bool reversed = false) where T : IComparable
 		{
 			T[] array = new T[stack.Count];
@@ -110,6 +140,10 @@ namespace Com.Surbon.CSUtils.Collections
 			return stack;
 		}
 
+		/// <summary>
+		/// Sorts the <see cref="Stack{T}"/> to put the lowest element at the bottom and the greatest at the top.
+		/// </summary>
+		/// <param name="reversed">If true, the lowest element is at the top and the greatest element is at the bottom.</param>
 		public static Stack<T> Sort<T>(Stack<T> stack, IComparer<T> comparer, bool reversed = false)
 		{
 			T[] array = new T[stack.Count];
@@ -142,8 +176,14 @@ namespace Com.Surbon.CSUtils.Collections
 		}
 	}
 
+	/// <summary>
+	/// Provides static methods for <see cref="Dictionary{TKey, TValue}"/>.
+	/// </summary>
 	public static class DictionaryT
 	{
+		/// <summary>
+		/// Returns a copy of the given <see cref="Dictionary{TKey, TValue}"/>.
+		/// </summary>
 		public static Dictionary<TKey, TValue> Clone<TKey, TValue>(Dictionary<TKey, TValue> dictionary) => new Dictionary<TKey, TValue>(dictionary);
 	}
 }

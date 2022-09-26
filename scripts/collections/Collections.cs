@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace Com.Surbon.CSUtils.Collections
 {
+	/// <summary>
+	/// Provides static methods for <see cref="Array"/>.
+	/// </summary>
 	public static class ArrayT
 	{
+		/// <summary>
+		/// Returns the <see cref="Array"/> with its lowest value at the beginning and its greatest value at the end.
+		/// </summary>
 		public static T[] Sort<T>(T[] array) where T : IComparable
 		{
 			if (array.Length <= 1) return array;
@@ -27,6 +33,9 @@ namespace Com.Surbon.CSUtils.Collections
 			return Fusion(subArray1, subArray2);
 		}
 
+		/// <summary>
+		/// Returns the <see cref="Array"/> with its lowest value at the beginning and its greatest value at the end.
+		/// </summary>
 		public static T[] Sort<T>(T[] array, IComparer<T> comparer)
 		{
 			if (array.Length <= 1) return array;
